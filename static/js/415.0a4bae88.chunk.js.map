@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/415.0a4bae88.chunk.js","mappings":"oMAAaA,EAAY,WACvB,OAAO,uBACR,EACD,W","sources":["pages/Board.jsx"],"sourcesContent":["export const BoardPage = () => {\n  return <></>;\n};\nexport default BoardPage;\n"],"names":["BoardPage"],"sourceRoot":""}
