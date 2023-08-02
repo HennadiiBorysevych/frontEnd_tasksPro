@@ -1,41 +1,28 @@
 import { Suspense, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import ScreenPage from '../pages/ScreenPage';
-
+import { Routes, Route } from 'react-router-dom';
 import GlobalStyles from '../GlobalStyles';
-import SharedLayout from '../sharedLayouts/SharedLayouts';
+// import PublicPage from 'routes/PublicPage';
+import PrivatePage from 'routes/PrivatePage';
 
-const WelcomePage = lazy(() => import('../pages/WelcomePage'));
+const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
 const HomePage = lazy(() => import('../pages/HomePage'));
+const Board = lazy(() => import('../pages/Board'));
 
 const App = () => {
-  const userLogged = false;
   return (
     <>
       <GlobalStyles />
       <Suspense>
         <Routes>
-          <Route
-            path="/"
-            element={
-              userLogged ? (
-                <Navigate to="/home" replace={true} />
-              ) : (
-                <WelcomePage />
-              )
-            }
-          />
-          <Route path="/welcome" element={<WelcomePage />} />
+          <Route path="/" element={<Welcome />} />
           <Route path="/auth/:id" element={<AuthPage />} />
-          <Route
-            path="/home"
-            element={
-              userLogged ? <SharedLayout /> : <Navigate to="/" replace={true} />
-            }
-          >
-            <Route index element={<HomePage />} />
-            <Route path=":boardId" element={<ScreenPage />} />
+
+          <Route path="/home" element={<HomePage />}>
+            <Route
+              path=":boardId"
+              element={<PrivatePage component={<Board />} />}
+            />
           </Route>
         </Routes>
       </Suspense>
