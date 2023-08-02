@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom';
+import SharedLayout from 'sharedLayout/SharedLayout';
 
 const HomePage = () => {
   return (
     <div>
-      <Outlet />
+      <SharedLayout />
     </div>
   );
 };
