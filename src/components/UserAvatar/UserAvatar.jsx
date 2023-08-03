@@ -17,8 +17,8 @@ const UserAvatar = ({ avatar, width = '68px', height = '68px', margin }) => {
 
 UserAvatar.propTypes = {
   avatar: PropTypes.string,
-  width: PropTypes.string.isRequired,
-  height: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
   margin: PropTypes.string,
 };
 
