@@ -4,7 +4,7 @@ import { Profile } from 'components';
 const Header = () => {
   return (
     <div>
-      <Profile user={{}} />
+      <Profile />
     </div>
   );
 };

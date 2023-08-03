@@ -27,23 +27,17 @@ const ProfilePopUp = ({
         <input
           id="name"
           value={editedUser?.name}
-          onChange={e => {
-            handleChangeProfile(e.currentTarget.id, e.currentTarget.value);
-          }}
+          onChange={handleChangeProfile}
         />
         <input
           id="email"
           value={editedUser?.email}
-          onChange={e => {
-            handleChangeProfile(e.currentTarget.id, e.currentTarget.value);
-          }}
+          onChange={handleChangeProfile}
         />
         <input
           id="password"
           value={editedUser?.password}
-          onChange={e => {
-            handleChangeProfile(e.currentTarget.id, e.currentTarget.value);
-          }}
+          onChange={handleChangeProfile}
         />
         <PrimaryButton
           onClick={() => {

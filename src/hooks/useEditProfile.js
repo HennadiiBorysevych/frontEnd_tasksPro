@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 const useEditProfile = user => {
-  const [editedUser, setEditedUser] = useState(user ?? null);
+  const [editedUser, setEditedUser] = useState({ ...user, password: '' });
 
-  const handleChangeProfile = (key, value) => {
-    setEditedUser(prev => ({ ...prev, [key]: value }));
+  const handleChangeProfile = e => {
+    const { id, value } = e.currentTarget;
+    setEditedUser(prev => ({ ...prev, [id]: value }));
   };
 
   return { editedUser, handleChangeProfile };
