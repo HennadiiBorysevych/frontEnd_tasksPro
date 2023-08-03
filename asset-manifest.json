@@ -1,20 +1,18 @@
 {
   "files": {
-    "main.js": "/frontEnd_tasksPro/static/js/main.cda0f308.js",
-    "static/js/676.8552b520.chunk.js": "/frontEnd_tasksPro/static/js/676.8552b520.chunk.js",
+    "main.js": "/frontEnd_tasksPro/static/js/main.ce0d5755.js",
+    "static/js/676.4bdf24f3.chunk.js": "/frontEnd_tasksPro/static/js/676.4bdf24f3.chunk.js",
     "static/js/923.5ac74d4b.chunk.js": "/frontEnd_tasksPro/static/js/923.5ac74d4b.chunk.js",
-    "static/js/387.c3c96291.chunk.js": "/frontEnd_tasksPro/static/js/387.c3c96291.chunk.js",
+    "static/js/721.79a5e3eb.chunk.js": "/frontEnd_tasksPro/static/js/721.79a5e3eb.chunk.js",
     "static/js/415.0a4bae88.chunk.js": "/frontEnd_tasksPro/static/js/415.0a4bae88.chunk.js",
-    "static/js/139.394b230f.chunk.js": "/frontEnd_tasksPro/static/js/139.394b230f.chunk.js",
     "index.html": "/frontEnd_tasksPro/index.html",
-    "main.cda0f308.js.map": "/frontEnd_tasksPro/static/js/main.cda0f308.js.map",
-    "676.8552b520.chunk.js.map": "/frontEnd_tasksPro/static/js/676.8552b520.chunk.js.map",
+    "main.ce0d5755.js.map": "/frontEnd_tasksPro/static/js/main.ce0d5755.js.map",
+    "676.4bdf24f3.chunk.js.map": "/frontEnd_tasksPro/static/js/676.4bdf24f3.chunk.js.map",
     "923.5ac74d4b.chunk.js.map": "/frontEnd_tasksPro/static/js/923.5ac74d4b.chunk.js.map",
-    "387.c3c96291.chunk.js.map": "/frontEnd_tasksPro/static/js/387.c3c96291.chunk.js.map",
-    "415.0a4bae88.chunk.js.map": "/frontEnd_tasksPro/static/js/415.0a4bae88.chunk.js.map",
-    "139.394b230f.chunk.js.map": "/frontEnd_tasksPro/static/js/139.394b230f.chunk.js.map"
+    "721.79a5e3eb.chunk.js.map": "/frontEnd_tasksPro/static/js/721.79a5e3eb.chunk.js.map",
+    "415.0a4bae88.chunk.js.map": "/frontEnd_tasksPro/static/js/415.0a4bae88.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.cda0f308.js"
+    "static/js/main.ce0d5755.js"
   ]
 }
