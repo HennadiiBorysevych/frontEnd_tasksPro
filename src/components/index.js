@@ -28,4 +28,3 @@ export { default as ThemeMenu } from './themeMenu/ThemeMenu';
 export { default as TitlePopUp } from './titlePopUp/TitlePopUp';
 export { default as Modal } from './modal/Modal';
 export { default as CardsSettings } from './cardsSettings/CardsSettings';
-export { default as Welcome } from './welcome/Welcome';
