@@ -1,5 +1,4 @@
 export { default as Board } from './board/Board';
-export { default as BoardHead } from './boardHead/BoardHead';
 export { default as BoardSettings } from './boardSettings/BoardSettings';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
 export { default as ButtonPlus } from './buttonPlus/ButtonPlus';
