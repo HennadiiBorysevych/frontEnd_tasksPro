@@ -29,7 +29,7 @@ export const AddButtonWrap = styled.div({
   bottom: '0%',
   left: '50%',
   transform: 'translate( -50%, 50%)',
-  width: '24px',
-  height: '24px',
-  outline: '1px solid red',
+  // width: '24px',
+  // height: '24px',
+  // outline: '1px solid red',
 });

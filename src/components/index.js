@@ -26,5 +26,6 @@ export { default as SupportPopUp } from './supportPopUp/SupportPopUp';
 export { default as SvgIcon } from './svgIcon/SvgIcon';
 export { default as ThemeMenu } from './themeMenu/ThemeMenu';
 export { default as TitlePopUp } from './titlePopUp/TitlePopUp';
+export { default as PopUpLayout } from './popUpLayout/PopUpLayout';
 export { default as Modal } from './modal/Modal';
 export { default as CardsSettings } from './cardsSettings/CardsSettings';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { UserAvatar, Modal } from 'components';
+import { UserAvatar, ProfilePopUp, Modal } from 'components';
 
 import { useModal } from 'hooks';
 
@@ -21,7 +21,12 @@ const Profile = () => {
       </AvatarWrap>
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
-          <div>PopUp</div>
+          <ProfilePopUp
+            user={{ name: 'nataha', email: 'rer@fd.com', avatarUrl: 'wew' }}
+            handleModalClose={toggleModal}
+            handleAddAvatar={toggleModal}
+            handleEditProfile={toggleModal}
+          />
         </Modal>
       ) : null}
     </Container>

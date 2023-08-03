@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PopUpLayout from 'components/PopUp/PopUpLayout/PopUpLayout';
+import { UserAvatar, PopUpLayout, ButtonPlus, PrimaryButton } from 'components';
 
-import { UserAvatar } from 'components';
+import { useEditProfile } from 'hooks';
 
 import { Container, AvatarWrap, AddButtonWrap } from './ProfilePopUp.styled';
 
@@ -13,17 +13,46 @@ const ProfilePopUp = ({
   handleEditProfile,
   handleModalClose,
 }) => {
+  const { editedUser, handleChangeProfile } = useEditProfile(user);
+
   return (
     <Container>
       <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
         <AvatarWrap>
-          <UserAvatar avatar={null} />
-          <AddButtonWrap></AddButtonWrap>
+          <UserAvatar avatar={user?.avatarURL} />
+          <AddButtonWrap>
+            <ButtonPlus svgName="icon-plus" width={24} height={24} />
+          </AddButtonWrap>
         </AvatarWrap>
-        <input value={user?.name} />
-        <input value={user?.email} />
-        <input value={user?.password} />
-        <button onClick={handleEditProfile}>Send</button>
+        <input
+          id="name"
+          value={editedUser?.name}
+          onChange={e => {
+            handleChangeProfile(e.currentTarget.id, e.currentTarget.value);
+          }}
+        />
+        <input
+          id="email"
+          value={editedUser?.email}
+          onChange={e => {
+            handleChangeProfile(e.currentTarget.id, e.currentTarget.value);
+          }}
+        />
+        <input
+          id="password"
+          value={editedUser?.password}
+          onChange={e => {
+            handleChangeProfile(e.currentTarget.id, e.currentTarget.value);
+          }}
+        />
+        <PrimaryButton
+          onClick={() => {
+            console.log(editedUser);
+          }}
+          hasIcon={false}
+        >
+          Send
+        </PrimaryButton>
       </PopUpLayout>
     </Container>
   );
