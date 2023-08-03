@@ -6,18 +6,16 @@ import { ButtonPlus } from 'components';
 const PrimaryButton = ({
   children,
   onClick,
-  onSubmit,
-  type = 'button',
   width,
   height,
   hasIcon,
   svgName,
   ...rest
 }) => {
-  const eventHandler = type === 'submit' ? onSubmit : onClick;
+  
   return (
     <ButtonStyled
-      onClick={eventHandler}
+      onClick={onClick}
       style={{ width, height }}
       svgName={svgName}
       {...rest}
@@ -31,8 +29,6 @@ const PrimaryButton = ({
 PrimaryButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
-  onSubmit: PropTypes.func,
-  type: PropTypes.oneOf(['button', 'submit']).isRequired,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hasIcon: PropTypes.bool.isRequired,
