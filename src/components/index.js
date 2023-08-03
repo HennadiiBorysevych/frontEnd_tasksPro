@@ -1,5 +1,4 @@
 export { default as Board } from './board/Board';
-export { default as BoardHead } from './boardHead/BoardHead';
 export { default as BoardSettings } from './boardSettings/BoardSettings';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
 export { default as ButtonPlus } from './buttonPlus/ButtonPlus';
@@ -28,4 +27,3 @@ export { default as ThemeMenu } from './themeMenu/ThemeMenu';
 export { default as TitlePopUp } from './titlePopUp/TitlePopUp';
 export { default as Modal } from './modal/Modal';
 export { default as CardsSettings } from './cardsSettings/CardsSettings';
-export { default as Welcome } from './welcome/Welcome';

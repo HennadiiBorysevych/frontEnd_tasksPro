@@ -12,6 +12,7 @@ const WelcomePage = () => {
       {/* <Input placeholder="Title" /> */}
     </>
   );
+
 };
 
 export default WelcomePage;
