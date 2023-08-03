@@ -16,7 +16,7 @@ export { default as Logo } from './logo/Logo';
 export { default as PrimaryButton } from './primaryButton/PrimaryButton';
 export { default as Profile } from './profile/Profile';
 export { default as ProfilePopUp } from './profilePopUp/ProfilePopUp';
-export { default as UserAvatar } from './userAvatar/UserAvatar';
+export { default as UserAvatar } from './UserAvatar/UserAvatar';
 export { default as SideBar } from './sideBar/SideBar';
 export { default as SideBarItem } from './sideBarItem/SideBarItem';
 export { default as AuthForm } from './authForm/AuthForm';
