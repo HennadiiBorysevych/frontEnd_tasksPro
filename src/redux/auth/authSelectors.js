@@ -1,12 +1,12 @@
 const getIsLoggedIn = state => state.auth.isLoggedIn;
 
-const getUsername = state => state.auth.user.name;
+const getUser = state => state.auth.user;
 
 const getIsFetchingCurrent = state => state.auth.isFetchingCurrentUser;
 
 const authSelectors = {
   getIsLoggedIn,
-  getUsername,
+  getUser,
   getIsFetchingCurrent,
 };
 export default authSelectors;
