@@ -1,6 +1,4 @@
-import { Welcome } from '../components';
-
 const WelcomePage = () => {
-  return <Welcome />;
+  return <div></div>;
 };
 export default WelcomePage;
