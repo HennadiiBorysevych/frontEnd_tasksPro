@@ -11,7 +11,7 @@ const SvgIcon = ({
   fill = 'none',
 }) => {
   return (
-    <SvgStyled width={width} height={height} stroke={stroke}>
+    <SvgStyled width={width} height={height} stroke={stroke} fill={fill}>
       <use href={sprite + `#${svgName}`} />
     </SvgStyled>
   );

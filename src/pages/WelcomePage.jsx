@@ -1,11 +1,10 @@
 import React from 'react';
-import { PrimaryButton, Welcome } from '../components';
+import { PrimaryButton } from '../components';
 
 const WelcomePage = () => {
   return (
     <>
-      <Welcome />
-      <PrimaryButton hasIcon={true} svgName="icon-plus">
+      <PrimaryButton hasIcon={true} svgName="icon-plus" type='button' onClick={() => console.log('Click PrimaryButton')}>
         Add
       </PrimaryButton>
       {/* <SvgIcon svgName="icon-Project" stroke="#FFFFFF" /> */}

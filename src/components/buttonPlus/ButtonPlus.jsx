@@ -3,7 +3,7 @@ import { SpanStyled } from './ButtonPlus.styled';
 import SvgIcon from 'components/svgIcon/SvgIcon';
 import PropTypes from 'prop-types';
 
-const ButtonPlus = ({ svgName, width = '28', height = '28' }) => {
+const ButtonPlus = ({ svgName, width, height }) => {
   return (
     <SpanStyled width={width} height={height}>
       <SvgIcon svgName={svgName} stroke="#ffffff" />
