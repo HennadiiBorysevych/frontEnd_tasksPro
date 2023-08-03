@@ -10,10 +10,16 @@ import {
   REGISTER,
 } from 'redux-persist/es/constants';
 
-import { authReducer } from './auth/authSlice';
+import { authReducer } from './auth';
+
+// import { boardsReducer } from "./boards/slice";
+// import { columnsReducer } from "./columns/slice";
+// import { tasksReducer } from "./tasks/slice";
+
+// import { sidebarReducer } from "./sidebarSlice";
 
 const persistConfig = {
-  key: 'token',
+  key: 'auth',
   storage,
   whitelist: ['token'],
 };
@@ -22,6 +28,10 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    // boards: boardsReducer,
+    // columns: columnsReducer,
+    // tasks: tasksReducer,
+    // sidebar: sidebarReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
