@@ -12,11 +12,6 @@ const token = {
   },
 };
 
-/*
- * POST @ /users/signup
- * body: { name, email, password }
- * После успешной регистрации добавляем токен в HTTP-заголовок
- */
 const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -30,11 +25,6 @@ const register = createAsyncThunk(
   }
 );
 
-/*
- * POST @ /users/login
- * body: { email, password }
- * После успешного логина добавляем токен в HTTP-заголовок
- */
 const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post('/api/auth/login', credentials);
@@ -45,11 +35,6 @@ const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   }
 });
 
-/*
- * POST @ /users/logout
- * headers: Authorization: Bearer token
- * После успешного логаута, удаляем токен из HTTP-заголовка
- */
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/api/auth/logout');
@@ -59,15 +44,6 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-/*
- * GET @ /users/current
- * headers:
- *    Authorization: Bearer token
- *
- * 1. Забираем токен из стейта через getState()
- * 2. Если токена нет, выходим не выполняя никаких операций
- * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
- */
 const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -75,7 +51,6 @@ const fetchCurrentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      // Токена нет, уходим из fetchCurrentUser
       return thunkAPI.rejectWithValue('No token found.');
     }
 
@@ -89,10 +64,53 @@ const fetchCurrentUser = createAsyncThunk(
   }
 );
 
+export const updateUserInfo = createAsyncThunk(
+  'auth/updateUserInfo',
+  async (updatedUser, thunkAPI) => {
+    try {
+      const response = await axios.patch('/api/users', updatedUser);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserTheme = createAsyncThunk(
+  'auth/updateUserTheme',
+  async (updatedTheme, thunkAPI) => {
+    try {
+      const response = await axios.patch('/api/users/theme', {
+        theme: updatedTheme,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserHelp = createAsyncThunk(
+  'auth/updateUserHelp',
+  async (updatedHelp, thunkAPI) => {
+    try {
+      const response = await axios.patch('/api/users/help', {
+        help: updatedHelp,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const operations = {
   register,
   logIn,
   logOut,
   fetchCurrentUser,
+  updateUserInfo,
+  updateUserTheme,
+  updateUserHelp,
 };
 export default operations;
