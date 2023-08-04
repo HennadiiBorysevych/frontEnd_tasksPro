@@ -13,10 +13,8 @@ import {
 import { authReducer } from './auth';
 
 import { boardsReducer } from './boards/slice';
-// import { columnsReducer } from "./columns/slice";
+import { сolumnsReducer } from './columns/slice';
 // import { tasksReducer } from "./tasks/slice";
-
-// import { sidebarReducer } from "./sidebarSlice";
 
 const persistConfig = {
   key: 'auth',
@@ -29,9 +27,8 @@ export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     boards: boardsReducer,
-    // columns: columnsReducer,
+    columns: сolumnsReducer,
     // tasks: tasksReducer,
-    // sidebar: sidebarReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
