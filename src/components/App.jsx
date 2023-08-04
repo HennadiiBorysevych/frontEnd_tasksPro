@@ -4,8 +4,8 @@ import GlobalStyles from '../GlobalStyles';
 // import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
 
-const Welcome = lazy(() => import('../pages/WelcomePage'));
-const AuthPage = lazy(() => import('../pages/AuthPage'));
+// const Welcome = lazy(() => import('../pages/WelcomePage'));
+// const AuthPage = lazy(() => import('../pages/AuthPage'));
 const HomePage = lazy(() => import('../pages/HomePage'));
 const Board = lazy(() => import('../pages/Board'));
 
@@ -15,8 +15,8 @@ const App = () => {
       <GlobalStyles />
       <Suspense>
         <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/auth/:id" element={<AuthPage />} />
+          {/* <Route path="/" element={<Welcome />} />
+          <Route path="/auth/:id" element={<AuthPage />} /> */}
 
           <Route path="/home" element={<HomePage />}>
             <Route
