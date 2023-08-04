@@ -1,7 +1,9 @@
 import React from 'react';
 
-const TitlePopUp = () => {
-  return <div>TitlePopUp</div>;
+import { Title } from './TitlePopUp.styled';
+
+const TitlePopUp = ({ title }) => {
+  return <Title>{title}</Title>;
 };
 
 export default TitlePopUp;
