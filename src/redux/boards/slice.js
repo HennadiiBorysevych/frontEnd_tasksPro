@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logOut } from '../auth/authOperations';
-
 import {
   fetchBoards,
   addBoard,
@@ -8,7 +6,6 @@ import {
   getBoard,
   updateBoard,
 } from './operations';
-// import Notiflix from "notiflix";
 
 const handlePending = state => {
   state.isLoading = true;
@@ -17,79 +14,74 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
-
-  // Notiflix.Notify.failure(action.payload);
   console.error(action.payload);
 };
 
+const initialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+};
+
 const boardsSlice = createSlice({
-  name: 'board',
-  initialState: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  extraReducers: {
-    [fetchBoards.pending]: handlePending,
-    [addBoard.pending]: handlePending,
-    [deleteBoard.pending]: handlePending,
-    [getBoard.pending]: handlePending,
-    [updateBoard.pending]: handlePending,
-    [fetchBoards.rejected]: handleRejected,
-    [addBoard.rejected]: handleRejected,
-    [deleteBoard.rejected]: handleRejected,
-    [getBoard.rejected]: handleRejected,
-    [updateBoard.rejected]: handleRejected,
-    [fetchBoards.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.items = action.payload;
-    },
-    [addBoard.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.items.push(action.payload);
-      // Notiflix.Notify.success(${action.payload.name} added to yours boards);
-      console.log(`${action.payload.name} added to yours boards`);
-    },
-    [deleteBoard.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.items.findIndex(
-        board => board.id === action.payload.id
-      );
-      state.items.splice(index, 1);
-      console.log('Board deleted');
-      // Notiflix.Notify.success(Board deleted);
-    },
-    [getBoard.fulfilled](state, action) {
-      // New action
-      state.isLoading = false;
-      state.error = null;
-      const index = state.items.findIndex(
-        board => board.id === action.payload.id
-      );
-      if (index !== -1) {
-        state.items[index] = action.payload;
-      }
-    },
-    [updateBoard.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.items.findIndex(
-        board => board.id === action.payload.id
-      );
-      if (index !== -1) {
-        state.items[index] = action.payload;
-        console.log('Board updated');
-        // Notiflix.Notify.success(Board updated);
-      }
-    },
-    [logOut.fulfilled](state) {
-      state.items = [];
-      state.error = null;
-      state.isLoading = false;
-    },
+  name: 'boards',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(fetchBoards.pending, handlePending)
+      .addCase(addBoard.pending, handlePending)
+      .addCase(deleteBoard.pending, handlePending)
+      .addCase(getBoard.pending, handlePending)
+      .addCase(updateBoard.pending, handlePending)
+      .addCase(fetchBoards.rejected, handleRejected)
+      .addCase(addBoard.rejected, handleRejected)
+      .addCase(deleteBoard.rejected, handleRejected)
+      .addCase(getBoard.rejected, handleRejected)
+      .addCase(updateBoard.rejected, handleRejected)
+      .addCase(fetchBoards.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(addBoard.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items.push(action.payload);
+        console.log(`${action.payload.name} added to your boards`);
+      })
+      .addCase(deleteBoard.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          board => board.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items.splice(index, 1);
+          console.log('Board deleted');
+        }
+      })
+      .addCase(getBoard.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          board => board.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+      .addCase(updateBoard.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          board => board.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+          console.log('Board updated');
+        }
+      });
   },
 });
 
