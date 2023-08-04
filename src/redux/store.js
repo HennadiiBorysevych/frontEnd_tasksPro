@@ -12,7 +12,7 @@ import {
 
 import { authReducer } from './auth';
 
-// import { boardsReducer } from "./boards/slice";
+import { boardsReducer } from './boards/slice';
 // import { columnsReducer } from "./columns/slice";
 // import { tasksReducer } from "./tasks/slice";
 
@@ -28,7 +28,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    // boards: boardsReducer,
+    boards: boardsReducer,
     // columns: columnsReducer,
     // tasks: tasksReducer,
     // sidebar: sidebarReducer,
