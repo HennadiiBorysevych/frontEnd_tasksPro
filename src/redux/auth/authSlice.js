@@ -2,7 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './authOperations';
 
 const initialState = {
-  user: { name: null, email: null, theme: null, avatarURL: null },
+  // user: { name: null, email: null, theme: null, avatarURL: null },
+  user: {
+    name: 'Kit',
+    email: 'KitPes@mail.com',
+    theme: 'dark',
+    avatarURL:
+      'https://koshka.top/uploads/posts/2021-12/1640013101_2-koshka-top-p-samie-smeshnie-koshek-2.jpg',
+  },
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,

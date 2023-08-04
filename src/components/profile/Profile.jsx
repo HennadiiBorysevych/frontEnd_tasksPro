@@ -22,7 +22,7 @@ const Profile = () => {
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
           <ProfilePopUp
-            user={{ name: 'nataha', email: 'rer@fd.com', avatarUrl: 'wew' }}
+            user={user}
             handleModalClose={toggleModal}
             handleAddAvatar={toggleModal}
             handleEditProfile={toggleModal}
