@@ -1,6 +1,6 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { Input} from '../components';
+// import { Formik, Form, Field } from 'formik';
+// import { Input} from '../components';
 
 const WelcomePage = () => {
   return (
@@ -9,7 +9,7 @@ const WelcomePage = () => {
         Add
       </PrimaryButton> */}
       {/* <SvgIcon svgName="icon-Project" stroke="#FFFFFF" /> */}
-      <Input placeholder="Title" />
+      {/* <Input placeholder="Title" />
       <Input multiline="true" placeholder="Description" />
 
       <Formik
@@ -30,10 +30,9 @@ const WelcomePage = () => {
             placeholder="Create a password"
           />
         </Form>
-      </Formik>
+      </Formik> */}
     </>
   );
-
 };
 
 export default WelcomePage;
