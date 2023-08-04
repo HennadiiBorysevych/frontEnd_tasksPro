@@ -1,6 +1,7 @@
-import { Board, BoardHead } from 'components';
+import { BoardHead } from 'components';
 import SharedLayout from 'sharedLayout/SharedLayout';
 import { BoardBody, WelcomeText } from './homePage.styled';
+import Board from 'pages/Board';
 
 const HomePage = () => {
   const boardName = false;
