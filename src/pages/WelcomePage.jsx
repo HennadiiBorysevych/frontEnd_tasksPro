@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Formik, Form, Field } from 'formik';
-// import { Input} from '../components';
+// import { Input } from '../components';
 
 const WelcomePage = () => {
   return (
@@ -10,9 +10,9 @@ const WelcomePage = () => {
       </PrimaryButton> */}
       {/* <SvgIcon svgName="icon-Project" stroke="#FFFFFF" /> */}
       {/* <Input placeholder="Title" />
-      <Input multiline="true" placeholder="Description" />
+      <Input multiline="true" placeholder="Description" /> */}
 
-      <Formik
+      {/* <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={values => {}}
       >

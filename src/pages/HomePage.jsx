@@ -1,4 +1,4 @@
-import { BoardHead } from 'components';
+import { BoardHead, ButtonPlus } from 'components';
 import SharedLayout from 'sharedLayout/SharedLayout';
 import { BoardBody, WelcomeText } from './homePage.styled';
 import Board from 'pages/Board';
@@ -19,9 +19,11 @@ const HomePage = () => {
             visualize and track all the necessary tasks and milestones. This
             board serves as a powerful tool to organize the workflow and ensure
             effective collaboration among team members.
-          </WelcomeText>
+            </WelcomeText>
+            
         )}
       </BoardBody>
+      <ButtonPlus width={40} height={36} size={20} stroke='#121212' backgroundColor='#BEDBB0'/> 
     </div>
   );
 };
