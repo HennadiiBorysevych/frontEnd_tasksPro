@@ -8,6 +8,7 @@ import {
   WelcomeText,
   CreateBoardLink,
 } from './homePage.styled';
+import { Outlet } from 'react-router-dom';
 
 const HomePage = () => {
   const [isBoardPopUpOpen, setIsBoardPopUpOpen] = useState(false);
@@ -21,14 +22,12 @@ const HomePage = () => {
     setIsBoardPopUpOpen(false);
   };
   return (
-    <>
-      <SharedLayout />
+    <SharedLayout>
       <BoardWrap>
         <BoardHead boardName={boardName} />
-
         <BoardBody>
           {boardName ? (
-            <Board />
+            <Outlet />
           ) : (
             <WelcomeText>
               Before starting your project, it is essential to{' '}
@@ -43,7 +42,7 @@ const HomePage = () => {
           {isBoardPopUpOpen && <BoardPopUp onClose={closeBoardPopUp} />}
         </BoardBody>
       </BoardWrap>
-    </>
+    </SharedLayout>
   );
 };
 export default HomePage;

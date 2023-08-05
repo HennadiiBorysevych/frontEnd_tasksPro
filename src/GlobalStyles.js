@@ -1,36 +1,8 @@
 import { Global } from '@emotion/react';
-
 const GlobalStyles = () => {
   return (
     <Global
       styles={`
-        @font-face {
-          font-family: 'Poppins';
-          src: url('Poppins-Regular.woff2') format('woff2'),
-            url('Poppins-Regular.woff') format('woff');
-          font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family: 'Poppins';
-          src: url('Poppins-SemiBold.woff2') format('woff2'),
-            url('Poppins-SemiBold.woff') format('woff');
-          font-weight: 600;
-          font-style: normal;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family: 'Poppins';
-          src: url('Poppins-Medium.woff2') format('woff2'),
-            url('Poppins-Medium.woff') format('woff');
-          font-weight: 500;
-          font-style: normal;
-          font-display: swap;
-        }
-
         :root {
           /** WelcomePage */
           --welcomeBgColor: linear-gradient(

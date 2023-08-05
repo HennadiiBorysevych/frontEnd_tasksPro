@@ -7,7 +7,7 @@ export const SideBarWrapper = styled.div`
   top: 0;
   left: ${({ isOpen }) => (isOpen ? '0' : '-225px')}; */
   width: 225px;
-  height: 100%;
+  min-height: 100vh;
   background-color: #121212;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   /* transition: left 0.3s ease-in-out;

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Container, ScreenWrapper } from './SharedLayouts.styled';
 import { SideBar, Header } from 'components';
 
-const SharedLayout = () => {
+const SharedLayout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
@@ -50,7 +50,7 @@ const SharedLayout = () => {
         />
         <div style={{ width: '100%' }}>
           <Header isOpenSideBar={openSidebar} />
-          <Outlet />
+          {children}
         </div>
       </ScreenWrapper>
     </Container>
