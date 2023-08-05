@@ -17,6 +17,7 @@ const initialState = {
   //     'https://koshka.top/uploads/posts/2021-12/1640013101_2-koshka-top-p-samie-smeshnie-koshek-2.jpg',
   // },
   token: null,
+  isRegistered: false,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
 };
@@ -66,24 +67,3 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-
-// import { createSlice } from '@reduxjs/toolkit';
-
-// export const authSlice = createSlice({
-//   name: 'auth',
-//   initialState: {
-//     user: {
-//       email: '',
-//       name: '',
-//       avatarURL: '',
-//       theme: 'dark',
-//     },
-//     token: '',
-//     isLoggedIn: false,
-//     isRefreshing: false,
-//     error: null,
-//   },
-//   extraReducers: builder => builder,
-// });
-
-// export const authReducer = authSlice.reducer;

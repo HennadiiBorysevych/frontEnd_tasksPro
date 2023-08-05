@@ -1,5 +1,5 @@
-const selectIsLoggedIn = state => state.auth.isLoggedIn;
 
+const selectIsLoggedIn = state => state.auth.isLoggedIn;
 const selectUser = state => state.auth.user;
 
 const selectIsFetchingCurrent = state => state.auth.isFetchingCurrentUser;
