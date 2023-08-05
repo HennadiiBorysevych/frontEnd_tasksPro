@@ -1,28 +1,40 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const SideBarWrapper = styled.div`
   padding: 14px 14px 24px 14px;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: ${({ isOpen }) => (isOpen ? '0' : '-50%')};
-  width: 50%;
+  left: ${({ isOpen }) => (isOpen ? '0' : '-225px')}; */
+  width: 225px;
   height: 100%;
   background-color: #121212;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  transition: left 0.3s ease-in-out;
-  z-index: 1000;
+  /* transition: left 0.3s ease-in-out;
+  z-index: 1000; */
   color: #ffffff;
 
-  @media screen and (min-width: var(--xs)) {
-    padding: 24px 14px;
+  @media screen and (max-width: 1439px) {
+    position: fixed;
+    top: 0;
+    left: ${({ isOpen }) => (isOpen ? '0' : '-225px')};
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
   }
-  @media screen and (min-width: var(--medium)) {
+  @media screen and (min-width: 768px) {
     padding: 24px;
+    left: ${({ isOpen }) => (isOpen ? '0' : '-260px')};
+    width: 260px;
   }
 
-  @media screen and (min-width: var(--medium)) {
-    padding: 24px;
-  }
+  ${({ isOpen, windowHeight }) =>
+    isOpen &&
+    css`
+      @media screen and (max-height: ${windowHeight}px) {
+        height: ${windowHeight}px;
+        overflow-y: auto;
+      }
+    `}
 `;
 
 export const Overlay = styled.div`
@@ -42,6 +54,10 @@ export const TitleBoardList = styled.h2`
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 60px;
+  }
 `;
 
 export const CreateBoard = styled.button`

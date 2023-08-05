@@ -3,7 +3,7 @@ export { default as BoardSettings } from './boardSettings/BoardSettings';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
 export { default as ButtonPlus } from './buttonPlus/ButtonPlus';
 export { default as Calendar } from './calendar/Calendar';
-export { default as CardItem } from './cardItem/CardItem';
+export { default as CardItem } from './cardItem/CardItem.styled';
 export { default as CardsList } from './cardsList/CardsList';
 export { default as CardPopUp } from './cardPopUp/CardPopUp';
 export { default as CardsState } from './cardsState/CardsState';

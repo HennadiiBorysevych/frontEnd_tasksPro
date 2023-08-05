@@ -1,19 +1,19 @@
 import React from 'react';
-import { Profile, SvgIcon, ThemeMenu } from 'components';
-import { HeaderBox, UserSettings } from './Header.styled';
 import PropTypes from 'prop-types';
+import { Profile, SvgIcon, ThemeMenu } from 'components';
+import styles from './Header.styled';
 
 const Header = ({ isOpenSideBar }) => {
   return (
-    <HeaderBox>
-      <button type="button" onClick={isOpenSideBar}>
+    <styles.HeaderBox>
+      <styles.SideBarButton type="button" onClick={isOpenSideBar}>
         <SvgIcon svgName="icon-menu" size={28} stroke="#ffffff" />
-      </button>
-      <UserSettings>
+      </styles.SideBarButton>
+      <styles.UserSettings>
         <ThemeMenu />
         <Profile />
-      </UserSettings>
-    </HeaderBox>
+      </styles.UserSettings>
+    </styles.HeaderBox>
   );
 };
 
