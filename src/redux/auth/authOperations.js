@@ -106,6 +106,20 @@ export const updateUserHelp = createAsyncThunk(
   }
 );
 
+export const updateUserAvatar = createAsyncThunk(
+  'auth/updateUserAvatar',
+  async (updatedAvatar, thunkAPI) => {
+    try {
+      const response = await axios.patch('/api/users/avatar', {
+        avatar: updatedAvatar,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const operations = {
   register,
   logIn,
@@ -114,5 +128,6 @@ const operations = {
   updateUserInfo,
   updateUserTheme,
   updateUserHelp,
+  updateUserAvatar,
 };
 export default operations;

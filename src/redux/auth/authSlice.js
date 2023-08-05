@@ -62,6 +62,9 @@ const authSlice = createSlice({
       })
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.help;
+      })
+      .addCase(authOperations.updateUserAvatar.fulfilled, (state, action) => {
+        state.user.avatarURL = action.payload.avatar;
       });
   },
 });
