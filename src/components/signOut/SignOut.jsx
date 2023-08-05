@@ -9,6 +9,7 @@ const SignOut = () => {
   return (
     <>
       <ButtonSignOut type="submit" onClick={() => signOut()}>
+        {/* <ButtonSignOut type="submit"> */}
         <SvgIcon svgName="icon-login" size={32} stroke="#bedbb0" />{' '}
         <TextSignOut>Log out</TextSignOut>
       </ButtonSignOut>

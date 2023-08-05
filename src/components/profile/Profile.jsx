@@ -10,7 +10,7 @@ import { authSelectors } from 'redux/auth';
 import { Container, UserName, AvatarWrap } from './Profile.styled';
 
 const Profile = () => {
-  const user = useSelector(authSelectors.getUser);
+  const user = useSelector(authSelectors.selectUser);
   const { isModal, toggleModal, onBackdropClick } = useModal();
 
   return (

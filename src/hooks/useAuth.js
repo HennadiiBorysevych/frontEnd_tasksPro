@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from 'redux/auth';
 
 const useAuth = () => {
-  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  const user = useSelector(authSelectors.getUser);
-  const isFetchingCurrent = useSelector(authSelectors.getIsFetchingCurrent);
+  const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn);
+  const user = useSelector(authSelectors.selectUser);
+  const isFetchingCurrent = useSelector(authSelectors.selectIsFetchingCurrent);
 
   const dispatch = useDispatch();
 
