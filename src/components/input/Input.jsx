@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { SvgIcon } from 'components';
 import {
   InputStyled,
   TextareaStyled,
   PasswordWrapperIcon,
 } from './Input.styled';
-import { SvgIcon } from 'components';
 
 const Input = ({
   multiline,

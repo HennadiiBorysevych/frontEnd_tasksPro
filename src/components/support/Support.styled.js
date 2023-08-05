@@ -6,6 +6,7 @@ export const SupportBox = styled.a`
   display: block;
   background-color: #1f1f1f;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const SupportPlate = styled.img`

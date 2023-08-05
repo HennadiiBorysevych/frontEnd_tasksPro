@@ -1,9 +1,16 @@
 import React from 'react';
-import { SpanStyled } from './ButtonPlus.styled';
-import SvgIcon from 'components/svgIcon/SvgIcon';
 import PropTypes from 'prop-types';
+import { SvgIcon } from 'components';
+import { SpanStyled } from './ButtonPlus.styled';
 
-const ButtonPlus = ({ width, height, stroke, size, backgroundColor, ...rest }) => {
+const ButtonPlus = ({
+  width,
+  height,
+  stroke,
+  size,
+  backgroundColor,
+  ...rest
+}) => {
   return (
     <SpanStyled
       width={width}
