@@ -5,7 +5,13 @@ import { UserAvatar, PopUpLayout, ButtonPlus, PrimaryButton } from 'components';
 
 import { useEditProfile } from 'hooks';
 
-import { Container, AvatarWrap, AddButtonWrap } from './ProfilePopUp.styled.js';
+import {
+  Container,
+  AvatarWrap,
+  AddButtonWrap,
+  Input,
+  AvatarBg,
+} from './ProfilePopUp.styled.js';
 
 const ProfilePopUp = ({
   user,
@@ -13,12 +19,14 @@ const ProfilePopUp = ({
   handleEditProfile,
   handleModalClose,
 }) => {
-  const { editedUser, handleChangeProfile } = useEditProfile(user);
-
+  const { editedUser, userAvatar, handleChangeProfile, handleUserAvatar } =
+    useEditProfile(user);
   return (
     <Container>
       <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
         <AvatarWrap>
+          <Input type="file" id="avatar" background={userAvatar} />
+          <AvatarBg size="68"></AvatarBg>
           <UserAvatar avatar={user?.avatarURL} />
           <AddButtonWrap>
             <ButtonPlus svgName="icon-plus" width={24} height={24} />

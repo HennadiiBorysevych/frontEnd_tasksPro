@@ -33,3 +33,50 @@ export const AddButtonWrap = styled.div({
   // height: '24px',
   // outline: '1px solid red',
 });
+export const Input = styled.input(
+  {
+    width: '68px',
+    height: '68px',
+    outline: '1px solid red',
+  },
+  props => ({
+    background: props.background ?? null,
+  })
+);
+export const AvatarBg = styled.div(
+  {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    '::before': {
+      // position: 'absolute',
+      // zIndex: '2',
+      top: '30%',
+      left: '50%',
+      transform: 'translate( -50%, 0)',
+      content: '""',
+      borderRadius: '50%',
+      backgroundColor: '#151515',
+    },
+    '::after': {
+      // position: 'absolute',
+      // zIndex: '2',
+      bottom: '0',
+      left: '50%',
+      transform: 'translate( -50%, 54%)',
+      content: '""',
+      borderRadius: '50%',
+      backgroundColor: '#151515',
+    },
+  },
+  props => ({
+    '::before': {
+      width: `${Number.parseInt(props.size) * 0.338}px`,
+      height: `${Number.parseInt(props.size) * 0.338}px`,
+    },
+    '::after': {
+      width: `${Number.parseInt(props.size) * 0.824}px`,
+      height: `${Number.parseInt(props.size) * 0.824}px`,
+    },
+  })
+);
