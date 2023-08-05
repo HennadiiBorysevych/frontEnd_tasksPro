@@ -5,7 +5,7 @@ import { UserAvatar, PopUpLayout, ButtonPlus, PrimaryButton } from 'components';
 
 import { useEditProfile } from 'hooks';
 
-import { Container, AvatarWrap, AddButtonWrap } from './profilePopUp.styled';
+import { Container, AvatarWrap, AddButtonWrap } from './ProfilePopUp.styled.js';
 
 const ProfilePopUp = ({
   user,

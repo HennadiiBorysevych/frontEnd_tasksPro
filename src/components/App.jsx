@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import authSelectors from 'redux/auth/authSelectors';
 import operations from 'redux/auth/authOperations';
 
-const Welcome = lazy(() => import('../pages/WelcomePage'));
-const AuthPage = lazy(() => import('../pages/AuthPage'));
+// const Welcome = lazy(() => import('../pages/WelcomePage'));
+// const AuthPage = lazy(() => import('../pages/AuthPage'));
 const HomePage = lazy(() => import('../pages/HomePage'));
 const Board = lazy(() => import('../pages/Board'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
