@@ -11,6 +11,7 @@ const initialState = {
   //     'https://koshka.top/uploads/posts/2021-12/1640013101_2-koshka-top-p-samie-smeshnie-koshek-2.jpg',
   // },
   token: null,
+  isRegistered: false,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
 };
@@ -22,7 +23,7 @@ const authSlice = createSlice({
     [authOperations.register.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      state.isLoggedIn = true;
+      state.isRegistered = true;
     },
     [authOperations.logIn.fulfilled](state, action) {
       state.user = action.payload.user;
