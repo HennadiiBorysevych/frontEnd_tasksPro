@@ -27,7 +27,7 @@ const formStyle = {
 
 const AuthForm = ({ value }) => {
   const dispatch = useDispatch();
-  const isReg = useSelector(authSelectors.getIsRegistered);
+  const isReg = useSelector(authSelectors.selectIsLoggedIn);
 
   useEffect(() => {
     if (!isReg) return;
