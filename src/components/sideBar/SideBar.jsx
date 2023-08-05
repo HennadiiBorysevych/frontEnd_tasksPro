@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ButtonPlus, Logo, SideBarItem, SignOut, Support } from 'components';
+import {
+  BoardPopUp,
+  ButtonPlus,
+  Logo,
+  SideBarItem,
+  SignOut,
+  Support,
+} from 'components';
 import {
   BoardList,
   CreateBoard,
@@ -12,15 +19,24 @@ import {
 } from './SideBar.styled';
 
 const SideBar = ({ isOpen, isClose, windowHeight }) => {
+  const [isBoardPopUpOpen, setIsBoardPopUpOpen] = useState(false);
   const { boardName } = useParams();
   const boards = [];
+
+  const openBoardPopUp = () => {
+    setIsBoardPopUpOpen(true);
+  };
+
+  const closeBoardPopUp = () => {
+    setIsBoardPopUpOpen(false);
+  };
 
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
         <Logo />
         <TitleBoardList>My boards</TitleBoardList>
-        <CreateBoard type="submit">
+        <CreateBoard type="button" onClick={openBoardPopUp}>
           <TitleButton>
             Create a <br />
             new board
@@ -45,6 +61,7 @@ const SideBar = ({ isOpen, isClose, windowHeight }) => {
         <SignOut />
       </SideBarWrapper>
       {isOpen && <Overlay onClick={isClose} />}
+      {isBoardPopUpOpen && <BoardPopUp onClose={closeBoardPopUp} />}
     </>
   );
 };
