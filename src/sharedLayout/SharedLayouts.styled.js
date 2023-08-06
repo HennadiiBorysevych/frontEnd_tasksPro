@@ -22,7 +22,11 @@ export const ScreenWrapper = styled.div`
   @media screen and (min-width: var(--medium)) {
     padding: 18px 32px 32px 32px;
   }
-  @media screen and (min-width: var(--large)) {
-    padding: 18px 24px 8px 24px;
+  @media screen and (min-width: 1440px) {
+    display: flex;
   }
+`;
+
+export const MainWrapper = styled.div`
+  width: 100%;
 `;

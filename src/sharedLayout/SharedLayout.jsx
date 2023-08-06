@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Container, ScreenWrapper } from './SharedLayouts.styled';
+import { Container, ScreenWrapper, MainWrapper } from './SharedLayouts.styled';
 import { SideBar, Header } from 'components';
 
 const SharedLayout = ({ children }) => {
@@ -42,16 +41,16 @@ const SharedLayout = ({ children }) => {
 
   return (
     <Container>
-      <ScreenWrapper style={{ display: 'flex' }}>
+      <ScreenWrapper>
         <SideBar
           isOpen={isOpen}
           isClose={closeSideBar}
           windowHeight={windowHeight}
         />
-        <div style={{ width: '100%' }}>
+        <MainWrapper style={{ width: '100%' }}>
           <Header isOpenSideBar={openSidebar} />
           {children}
-        </div>
+        </MainWrapper>
       </ScreenWrapper>
     </Container>
   );

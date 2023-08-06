@@ -3,15 +3,13 @@ import { css } from '@emotion/react';
 
 export const SideBarWrapper = styled.div`
   padding: 14px 14px 24px 14px;
-  /* position: fixed;
-  top: 0;
-  left: ${({ isOpen }) => (isOpen ? '0' : '-225px')}; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 225px;
   min-height: 100vh;
   background-color: #121212;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  /* transition: left 0.3s ease-in-out;
-  z-index: 1000; */
   color: #ffffff;
 
   @media screen and (max-width: 1439px) {
