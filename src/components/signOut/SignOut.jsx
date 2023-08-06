@@ -10,7 +10,7 @@ const SignOut = () => {
 
   const handleSignOut = () => {
     signOut();
-    navigate('/auth/login');
+    navigate('/');
   };
 
   return (

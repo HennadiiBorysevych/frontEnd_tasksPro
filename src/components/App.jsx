@@ -13,7 +13,7 @@ const Board = lazy(() => import('../pages/Board'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
-  const { isFetchingCurrent } = useAuth();
+  const { isLoggedIn, isFetchingCurrent } = useAuth();
 
   return (
     <>
@@ -24,10 +24,18 @@ const App = () => {
           <p>Loading</p>
         ) : (
           <Routes>
-            <Route path="/" element={<Navigate to="/welcome" />} />
-
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/auth/:id" element={<AuthPage />} />
+            <Route
+              path="/"
+              element={
+                !isLoggedIn ? <Welcome /> : <Navigate replace to="/home" />
+              }
+            />
+            <Route
+              path="/auth/:id"
+              element={
+                !isLoggedIn ? <AuthPage /> : <Navigate replace to="/home" />
+              }
+            />
 
             <Route path="/home" element={<HomePage />}>
               <Route
