@@ -13,28 +13,21 @@ const Board = lazy(() => import('../pages/Board'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
-  const { isLoggedIn, isFetchingCurrent } = useAuth();
+  const { isFetchingCurrent } = useAuth();
 
   return (
     <>
       <GlobalStyles />
-      {isFetchingCurrent ? (
-        <p>...Loading. Please, wait.</p>
-      ) : (
-        <Suspense>
+
+      <Suspense>
+        {isFetchingCurrent ? (
+          <p>Loading</p>
+        ) : (
           <Routes>
-            <Route
-              path="/"
-              element={
-                !isLoggedIn ? <Welcome /> : <Navigate replace to="/home" />
-              }
-            />
-            <Route
-              path="/auth/:id"
-              element={
-                !isLoggedIn ? <AuthPage /> : <Navigate replace to="/home" />
-              }
-            />
+            <Route path="/" element={<Navigate to="/welcome" />} />
+
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/auth/:id" element={<AuthPage />} />
 
             <Route path="/home" element={<HomePage />}>
               <Route
@@ -44,8 +37,8 @@ const App = () => {
               <Route path="*" element={<ErrorPage />} />
             </Route>
           </Routes>
-        </Suspense>
-      )}
+        )}
+      </Suspense>
     </>
   );
 };

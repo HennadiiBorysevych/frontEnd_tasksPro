@@ -61,7 +61,8 @@ export const AuthContainer = styled.div`
   margin: 0 auto;
   padding: 40px;
 
-  background-color: var(--bgColorAuth);
+  /* background-color: var(--bgColorAuth); */
+  background-color: gray;
   border-radius: 8px;
 
   top: 50%;
