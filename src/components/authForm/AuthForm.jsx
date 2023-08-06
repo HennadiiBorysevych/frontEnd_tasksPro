@@ -46,10 +46,8 @@ const AuthForm = ({ value, chgForm }) => {
   const onHandleSubmit = ({ name, email, password }, { resetForm }) => {
     if (value === 0) {
       dispatch(operations.register({ name, email, password }));
-      console.log({ name, email, password });
     } else {
       dispatch(operations.logIn({ email, password }));
-      console.log({ email, password });
     }
 
     resetForm();
@@ -111,7 +109,6 @@ const AuthForm = ({ value, chgForm }) => {
         onBlur={handleBlur}
         value={values.password}
       />
-      {console.log(errors)}
       {errors.password && touched.password ? (
         <span style={{ color: 'white' }}>{errors.password}</span>
       ) : null}

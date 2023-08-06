@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import userAvtr from '../assets/images/welcomeAndPlate/welcome.png';
 
 import {
@@ -16,6 +16,10 @@ const fill = {
 };
 
 const WelcomePage = () => {
+  const location = useLocation();
+
+  console.log(location);
+
   return (
     <Background>
       <Container>
@@ -37,10 +41,10 @@ const WelcomePage = () => {
           Pro - Don't wait, start achieving your goals now!
         </WelcomeText>
         <NavLinks>
-          <NavLink to="auth/register">
+          <NavLink to="/auth/register">
             <RegisterLink>Registration</RegisterLink>
           </NavLink>
-          <NavLink to="auth/login">Log In</NavLink>
+          <NavLink to="/auth/login">Log In</NavLink>
         </NavLinks>
       </Container>
     </Background>

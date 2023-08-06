@@ -7,8 +7,7 @@ const authSchema = Yup.object().shape({
     .matches(
       /^[a-zA-Z0-9\s\-_!@#$%^&*()+=?<>{}[\]\\/]+$/,
       'Invalid characters in name'
-    )
-    .required('Name is required'),
+    ),
   email: Yup.string()
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
