@@ -1,16 +1,10 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import registerSchema from '../../validationSchemas/registerSchema';
-import loginSchema from 'validationSchemas/loginSchema';
+import { useFormik } from 'formik';
+import authSchema from '../../validationSchemas/authSchema';
 import { useDispatch } from 'react-redux';
 
 import operations from '../../redux/auth/authOperations';
 import { Input, PrimaryButton } from 'components';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import { useSelector } from 'react-redux';
-import authSelectors from '../../redux/auth/authSelectors';
 import { useEffect } from 'react';
 
 const initialValues = {
@@ -25,15 +19,28 @@ const formStyle = {
   gap: '14px',
 };
 
-const AuthForm = ({ value }) => {
+const AuthForm = ({ value, chgForm }) => {
   const dispatch = useDispatch();
-  const isReg = useSelector(authSelectors.selectIsLoggedIn);
 
   useEffect(() => {
-    if (!isReg) return;
+    async function breakFormikInputs() {
+      await setValues({
+        name: initialValues.name,
+        email: initialValues.email,
+        password: initialValues.password,
+      });
+    }
+    async function breakFormikTouched() {
+      await setTouched({
+        name: false,
+        email: false,
+        password: false,
+      });
+    }
 
-    notify();
-  }, [isReg]);
+    breakFormikInputs();
+    breakFormikTouched();
+  }, [chgForm]);
 
   const onHandleSubmit = ({ name, email, password }, { resetForm }) => {
     if (value === 0) {
@@ -47,82 +54,75 @@ const AuthForm = ({ value }) => {
     resetForm();
   };
 
-  const placeholder =
-    value === 0 ? 'Create a password' : 'Confirm your password';
+  const formDistributor = {
+    passText: value === 0 ? 'Create a password' : 'Confirm your password',
+    buttText: value === 0 ? 'Register Now' : 'Log in Now',
+  };
 
-  const validate = value === 0 ? registerSchema : loginSchema;
-
-  const notify = () =>
-    toast.success('🦄 Registration successful!', {
-      position: 'top-right',
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark',
-    });
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+    touched,
+    setValues,
+    setTouched,
+  } = useFormik({
+    initialValues: initialValues,
+    onSubmit: onHandleSubmit,
+    validationSchema: authSchema,
+  });
 
   return (
-    <>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validate}
-        onSubmit={onHandleSubmit}
+    <form style={formStyle} onSubmit={handleSubmit}>
+      {value === 0 && (
+        <Input
+          name="name"
+          type="name"
+          placeholder="Enter your name"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.name}
+        />
+      )}
+      {value === 0 && errors.name && touched.name ? (
+        <span style={{ color: 'white' }}>{errors.name}</span>
+      ) : null}
+
+      <Input
+        name="email"
+        type="email"
+        placeholder="Enter your email"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values.email}
+      />
+      {errors.email && touched.email ? (
+        <span style={{ color: 'white' }}>{errors.email}</span>
+      ) : null}
+
+      <Input
+        name="password"
+        type="password"
+        placeholder={formDistributor.passText}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values.password}
+      />
+      {console.log(errors)}
+      {errors.password && touched.password ? (
+        <span style={{ color: 'white' }}>{errors.password}</span>
+      ) : null}
+
+      <PrimaryButton
+        style={{ marginTop: '14px' }}
+        hasIcon={false}
+        type="submit"
       >
-        <Form style={formStyle}>
-          {value === 0 && (
-            <Field
-              as={Input}
-              name="name"
-              type="name"
-              placeholder="Enter your name"
-            />
-          )}
-          {value === 0 && (
-            <ErrorMessage
-              name="name"
-              component="span"
-              style={{ color: '#fff' }}
-            />
-          )}
-
-          <Field
-            as={Input}
-            name="email"
-            type="email"
-            placeholder="Enter your email"
-          />
-          <ErrorMessage
-            name="email"
-            component="span"
-            style={{ color: '#fff' }}
-          />
-
-          <Field
-            as={Input}
-            name="password"
-            type="password"
-            placeholder={placeholder}
-          />
-          <ErrorMessage
-            name="password"
-            component="span"
-            style={{ color: '#fff' }}
-          />
-
-          <PrimaryButton hasIcon={false} type="submit">
-            Submit
-          </PrimaryButton>
-        </Form>
-      </Formik>
-
-      <div>
-        <button onClick={notify}>Notify!</button>
-      </div>
-      <ToastContainer />
-    </>
+        {formDistributor.buttText}
+      </PrimaryButton>
+    </form>
   );
 };
 

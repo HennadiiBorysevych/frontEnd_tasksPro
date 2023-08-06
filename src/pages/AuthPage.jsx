@@ -51,6 +51,7 @@ const AuthPage = e => {
   const { id } = useParams();
   const history = useNavigate();
   const [value, setValue] = useState(id === 'register' ? 0 : 1);
+  const [resetForm, setResetForm] = useState(0);
 
   const tabToIdx = {
     1: 'register',
@@ -60,6 +61,12 @@ const AuthPage = e => {
   const handleChange = (evt, newVal) => {
     history(`/auth/${tabToIdx[value]}`);
     setValue(newVal);
+    setResetForm(resetForm + 1);
+
+    // if (resetForm % 2 === 0) {
+    //   console.log(`work`, resetForm);
+    //   setResetForm(resetForm + 1);
+    // }
   };
 
   return (
@@ -70,7 +77,7 @@ const AuthPage = e => {
             <StyledTab label="Registration" />
             <StyledTab label="Log In" />
           </StyledTabs>
-          <AuthForm value={value} />
+          <AuthForm value={value} chgForm={resetForm} />
         </AuthContainer>
       </Container>
     </Background>

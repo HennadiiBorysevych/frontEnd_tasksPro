@@ -18,34 +18,23 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      {isFetchingCurrent ? (
-        <p>...Loading. Please, wait.</p>
-      ) : (
-        <Suspense>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                !isLoggedIn ? <Welcome /> : <Navigate replace to="/home" />
-              }
-            />
-            <Route
-              path="/auth/:id"
-              element={
-                !isLoggedIn ? <AuthPage /> : <Navigate replace to="/home" />
-              }
-            />
 
-            <Route path="/home" element={<HomePage />}>
-              <Route
-                path=":boardId"
-                element={<PrivatePage component={<Board />} />}
-              />
-              <Route path="*" element={<ErrorPage />} />
-            </Route>
-          </Routes>
-        </Suspense>
-      )}
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<Navigate to="/welcome" />} />
+
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/auth/:id" element={<AuthPage />} />
+
+          <Route path="/home" element={<HomePage />}>
+            <Route
+              path=":boardId"
+              element={<PrivatePage component={<Board />} />}
+            />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 };
