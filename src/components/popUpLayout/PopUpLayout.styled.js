@@ -9,6 +9,7 @@ export const Container = styled.div({
   flexDirection: 'column',
   alignItems: 'left',
   overflow: 'hidden',
+  backgroundColor: '#151515',
 });
 
 export const CloseBtn = styled.button({
@@ -17,6 +18,5 @@ export const CloseBtn = styled.button({
   right: '14px',
   width: '18px',
   height: '18px',
-  outline: '1px solid graphite',
   cursor: 'pointer',
 });

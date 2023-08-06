@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useFormik } from 'formik';
 import userUpdateSchema from '../../validationSchemas/userUpdateSchema';
 
-import { UserAvatar, PopUpLayout, SvgIcon, PrimaryButton } from 'components';
+import {
+  UserAvatar,
+  PopUpLayout,
+  SvgIcon,
+  Input,
+  PrimaryButton,
+} from 'components';
 
 import { useEditProfile } from 'hooks';
 
@@ -12,11 +17,14 @@ import {
   AvatarWrap,
   AddButtonWrap,
   AvatarInput,
-  Input,
   AvatarBg,
-  TogglePasswordBtn,
 } from './ProfilePopUp.styled.js';
 
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+};
 const formStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -24,9 +32,14 @@ const formStyle = {
 };
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const { userAvatar, handleChangeProfile, handleUserAvatar } =
+  const { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar } =
     useEditProfile(user);
+  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
+    useFormik({
+      initialValues: initialValues,
+      onSubmit: handleChangeProfile,
+      validationSchema: userUpdateSchema,
+    });
 
   return (
     <Container>
@@ -49,70 +62,55 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             <SvgIcon svgName="icon-plus" stroke="#000" />
           </AddButtonWrap>
         </AvatarWrap>
+        <form style={formStyle} onSubmit={handleSubmit}>
+          <Input
+            name="name"
+            type="name"
+            placeholder={user?.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.name}
+          />
 
-        <Formik
-          initialValues={{ name: user?.name, email: user?.email, password: '' }}
-          validationSchema={userUpdateSchema}
-          onSubmit={values => {
-            handleChangeProfile(values);
-          }}
-        >
-          <Form style={formStyle}>
-            <Field
-              as={Input}
-              name="name"
-              type="name"
-              placeholder="Enter your name"
-            />
-            <ErrorMessage
-              name="name"
-              component="span"
-              style={{ color: 'rgba(255,255,255,.8)', fontSize: '12px' }}
-            />
+          {errors.name && touched.name ? (
+            <span style={{ color: 'white' }}>{errors.name}</span>
+          ) : null}
 
-            <Field
-              as={Input}
-              name="email"
-              type="email"
-              placeholder="Enter your email"
-            />
-            <ErrorMessage
-              name="email"
-              component="span"
-              style={{ color: 'rgba(255,255,255,.6)', fontSize: '12px' }}
-            />
+          <Input
+            name="email"
+            type="email"
+            placeholder={user?.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.email}
+          />
+          {errors.email && touched.email ? (
+            <span style={{ color: 'white' }}>{errors.email}</span>
+          ) : null}
 
-            <div style={{ position: 'relative' }}>
-              <Field
-                as={Input}
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                // type="password"
-                placeholder="Enter new password"
-              />
-              <ErrorMessage
-                name="password"
-                component="span"
-                style={{ color: 'rgba(255,255,255,.6)', fontSize: '12px' }}
-              />
-              <TogglePasswordBtn
-                onClick={() => {
-                  setShowPassword(prev => !prev);
-                }}
-              >
-                <SvgIcon
-                  svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
-                  size="18"
-                  fill="#FFF"
-                />
-              </TogglePasswordBtn>
-            </div>
+          <Input
+            name="password"
+            type="password"
+            placeholder="Enter new password"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
+          />
+          {errors.password && touched.password ? (
+            <span style={{ color: 'white' }}>{errors.password}</span>
+          ) : null}
 
-            <PrimaryButton type="submit" hasIcon={false}>
-              Send
-            </PrimaryButton>
-          </Form>
-        </Formik>
+          <PrimaryButton
+            disabled={
+              !isAvatarLoad && !values.name && !values.email && !values.password
+            }
+            style={{ marginTop: '10px' }}
+            hasIcon={false}
+            type="submit"
+          >
+            Send
+          </PrimaryButton>
+        </form>
       </PopUpLayout>
     </Container>
   );
