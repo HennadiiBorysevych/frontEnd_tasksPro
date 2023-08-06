@@ -11,7 +11,7 @@ import {
 
 const HomePage = () => {
   const [isBoardPopUpOpen, setIsBoardPopUpOpen] = useState(false);
-  const boardName = true;
+  const boardName = false;
 
   const openBoardPopUp = () => {
     setIsBoardPopUpOpen(true);
