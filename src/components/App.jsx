@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/home" element={<HomePage />}>
               <Route
                 path=":boardId"
-                element={<PrivatePage component={<Board />} />}
+                element={<PrivatePage component={Board} />}
               />
               <Route path="*" element={<ErrorPage />} />
             </Route>
