@@ -42,6 +42,7 @@ const App = () => {
                 path=":boardId"
                 element={<PrivatePage component={Board} />}
               />
+
               <Route path="*" element={<ErrorPage />} />
             </Route>
           </Routes>
