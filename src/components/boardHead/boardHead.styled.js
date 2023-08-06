@@ -3,8 +3,6 @@ import styled from '@emotion/styled';
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  justify-content: ${({ boardName }) =>
-    boardName ? 'space-between' : 'flex-end'};
   background-color: #1f1f1f;
   color: #ffffff;
   margin-bottom: 39px;
@@ -19,5 +17,7 @@ export const Header = styled.div`
 `;
 
 export const BoardTitle = styled.p`
-  display: ${({ boardName }) => (boardName ? 'block' : 'none')};
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  font-weight: 500;
 `;

@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
-export const SupportBox = styled.a`
+export const SupportBox = styled.button`
   margin-bottom: 24px;
   padding: 14px;
   display: block;
   background-color: #1f1f1f;
   border-radius: 8px;
-  cursor: pointer;
+  text-align: left;
 `;
 
 export const SupportPlate = styled.img`
@@ -22,7 +22,11 @@ export const SupportOffer = styled.p`
   letter-spacing: -0.24px;
 `;
 
-export const SupportQuestion = styled.div`
+export const AppName = styled.span`
+  color: #bedbb0;
+`;
+
+export const SupportQuestion = styled.span`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -33,7 +37,4 @@ export const TextHelp = styled.p`
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: -0.24px;
-`;
-export const AppName = styled.span`
-  color: #bedbb0;
 `;

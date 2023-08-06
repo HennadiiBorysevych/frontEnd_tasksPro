@@ -34,31 +34,34 @@ const SideBar = ({ isOpen, isClose, windowHeight }) => {
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
-        <Logo />
-        <TitleBoardList>My boards</TitleBoardList>
-        <CreateBoard type="button" onClick={openBoardPopUp}>
-          <TitleButton>
-            Create a <br />
-            new board
-          </TitleButton>
-          <ButtonPlus
-            width={40}
-            height={36}
-            stroke="#121212"
-            backgroundColor="#BEDBB0"
-            size={20}
-          />
-        </CreateBoard>
-        {boardName && (
-          <BoardList>
-            {boards.map(({ id, iconName, title }) => (
-              <SideBarItem key={id} iconName={iconName} title={title} />
-            ))}
-          </BoardList>
-        )}
-
-        <Support />
-        <SignOut />
+        <div>
+          <Logo />
+          <TitleBoardList>My boards</TitleBoardList>
+          <CreateBoard type="button" onClick={openBoardPopUp}>
+            <TitleButton>
+              Create a <br />
+              new board
+            </TitleButton>
+            <ButtonPlus
+              width={40}
+              height={36}
+              stroke="#121212"
+              backgroundColor="#BEDBB0"
+              size={20}
+            />
+          </CreateBoard>
+          {boardName && (
+            <BoardList>
+              {boards.map(({ id, iconName, title }) => (
+                <SideBarItem key={id} iconName={iconName} title={title} />
+              ))}
+            </BoardList>
+          )}
+        </div>
+        <div>
+          <Support />
+          <SignOut />
+        </div>
       </SideBarWrapper>
       {isOpen && <Overlay onClick={isClose} />}
       {isBoardPopUpOpen && <BoardPopUp onClose={closeBoardPopUp} />}

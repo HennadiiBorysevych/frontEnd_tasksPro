@@ -5,12 +5,16 @@ import { BoardTitle, Header } from './boardHead.styled';
 const BoardHead = ({ boardName }) => {
   return (
     <>
-      {!boardName && (
-        <Header>
-          <BoardTitle>{boardName}Project Office</BoardTitle>
-          <Filters />
-        </Header>
-      )}
+      <Header
+        style={
+          boardName
+            ? { justifyContent: 'space-between' }
+            : { justifyContent: 'flex-end' }
+        }
+      >
+        {!!boardName && <BoardTitle>{boardName}Project Office</BoardTitle>}
+        <Filters />
+      </Header>
     </>
   );
 };

@@ -6,7 +6,7 @@ export const Background = styled.section`
   background-image: var(--welcomeBgColor);
   text-align: center;
 
-  height: 770px;
+  min-height: 100vh;
 `;
 
 export const Container = styled.div`

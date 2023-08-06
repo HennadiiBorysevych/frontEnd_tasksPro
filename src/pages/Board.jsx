@@ -1,8 +1,12 @@
-import { CardsList } from 'components';
 import React from 'react';
+import { CardsList } from 'components';
 
-export const Board = ({ boardName, hasColumns, isFilled, onAddColumn }) => {
-  return <CardsList />;
+export const Board = ({ boardName }) => {
+  return (
+    <>
+      <CardsList />;
+    </>
+  );
 };
 
 export default Board;
