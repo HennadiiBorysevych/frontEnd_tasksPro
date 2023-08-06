@@ -64,7 +64,7 @@ const authSlice = createSlice({
       .addCase(authOperations.logOut.rejected, handleRejected)
 
       .addCase(authOperations.fetchCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.isLoggedIn = true;
         handleFulfilled(state);
       })
@@ -88,16 +88,11 @@ const authSlice = createSlice({
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.help;
         handleFulfilled(state);
+    });
+    // .addCase(authOperations.updateUserAvatar.fulfilled, (state, action) => {
+    //   state.user.avatarURL = action.payload.avatar;
+    // });
       })
-      .addCase(authOperations.updateUserHelp.pending, handlePending)
-      .addCase(authOperations.updateUserHelp.rejected, handleRejected)
-
-      .addCase(authOperations.updateUserAvatar.fulfilled, (state, action) => {
-        state.user.avatarURL = action.payload.avatar;
-        handleFulfilled(state);
-      })
-      .addCase(authOperations.updateUserAvatar.pending, handlePending)
-      .addCase(authOperations.updateUserAvatar.rejected, handleRejected);
   },
 });
 

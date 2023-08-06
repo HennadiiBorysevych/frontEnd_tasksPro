@@ -7,7 +7,6 @@ export const Avatar = styled.div(
     alignItems: 'center',
     borderRadius: '8px',
     overflow: 'hidden',
-    outline: '1px solid red',
   },
   props => ({
     margin: props.margin,

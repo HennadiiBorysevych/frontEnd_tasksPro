@@ -18,10 +18,17 @@ export const Container = styled.div({
   backgroundColor: '#1F1F1F',
 });
 
-export const AvatarWrap = styled.div({
-  position: 'relative',
-  margin: '0 auto 24px auto',
-});
+export const AvatarWrap = styled.div(
+  {
+    position: 'relative',
+    margin: '0 auto 24px auto',
+    width: '68px',
+    height: '68px',
+  },
+  props => ({
+    background: props.background ?? null,
+  })
+);
 
 export const AddButtonWrap = styled.div({
   position: 'absolute',
@@ -29,7 +36,81 @@ export const AddButtonWrap = styled.div({
   bottom: '0%',
   left: '50%',
   transform: 'translate( -50%, 50%)',
-  // width: '24px',
-  // height: '24px',
-  // outline: '1px solid red',
+  width: '24px',
+  height: '24px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '6px',
+  backgroundColor: '#BEDBB0',
+});
+export const AvatarInput = styled.input({
+  position: 'absolute',
+  zIndex: '4',
+  width: '68px',
+  height: '68px',
+  cursor: 'pointer',
+  backgroundColor: 'transparent',
+  ' ::file-selector-button ': {
+    visibility: 'hidden',
+  },
+});
+export const Input = styled.input({
+  padding: '14px 18px',
+  width: '100%',
+  fontSize: '14px',
+  borderRadius: '8px',
+  border: '1px solid rgba(	190, 219, 176, .4)',
+  backgroundColor: 'inherit',
+  ':focus': {
+    outline: '1px solid rgba(	190, 219, 176,1)',
+  },
+});
+export const AvatarBg = styled.div(
+  {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    '::before': {
+      position: 'absolute',
+      zIndex: '2',
+      top: '30%',
+      left: '50%',
+      transform: 'translate( -50%, 0)',
+      content: '""',
+      borderRadius: '50%',
+      backgroundColor: '#151515',
+    },
+    '::after': {
+      position: 'absolute',
+      zIndex: '2',
+      bottom: '0',
+      left: '50%',
+      transform: 'translate( -50%, 54%)',
+      content: '""',
+      borderRadius: '50%',
+      backgroundColor: '#151515',
+    },
+  },
+  props => ({
+    '::before': {
+      width: `${Number.parseInt(props.size) * 0.338}px`,
+      height: `${Number.parseInt(props.size) * 0.338}px`,
+    },
+    '::after': {
+      width: `${Number.parseInt(props.size) * 0.824}px`,
+      height: `${Number.parseInt(props.size) * 0.824}px`,
+    },
+  })
+);
+export const TogglePasswordBtn = styled.button({
+  position: 'absolute',
+  top: '50%',
+  right: '0',
+  transform: 'translate( -16px, -50%)',
+  zIndex: '1',
+  width: '18px',
+  height: '18px',
+  cursor: 'pointer',
 });
