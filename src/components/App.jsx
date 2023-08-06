@@ -5,6 +5,7 @@ import GlobalStyles from '../GlobalStyles';
 import PrivatePage from 'routes/PrivatePage';
 
 import { useAuth } from 'hooks';
+import Layout from './Layout';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
@@ -15,6 +16,8 @@ const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 const App = () => {
   const { isLoggedIn, isFetchingCurrent } = useAuth();
 
+  console.log(isLoggedIn);
+
   return (
     <>
       <GlobalStyles />
@@ -24,26 +27,29 @@ const App = () => {
           <p>Loading</p>
         ) : (
           <Routes>
-            <Route
-              path="/"
-              element={
-                !isLoggedIn ? <Welcome /> : <Navigate replace to="/home" />
-              }
-            />
-            <Route
-              path="/auth/:id"
-              element={
-                !isLoggedIn ? <AuthPage /> : <Navigate replace to="/home" />
-              }
-            />
-
-            <Route path="/home" element={<HomePage />}>
+            <Route path="/" element={<Layout />}>
               <Route
-                path=":boardId"
-                element={<PrivatePage component={Board} />}
+                index
+                element={<Navigate to={!isLoggedIn ? '/welcome' : '/home'} />}
               />
 
-              <Route path="*" element={<ErrorPage />} />
+              <Route
+                path="welcome"
+                element={!isLoggedIn ? <Welcome /> : <Navigate to="/home" />}
+              />
+              <Route
+                path="auth/:id"
+                element={!isLoggedIn ? <AuthPage /> : <Navigate to="/home" />}
+              />
+
+              <Route path="home" element={<HomePage />}>
+                <Route
+                  path=":boardId"
+                  element={<PrivatePage component={Board} />}
+                />
+
+                <Route path="*" element={<ErrorPage />} />
+              </Route>
             </Route>
           </Routes>
         )}
