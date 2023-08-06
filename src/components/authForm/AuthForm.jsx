@@ -1,11 +1,10 @@
 import { useFormik } from 'formik';
 import authSchema from '../../validationSchemas/authSchema';
-import { useDispatch } from 'react-redux';
 
-import operations from '../../redux/auth/authOperations';
 import { Input, PrimaryButton } from 'components';
 
 import { useEffect } from 'react';
+import { useAuth } from 'hooks';
 
 const initialValues = {
   name: '',
@@ -20,7 +19,7 @@ const formStyle = {
 };
 
 const AuthForm = ({ value, chgForm }) => {
-  const dispatch = useDispatch();
+  const { signUp, signIn } = useAuth();
 
   useEffect(() => {
     async function breakFormikInputs() {
@@ -45,11 +44,9 @@ const AuthForm = ({ value, chgForm }) => {
 
   const onHandleSubmit = ({ name, email, password }, { resetForm }) => {
     if (value === 0) {
-      dispatch(operations.register({ name, email, password }));
-      console.log({ name, email, password });
+      signUp({ name, email, password });
     } else {
-      dispatch(operations.logIn({ email, password }));
-      console.log({ email, password });
+      signIn({ email, password });
     }
 
     resetForm();
@@ -111,7 +108,6 @@ const AuthForm = ({ value, chgForm }) => {
         onBlur={handleBlur}
         value={values.password}
       />
-      {console.log(errors)}
       {errors.password && touched.password ? (
         <span style={{ color: 'white' }}>{errors.password}</span>
       ) : null}
