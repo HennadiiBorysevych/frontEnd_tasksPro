@@ -1,18 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
 
 const useEditProfile = user => {
   const [userAvatar, setUserAvatar] = useState(user?.avatarURL ?? '');
-  const [avatarFile, setAvatarFile] = useState('');
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [isAvatarLoad, setIsAvatarLoad] = useState(false);
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    avatarFile ? setIsAvatarLoad(true) : setIsAvatarLoad(false);
+  }, [avatarFile]);
+
   const handleChangeProfile = values => {
-    const { password, ...rest } = values;
-    const newUser =
-      password === ''
-        ? { user: rest, avatarFile }
-        : { user: values, avatarFile };
+    let formatedValues = {};
+    for (const key in values) {
+      if (values[key] !== '')
+        formatedValues = { ...formatedValues, [key]: values[key] };
+    }
+    if (!Object.keys(formatedValues).length && !isAvatarLoad) return;
+    const newUser = {
+      avatarFile,
+      user: Object.keys(formatedValues).length ? formatedValues : null,
+    };
+
+    console.log(newUser);
     dispatch(authOperations.updateUserInfo(newUser));
   };
 
@@ -26,7 +39,7 @@ const useEditProfile = user => {
     };
   };
 
-  return { userAvatar, handleChangeProfile, handleUserAvatar };
+  return { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar };
 };
 
 export default useEditProfile;
