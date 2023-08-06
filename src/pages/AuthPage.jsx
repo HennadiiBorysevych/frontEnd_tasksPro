@@ -62,11 +62,6 @@ const AuthPage = e => {
     history(`/auth/${tabToIdx[value]}`);
     setValue(newVal);
     setResetForm(resetForm + 1);
-
-    // if (resetForm % 2 === 0) {
-    //   console.log(`work`, resetForm);
-    //   setResetForm(resetForm + 1);
-    // }
   };
 
   return (
