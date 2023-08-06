@@ -69,8 +69,11 @@ const fetchCurrentUser = createAsyncThunk(
 export const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
+    const formData = new FormData();
+    formData.append('newAvatar', updatedUser.avatarFile);
+    formData.append('updatedUser', updatedUser.user);
     try {
-      const response = await axios.patch('/api/users', updatedUser);
+      const response = await axios.patch('/api/users', formData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -106,19 +109,19 @@ export const updateUserHelp = createAsyncThunk(
   }
 );
 
-export const updateUserAvatar = createAsyncThunk(
-  'auth/updateUserAvatar',
-  async (updatedAvatar, thunkAPI) => {
-    try {
-      const response = await axios.patch('/api/users/avatar', {
-        avatar: updatedAvatar,
-      });
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const updateUserAvatar = createAsyncThunk(
+//   'auth/updateUserAvatar',
+//   async (updatedUser, thunkAPI) => {
+//     const formData = new FormData();
+//     formData.append('newAvatar', updatedUser.avatarFile);
+//     try {
+//       const response = await axios.patch('/api/users/avatar', formData);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 const operations = {
   register,
@@ -128,6 +131,5 @@ const operations = {
   updateUserInfo,
   updateUserTheme,
   updateUserHelp,
-  updateUserAvatar,
 };
 export default operations;
