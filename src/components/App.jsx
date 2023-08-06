@@ -1,12 +1,10 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import GlobalStyles from '../GlobalStyles';
 // import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
-import { useDispatch, useSelector } from 'react-redux';
 
-import authSelectors from 'redux/auth/authSelectors';
-import operations from 'redux/auth/authOperations';
+import { useAuth } from 'hooks';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
@@ -15,18 +13,12 @@ const Board = lazy(() => import('../pages/Board'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn);
-  const isRefresh = useSelector(authSelectors.selectIsFetchingCurrent);
-
-  useEffect(() => {
-    dispatch(operations.fetchCurrentUser());
-  }, [dispatch]);
+  const { isLoggedIn, isFetchingCurrent } = useAuth();
 
   return (
     <>
       <GlobalStyles />
-      {isRefresh ? (
+      {isFetchingCurrent ? (
         <p>...Loading. Please, wait.</p>
       ) : (
         <Suspense>
