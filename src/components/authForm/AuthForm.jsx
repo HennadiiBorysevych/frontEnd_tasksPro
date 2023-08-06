@@ -40,6 +40,7 @@ const AuthForm = ({ value, chgForm }) => {
 
     breakFormikInputs();
     breakFormikTouched();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chgForm]);
 
   const onHandleSubmit = ({ name, email, password }, { resetForm }) => {
