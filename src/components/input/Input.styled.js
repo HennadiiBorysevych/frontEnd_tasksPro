@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 export const CommonInputStyles = `
+position: relative;
+
 width: calc(100%);
   height: 49px;
   padding: 14px 18px;
@@ -41,6 +43,10 @@ export const TextareaStyled = styled.textarea`
   height: ${props => (props.height ? `${props.height}px` : '154px')};
   background: ${props =>
     props.background ? `${props.background}` : '#1f1f1f'};
+`;
+
+export const InputUnit = styled.div`
+  position: relative;
 `;
 
 export const PasswordWrapperIcon = styled.span`

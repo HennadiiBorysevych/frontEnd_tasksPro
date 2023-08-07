@@ -9,7 +9,7 @@ import {
   WelcomeText,
   CreateBoardLink,
 } from './homePage.styled';
-
+import BoardSettings from '../components/boardSettings/BoardSettings';
 const HomePage = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const boardName = false;
@@ -21,7 +21,6 @@ const HomePage = () => {
     <SharedLayout>
       <BoardWrap>
         <BoardHead boardName={boardName} />
-
         <BoardBody>
           {boardName ? (
             <>

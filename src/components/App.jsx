@@ -20,8 +20,6 @@ const App = () => {
     fetchUser();
   }, [fetchUser]);
 
-  console.log(isLoggedIn);
-
   return (
     <>
       <GlobalStyles />
@@ -46,7 +44,10 @@ const App = () => {
                 element={!isLoggedIn ? <AuthPage /> : <Navigate to="/home" />}
               />
 
-              <Route path="home" element={<HomePage />}>
+              <Route
+                path="home"
+   element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
+              >
                 <Route
                   path=":boardId"
                   element={<PrivatePage component={Board} />}

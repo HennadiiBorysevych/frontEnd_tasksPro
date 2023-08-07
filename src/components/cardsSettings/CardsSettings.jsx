@@ -49,7 +49,9 @@ const CardsSettings = () => {
       </Label>
       <Label>
         Deadline
+
         <Calend />
+
       </Label>
     </SettingsBlock>
   );
