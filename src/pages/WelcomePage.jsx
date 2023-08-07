@@ -1,4 +1,4 @@
-import { Logo, SvgIcon } from 'components';
+import { Logo } from 'components';
 import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
 import { NavLink, useLocation } from 'react-router-dom';
 

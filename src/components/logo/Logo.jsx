@@ -22,16 +22,11 @@ const Logo = ({ variant }) => {
   // }, [theme, variant])
 
   const iconSize =
-    variant === 'welcome'
-      ? window.innerWidth >= 768
-        ? '48'
-        : '40'
-      : '32';
-  
-  
+    variant === 'welcome' ? (window.innerWidth >= 768 ? '48' : '40') : '32';
+
   return (
     <LogoWrapper variant={variant}>
-      <SvgIcon svgName="icon-logo-big" size={iconSize} stroke='none'/>
+      <SvgIcon svgName="icon-logo-big" size={iconSize} stroke="none" />
       {variant === 'welcome' ? (
         <Welcome>Task Pro</Welcome>
       ) : (

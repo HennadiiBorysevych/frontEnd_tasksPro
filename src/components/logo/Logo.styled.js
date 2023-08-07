@@ -6,9 +6,8 @@ export const LogoWrapper = styled.div`
   gap: ${({ variant }) => (variant === 'welcome' ? '14px' : '8px')};
 `;
 
-export const Welcome = styled.h2`
+export const Welcome = styled.h1`
   color: #161616;
-  font-family: Poppins;
   font-size: 28px;
   font-weight: 600;
   letter-spacing: -1.12px;
@@ -19,9 +18,8 @@ export const Welcome = styled.h2`
   }
 `;
 
-export const Bord = styled.h2`
+export const Bord = styled.h1`
   color: #fff;
-  font-family: Poppins;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.64px;
