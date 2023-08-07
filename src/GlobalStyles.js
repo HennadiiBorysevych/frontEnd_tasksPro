@@ -20,6 +20,7 @@ const GlobalStyles = () => {
           --buttonColor: #161616;
 
           /** Priority Colors*/
+          --defaultPriorityColor: rgba(255, 255, 255, 0.3)
           --lowPriorityColor: #8fa1d0;
           --mediumPriorityColor: #e09cb5;
           --highPriorityColor: #bedbb0;
