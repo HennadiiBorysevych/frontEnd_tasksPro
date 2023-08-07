@@ -2,7 +2,6 @@ import { Logo } from 'components';
 import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
 import { NavLink, useLocation } from 'react-router-dom';
 
-
 import {
   Background,
   Container,
@@ -23,7 +22,7 @@ const WelcomePage = () => {
       <Container>
         <AppLogo>
           <UserImage src={userAvatar} alt="user-avatar" />
-          <Logo size="40" style={{ color: '161616' }} font-size="28px" />
+          <Logo />
         </AppLogo>
         <WelcomeText>
           Supercharge your productivity and take control of your tasks with Task

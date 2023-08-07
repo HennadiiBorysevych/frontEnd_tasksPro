@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { SupportPopUp, SvgIcon } from 'components';
+import React from 'react';
+import { useModal } from 'hooks';
+import { Modal, SupportPopUp, SvgIcon } from 'components';
 import image from 'assets/images/welcomeAndPlate/plate.png';
 import {
   AppName,
@@ -11,19 +12,12 @@ import {
 } from './Support.styled';
 
 const Support = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const { isModal, toggleModal, onBackdropClick } = useModal();
+  const email = '';
 
   return (
     <>
-      <SupportBox onClick={openModal}>
+      <SupportBox onClick={toggleModal}>
         <SupportPlate src={image} alt="plate" />
         <SupportOffer>
           If you need help with <AppName>TaskPro</AppName>, check out our
@@ -35,7 +29,11 @@ const Support = () => {
         </SupportQuestion>
       </SupportBox>
 
-      {isModalOpen && <SupportPopUp onClose={closeModal} />}
+      {isModal && (
+        <Modal onBackdropClick={onBackdropClick}>
+          <SupportPopUp email={email} onClose={toggleModal} />
+        </Modal>
+      )}
     </>
   );
 };
