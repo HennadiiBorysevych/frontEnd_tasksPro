@@ -1,19 +1,20 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { SvgIcon } from 'components';
 import { LogoWrapper, AppName } from './Logo.styled';
+import sprite from 'assets/images/sprite.svg';
 
-const Logo = ({ size, stroke }) => {
+const Logo = () => {
   const location = useLocation();
-  const isWelcomePage = location.pathname === '/';
+  const isWelcomePage = location.pathname === '/welcome';
   const h1FontSize = isWelcomePage ? '28px' : '16px';
+  const iconLogoSize = isWelcomePage ? '40px' : '32px';
   const h1LetterSpacing = isWelcomePage ? '-1.12px' : '-0.64px';
-  const defaultSize = '32';
-  const logoSize = size || defaultSize;
 
   return (
-    <LogoWrapper>
-      <SvgIcon svgName="icon-icon" size={logoSize} stroke={stroke} />
+    <LogoWrapper gap={isWelcomePage}>
+      <svg width={iconLogoSize} height={iconLogoSize}>
+        <use href={sprite + '#icon-logo-big'}></use>
+      </svg>
       <AppName style={{ fontSize: h1FontSize, letterSpacing: h1LetterSpacing }}>
         {' '}
         Task Pro{' '}
