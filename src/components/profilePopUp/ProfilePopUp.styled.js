@@ -14,8 +14,6 @@ export const Container = styled.div({
   '@media (min-width: 768px)': {
     width: '400px',
   },
-
-  backgroundColor: '#1F1F1F',
 });
 
 export const AvatarWrap = styled.div(
@@ -104,13 +102,3 @@ export const AvatarBg = styled.div(
     },
   })
 );
-export const TogglePasswordBtn = styled.button({
-  position: 'absolute',
-  top: '50%',
-  right: '0',
-  transform: 'translate( -16px, -50%)',
-  zIndex: '1',
-  width: '18px',
-  height: '18px',
-  cursor: 'pointer',
-});

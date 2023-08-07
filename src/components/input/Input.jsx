@@ -5,6 +5,7 @@ import {
   TextareaStyled,
   InputUnit,
   PasswordWrapperIcon,
+  PasswordInputWrapper,
 } from './Input.styled';
 
 const Input = ({
@@ -35,6 +36,7 @@ const Input = ({
           {...rest}
         />
       ) : (
+
         <InputUnit>
           <InputStyled
             type={showPassword ? 'text' : type}
@@ -55,6 +57,7 @@ const Input = ({
             </PasswordWrapperIcon>
           )}
         </InputUnit>
+
       )}
     </>
   );

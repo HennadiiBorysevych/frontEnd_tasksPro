@@ -1,20 +1,17 @@
+import { Logo } from 'components';
+import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
 import { NavLink, useLocation } from 'react-router-dom';
-import userAvtr from '../assets/images/welcomeAndPlate/welcome.png';
 
 import {
   Background,
   Container,
-  AppName,
   AppLogo,
   AppDescription,
+  UserImage,
   WelcomeText,
   NavLinks,
   RegisterLink,
-} from '../pages/pages.styled';
-
-const fill = {
-  fill: 'white',
-};
+} from './pages.styled';
 
 const WelcomePage = () => {
   const location = useLocation();
@@ -23,6 +20,7 @@ const WelcomePage = () => {
     <Background>
       <Container>
         <AppLogo>
+
           <img src={userAvtr} alt="user-avatar" />
           <AppName>
             <svg width="32" height="32">
@@ -34,6 +32,7 @@ const WelcomePage = () => {
             </svg>
             <AppDescription>Task Pro</AppDescription>
           </AppName>
+
         </AppLogo>
         <WelcomeText>
           Supercharge your productivity and take control of your tasks with Task

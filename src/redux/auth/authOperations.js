@@ -58,7 +58,8 @@ const fetchCurrentUser = createAsyncThunk(
 
     token.set(persistedToken);
     try {
-      const { data } = await axios.get('/api/auth/current');
+      const { data } = await axios.get('/api/users/current');
+      console.log('🚀 : data', data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -70,8 +71,14 @@ export const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
     const formData = new FormData();
-    formData.append('newAvatar', updatedUser.avatarFile);
-    formData.append('updatedUser', updatedUser.user);
+
+    if (updatedUser.avatarFile)
+      formData.append('newAvatar', updatedUser.avatarFile);
+    if (updatedUser.user) {
+      for (const key in updatedUser.user) {
+        formData.append(`${key}`, updatedUser.user[key]);
+      }
+    }
     try {
       const response = await axios.patch('/api/users', formData);
       return response.data;

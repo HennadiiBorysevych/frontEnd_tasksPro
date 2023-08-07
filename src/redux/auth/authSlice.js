@@ -13,7 +13,7 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.isFetchingCurrentUser = false;
   state.error = action.payload;
-  console.error(action.payload);
+  // console.error(action.payload);
 };
 
 const initialState = {
@@ -72,10 +72,10 @@ const authSlice = createSlice({
       .addCase(authOperations.fetchCurrentUser.rejected, handleRejected)
 
       .addCase(authOperations.updateUserInfo.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         handleFulfilled(state);
       })
-      .addCase(authOperations.updateUserInfo.pending, handlePending)
+      // .addCase(authOperations.updateUserInfo.pending, handlePending)
       .addCase(authOperations.updateUserInfo.rejected, handleRejected)
 
       .addCase(authOperations.updateUserTheme.fulfilled, (state, action) => {
