@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import GlobalStyles from '../GlobalStyles';
 // import PublicPage from 'routes/PublicPage';
@@ -14,7 +14,11 @@ const Board = lazy(() => import('../pages/Board'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
-  const { isLoggedIn, isFetchingCurrent } = useAuth();
+  const { isLoggedIn, isFetchingCurrent, fetchUser } = useAuth();
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   return (
     <>
@@ -42,7 +46,9 @@ const App = () => {
 
               <Route
                 path="home"
+
                 element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
+
               >
                 <Route
                   path=":boardId"

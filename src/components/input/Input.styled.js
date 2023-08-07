@@ -58,3 +58,7 @@ export const PasswordWrapperIcon = styled.span`
   color: #fff;
   opacity: 0.4;
 `;
+
+export const PasswordInputWrapper = styled.div`
+  position: relative;
+`;
