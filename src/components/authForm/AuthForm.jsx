@@ -43,11 +43,12 @@ const AuthForm = ({ value, chgForm }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chgForm]);
 
-  const onHandleSubmit = ({ name, email, password }, { resetForm }) => {
+  const onHandleSubmit = async ({ name, email, password }, { resetForm }) => {
     if (value === 0) {
-      dispatch(operations.register({ name, email, password }));
+      await dispatch(operations.register({ name, email, password }));
+      await dispatch(operations.logIn({ email, password }));
     } else {
-      dispatch(operations.logIn({ email, password }));
+      await dispatch(operations.logIn({ email, password }));
     }
 
     resetForm();
