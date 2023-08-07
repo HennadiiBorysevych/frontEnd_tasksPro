@@ -72,7 +72,7 @@ const authSlice = createSlice({
       .addCase(authOperations.fetchCurrentUser.rejected, handleRejected)
 
       .addCase(authOperations.updateUserInfo.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         handleFulfilled(state);
       })
       .addCase(authOperations.updateUserInfo.pending, handlePending)
