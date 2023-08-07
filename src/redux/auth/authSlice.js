@@ -75,7 +75,7 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         handleFulfilled(state);
       })
-      .addCase(authOperations.updateUserInfo.pending, handlePending)
+      // .addCase(authOperations.updateUserInfo.pending, handlePending)
       .addCase(authOperations.updateUserInfo.rejected, handleRejected)
 
       .addCase(authOperations.updateUserTheme.fulfilled, (state, action) => {
