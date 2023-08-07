@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { useModal } from 'hooks';
 import SharedLayout from 'sharedLayout/SharedLayout';
-import { BoardHead, BoardPopUp } from 'components';
+import { BoardHead, BoardPopUp, Modal } from 'components';
 import {
   BoardWrap,
   BoardBody,
@@ -10,16 +11,12 @@ import {
 } from './homePage.styled';
 
 const HomePage = () => {
-  const [isBoardPopUpOpen, setIsBoardPopUpOpen] = useState(false);
+  const { isModal, toggleModal, onBackdropClick } = useModal();
   const boardName = false;
+  let BoardTitle = 'Project Office';
+  let icon = '';
+  let bg = '';
 
-  const openBoardPopUp = () => {
-    setIsBoardPopUpOpen(true);
-  };
-
-  const closeBoardPopUp = () => {
-    setIsBoardPopUpOpen(false);
-  };
   return (
     <SharedLayout>
       <BoardWrap>
@@ -34,7 +31,7 @@ const HomePage = () => {
             <>
               <WelcomeText>
                 Before starting your project, it is essential to{' '}
-                <CreateBoardLink onClick={openBoardPopUp}>
+                <CreateBoardLink onClick={toggleModal}>
                   create a board
                 </CreateBoardLink>{' '}
                 to visualize and track all the necessary tasks and milestones.
@@ -43,7 +40,16 @@ const HomePage = () => {
               </WelcomeText>
             </>
           )}
-          {isBoardPopUpOpen && <BoardPopUp onClose={closeBoardPopUp} />}
+          {isModal && (
+            <Modal onBackdropClick={onBackdropClick}>
+              <BoardPopUp
+                title={BoardTitle}
+                iconName={icon}
+                bg={bg}
+                onClose={toggleModal}
+              />
+            </Modal>
+          )}
         </BoardBody>
       </BoardWrap>
     </SharedLayout>
