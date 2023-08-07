@@ -12,7 +12,7 @@ import {
 
 import { authReducer } from './auth';
 
-import { boardsReducer } from './boards/slice';
+import { boardsReducer } from './boards';
 import { columnsReducer } from './columns/slice';
 import { tasksReducer } from './tasks/slice';
 

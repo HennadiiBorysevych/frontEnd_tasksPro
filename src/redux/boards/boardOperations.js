@@ -60,3 +60,12 @@ export const deleteBoard = createAsyncThunk(
     }
   }
 );
+
+const operations = {
+  fetchBoards,
+  addBoard,
+  updateBoard,
+  getBoard,
+  deleteBoard,
+};
+export default operations;
