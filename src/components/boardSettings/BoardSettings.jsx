@@ -23,9 +23,12 @@ const BOARD_ICONS = [
   'icon-hexagon',
 ];
 
-const BoardSettings = () => {
-  const [chosenIcon, setChosenIcon] = useState(BOARD_ICONS[0]);
-  const [chosenBackground, setChosenBackground] = useState('');
+const BoardSettings = ({
+  chosenIcon,
+  setChosenIcon,
+  chosenBackground,
+  setChosenBackground,
+}) => {
   return (
     <Formik
       initialValues={{

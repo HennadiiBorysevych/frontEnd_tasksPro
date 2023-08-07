@@ -9,15 +9,43 @@ import {
   Input,
 } from 'components';
 
+import { useBoard } from 'hooks';
+
 import { Container } from './BoardPopUp.styled';
 
 const BoardPopUp = ({ onClose }) => {
+  const {
+    icon,
+    background,
+    setIcon,
+    setBackground,
+    handleTitle,
+    titleChecker,
+    handleBoradSubmit,
+  } = useBoard();
+
   return (
     <Container>
       <PopUpLayout title="New board" handleClose={onClose}>
-        <Input style={{ marginBottom: '14px' }} placeholder="Title" />
-        <BoardSettings />
-        <PrimaryButton style={{ marginTop: '16px' }}>
+        <Input
+          style={{
+            marginBottom: '14px',
+            border: titleChecker && '1px solid red',
+          }}
+          onChange={handleTitle}
+          placeholder="Title"
+        />
+        <BoardSettings
+          chosenIcon={icon}
+          setChosenIcon={setIcon}
+          chosenBackground={background}
+          setChosenBackground={setBackground}
+        />
+        <PrimaryButton
+          style={{ marginTop: '16px' }}
+          onClick={handleBoradSubmit}
+          hasIcon={false}
+        >
           <ButtonPlus />
           Create
         </PrimaryButton>
