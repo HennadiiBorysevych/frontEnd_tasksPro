@@ -69,7 +69,9 @@ export const AvatarBg = styled.div(
     position: 'relative',
     width: '100%',
     height: '100%',
+    borderRadius: '8px',
     overflow: 'hidden',
+    backgroundColor: '#1F1F1F',
     '::before': {
       position: 'absolute',
       zIndex: '2',
