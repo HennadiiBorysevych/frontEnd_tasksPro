@@ -1,7 +1,7 @@
 import { SettingsBlock, Label, Priority, Radio } from './CardsSettings.styled';
 
-import Calendar from '../calendar/Calendar';
 import React, { useState } from 'react';
+import Calend from '../calendar/Calendar';
 
 const CardsSettings = () => {
   const [value, setValue] = useState('1');
@@ -49,7 +49,9 @@ const CardsSettings = () => {
       </Label>
       <Label>
         Deadline
-        <Calendar />
+
+        <Calend />
+
       </Label>
     </SettingsBlock>
   );

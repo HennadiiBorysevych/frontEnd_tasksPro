@@ -6,17 +6,17 @@ export const SettingsBlock = styled.div`
 
 export const Label = styled.label`
   display: flex;
-  /* margin-right: auto; */
   flex-direction: column;
-  color: #161616;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
   font-family: 'Poppins';
+  line-height: 1.25;
   letter-spacing: -0.24px;
+  margin-bottom: 14px;
 `;
 
 export const Priority = styled.div`
   margin-top: 4px;
-  margin-bottom: 14px;
   display: flex;
   gap: 8px;
 `;
@@ -60,8 +60,8 @@ export const Radio = styled.input`
       content: '';
       border-radius: 50%;
       display: block;
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       padding: 0;
     }
 
@@ -76,7 +76,7 @@ export const Radio = styled.input`
         border-radius: 50%;
         width: 14px;
         height: 14px;
-        border: 2px solid;
+        border: 1px solid;
         background-color: transparent;
         ${props => {
           switch (props.value) {
