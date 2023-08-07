@@ -192,7 +192,7 @@ const Calend = () => {
               {selectedDate.toLocaleDateString()}
             </TextWithGap>
             <DownWithPadding>
-              <SvgIcon svgName="arrow-down" stroke="#FFF" size="28" />
+              <SvgIcon svgName="icon-arrow-down" stroke="#bedbb0" size="18" />
             </DownWithPadding>
           </CalendarWrapper>
 
