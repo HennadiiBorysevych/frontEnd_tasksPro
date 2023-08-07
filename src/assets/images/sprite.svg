@@ -90,5 +90,8 @@
 <symbol id="arrow-down" viewBox="0 0 32 32">
 <path stroke="#BEDBB0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4.5 7.25 4.5 4.5 4.5-4.5"/>
 </symbol>
+<symbol id="icon-arrow-down" viewBox="0 0 30 28">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.3684" d="M7.579 12.211l7.579 7.579 7.579-7.579"></path>
+</symbol>
 </defs>
 </svg>
