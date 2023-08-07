@@ -22,7 +22,7 @@ const WelcomePage = () => {
       <Container>
         <AppLogo>
           <UserImage src={userAvatar} alt="user-avatar" />
-          <Logo />
+          <Logo variant="welcome" />
         </AppLogo>
         <WelcomeText>
           Supercharge your productivity and take control of your tasks with Task

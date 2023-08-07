@@ -32,7 +32,7 @@ const SideBar = ({ isOpen, isClose, windowHeight }) => {
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
         <div>
-          <Logo style={{ color: '#ffffff' }} />
+          <Logo variant="bord" />
           <TitleBoardList>My boards</TitleBoardList>
           <CreateBoard type="button" onClick={toggleModal}>
             <TitleButton>
