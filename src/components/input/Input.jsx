@@ -37,7 +37,7 @@ const Input = ({
       ) : (
         <>
           {type === 'password' ? (
-            <PasswordInputWrapper onClick={handleTogglePassword}>
+            <PasswordInputWrapper >
               <InputStyled
                 type={showPassword ? 'text' : type}
                 name={name}
@@ -46,7 +46,7 @@ const Input = ({
                 background={background}
                 {...rest}
               />
-              <PasswordWrapperIcon>
+              <PasswordWrapperIcon onClick={handleTogglePassword}>
                 <SvgIcon
                   svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
                   width="18"
