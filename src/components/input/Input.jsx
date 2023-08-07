@@ -3,6 +3,7 @@ import { SvgIcon } from 'components';
 import {
   InputStyled,
   TextareaStyled,
+  InputUnit,
   PasswordWrapperIcon,
 } from './Input.styled';
 
@@ -34,24 +35,26 @@ const Input = ({
           {...rest}
         />
       ) : (
-        <InputStyled
-          type={showPassword ? 'text' : type}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-          background={background}
-          {...rest}
-        />
-      )}
-      {type === 'password' && (
-        <PasswordWrapperIcon onClick={handleTogglePassword}>
-          <SvgIcon
-            svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
-            width="18"
-            height="18"
-            fill="#ffffff"
+        <InputUnit>
+          <InputStyled
+            type={showPassword ? 'text' : type}
+            name={name}
+            placeholder={placeholder}
+            onChange={onChange}
+            background={background}
+            {...rest}
           />
-        </PasswordWrapperIcon>
+          {type === 'password' && (
+            <PasswordWrapperIcon onClick={handleTogglePassword}>
+              <SvgIcon
+                svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
+                width="18"
+                height="18"
+                fill="#ffffff"
+              />
+            </PasswordWrapperIcon>
+          )}
+        </InputUnit>
       )}
     </>
   );

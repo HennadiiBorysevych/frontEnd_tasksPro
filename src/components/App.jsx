@@ -16,8 +16,6 @@ const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 const App = () => {
   const { isLoggedIn, isFetchingCurrent } = useAuth();
 
-  console.log(isLoggedIn);
-
   return (
     <>
       <GlobalStyles />

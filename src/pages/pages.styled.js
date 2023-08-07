@@ -11,12 +11,16 @@ export const Background = styled.section`
 
 export const Container = styled.div`
   position: absolute;
-  width: 475px;
   margin: 0 auto;
 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (min-width: 768px) and (max-width: 1439px) {
+    height: 473px;
+    width: 438px;
+  }
 `;
 
 export const AppLogo = styled.div`
@@ -35,7 +39,21 @@ export const AppName = styled.div`
   margin-top: 24px;
 `;
 
+export const AppDescription = styled.h1`
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 42px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 40px;
+    line-height: 60px;
+  }
+`;
+
 export const WelcomeText = styled.p`
+  font-weight: 400;
+  font-size: 14px;
+
   margin-top: 24px;
   margin-bottom: 48px;
 `;
@@ -48,18 +66,26 @@ export const NavLinks = styled.ul`
 `;
 
 export const RegisterLink = styled.li`
-  padding: 14px 130px;
+  padding: 14px 100px;
   background-color: var(--bgColorAuth);
   border-radius: 8px;
   color: white;
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    padding: 14px 126px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 14px 131px;
+  }
 `;
 
 // AUTH PAGE
 export const AuthContainer = styled.div`
   position: absolute;
-  width: 455px;
+  min-width: 275px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 24px;
 
   background-color: var(--bgColorAuth);
   border-radius: 8px;
@@ -67,6 +93,16 @@ export const AuthContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    width: 335px;
+    padding: 24px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 395px;
+    padding: 40px;
+  }
 `;
 
 export const TabsContainer = styled.div`
