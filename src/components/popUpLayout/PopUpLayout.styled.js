@@ -10,6 +10,7 @@ export const Container = styled.div({
   alignItems: 'left',
   overflow: 'hidden',
   backgroundColor: '#151515',
+  borderRadius: '8px',
 });
 
 export const CloseBtn = styled.button({
