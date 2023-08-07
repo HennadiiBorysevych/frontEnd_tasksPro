@@ -20,8 +20,6 @@ const App = () => {
     fetchUser();
   }, [fetchUser]);
 
-  console.log(isLoggedIn);
-
   return (
     <>
       <GlobalStyles />
@@ -48,9 +46,9 @@ const App = () => {
 
               <Route
                 path="home"
-                element={
-                  !isLoggedIn ? <Navigate to="/welcome" /> : <HomePage />
-                }
+
+                element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
+
               >
                 <Route
                   path=":boardId"
