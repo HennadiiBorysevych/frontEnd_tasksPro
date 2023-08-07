@@ -1,23 +1,42 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+// import React, { useEffect, useState } from 'react';
 import { SvgIcon } from 'components';
-import { LogoWrapper, AppName } from './Logo.styled';
+import { LogoWrapper, Welcome, Bord } from './Logo.styled';
+// import { useTheme } from '/ThemeProvider';
 
-const Logo = ({ size, stroke }) => {
-  const location = useLocation();
-  const isWelcomePage = location.pathname === '/';
-  const h1FontSize = isWelcomePage ? '28px' : '16px';
-  const h1LetterSpacing = isWelcomePage ? '-1.12px' : '-0.64px';
-  const defaultSize = '32';
-  const logoSize = size || defaultSize;
+const Logo = ({ variant }) => {
+  // const [svgName, setSvgName] = useState('icon-logo-big');
+  // const { theme } = useTheme();
 
+  // useEffect(() => {
+  //   if (variant === 'bord') {
+  //     if (theme === 'violet') {
+  //       setSvgName('icon-logo-violet');
+  //     }
+  //     else {
+  //       setSvgName('icon-logo-dark');
+  //     }
+  //   }
+  //   else {
+  //      setSvgName('icon-logo-big');
+  //   }
+  // }, [theme, variant])
+
+  const iconSize =
+    variant === 'welcome'
+      ? window.innerWidth >= 768
+        ? '48'
+        : '40'
+      : '32';
+  
+  
   return (
-    <LogoWrapper>
-      <SvgIcon svgName="icon-icon" size={logoSize} stroke={stroke} />
-      <AppName style={{ fontSize: h1FontSize, letterSpacing: h1LetterSpacing }}>
-        {' '}
-        Task Pro{' '}
-      </AppName>
+    <LogoWrapper variant={variant}>
+      <SvgIcon svgName="icon-logo-big" size={iconSize} stroke='none'/>
+      {variant === 'welcome' ? (
+        <Welcome>Task Pro</Welcome>
+      ) : (
+        <Bord>Task Pro</Bord>
+      )}
     </LogoWrapper>
   );
 };
