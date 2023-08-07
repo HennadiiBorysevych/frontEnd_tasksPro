@@ -10,6 +10,8 @@ import {
   CreateBoardLink,
 } from './homePage.styled';
 
+import Calendar from '../components/calendar/Calendar';
+
 const HomePage = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const boardName = false;
@@ -37,6 +39,7 @@ const HomePage = () => {
                 This board serves as a powerful tool to organize the workflow
                 and ensure effective collaboration among team members.
               </WelcomeText>
+              <Calendar />
             </>
           )}
           {isModal && (
