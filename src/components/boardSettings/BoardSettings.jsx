@@ -1,18 +1,16 @@
+import React, { useState } from 'react';
+import { Formik } from 'formik';
 
 import {
   Row,
   RadioField,
   IconContainer,
-  Svg,
   BoardText,
- } from './BoardSettings.styled';
+  BackgroundImage,
+} from './BoardSettings.styled';
 
-
-
-import React from 'react';
-import { Formik } from 'formik';
-import icon from '../../assets/images/sprite.svg';
-
+import { SvgIcon } from 'components';
+import { backgroundImages } from '../../constants/backgrounds';
 
 const BOARD_ICONS = [
   'icon-Project',
@@ -26,27 +24,57 @@ const BOARD_ICONS = [
 ];
 
 const BoardSettings = () => {
+  const [chosenIcon, setChosenIcon] = useState(BOARD_ICONS[0]);
+  const [chosenBackground, setChosenBackground] = useState('');
   return (
-    
     <Formik
       initialValues={{
         icon: BOARD_ICONS[0],
-        }}>
-        <BoardText>Icons</BoardText>
-            <Row>
-              {BOARD_ICONS.map(id => (
-                <label key={id} title={id}>
-                  <RadioField name="icon" type="radio" value={id} />
-                  <IconContainer>
-                    <Svg>
-                      <use xlinkHref={`${icon}#${id}`} />
-                    </Svg>
-                  </IconContainer>
-                </label>
-              ))}
-            </Row>
-      </Formik>
-      
+      }}
+      onSubmit={values => {
+        console.log('Form submitted with values:', values);
+      }}
+    >
+      {({ handleSubmit }) => (
+        <div>
+          <BoardText>Icons</BoardText>
+          <Row>
+            {BOARD_ICONS.map(id => (
+              <label key={id} title={id}>
+                <RadioField
+                  name="icon"
+                  type="radio"
+                  value={id}
+                  checked={chosenIcon === id}
+                  onChange={() => setChosenIcon(id)}
+                />
+                <IconContainer>
+                  <SvgIcon
+                    svgName={id}
+                    stroke={id === chosenIcon ? '#ffffff' : '#7f7f7f'}
+                  />
+                </IconContainer>
+              </label>
+            ))}
+          </Row>
+          <BoardText>Background</BoardText>
+          <Row>
+            {backgroundImages.map(bgIndex => (
+              <label key={bgIndex.title} title={bgIndex.title}>
+                <RadioField
+                  name="background"
+                  type="radio"
+                  value={bgIndex.title}
+                  checked={chosenBackground === bgIndex.title}
+                  onChange={() => setChosenBackground(bgIndex.title)}
+                />
+                <BackgroundImage bgIndex={bgIndex} />
+              </label>
+            ))}
+          </Row>
+        </div>
+      )}
+    </Formik>
   );
 };
 
