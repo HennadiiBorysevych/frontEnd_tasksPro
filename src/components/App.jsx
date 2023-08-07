@@ -46,9 +46,7 @@ const App = () => {
 
               <Route
                 path="home"
-
-                element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
-
+   element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
               >
                 <Route
                   path=":boardId"

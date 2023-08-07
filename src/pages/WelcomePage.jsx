@@ -6,11 +6,8 @@ import {
   Background,
   Container,
   AppLogo,
-
   AppDescription,
-
   UserImage,
-
   WelcomeText,
   NavLinks,
   RegisterLink,
