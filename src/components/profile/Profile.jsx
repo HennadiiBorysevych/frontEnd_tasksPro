@@ -20,12 +20,7 @@ const Profile = () => {
 
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
-          <ProfilePopUp
-            user={user}
-            handleModalClose={toggleModal}
-            handleAddAvatar={toggleModal}
-            handleEditProfile={toggleModal}
-          />
+          <ProfilePopUp user={user} handleModalClose={toggleModal} />
         </Modal>
       ) : null}
     </Container>

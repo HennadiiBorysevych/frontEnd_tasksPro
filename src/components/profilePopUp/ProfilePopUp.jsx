@@ -107,6 +107,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             style={{ marginTop: '10px' }}
             hasIcon={false}
             type="submit"
+            // onClick={handleModalClose}
           >
             Send
           </PrimaryButton>
