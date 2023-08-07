@@ -21,7 +21,6 @@ const HomePage = () => {
     <SharedLayout>
       <BoardWrap>
         <BoardHead boardName={boardName} />
-
         <BoardBody>
           {boardName ? (
             <>

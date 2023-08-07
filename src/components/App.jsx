@@ -46,7 +46,12 @@ const App = () => {
                 element={!isLoggedIn ? <AuthPage /> : <Navigate to="/home" />}
               />
 
-              <Route path="home" element={<HomePage />}>
+              <Route
+                path="home"
+                element={
+                  !isLoggedIn ? <Navigate to="/welcome" /> : <HomePage />
+                }
+              >
                 <Route
                   path=":boardId"
                   element={<PrivatePage component={Board} />}
