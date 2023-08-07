@@ -41,6 +41,11 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
       validationSchema: userUpdateSchema,
     });
 
+  const handleModalSubmit = () => {
+    handleSubmit();
+    handleModalClose();
+  };
+
   return (
     <Container>
       <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
@@ -62,7 +67,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             <SvgIcon svgName="icon-plus" stroke="#000" />
           </AddButtonWrap>
         </AvatarWrap>
-        <form style={formStyle} onSubmit={handleSubmit}>
+        <form style={formStyle} onSubmit={handleModalSubmit}>
           <Input
             name="name"
             type="name"
@@ -107,7 +112,6 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             style={{ marginTop: '10px' }}
             hasIcon={false}
             type="submit"
-            // onClick={handleModalClose}
           >
             Send
           </PrimaryButton>

@@ -15,7 +15,6 @@ const useModal = () => {
   };
 
   const toggleModal = name => {
-    console.log('close');
     if (name) {
       setActiveChildren(name);
     }
