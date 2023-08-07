@@ -7,18 +7,17 @@ import { useModal } from 'hooks';
 
 import { authSelectors } from 'redux/auth';
 
-import { Container, UserName, AvatarWrap } from './Profile.styled';
+import { Container, UserName } from './Profile.styled';
 
 const Profile = () => {
   const user = useSelector(authSelectors.selectUser);
   const { isModal, toggleModal, onBackdropClick } = useModal();
 
   return (
-    <Container>
+    <Container onClick={toggleModal}>
       <UserName>{user?.name ?? 'No User'}</UserName>
-      <AvatarWrap onClick={toggleModal}>
-        <UserAvatar avatar={user?.avatarURL} width="32px" height="32px" />
-      </AvatarWrap>
+      <UserAvatar avatar={user?.avatarURL} width="32px" height="32px" />
+
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
           <ProfilePopUp
