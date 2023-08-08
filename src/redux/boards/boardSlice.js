@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import {
-  fetchBoards,
   addBoard,
   deleteBoard,
+  fetchBoards,
   getBoard,
   updateBoard,
 } from './boardOperations';
@@ -49,7 +50,14 @@ const boardsSlice = createSlice({
       .addCase(addBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(action.payload.result);
+        const {
+          _id: id,
+          title,
+          icon,
+          background,
+          isActive,
+        } = action.payload.result;
+        state.items.push({ id, title, icon, background, isActive });
         state.activeBoardIndex = state.items.length;
         console.log(`${action.payload.name} added to your boards`);
       })
@@ -77,11 +85,23 @@ const boardsSlice = createSlice({
       .addCase(updateBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex(
-          board => board.id === action.payload.id
-        );
+        const {
+          _id: id,
+          title,
+          icon,
+          background,
+          isActive,
+        } = action.payload.result;
+        const index = state.items.findIndex(board => board.id === id);
+        console.log(index);
         if (index !== -1) {
-          state.items[index] = action.payload;
+          state.items[index] = {
+            id,
+            title,
+            icon,
+            background,
+            isActive,
+          };
           console.log('Board updated');
         }
       });

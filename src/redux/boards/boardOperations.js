@@ -28,6 +28,7 @@ export const addBoard = createAsyncThunk(
 export const updateBoard = createAsyncThunk(
   'boards/updateBoard',
   async ({ boardId, updatedData }, thunkAPI) => {
+    console.log(boardId, updatedData);
     try {
       const response = await axios.patch(`/api/boards/${boardId}`, updatedData);
       return response.data;
