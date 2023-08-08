@@ -6,7 +6,7 @@ export const fetchBoards = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get('/api/boards');
-      return res.data;
+      return res.data?.result.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
