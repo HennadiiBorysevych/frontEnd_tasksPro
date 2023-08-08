@@ -1,0 +1,165 @@
+import styled from '@emotion/styled';
+
+export const FiltersLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: '#ffffff';
+  cursor: pointer;
+`;
+
+export const SettingsBlock = styled.div`
+  width: 100%;
+`;
+
+export const Wrapper = styled.div`
+  width: 100%;
+`;
+
+export const FilterHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+`;
+
+export const LabelsTitle = styled.p`
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.28px;
+  margin-bottom: 14px;
+
+  &::before {
+    content: '';
+    display: block;
+    margin-bottom: 14px;
+    width: 252px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+`;
+
+export const Label = styled.label`
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-family: 'Poppins';
+  letter-spacing: -0.24px;
+  gap: 10px;
+  cursor: pointer;
+`;
+
+export const Priority = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const Radio = styled.input`
+  position: relative;
+  visibility: hidden;
+  cursor: pointer;
+  margin: 0;
+  &::after {
+    visibility: visible;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    position: absolute;
+    content: '';
+    border-radius: 50%;
+    padding: 5px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    ${props => {
+      switch (props.value) {
+        case 'low':
+          return `background-color: #8fa1d0}`;
+        case 'medium':
+          return `background-color: #e09cb5`;
+        case 'high':
+          return `background-color: #bedbb0`;
+        case 'without':
+          return `background-color: rgba(255, 255, 255, 0.3)`;
+        default:
+          return;
+      }
+    }}
+  }
+  &:checked {
+    &::after {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      content: '';
+      border-radius: 50%;
+      display: block;
+      width: 7px;
+      height: 7px;
+      padding: 0;
+    }
+
+    &:checked {
+      &::before {
+        visibility: visible;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        content: '';
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        border: 1px solid;
+        background-color: transparent;
+        ${props => {
+          switch (props.value) {
+            case 'low':
+              return `border-color: #8fa1d0`;
+            case 'medium':
+              return `border-color: #e09cb5`;
+            case 'high':
+              return `border-color: #bedbb0`;
+            case 'without':
+              return `border-color: rgba(255, 255, 255, 0.3)`;
+            default:
+              return;
+          }
+        }}
+      }
+    }
+  }
+`;
+
+export const ShowAllLabel = styled.label`
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  text-decoration-line: underline;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+`;
+
+export const ShowAllRadio = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+`;
+
+export const PopUpLayout = styled.title``;
