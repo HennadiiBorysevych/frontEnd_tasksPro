@@ -5,7 +5,7 @@ import {
   deleteBoard,
   getBoard,
   updateBoard,
-} from './operations';
+} from './boardOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -85,4 +85,4 @@ const boardsSlice = createSlice({
   },
 });
 
-export const boardsReducer = boardsSlice.reducer;
+export default boardsSlice.reducer;
