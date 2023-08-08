@@ -5,13 +5,14 @@ import { ThemeProvider } from '@emotion/react';
 
 import { SvgIcon } from 'components';
 
+
+let senseColor = "#bedbb0";
 import styled from '@emotion/styled';
 
 const CustomCalendar = styled(Calendar)`
   color: #ffffff;
   background-color: #1f1f1f;
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding: 18px;
   width: 233px;
   font-family: 'Poppins', Arial, sans-serif;
   font-size: 16px;
@@ -35,14 +36,17 @@ const CustomCalendar = styled(Calendar)`
     all: unset;
     content: '';
     display: block;
-    width: 195px;
+    width: 100%;
     height: 1px;
     background-color: white;
     opacity: 0.2;
     position: absolute;
     bottom: 14px;
-    padding-left: 10px;
   }
+  
+  & .react-calendar__month-view__weekdays__weekday react-calendar__month-view__weekdays__weekday--weekend{
+    align-items: center;
+  } 
 
   & .react-calendar__month-view__weekdays {
     color: rgba(255, 255, 255, 0.5);
@@ -52,14 +56,12 @@ const CustomCalendar = styled(Calendar)`
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.28px;
-    padding-left: 18px;
-    padding-right: 4px;
     padding-bottom: 11px;
     display: flex;
+    gap: 2px;
     text-decoration: underline;
     text-decoration-color: black;
     overflow: hidden;
-
     text-underline-offset: 5px;
   }
 
@@ -70,10 +72,10 @@ const CustomCalendar = styled(Calendar)`
   }
 
   & .react-calendar__month-view__days {
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-left: -7px;
+    margin-right: -7px;
   }
-
+  
   & .react-calendar__tile {
     color: #fff;
     font-family: 'Poppins', Arial, sans-serif;
@@ -82,8 +84,7 @@ const CustomCalendar = styled(Calendar)`
     font-weight: 400;
     line-height: 18px;
     letter-spacing: -0.28px;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding: 5px 7px;
     border: 0px;
   }
 
@@ -102,16 +103,14 @@ const CustomCalendar = styled(Calendar)`
   }
 
   .react-calendar__tile--active {
-    background-color: #bedbb0;
+    background-color: ${senseColor};
     border-radius: 50%;
   }
 
   .react-calendar__navigation {
     display: flex;
     justify-content: space-between;
-    height: 44px;
-    padding-left: 14px;
-    padding-right: 14px;
+    height: 46px;
     position: relative;
   }
 
@@ -195,7 +194,7 @@ const Calend = () => {
 
   const TextWithGap = styled.span`
     margin-right: 4px;
-    color: #bedbb0;
+    color: ${senseColor};
     font-family: 'Poppins', Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
@@ -216,7 +215,7 @@ const Calend = () => {
               {formatSelectedDate(selectedDate)}
             </TextWithGap>
             <DownWithPadding>
-              <SvgIcon svgName="icon-arrow-down" stroke="#bedbb0" size="18" />
+              <SvgIcon svgName="icon-arrow-down" stroke={senseColor} size="18" />
             </DownWithPadding>
           </CalendarWrapper>
 
