@@ -32,11 +32,13 @@ const SharedLayout = ({ children }) => {
     setIsScrollDisabled(true);
   };
 
-  const closeSideBar = e => {
-    if (e.target === e.currentTarget) {
-      setIsOpen(false);
-      setIsScrollDisabled(false);
-    }
+  const closeSideBar = () => {
+    setIsOpen(false);
+    setIsScrollDisabled(false);
+  };
+
+  const createBoardClick = () => {
+    closeSideBar();
   };
 
   return (
@@ -46,6 +48,7 @@ const SharedLayout = ({ children }) => {
           isOpen={isOpen}
           isClose={closeSideBar}
           windowHeight={windowHeight}
+          onCreateBoardClick={createBoardClick}
         />
         <MainWrapper style={{ width: '100%' }}>
           <Header isOpenSideBar={openSidebar} />

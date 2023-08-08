@@ -1,12 +1,11 @@
-import { SettingsBlock, Label, Priority, Radio } from './CardsSettings.styled';
-
 import React, { useState } from 'react';
 import Calend from '../calendar/Calendar';
+import { SettingsBlock, Label, Priority, Radio } from './CardsSettings.styled';
 
 const CardsSettings = () => {
-  const [value, setValue] = useState('1');
+  const [value, setValue] = useState('without');
 
-  function chengeValue(event) {
+  function changeValue(event) {
     setValue(event.target.value);
   }
 
@@ -20,7 +19,7 @@ const CardsSettings = () => {
             type="radio"
             name="priority"
             value="low"
-            onChange={chengeValue}
+            onChange={changeValue}
           />
 
           <Radio
@@ -28,7 +27,7 @@ const CardsSettings = () => {
             name="priority"
             value="medium"
             checked={value === 'medium' ? true : false}
-            onChange={chengeValue}
+            onChange={changeValue}
           />
 
           <Radio
@@ -36,22 +35,20 @@ const CardsSettings = () => {
             name="priority"
             value="high"
             checked={value === 'high' ? true : false}
-            onChange={chengeValue}
+            onChange={changeValue}
           />
           <Radio
             type="radio"
             name="priority"
             value="without"
             checked={value === 'without' ? true : false}
-            onChange={chengeValue}
+            onChange={changeValue}
           />
         </Priority>
       </Label>
       <Label>
         Deadline
-
         <Calend />
-
       </Label>
     </SettingsBlock>
   );
