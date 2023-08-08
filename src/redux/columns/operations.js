@@ -3,10 +3,10 @@ import axios from 'axios';
 
 export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',
-  async (_, thunkAPI) => {
+  async (boardId, thunkAPI) => {
     try {
-      const res = await axios.get('/api/columns');
-      return res.data;
+      const res = await axios.get(`/api/boards/${boardId}`);
+      return res.data.columns.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useModal } from 'hooks';
 import SharedLayout from 'sharedLayout/SharedLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
+import { fetchColumns } from 'redux/columns/operations';
+import { fetchTasks } from 'redux/tasks/operations';
+import { fetchBoards } from 'redux/boards/boardOperations';
+
 import { BoardHead, BoardPopUp, Modal } from 'components';
 import {
   BoardWrap,
@@ -11,18 +17,31 @@ import {
 } from './homePage.styled';
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const activeBoardId = useSelector(selectActiveBoardId);
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const boardName = false;
   let BoardTitle = 'Project Office';
   let icon = '';
   let bg = '';
 
+  useEffect(() => {
+    dispatch(fetchBoards());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (activeBoardId) {
+      dispatch(fetchColumns(activeBoardId));
+      dispatch(fetchTasks(activeBoardId));
+    }
+  }, [dispatch, activeBoardId]);
+
   return (
     <SharedLayout>
       <BoardWrap>
-        <BoardHead boardName={boardName} />
+        <BoardHead boardName={activeBoardId} />
         <BoardBody>
-          {boardName ? (
+          {activeBoardId ? (
             <>
               <Outlet />
             </>

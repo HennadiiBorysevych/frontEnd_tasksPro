@@ -19,6 +19,7 @@ const handleRejected = (state, action) => {
 
 const initialState = {
   items: [],
+  activeBoardIndex: null,
   isLoading: false,
   error: null,
 };
@@ -43,11 +44,13 @@ const boardsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
+        state.activeBoardIndex = state.items.length ? 1 : null; // рахуємо з 1
       })
       .addCase(addBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items.push(action.payload);
+        state.activeBoardIndex = state.items.length;
         console.log(`${action.payload.name} added to your boards`);
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {

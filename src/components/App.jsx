@@ -1,5 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import GlobalStyles from '../GlobalStyles';
 // import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
@@ -15,7 +17,14 @@ const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
   const { isLoggedIn, isFetchingCurrent, fetchUser } = useAuth();
+  const activeBoardId = useSelector(selectActiveBoardId);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (activeBoardId) {
+      navigate(`/home/${activeBoardId}`);
+    }
+  }, [activeBoardId, navigate]);
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
@@ -46,7 +55,7 @@ const App = () => {
 
               <Route
                 path="home"
-   element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
+                element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
               >
                 <Route
                   path=":boardId"

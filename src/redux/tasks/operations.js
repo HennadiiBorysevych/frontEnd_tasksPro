@@ -3,10 +3,10 @@ import axios from 'axios';
 
 export const fetchTasks = createAsyncThunk(
   'tasks/fetchAll',
-  async (_, thunkAPI) => {
+  async (boardId, thunkAPI) => {
     try {
-      const res = await axios.get('/api/tasks');
-      return res.data;
+      const res = await axios.get(`/api/boards/${boardId}`);
+      return res.data.cards.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
