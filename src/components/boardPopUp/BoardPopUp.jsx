@@ -12,7 +12,7 @@ import {
 
 import { Container } from './BoardPopUp.styled';
 
-const BoardPopUp = ({ onClose }) => {
+const BoardPopUp = ({ board, onClose }) => {
   const {
     icon,
     background,
@@ -21,18 +21,21 @@ const BoardPopUp = ({ onClose }) => {
     handleTitle,
     titleChecker,
     handleBoradSubmit,
-  } = useBoard();
+  } = useBoard(board, onClose);
 
   return (
     <Container>
-      <PopUpLayout title="New board" handleClose={onClose}>
+      <PopUpLayout
+        title={board ? 'Edit board' : 'New board'}
+        handleClose={onClose}
+      >
         <Input
           style={{
             marginBottom: '14px',
             border: titleChecker && '1px solid red',
           }}
           onChange={handleTitle}
-          placeholder="Title"
+          placeholder={board ? board?.title : 'Title'}
         />
         <BoardSettings
           chosenIcon={icon}
@@ -46,7 +49,7 @@ const BoardPopUp = ({ onClose }) => {
           hasIcon={false}
         >
           <ButtonPlus />
-          Create
+          {board ? 'Edit' : 'Create'}
         </PrimaryButton>
       </PopUpLayout>
     </Container>
@@ -55,6 +58,13 @@ const BoardPopUp = ({ onClose }) => {
 
 BoardPopUp.propTypes = {
   onClose: PropTypes.func.isRequired,
+  board: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    isActive: PropTypes.bool.isRequired,
+  }),
 };
 
 export default BoardPopUp;
