@@ -9,45 +9,48 @@ const boardModel = {
   isActive: false,
 };
 
-const useBoard = () => {
-  const [title, setTitle] = useState(boardModel.title);
-  const [icon, setIcon] = useState(boardModel.icon);
-  const [background, setBackground] = useState(boardModel.background);
-  const [board, setBoard] = useState(boardModel);
+const useBoard = (currentBoard, closeModal) => {
+  const initialBoard = currentBoard ? currentBoard : boardModel;
+
+  const [title, setTitle] = useState(initialBoard?.title);
+  const [icon, setIcon] = useState(initialBoard?.icon);
+  const [background, setBackground] = useState(initialBoard?.background);
+  const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleBoradSubmit = useCallback(() => {
-    if (title === '') {
+    if (title === '' && !currentBoard) {
       seTitleChecker(true);
       setTimeout(() => {
         seTitleChecker(false);
       }, 500);
       return;
     }
-    dispatch(boardsOperations.addBoard(board));
-  }, [board, dispatch, title]);
+    const { id, ...rest } = board;
+    currentBoard
+      ? dispatch(
+          boardsOperations.updateBoard({
+            boardId: id,
+            updatedData: rest,
+          })
+        )
+      : dispatch(boardsOperations.addBoard(rest));
+    closeModal();
+  }, [board, closeModal, currentBoard, dispatch, title]);
 
   const handleTitle = useCallback(e => {
     setTitle(e.currentTarget.value);
   }, []);
 
   useEffect(() => {
-    setBoard(
-      background === ''
-        ? {
-            title,
-            icon,
-            isActive: false,
-          }
-        : {
-            title,
-            icon,
-            background,
-            isActive: false,
-          }
-    );
+    setBoard(prev => {
+      const { background: prevBg, ...rest } = prev;
+      return background === ''
+        ? { ...rest, title, icon, isActive: false }
+        : { ...rest, title, icon, background, isActive: false };
+    });
   }, [background, icon, title]);
 
   return {
