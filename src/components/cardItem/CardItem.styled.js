@@ -95,3 +95,9 @@ export const IconsContainer = styled.div`
   align-items: center;
   gap: 8px;
 `;
+
+export const DetailsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;

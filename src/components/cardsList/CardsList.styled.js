@@ -31,15 +31,21 @@ export const Column = styled.div`
   background-color: #1f1f1f;
 `;
 
-export const ColumnHeading = styled.h3`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+export const ColumnHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 18px 20px;
   margin-bottom: 14px;
   background-color: #121212;
   border-radius: 8px;
+`;
+
+export const ColumnHeadingText = styled.h3`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
 `;
 
 export const ItemsContainer = styled.div`
@@ -48,4 +54,10 @@ export const ItemsContainer = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 14px;
+`;
+
+export const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;

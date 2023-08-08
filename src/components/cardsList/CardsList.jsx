@@ -11,7 +11,10 @@ import {
   Column,
   ColumnHeading,
   ItemsContainer,
+  IconsContainer,
+  ColumnHeadingText,
 } from './CardsList.styled';
+import { SvgIcon } from 'components';
 
 // import { updateOrderField } from 'helpers/updateOrderFieldById';
 
@@ -116,7 +119,20 @@ const CardsList = () => {
                         ref={provided.innerRef}
                       >
                         <ColumnHeading {...provided.dragHandleProps}>
-                          {column.title}
+                          <ColumnHeadingText>{column.title}</ColumnHeadingText>
+
+                          <IconsContainer>
+                            <SvgIcon
+                              svgName="icon-pencil"
+                              size={16}
+                              stroke="#FFFFFF80"
+                            />
+                            <SvgIcon
+                              svgName="icon-trash"
+                              size={16}
+                              stroke="#FFFFFF80"
+                            />
+                          </IconsContainer>
                         </ColumnHeading>
                         <Droppable
                           droppableId={column.id}
