@@ -20,13 +20,10 @@ import {
   TitleButton,
 } from './SideBar.styled';
 
-const SideBar = ({ isOpen, isClose, windowHeight }) => {
+const SideBar = ({ isOpen, isClose, windowHeight, onCreateBoardClick }) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { boardName } = useParams();
   const boards = [];
-  let BoardTitle = 'Project Office';
-  let icon = '';
-  let bg = '';
 
   return (
     <>
@@ -34,7 +31,13 @@ const SideBar = ({ isOpen, isClose, windowHeight }) => {
         <div>
           <Logo variant="bord" />
           <TitleBoardList>My boards</TitleBoardList>
-          <CreateBoard type="button" onClick={toggleModal}>
+          <CreateBoard
+            type="button"
+            onClick={() => {
+              toggleModal();
+              onCreateBoardClick();
+            }}
+          >
             <TitleButton>
               Create a <br />
               new board
@@ -63,12 +66,7 @@ const SideBar = ({ isOpen, isClose, windowHeight }) => {
       {isOpen && <Overlay onClick={isClose} />}
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <BoardPopUp
-            title={BoardTitle}
-            iconName={icon}
-            bg={bg}
-            onClose={toggleModal}
-          />
+          <BoardPopUp onClose={toggleModal} />
         </Modal>
       )}
     </>
@@ -80,4 +78,5 @@ export default SideBar;
 SideBar.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   isClose: PropTypes.func.isRequired,
+  onCreateBoardClick: PropTypes.func.isRequired,
 };

@@ -217,7 +217,7 @@ const Calend = () => {
               }
               showYearDropdown={false}
               locale="en-US"
-              calendarType="US"
+              calendarType="gregory"
               defaultView="month"
               onClickDay={handleDayClick}
               tileClassName={tileClassName}
