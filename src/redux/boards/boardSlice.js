@@ -49,7 +49,7 @@ const boardsSlice = createSlice({
       .addCase(addBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(action.payload);
+        state.items.push(action.payload.result);
         state.activeBoardIndex = state.items.length;
         console.log(`${action.payload.name} added to your boards`);
       })

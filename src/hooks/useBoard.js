@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { boardsOperations } from 'redux/boards';
 
 const boardModel = {
   title: '',
@@ -14,27 +16,38 @@ const useBoard = () => {
   const [board, setBoard] = useState(boardModel);
   const [titleChecker, seTitleChecker] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleBoradSubmit = useCallback(() => {
-    console.log(board);
     if (title === '') {
       seTitleChecker(true);
       setTimeout(() => {
         seTitleChecker(false);
       }, 500);
+      return;
     }
-  }, [board, title]);
+    dispatch(boardsOperations.addBoard(board));
+  }, [board, dispatch, title]);
 
   const handleTitle = useCallback(e => {
     setTitle(e.currentTarget.value);
   }, []);
 
   useEffect(() => {
-    setBoard({
-      title,
-      icon,
-      background,
-      isActive: false,
-    });
+    setBoard(
+      background === ''
+        ? {
+            title,
+            icon,
+            isActive: false,
+          }
+        : {
+            title,
+            icon,
+            background,
+            isActive: false,
+          }
+    );
   }, [background, icon, title]);
 
   return {
