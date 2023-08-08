@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
-
 import { ThemeProvider } from '@emotion/react';
-import styled from '@emotion/styled';
+
 import { SvgIcon } from 'components';
+
+import styled from '@emotion/styled';
 
 const CustomCalendar = styled(Calendar)`
   color: #ffffff;
@@ -21,14 +22,14 @@ const CustomCalendar = styled(Calendar)`
   border-radius: 8px;
 
   .react-calendar__navigation__label {
-  color: white; 
-  font-family: 'Poppins', Arial, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.32px;
-}
+    color: white;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.32px;
+  }
 
   & .react-calendar__navigation::after {
     all: unset;

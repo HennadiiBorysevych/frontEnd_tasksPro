@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import authOperations from './authOperations';
 
 const handleFulfilled = state => {

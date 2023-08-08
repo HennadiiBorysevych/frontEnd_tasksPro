@@ -1,20 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import columnsSelectors from 'redux/columns/selectors';
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 import { CardItem, PrimaryButton } from 'components';
+import { SvgIcon } from 'components';
+
 import {
-  ContainerWrapper,
-  ColumnsContainer,
   Column,
   ColumnHeading,
-  ItemsContainer,
-  IconsContainer,
   ColumnHeadingText,
+  ColumnsContainer,
+  ContainerWrapper,
+  IconsContainer,
+  ItemsContainer,
 } from './CardsList.styled';
-import { SvgIcon } from 'components';
 
 // import { updateOrderField } from 'helpers/updateOrderFieldById';
 

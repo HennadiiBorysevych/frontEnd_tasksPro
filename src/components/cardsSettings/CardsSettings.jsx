@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Calend from '../calendar/Calendar';
-import { SettingsBlock, Label, Priority, Radio } from './CardsSettings.styled';
+
+import { Label, Priority, Radio, SettingsBlock } from './CardsSettings.styled';
 
 const CardsSettings = () => {
   const [value, setValue] = useState('without');

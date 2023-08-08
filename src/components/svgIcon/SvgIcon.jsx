@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import sprite from 'assets/images/sprite.svg';
+import PropTypes from 'prop-types';
+
 import { SvgStyled } from './svgIcon.styled';
 
 const SvgIcon = ({
@@ -9,7 +10,6 @@ const SvgIcon = ({
   stroke = '#FFFFFF',
   fill = 'none',
 }) => {
-
   return (
     <SvgStyled width={size} height={size} stroke={stroke} fill={fill}>
       <use href={sprite + `#${svgName}`} />

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'hooks';
+
 import { SvgIcon } from 'components';
+
 import { ButtonSignOut, TextSignOut } from './SignOut.styled';
 
 const SignOut = () => {

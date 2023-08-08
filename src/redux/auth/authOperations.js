@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 axios.defaults.baseURL = 'https://backend-taskspro-public.onrender.com';
 

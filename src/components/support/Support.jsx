@@ -1,7 +1,9 @@
 import React from 'react';
-import { useModal } from 'hooks';
-import { Modal, SupportPopUp, SvgIcon } from 'components';
 import image from 'assets/images/welcomeAndPlate/plate.png';
+import { useModal } from 'hooks';
+
+import { Modal, SupportPopUp, SvgIcon } from 'components';
+
 import {
   AppName,
   SupportBox,

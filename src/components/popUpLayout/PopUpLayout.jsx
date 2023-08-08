@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TitlePopUp, SvgIcon } from 'components';
+import { SvgIcon, TitlePopUp } from 'components';
 
-import { Container, CloseBtn } from './PopUpLayout.styled';
+import { CloseBtn, Container } from './PopUpLayout.styled';
 
 const PopUpLayout = ({ title, handleClose, children }) => {
   return (

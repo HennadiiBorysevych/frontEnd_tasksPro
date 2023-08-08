@@ -1,23 +1,23 @@
-import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
+import { useEditProfile } from 'hooks';
+import PropTypes from 'prop-types';
+
+import {
+  Input,
+  PopUpLayout,
+  PrimaryButton,
+  SvgIcon,
+  UserAvatar,
+} from 'components';
+
 import userUpdateSchema from '../../validationSchemas/userUpdateSchema';
 
 import {
-  UserAvatar,
-  PopUpLayout,
-  SvgIcon,
-  Input,
-  PrimaryButton,
-} from 'components';
-
-import { useEditProfile } from 'hooks';
-
-import {
-  Container,
-  AvatarWrap,
   AddButtonWrap,
-  AvatarInput,
   AvatarBg,
+  AvatarInput,
+  AvatarWrap,
+  Container,
 } from './ProfilePopUp.styled.js';
 
 const initialValues = {

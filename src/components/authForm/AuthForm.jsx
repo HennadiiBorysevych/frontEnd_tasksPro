@@ -1,11 +1,11 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import authSchema from '../../validationSchemas/authSchema';
 
 import { Input, PrimaryButton } from 'components';
 
 import operations from '../../redux/auth/authOperations';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import authSchema from '../../validationSchemas/authSchema';
 
 const initialValues = {
   name: '',
