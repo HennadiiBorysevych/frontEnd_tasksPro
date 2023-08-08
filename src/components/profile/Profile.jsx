@@ -1,13 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
-import { UserAvatar, ProfilePopUp, Modal } from 'components';
-
 import { useModal } from 'hooks';
-
 import { authSelectors } from 'redux/auth';
 
-import { Container, UserName, ClickWrap } from './Profile.styled';
+import { Modal, ProfilePopUp, UserAvatar } from 'components';
+
+import { ClickWrap, Container, UserName } from './Profile.styled';
 
 const Profile = () => {
   const user = useSelector(authSelectors.selectUser);

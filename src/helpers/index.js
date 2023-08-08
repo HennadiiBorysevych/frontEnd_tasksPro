@@ -1,1 +1,2 @@
-export {getPriorityStyles} from './getPriorityStyles'
+export { getPriorityStyles } from './getPriorityStyles';
+export { backgroundImage } from './backgroundImage';

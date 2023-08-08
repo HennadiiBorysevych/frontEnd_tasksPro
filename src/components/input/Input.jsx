@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+
 import { SvgIcon } from 'components';
+
 import {
   InputStyled,
-  TextareaStyled,
   InputUnit,
-  PasswordWrapperIcon,
   PasswordInputWrapper,
+  PasswordWrapperIcon,
+  TextareaStyled,
 } from './Input.styled';
 
 const Input = ({
@@ -36,7 +38,6 @@ const Input = ({
           {...rest}
         />
       ) : (
-
         <InputUnit>
           <InputStyled
             type={showPassword ? 'text' : type}
@@ -57,7 +58,6 @@ const Input = ({
             </PasswordWrapperIcon>
           )}
         </InputUnit>
-
       )}
     </>
   );

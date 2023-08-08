@@ -16,6 +16,8 @@ import { boardsReducer } from './boards';
 import { columnsReducer } from './columns/slice';
 import { tasksReducer } from './tasks/slice';
 
+import userFilterReducer from './userFilterSlice';
+
 const persistConfig = {
   key: 'auth',
   storage,
@@ -29,6 +31,7 @@ export const store = configureStore({
     boards: boardsReducer,
     columns: columnsReducer,
     tasks: tasksReducer,
+    userFilter: userFilterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

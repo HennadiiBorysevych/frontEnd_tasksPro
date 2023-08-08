@@ -3,8 +3,12 @@ import styled from '@emotion/styled';
 export const BoardWrap = styled.div`
   padding: 14px 20px 60px;
   background-color: #1f1f1f;
+  background-repeat: no-repeat;
+  background-image: url(${props => props.bg});
+  background-size: cover;
   color: #ffffff;
   min-height: 100vh;
+
   @media screen and (min-width: 768px) {
     padding: 26px 32px 96px;
   }

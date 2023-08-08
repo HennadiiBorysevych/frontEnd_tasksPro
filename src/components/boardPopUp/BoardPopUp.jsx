@@ -1,15 +1,14 @@
 import React from 'react';
+import { useBoard } from 'hooks';
 import PropTypes from 'prop-types';
 
 import {
-  PopUpLayout,
   BoardSettings,
   ButtonPlus,
-  PrimaryButton,
   Input,
+  PopUpLayout,
+  PrimaryButton,
 } from 'components';
-
-import { useBoard } from 'hooks';
 
 import { Container } from './BoardPopUp.styled';
 

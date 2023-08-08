@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useModal } from 'hooks';
+import { useModal, useBackground } from 'hooks';
 import SharedLayout from 'sharedLayout/SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { fetchColumns } from 'redux/columns/operations';
 import { fetchTasks } from 'redux/tasks/operations';
 import { fetchBoards } from 'redux/boards/boardOperations';
-
 import { BoardHead, BoardPopUp, Modal } from 'components';
 import {
   BoardWrap,
@@ -20,7 +19,9 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const activeBoardId = useSelector(selectActiveBoardId);
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const boardName = false;
+  const [backgroundImage] = useBackground('moon');
+  // const boardName = false;
+
   let BoardTitle = 'Project Office';
   let icon = '';
   let bg = '';
@@ -38,7 +39,7 @@ const HomePage = () => {
 
   return (
     <SharedLayout>
-      <BoardWrap>
+      <BoardWrap bg={backgroundImage}>
         <BoardHead boardName={activeBoardId} />
         <BoardBody>
           {activeBoardId ? (

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 
-import {
-  Row,
-  RadioField,
-  IconContainer,
-  BoardText,
-  BackgroundImage,
-} from './BoardSettings.styled';
-
 import { SvgIcon } from 'components';
+
 import { backgroundImages } from '../../constants/backgrounds';
+
+import {
+  BackgroundImage,
+  BoardText,
+  IconContainer,
+  RadioField,
+  Row,
+} from './BoardSettings.styled';
 
 const BOARD_ICONS = [
   'icon-Project',

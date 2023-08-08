@@ -1,6 +1,7 @@
 // import React, { useEffect, useState } from 'react';
 import { SvgIcon } from 'components';
-import { LogoWrapper, Welcome, Bord } from './Logo.styled';
+
+import { Bord, LogoWrapper, Welcome } from './Logo.styled';
 // import { useTheme } from '/ThemeProvider';
 
 const Logo = ({ variant }) => {

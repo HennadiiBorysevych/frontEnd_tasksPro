@@ -1,7 +1,9 @@
 import React from 'react';
-import { ButtonStyled } from './PrimaryButton.styled';
 import PropTypes from 'prop-types';
+
 import { ButtonPlus } from 'components';
+
+import { ButtonStyled } from './PrimaryButton.styled';
 
 const PrimaryButton = ({
   children,
@@ -12,7 +14,6 @@ const PrimaryButton = ({
   svgName,
   ...rest
 }) => {
-  
   return (
     <ButtonStyled
       onClick={onClick}

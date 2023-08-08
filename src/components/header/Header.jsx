@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Profile, SvgIcon, ThemeMenu } from 'components';
+
 import styles from './Header.styled';
 
 const Header = ({ isOpenSideBar }) => {
