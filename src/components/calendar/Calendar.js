@@ -9,7 +9,7 @@ import { SvgIcon } from 'components';
 const CustomCalendar = styled(Calendar)`
   color: #ffffff;
   background-color: #1f1f1f;
-  padding-top: 5px;
+  padding-top: 18px;
   width: 233px;
   height: 254px;
   font-family: 'Poppins', Arial, sans-serif;
@@ -23,13 +23,13 @@ const CustomCalendar = styled(Calendar)`
     all: unset;
     content: '';
     display: block;
-    width: 200px;
+    width: 195px;
     height: 1px;
     background-color: white;
     opacity: 0.2;
     position: absolute;
     bottom: 14px;
-    left: 18;
+    padding-left: 10px;
   }
 
   & .react-calendar__month-view__weekdays {
@@ -40,14 +40,15 @@ const CustomCalendar = styled(Calendar)`
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.28px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 18px;
+    padding-right: 4px;
     padding-bottom: 11px;
-
+    display: flex;
     text-decoration: underline;
     text-decoration-color: black;
     overflow: hidden;
-    line-height: 0.83;
+
+    text-underline-offset: 5px;
   }
 
   & .react-calendar__year-view .react-calendar__tile,
@@ -67,7 +68,7 @@ const CustomCalendar = styled(Calendar)`
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; /* 128.571% */
+    line-height: 18px;
     letter-spacing: -0.28px;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -87,7 +88,6 @@ const CustomCalendar = styled(Calendar)`
     border-radius: 50%;
   }
 
-  .react-calendar__tile--now,
   .react-calendar__tile--active {
     background-color: #bedbb0;
     border-radius: 50%;
@@ -95,9 +95,10 @@ const CustomCalendar = styled(Calendar)`
 
   .react-calendar__navigation {
     display: flex;
+    justify-content: space-between;
     height: 44px;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 14px;
+    padding-right: 14px;
     position: relative;
   }
 
@@ -105,7 +106,7 @@ const CustomCalendar = styled(Calendar)`
     background: none;
     border: none;
     cursor: pointer;
-    width: 4px;
+    width: 14px;
     height: 8px;
     flex-shrink: 0;
   }
@@ -138,6 +139,17 @@ const Calend = () => {
     return formattedWeekday.slice(0, 2);
   };
 
+  const formatSelectedDate = date => {
+    const options = {
+      month: 'long',
+      day: 'numeric',
+    };
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(
+      date
+    );
+    return formattedDate;
+  };
+
   const handleDayClick = value => {
     setSelectedDate(value);
     toggleCalendarVisibility();
@@ -154,13 +166,13 @@ const Calend = () => {
     return null;
   };
   const PrevLabelWithPadding = styled.div`
-    padding-top: 5px;
+    margin-left: -5px;
   `;
   const NextLabelWithPadding = styled.div`
-    padding-top: 5px;
+    margin-right: -5px;
   `;
   const DownWithPadding = styled.div`
-    padding-top: 15px;
+    padding-top: 5px;
   `;
   const CalendarWrapper = styled.div`
     display: flex;
@@ -187,9 +199,8 @@ const Calend = () => {
             <TextWithGap>
               {selectedDate.toDateString() === today.toDateString()
                 ? 'Today, '
-                : 'Selected Date: '}
-
-              {selectedDate.toLocaleDateString()}
+                : ''}{' '}
+              {formatSelectedDate(selectedDate)}
             </TextWithGap>
             <DownWithPadding>
               <SvgIcon svgName="icon-arrow-down" stroke="#bedbb0" size="18" />
@@ -207,12 +218,12 @@ const Calend = () => {
               next2Label={null}
               prevLabel={
                 <PrevLabelWithPadding>
-                  <SvgIcon svgName="arrow-left" size="28" />
+                  <SvgIcon svgName="icon-arrow-left" size="10" />
                 </PrevLabelWithPadding>
               }
               nextLabel={
                 <NextLabelWithPadding>
-                  <SvgIcon svgName="arrow-right" stroke="#FFF" size="28" />
+                  <SvgIcon svgName="icon-arrow-right" stroke="#FFF" size="10" />
                 </NextLabelWithPadding>
               }
               showYearDropdown={false}
