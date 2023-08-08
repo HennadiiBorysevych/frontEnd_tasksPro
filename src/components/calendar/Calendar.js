@@ -10,14 +10,25 @@ const CustomCalendar = styled(Calendar)`
   color: #ffffff;
   background-color: #1f1f1f;
   padding-top: 18px;
+  padding-bottom: 18px;
   width: 233px;
-  height: 254px;
   font-family: 'Poppins', Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.32px;
+  border-radius: 8px;
+
+  .react-calendar__navigation__label {
+  color: white; 
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.32px;
+}
 
   & .react-calendar__navigation::after {
     all: unset;
@@ -72,6 +83,7 @@ const CustomCalendar = styled(Calendar)`
     letter-spacing: -0.28px;
     padding-bottom: 5px;
     padding-top: 5px;
+    border: 0px;
   }
 
   .react-calendar__tile:disabled {
