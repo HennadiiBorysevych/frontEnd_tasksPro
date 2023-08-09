@@ -1,12 +1,13 @@
-import { Suspense, lazy, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectActiveBoardId } from 'redux/boards/boardSelectors';
-import GlobalStyles from '../GlobalStyles';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { useAuth } from 'hooks';
 // import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
 
-import { useAuth } from 'hooks';
+import GlobalStyles from '../GlobalStyles';
+
+import SkeletonLoader from './skeleton/SkeletonLoader';
 import Layout from './Layout';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
@@ -17,14 +18,7 @@ const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
   const { isLoggedIn, isFetchingCurrent, fetchUser } = useAuth();
-  const activeBoardId = useSelector(selectActiveBoardId);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (activeBoardId) {
-      navigate(`/home/${activeBoardId}`);
-    }
-  }, [activeBoardId, navigate]);
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
@@ -35,7 +29,7 @@ const App = () => {
 
       <Suspense>
         {isFetchingCurrent ? (
-          <p>Loading</p>
+          <SkeletonLoader page="/home/" />
         ) : (
           <Routes>
             <Route path="/" element={<Layout />}>
