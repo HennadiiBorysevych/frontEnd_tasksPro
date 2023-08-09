@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
 import { useModal } from 'hooks';
 import { moveColumn } from 'redux/columns/operations';
 import { moveTaskToColumn } from 'redux/columns/operations';
@@ -16,7 +17,6 @@ import { CardItem, PrimaryButton } from 'components';
 import { SvgIcon } from 'components';
 
 import CustomScrollBar from './CustomScrollBar';
-import { updateOrderField } from './updateOrder';
 
 import {
   Column,
@@ -52,73 +52,65 @@ const CardsList = () => {
       return;
     }
     console.log('onDragEnd..');
+
     if (result.type === 'column') {
       console.log('column moving');
       const dataArray = Array.from(columnsAndTasks);
-      const sourceId = result.draggableId;
+      const idTask = result.draggableId;
       const destinationIndex = result.destination.index;
-      const { updatedArray, updatingSchema } = updateOrderField({
-        sourceId,
+      const { updatingDataFull, updatingDataStripped } = updateOrdersFromIndex({
+        idTask,
         destinationIndex,
         dataArray,
       });
-      dispatch(moveColumn({ updatedArray, updatingSchema }));
+      dispatch(moveColumn({ updatingDataFull, updatingDataStripped }));
     } else {
+      const dataArray = Array.from(columnsAndTasks);
       const { source, destination } = result;
       const columnId = source.droppableId;
-      const targetColumnId = destination.droppableId;
-      const isSameColumn = columnId === targetColumnId;
+      const idColumnNew = destination.droppableId;
+      const isSameColumn = columnId === idColumnNew;
 
       if (!isSameColumn) {
         console.log('column+row moving');
         const idTask = result.draggableId;
-        // const destinationIndex = result.destination.index; // !!! should be used!
-        const sourceColumn = columnsAndTasks.find(col => col.id === columnId);
-        console.log(
-          '🚀 ~ file: CardsList.jsx:73 ~ onDragEnd ~ sourceColumn:',
-          sourceColumn
-        );
-        const sourceColumnItems = sourceColumn.items;
-        const idColumnNew = targetColumnId;
+        const destinationIndex = result.destination.index;
+        const sourceColumnItems = dataArray.find(
+          col => col.id === columnId
+        ).items;
         const indexToMove = sourceColumnItems.findIndex(
           item => item.id === idTask
         );
         const taskToMove = sourceColumnItems.splice(indexToMove, 1)[0];
-        const destinationColumn = columnsAndTasks.find(
-          col => col.id === targetColumnId
-        );
-        const destinationColumnItems = destinationColumn.items;
+        const destinationColumnItems = dataArray.find(
+          col => col.id === idColumnNew
+        ).items;
         destinationColumnItems.push(taskToMove);
         const dataOld = sourceColumnItems.map(({ id, order }) => ({
           id,
           order,
         }));
-        const dataNew = destinationColumnItems.map(({ id, order }) => ({
-          id,
-          order,
-        }));
 
-        console.log(
-          'idTask=, idColumnNew=, dataOld=, dataNew=  ',
+        const { updatingDataStripped: dataNew } = updateOrdersFromIndex({
           idTask,
-          idColumnNew,
-          dataOld,
-          dataNew
-        );
+          destinationIndex,
+          dataArray: destinationColumnItems,
+        });
+
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
-        // Logics for moving items within the same column
         console.log('row moving');
         const column = columnsAndTasks.find(col => col.id === columnId);
         const dataArray = Array.from(column.items);
-        const sourceId = dataArray[source.index].id;
+        const idTask = dataArray[source.index].id;
         const destinationIndex = destination.index;
-        const { updatedArray, updatingSchema } = updateOrderField({
-          sourceId,
-          destinationIndex,
-          dataArray,
-        });
-        dispatch(moveTask({ updatedArray, updatingSchema }));
+        const { updatingDataFull, updatingDataStripped } =
+          updateOrdersFromIndex({
+            idTask,
+            destinationIndex,
+            dataArray,
+          });
+        dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
   };

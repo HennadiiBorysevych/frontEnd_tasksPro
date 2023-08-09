@@ -1,10 +1,10 @@
-export function updateOrderField({ sourceId, destinationIndex, dataArray }) {
-  const sourceIndex = dataArray.findIndex(item => item.id === sourceId);
+export function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
+  const sourceIndex = dataArray.findIndex(item => item.id === idTask);
   if (sourceIndex === -1) {
     return dataArray;
   }
 
-  const updatedArray = dataArray.map((item, index) => {
+  const updatingDataFull = dataArray.map((item, index) => {
     if (index === sourceIndex) {
       return { ...item, order: destinationIndex + 1 };
     } else if (index >= destinationIndex && index < sourceIndex) {
@@ -16,7 +16,7 @@ export function updateOrderField({ sourceId, destinationIndex, dataArray }) {
     }
   });
 
-  const updatingSchema = dataArray.map(({ id, order }, index) => {
+  const updatingDataStripped = dataArray.map(({ id, order }, index) => {
     if (index === sourceIndex) {
       return { id, order: destinationIndex + 1 };
     } else if (index >= destinationIndex && index < sourceIndex) {
@@ -28,5 +28,5 @@ export function updateOrderField({ sourceId, destinationIndex, dataArray }) {
     }
   });
 
-  return { updatedArray, updatingSchema };
+  return { updatingDataFull, updatingDataStripped };
 }

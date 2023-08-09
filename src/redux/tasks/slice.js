@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { updateOrderFromArray } from 'helpers';
 import operations from 'redux/boards/boardOperations';
+import { moveTaskToColumn } from 'redux/columns/operations';
 
 import { logOut } from '../auth/authOperations';
 
@@ -34,12 +36,14 @@ const tasksSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(operations.fetchColumnsTasks.pending, handlePending)
+      .addCase(moveTaskToColumn.pending, handlePending)
       .addCase(addTask.pending, handlePending)
       .addCase(deleteTask.pending, handlePending)
       .addCase(getTask.pending, handlePending)
       .addCase(moveTask.pending, handlePending)
       .addCase(updateTask.pending, handlePending)
       .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
+      .addCase(moveTaskToColumn.rejected, handleRejected)
       .addCase(addTask.rejected, handleRejected)
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(getTask.rejected, handleRejected)
@@ -53,14 +57,11 @@ const tasksSlice = createSlice({
       .addCase(moveTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const updatedItems = state.items.map(item => {
-          const matchingItem = action.payload.find(
-            updatedItem => updatedItem.id === item.id
-          );
-          return matchingItem ? matchingItem : item;
-        });
-
-        state.items = updatedItems;
+        state.items = updateOrderFromArray(state.items, action.payload);
+      })
+      .addCase(moveTaskToColumn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;

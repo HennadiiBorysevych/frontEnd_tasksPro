@@ -5,9 +5,11 @@ export const moveTask = createAsyncThunk(
   'tasks/moveSome',
   async (tasksData, thunkAPI) => {
     try {
-      //add correct result processing!!!
-      await axios.put(`/api/drag/movetask`, tasksData.updatingSchema);
-      return tasksData.updatedArray;
+      const response = await axios.put(
+        `/api/drag/movetask`,
+        tasksData.updatingDataStripped
+      );
+      return response.data?.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

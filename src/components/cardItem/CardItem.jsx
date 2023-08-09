@@ -1,17 +1,19 @@
 import React from 'react';
+
+import SvgIcon from 'components/svgIcon/SvgIcon';
+
 import {
   CardContainer,
-  Title,
-  Description,
-  Details,
-  DetailLabel,
-  DetailValue,
   Circle,
-  PriorityBlock,
-  IconsContainer,
+  Description,
+  DetailLabel,
+  Details,
   DetailsContainer,
+  DetailValue,
+  IconsContainer,
+  PriorityBlock,
+  Title,
 } from './CardItem.styled';
-import SvgIcon from 'components/svgIcon/SvgIcon';
 
 const CardItem = ({ item }) => {
   const { title, description, priority, deadline } = item;

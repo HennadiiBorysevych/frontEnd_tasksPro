@@ -61,7 +61,7 @@ export const deleteBoard = createAsyncThunk(
   }
 );
 
-export const fetchColumnsTasks = createAsyncThunk(
+const fetchColumnsTasks = createAsyncThunk(
   'columns/fetchAll',
   async (boardId, thunkAPI) => {
     try {

@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { updateOrderFromArray } from 'helpers';
 import operations from 'redux/boards/boardOperations';
 
 import { logOut } from '../auth/authOperations';
 
+import { moveTaskToColumn } from './operations';
 import {
   addColumn,
   deleteColumn,
@@ -34,12 +36,14 @@ const columnsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(operations.fetchColumnsTasks.pending, handlePending)
+      .addCase(moveTaskToColumn.pending, handlePending)
       .addCase(addColumn.pending, handlePending)
       .addCase(deleteColumn.pending, handlePending)
       .addCase(getColumn.pending, handlePending)
       .addCase(moveColumn.pending, handlePending)
       .addCase(updateColumn.pending, handlePending)
       .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
+      .addCase(moveTaskToColumn.rejected, handleRejected)
       .addCase(addColumn.rejected, handleRejected)
       .addCase(deleteColumn.rejected, handleRejected)
       .addCase(getColumn.rejected, handleRejected)
@@ -53,7 +57,13 @@ const columnsSlice = createSlice({
       .addCase(moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        // replace "order" field for items (by id) that present in payload array
+        state.items = updateOrderFromArray(state.items, action.payload);
+      })
+      .addCase(moveTaskToColumn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        // state.items = action.payload;
       })
       .addCase(addColumn.fulfilled, (state, action) => {
         state.isLoading = false;

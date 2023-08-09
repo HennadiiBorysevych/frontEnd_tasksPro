@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const moveTaskToColumn = createAsyncThunk(
-  'columns/moveSome',
+  'columns/moveTaskToColumn',
   async (data, thunkAPI) => {
     try {
       //add correct result processing!!!
@@ -18,9 +18,11 @@ export const moveColumn = createAsyncThunk(
   'columns/moveSome',
   async (columnData, thunkAPI) => {
     try {
-      //add correct result processing!!!
-      await axios.put(`/api/drag/movecolumn`, columnData.updatingSchema);
-      return columnData.updatedArray;
+      const response = await axios.put(
+        `/api/drag/movecolumn`,
+        columnData.updatingDataStripped
+      );
+      return response.data?.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

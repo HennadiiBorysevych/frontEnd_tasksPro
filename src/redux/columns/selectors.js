@@ -10,6 +10,11 @@ export const selectOneColumn = (state, columnId) => {
 export const selectColumnsAndTasks = createSelector(
   [selectAllColumns, selectAllTasks],
   (columns, tasks) => {
+    console.log(
+      '🚀 ~ file: selectors.js:13 ~ columns:',
+      Array.isArray(columns),
+      columns
+    );
     return columns.map(column => {
       const ownTasks = tasks.filter(task => task.cardOwner === column.id);
       return {
