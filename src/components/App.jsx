@@ -1,8 +1,9 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuth } from 'hooks';
-// import PublicPage from 'routes/PublicPage';
+
+import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
 
 import GlobalStyles from '../GlobalStyles';
@@ -40,20 +41,20 @@ const App = () => {
 
               <Route
                 path="welcome"
-                element={!isLoggedIn ? <Welcome /> : <Navigate to="/home" />}
+                element={<PublicPage component={<Welcome />} />}
               />
               <Route
                 path="auth/:id"
-                element={!isLoggedIn ? <AuthPage /> : <Navigate to="/home" />}
+                element={<PublicPage component={<AuthPage />} />}
               />
 
               <Route
                 path="home"
-                element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
+                element={<PrivatePage component={<HomePage />} />}
               >
                 <Route
                   path=":boardId"
-                  element={<PrivatePage component={Board} />}
+                  element={<PrivatePage component={<Board />} />}
                 />
               </Route>
               <Route path="*" element={<ErrorPage />} />
