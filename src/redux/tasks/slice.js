@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import operations from 'redux/boards/boardOperations';
+
 import { logOut } from '../auth/authOperations';
 
 import {
-  fetchTasks,
   addTask,
   deleteTask,
   getTask,
+  moveTask,
   updateTask,
 } from './operations';
 
@@ -31,20 +33,34 @@ const tasksSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchTasks.pending, handlePending)
+      .addCase(operations.fetchColumnsTasks.pending, handlePending)
       .addCase(addTask.pending, handlePending)
       .addCase(deleteTask.pending, handlePending)
       .addCase(getTask.pending, handlePending)
+      .addCase(moveTask.pending, handlePending)
       .addCase(updateTask.pending, handlePending)
-      .addCase(fetchTasks.rejected, handleRejected)
+      .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
       .addCase(addTask.rejected, handleRejected)
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(getTask.rejected, handleRejected)
+      .addCase(moveTask.rejected, handleRejected)
       .addCase(updateTask.rejected, handleRejected)
-      .addCase(fetchTasks.fulfilled, (state, action) => {
+      .addCase(operations.fetchColumnsTasks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.items = action.payload.tasks;
+      })
+      .addCase(moveTask.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const updatedItems = state.items.map(item => {
+          const matchingItem = action.payload.find(
+            updatedItem => updatedItem.id === item.id
+          );
+          return matchingItem ? matchingItem : item;
+        });
+
+        state.items = updatedItems;
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;

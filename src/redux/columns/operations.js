@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchColumns = createAsyncThunk(
-  'columns/fetchAll',
-  async (boardId, thunkAPI) => {
+export const moveColumn = createAsyncThunk(
+  'columns/moveSome',
+  async (columnData, thunkAPI) => {
     try {
-      const res = await axios.get(`/api/boards/${boardId}`);
-      return res.data.columns.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
+      await axios.put(`/api/drag/movecolumn`, columnData.updatingSchema);
+      return columnData.updatedArray;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

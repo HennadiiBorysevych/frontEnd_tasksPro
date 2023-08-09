@@ -61,11 +61,34 @@ export const deleteBoard = createAsyncThunk(
   }
 );
 
+export const fetchColumnsTasks = createAsyncThunk(
+  'columns/fetchAll',
+  async (boardId, thunkAPI) => {
+    try {
+      const res = await axios.get(`/api/boards/${boardId}`);
+      const columns = res.data.columns.map(({ _id, orderColumn, ...rest }) => ({
+        id: _id,
+        order: orderColumn,
+        ...rest,
+      }));
+      const tasks = res.data.cards.map(({ _id, orderTask, ...rest }) => ({
+        id: _id,
+        order: orderTask,
+        ...rest,
+      }));
+      return { columns, tasks };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const operations = {
   fetchBoards,
   addBoard,
   updateBoard,
   getBoard,
   deleteBoard,
+  fetchColumnsTasks,
 };
 export default operations;
