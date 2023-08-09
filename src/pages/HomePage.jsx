@@ -27,21 +27,21 @@ const HomePage = () => {
   let bg = '';
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    // dispatch(fetchBoards());
   }, [dispatch]);
 
   useEffect(() => {
     if (activeBoardId) {
-      dispatch(fetchColumns(activeBoardId));
-      dispatch(fetchTasks(activeBoardId));
+      // dispatch(fetchColumns(activeBoardId));
+      // dispatch(fetchTasks(activeBoardId));
     }
   }, [dispatch, activeBoardId]);
 
   return (
     <SharedLayout>
       <BoardWrap bg={backgroundImage}>
-        <BoardHead boardName={activeBoardId} />
-        <BoardBody>
+        {/* <BoardHead boardName={activeBoardId} /> */}
+        {/* <BoardBody>
           {activeBoardId ? (
             <>
               <Outlet />
@@ -69,7 +69,7 @@ const HomePage = () => {
               />
             </Modal>
           )}
-        </BoardBody>
+        </BoardBody> */}
       </BoardWrap>
     </SharedLayout>
   );

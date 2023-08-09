@@ -9,6 +9,7 @@ const useModal = () => {
   };
 
   const onEscKeydown = e => {
+    console.log(e.code);
     if (e.code === 'Escape') {
       setIsModal(false);
     }

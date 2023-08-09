@@ -8,6 +8,7 @@ import PrivatePage from 'routes/PrivatePage';
 
 import { useAuth } from 'hooks';
 import Layout from './Layout';
+import SideBarItem from './sideBarItem/SideBarItem';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
@@ -20,11 +21,12 @@ const App = () => {
   const activeBoardId = useSelector(selectActiveBoardId);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (activeBoardId) {
-      navigate(`/home/${activeBoardId}`);
-    }
-  }, [activeBoardId, navigate]);
+  // useEffect(() => {
+  //   if (activeBoardId) {
+  //     navigate(`/home/${activeBoardId}`);
+  //   }
+  // }, [activeBoardId, navigate]);
+
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
@@ -57,10 +59,12 @@ const App = () => {
                 path="home"
                 element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
               >
-                <Route
+                <Route path=":boardId" element={<Board />} />
+
+                {/* <Route
                   path=":boardId"
                   element={<PrivatePage component={Board} />}
-                />
+                /> */}
               </Route>
               <Route path="*" element={<ErrorPage />} />
             </Route>

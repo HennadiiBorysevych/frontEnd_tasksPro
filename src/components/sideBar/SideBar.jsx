@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useModal } from 'hooks';
 import PropTypes from 'prop-types';
+
+import operations from 'redux/boards/boardOperations';
+import boardSelectors from 'redux/boards/boardSelectors';
 
 import {
   BoardPopUp,
@@ -21,11 +24,20 @@ import {
   TitleBoardList,
   TitleButton,
 } from './SideBar.styled';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SideBar = ({ isOpen, isClose, windowHeight, onCreateBoardClick }) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const { boardName } = useParams();
-  const boards = [];
+  const boardNam = useParams();
+  const boards = useSelector(boardSelectors.selectAllBoards);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(operations.fetchBoards());
+  }, []);
+
+  // console.log(boardName);
 
   return (
     <>
@@ -52,13 +64,21 @@ const SideBar = ({ isOpen, isClose, windowHeight, onCreateBoardClick }) => {
               size={20}
             />
           </CreateBoard>
-          {boardName && (
-            <BoardList>
-              {boards.map(({ id, iconName, title }) => (
-                <SideBarItem key={id} iconName={iconName} title={title} />
-              ))}
-            </BoardList>
-          )}
+          {/* {boardName && ( */}
+          <BoardList>
+            {boards.map(({ id, iconName, title }) => (
+              // <NavLink to={`/home/${id}`} >
+              <SideBarItem
+                style={{ marginBottom: '10px' }}
+                key={id}
+                id={id}
+                iconName={iconName}
+                title={title}
+              />
+              // </NavLink>
+            ))}
+          </BoardList>
+          {/* )} */}
         </div>
         <div>
           <Support />
