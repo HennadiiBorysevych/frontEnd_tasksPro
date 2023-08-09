@@ -11,7 +11,7 @@ import {
   getTask,
   moveTask,
   updateTask,
-} from './operations';
+} from './cardOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -65,8 +65,17 @@ const tasksSlice = createSlice({
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(action.payload);
-        console.log(`${action.payload.name} added to your tasks`);
+        const {
+          _id: id,
+          createdAt,
+          updatedAt,
+          ...rest
+        } = action.payload.result;
+        state.items.push({
+          id,
+          ...rest,
+        });
+        console.log(`${action.payload.result.title} added to your tasks`);
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -92,11 +101,18 @@ const tasksSlice = createSlice({
       .addCase(updateTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex(
-          task => task.id === action.payload.id
-        );
+        const {
+          _id: id,
+          createdAt,
+          updatedAt,
+          ...rest
+        } = action.payload.result;
+        const index = state.items.findIndex(task => task.id === id);
         if (index !== -1) {
-          state.items[index] = action.payload;
+          state.items[index] = {
+            id,
+            ...rest,
+          };
           console.log('Task updated');
         }
       })
@@ -108,4 +124,4 @@ const tasksSlice = createSlice({
   },
 });
 
-export const tasksReducer = tasksSlice.reducer;
+export default tasksSlice.reducer;

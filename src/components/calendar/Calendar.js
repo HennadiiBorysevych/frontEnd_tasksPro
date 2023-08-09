@@ -131,7 +131,10 @@ const CustomCalendar = styled(Calendar)`
 `;
 
 const Calend = ({ selectedDate, setSelectedDate }) => {
+  console.log(selectedDate);
+
   const today = new Date();
+  console.log('today', today);
   const futureDate = new Date();
   futureDate.setFullYear(today.getFullYear() + 5);
 

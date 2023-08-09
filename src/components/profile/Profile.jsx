@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useModal } from 'hooks';
 import { authSelectors } from 'redux/auth';
 
-import { Modal, ProfilePopUp, UserAvatar, CardPopUp } from 'components';
+import { Modal, ProfilePopUp, UserAvatar } from 'components';
 
 import { ClickWrap, Container, UserName } from './Profile.styled';
 
@@ -20,12 +20,7 @@ const Profile = () => {
 
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
-          <CardPopUp
-            card={null}
-            handleModalClose={toggleModal}
-            // card={{}}
-          />
-          {/* <ProfilePopUp user={user} handleModalClose={toggleModal} /> */}
+          <ProfilePopUp user={user} handleModalClose={toggleModal} />
         </Modal>
       ) : null}
     </Container>

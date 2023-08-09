@@ -5,7 +5,7 @@ import { CardsSettings, Input, PopUpLayout, PrimaryButton } from 'components';
 
 import { Container } from './CardPopUp.styled';
 
-const CardPopUp = ({ columnId, card, handleModalClose }) => {
+const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
   const {
     priority,
     deadline,
@@ -14,7 +14,7 @@ const CardPopUp = ({ columnId, card, handleModalClose }) => {
     handlePriority,
     titleChecker,
     handleCardSubmit,
-  } = useCard(columnId, card, handleModalClose);
+  } = useCard(columnId, cardIndex, card, handleModalClose);
 
   return (
     <Container>
@@ -38,7 +38,6 @@ const CardPopUp = ({ columnId, card, handleModalClose }) => {
           placeholder={card ? card?.description : 'Description'}
           style={{
             marginBottom: '14px',
-            // border: titleChecker && '1px solid red',
           }}
         />
 
