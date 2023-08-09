@@ -13,10 +13,6 @@ import {
 } from './pages.styled';
 
 const WelcomePage = () => {
-  const location = useLocation();
-
-  console.log(location);
-
   return (
     <Background>
       <Container>

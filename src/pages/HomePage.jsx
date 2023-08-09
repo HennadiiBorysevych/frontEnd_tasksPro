@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useModal, useBackground } from 'hooks';
 import SharedLayout from 'sharedLayout/SharedLayout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ const HomePage = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground('moon');
   // const boardName = false;
-
+  const navigate = useNavigate();
   let BoardTitle = 'Project Office';
   let icon = '';
   let bg = '';
@@ -29,6 +29,12 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchBoards());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (activeBoardId) {
+      navigate(`/home/${activeBoardId}`);
+    }
+  }, [activeBoardId, navigate]);
 
   useEffect(() => {
     if (activeBoardId) {

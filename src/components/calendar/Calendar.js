@@ -3,11 +3,10 @@ import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import { ThemeProvider } from '@emotion/react';
 
+import styled from '@emotion/styled';
 import { SvgIcon } from 'components';
 
-
-let senseColor = "#bedbb0";
-import styled from '@emotion/styled';
+let senseColor = '#bedbb0';
 
 const CustomCalendar = styled(Calendar)`
   color: #ffffff;
@@ -43,10 +42,12 @@ const CustomCalendar = styled(Calendar)`
     position: absolute;
     bottom: 14px;
   }
-  
-  & .react-calendar__month-view__weekdays__weekday react-calendar__month-view__weekdays__weekday--weekend{
+
+  &
+    .react-calendar__month-view__weekdays__weekday
+    react-calendar__month-view__weekdays__weekday--weekend {
     align-items: center;
-  } 
+  }
 
   & .react-calendar__month-view__weekdays {
     color: rgba(255, 255, 255, 0.5);
@@ -75,7 +76,7 @@ const CustomCalendar = styled(Calendar)`
     margin-left: -7px;
     margin-right: -7px;
   }
-  
+
   & .react-calendar__tile {
     color: #fff;
     font-family: 'Poppins', Arial, sans-serif;
@@ -215,7 +216,11 @@ const Calend = () => {
               {formatSelectedDate(selectedDate)}
             </TextWithGap>
             <DownWithPadding>
-              <SvgIcon svgName="icon-arrow-down" stroke={senseColor} size="18" />
+              <SvgIcon
+                svgName="icon-arrow-down"
+                stroke={senseColor}
+                size="18"
+              />
             </DownWithPadding>
           </CalendarWrapper>
 
