@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 export const ContainerWrapper = styled.div`
-  overflow-x: auto;
   width: 100%;
   display: flex;
   padding: 8px;
@@ -29,6 +28,9 @@ export const ColumnsContainer = styled.div`
 export const Column = styled.div`
   padding: 8px;
   background-color: #1f1f1f;
+  opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
+  filter: ${({ isLoading }) => (isLoading ? 'blur(8px)' : 'none')};
+  transition: opacity 0.3s ease, filter 0.3s ease; /* Add transition properties */
 `;
 
 export const ColumnHeading = styled.div`
@@ -50,6 +52,7 @@ export const ColumnHeadingText = styled.h3`
 
 export const ItemsContainer = styled.div`
   min-height: 100px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   gap: 8px;
