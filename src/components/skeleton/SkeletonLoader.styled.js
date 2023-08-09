@@ -78,11 +78,11 @@ export const BoardBody = styled.div`
 `;
 
 export const ProjectName = styled.div`
-  width: 88px;
+  width: 80%;
   height: 21px;
 
   @media (min-width: 778px) {
-    width: 115px;
+    width: 90%;
     height: 40px;
   }
 `;
@@ -97,4 +97,13 @@ export const Filters = styled.div`
 export const Button = styled.div`
   margin-top: 30px;
   width: 80%;
+
+  @media (min-width: 778px) {
+    width: 90%;
+  }
+`;
+export const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -9,6 +10,7 @@ import {
   Button,
   Filters,
   Header,
+  ListWrapper,
   Logo,
   ProjectName,
   Tabs,
@@ -18,7 +20,31 @@ import {
 } from './SkeletonLoader.styled';
 
 const SkeletonLoader = ({ page }) => {
-  const screenWidth = window.innerWidth;
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  const generateSkeletonList = count => {
+    return new Array(count)
+      .fill(null)
+      .map((_, index) => (
+        <Skeleton
+          key={index}
+          height={154}
+          style={{ marginLeft: 20, marginBottom: 5 }}
+        />
+      ));
+  };
+
+  const skeletonColumns = screenWidth > 1150 ? 3 : screenWidth > 776 ? 2 : 1;
 
   return (
     <>
@@ -98,43 +124,19 @@ const SkeletonLoader = ({ page }) => {
                     style={{ marginLeft: 60, marginBottom: 20 }}
                   />
                 </Button>
-                <div style={{ display: 'flex', marginTop: 30 }}>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {new Array(3).fill(null).map((_, index) => (
-                      <Skeleton
-                        key={index}
-                        width={'20rem'}
-                        height={154}
-                        style={{ marginLeft: 60, marginBottom: 5 }}
-                      />
-                    ))}
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {screenWidth > 776 &&
-                      new Array(3)
-                        .fill(null)
-                        .map((_, index) => (
-                          <Skeleton
-                            key={index}
-                            width={'20rem'}
-                            height={154}
-                            style={{ marginLeft: 60, marginBottom: 5 }}
-                          />
-                        ))}
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {screenWidth > 1250 &&
-                      new Array(3)
-                        .fill(null)
-                        .map((_, index) => (
-                          <Skeleton
-                            key={index}
-                            width={'20rem'}
-                            height={154}
-                            style={{ marginLeft: 60, marginBottom: 5 }}
-                          />
-                        ))}
-                  </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '40px',
+                    marginTop: 30,
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  {[...Array(skeletonColumns)].map((_, index) => (
+                    <ListWrapper key={index}>
+                      {generateSkeletonList(3)}
+                    </ListWrapper>
+                  ))}
                 </div>
               </BoardBody>
             </BackgroundHome>
