@@ -1,13 +1,25 @@
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import {
   Background,
+  BackgroundHome,
   BackgroundLogin,
-  Tabs,
+  BoardBody,
+  Button,
+  Filters,
   Header,
+  Logo,
+  ProjectName,
+  Tabs,
+  Theme,
+  UserName,
+  UserPic,
 } from './SkeletonLoader.styled';
 
 const SkeletonLoader = ({ page }) => {
+  const screenWidth = window.innerWidth;
+
   return (
     <>
       {page === '/welcome' && (
@@ -54,20 +66,78 @@ const SkeletonLoader = ({ page }) => {
       )}
       {page.includes('/home/') && (
         <>
-          <SkeletonTheme baseColor="#161616" highlightColor="#1f1f1f;">
-            <>
+          <SkeletonTheme baseColor="#161616" highlightColor="#1f1f1f">
+            <BackgroundHome>
               <Header>
-                <Skeleton width={24} height={24} />
-                <div>
-                  <Skeleton width={70} height={23} />
-                  <Skeleton width={70} height={23} />
+                <Logo>
+                  <Skeleton />
+                </Logo>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <Theme>
+                    <Skeleton />
+                  </Theme>
+                  <UserName>
+                    <Skeleton />
+                  </UserName>
+                  <UserPic>
+                    <Skeleton />
+                  </UserPic>
                 </div>
               </Header>
-              <Skeleton width={345} height={50} style={{ marginBottom: 14 }} />
-              <Skeleton width={345} height={50} style={{ marginBottom: 14 }} />
-              <Skeleton width={345} height={50} style={{ marginBottom: 24 }} />
-              <Skeleton width={345} height={50} style={{ marginBottom: 24 }} />
-            </>
+              <BoardBody>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <ProjectName>
+                    <Skeleton style={{ marginLeft: 60 }} />
+                  </ProjectName>
+                </div>
+                <Button>
+                  <Skeleton
+                    height={50}
+                    style={{ marginLeft: 60, marginBottom: 20 }}
+                  />
+                </Button>
+                <div style={{ display: 'flex', marginTop: 30 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {new Array(3).fill(null).map((_, index) => (
+                      <Skeleton
+                        key={index}
+                        width={'20rem'}
+                        height={154}
+                        style={{ marginLeft: 60, marginBottom: 5 }}
+                      />
+                    ))}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {screenWidth > 776 &&
+                      new Array(3)
+                        .fill(null)
+                        .map((_, index) => (
+                          <Skeleton
+                            key={index}
+                            width={'20rem'}
+                            height={154}
+                            style={{ marginLeft: 60, marginBottom: 5 }}
+                          />
+                        ))}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {screenWidth > 1250 &&
+                      new Array(3)
+                        .fill(null)
+                        .map((_, index) => (
+                          <Skeleton
+                            key={index}
+                            width={'20rem'}
+                            height={154}
+                            style={{ marginLeft: 60, marginBottom: 5 }}
+                          />
+                        ))}
+                  </div>
+                </div>
+              </BoardBody>
+            </BackgroundHome>
           </SkeletonTheme>
         </>
       )}
