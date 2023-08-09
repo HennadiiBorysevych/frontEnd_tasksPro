@@ -8,7 +8,7 @@ import { moveColumn } from 'redux/columns/operations';
 import { moveTaskToColumn } from 'redux/columns/operations';
 import columnsSelectors from 'redux/columns/selectors';
 import { selectLoading } from 'redux/columns/selectors';
-import { moveTask } from 'redux/tasks/operations';
+import { moveTask } from 'redux/tasks/cardOperations';
 
 import { Modal } from 'components';
 import { ColumnPopUp } from 'components';

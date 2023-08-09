@@ -3,8 +3,9 @@ import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import { ThemeProvider } from '@emotion/react';
 
-import styled from '@emotion/styled';
 import { SvgIcon } from 'components';
+
+import styled from '@emotion/styled';
 
 let senseColor = '#bedbb0';
 
@@ -129,12 +130,15 @@ const CustomCalendar = styled(Calendar)`
   }
 `;
 
-const Calend = () => {
+const Calend = ({ selectedDate, setSelectedDate }) => {
+  console.log(selectedDate);
+
   const today = new Date();
+  console.log('today', today);
   const futureDate = new Date();
   futureDate.setFullYear(today.getFullYear() + 5);
 
-  const [selectedDate, setSelectedDate] = useState(today);
+  // const [selectedDate, setSelectedDate] = useState(today);
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const handleDateChange = date => {
     setSelectedDate(date);

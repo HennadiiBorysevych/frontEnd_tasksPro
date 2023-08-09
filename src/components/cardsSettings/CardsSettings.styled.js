@@ -24,6 +24,7 @@ export const Priority = styled.div`
 export const Radio = styled.input`
   position: relative;
   visibility: hidden;
+  cursor: pointer;
   &::after {
     visibility: visible;
     top: 0;
@@ -38,13 +39,13 @@ export const Radio = styled.input`
     height: 14px;
     ${props => {
       switch (props.value) {
-        case 'low':
+        case 'Low':
           return `background-color: #8fa1d0}`;
-        case 'medium':
+        case 'Medium':
           return `background-color: #e09cb5`;
-        case 'high':
+        case 'High':
           return `background-color: #bedbb0`;
-        case 'without':
+        case 'Without':
           return `background-color: rgba(255, 255, 255, 0.3)`;
         default:
           return;
@@ -80,13 +81,13 @@ export const Radio = styled.input`
         background-color: transparent;
         ${props => {
           switch (props.value) {
-            case 'low':
+            case 'Low':
               return `border-color: #8fa1d0`;
-            case 'medium':
+            case 'Medium':
               return `border-color: #e09cb5`;
-            case 'high':
+            case 'High':
               return `border-color: #bedbb0`;
-            case 'without':
+            case 'Without':
               return `border-color: rgba(255, 255, 255, 0.3)`;
             default:
               return;

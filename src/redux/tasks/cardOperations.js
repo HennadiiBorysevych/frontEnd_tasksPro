@@ -17,7 +17,7 @@ export const addTask = createAsyncThunk(
   'tasks/addTask',
   async (name, thunkAPI) => {
     try {
-      const response = await axios.post('/api/tasks', name);
+      const response = await axios.post('/api/cards', name);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -29,7 +29,7 @@ export const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ taskId, updatedData }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/api/tasks/${taskId}`, updatedData);
+      const response = await axios.patch(`/api/cards/${taskId}`, updatedData);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -75,3 +75,13 @@ export const moveTask = createAsyncThunk(
     }
   }
 );
+
+const operations = {
+  fetchTasks,
+  addTask,
+  updateTask,
+  getTask,
+  deleteTask,
+  moveTask,
+};
+export default operations;
