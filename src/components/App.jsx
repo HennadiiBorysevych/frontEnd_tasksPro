@@ -1,11 +1,13 @@
-import { Suspense, lazy, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import GlobalStyles from '../GlobalStyles';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { useAuth } from 'hooks';
 // import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
 
-import { useAuth } from 'hooks';
+import GlobalStyles from '../GlobalStyles';
+
+import SkeletonLoader from './skeleton/SkeletonLoader';
 import Layout from './Layout';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
@@ -27,7 +29,7 @@ const App = () => {
 
       <Suspense>
         {isFetchingCurrent ? (
-          <p>Loading</p>
+          <SkeletonLoader page="/home/" />
         ) : (
           <Routes>
             <Route path="/" element={<Layout />}>
