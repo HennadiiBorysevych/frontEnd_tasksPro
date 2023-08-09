@@ -4,11 +4,9 @@ import Calend from '../calendar/Calendar';
 
 import { Label, Priority, Radio, SettingsBlock } from './CardsSettings.styled';
 
-const CardsSettings = () => {
-  const [value, setValue] = useState('without');
-
+const CardsSettings = ({ priority, deadline, setPriority, setDeadline }) => {
   function changeValue(event) {
-    setValue(event.target.value);
+    setPriority(event.target.value);
   }
 
   return (
@@ -17,40 +15,40 @@ const CardsSettings = () => {
         Label color
         <Priority>
           <Radio
-            checked={value === 'low' ? true : false}
+            // checked={priority === 'Low' ? true : false}
             type="radio"
             name="priority"
-            value="low"
+            value="Low"
             onChange={changeValue}
           />
 
           <Radio
             type="radio"
             name="priority"
-            value="medium"
-            checked={value === 'medium' ? true : false}
+            value="Medium"
+            checked={priority === 'Medium' ? true : false}
             onChange={changeValue}
           />
 
           <Radio
             type="radio"
             name="priority"
-            value="high"
-            checked={value === 'high' ? true : false}
+            value="High"
+            checked={priority === 'High' ? true : false}
             onChange={changeValue}
           />
           <Radio
             type="radio"
             name="priority"
-            value="without"
-            checked={value === 'without' ? true : false}
+            value="Without"
+            checked={priority === 'Without' ? true : false}
             onChange={changeValue}
           />
         </Priority>
       </Label>
       <Label>
         Deadline
-        <Calend />
+        <Calend selectedDate={deadline} setSelectedDate={setDeadline} />
       </Label>
     </SettingsBlock>
   );
