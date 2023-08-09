@@ -60,3 +60,18 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
+
+export const moveTask = createAsyncThunk(
+  'tasks/moveSome',
+  async (tasksData, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `/api/drag/movetask`,
+        tasksData.updatingDataStripped
+      );
+      return response.data?.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
