@@ -1,19 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
+  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
-  REHYDRATE,
 } from 'redux-persist/es/constants';
-import storage from 'redux-persist/lib/storage';
 
-import { columnsReducer } from './columns/slice';
 import { authReducer } from './auth';
+
 import { boardsReducer } from './boards';
-import { cardReducer } from './tasks';
+import { columnsReducer } from './columns/slice';
+import { tasksReducer } from './tasks/slice';
+
 import userFilterReducer from './userFilterSlice';
 
 const persistConfig = {
@@ -28,7 +30,7 @@ export const store = configureStore({
     auth: persistedReducer,
     boards: boardsReducer,
     columns: columnsReducer,
-    tasks: cardReducer,
+    tasks: tasksReducer,
     userFilter: userFilterReducer,
   },
   middleware: getDefaultMiddleware =>

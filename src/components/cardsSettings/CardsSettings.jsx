@@ -15,7 +15,7 @@ const CardsSettings = ({ priority, deadline, setPriority, setDeadline }) => {
         Label color
         <Priority>
           <Radio
-            checked={priority === 'Low' ? true : false}
+            // checked={priority === 'Low' ? true : false}
             type="radio"
             name="priority"
             value="Low"
@@ -48,7 +48,7 @@ const CardsSettings = ({ priority, deadline, setPriority, setDeadline }) => {
       </Label>
       <Label>
         Deadline
-        {/* <Calend selectedDate={deadline} setSelectedDate={setDeadline} /> */}
+        <Calend selectedDate={deadline} setSelectedDate={setDeadline} />
       </Label>
     </SettingsBlock>
   );

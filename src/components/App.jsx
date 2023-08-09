@@ -1,14 +1,12 @@
-import { lazy, Suspense, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { useAuth } from 'hooks';
-
-import PublicPage from 'routes/PublicPage';
+import { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
+import GlobalStyles from '../GlobalStyles';
+// import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
 
-import GlobalStyles from '../GlobalStyles';
-
-import SkeletonLoader from './skeleton/SkeletonLoader';
+import { useAuth } from 'hooks';
 import Layout from './Layout';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
@@ -19,7 +17,14 @@ const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
   const { isLoggedIn, isFetchingCurrent, fetchUser } = useAuth();
+  const activeBoardId = useSelector(selectActiveBoardId);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (activeBoardId) {
+      navigate(`/home/${activeBoardId}`);
+    }
+  }, [activeBoardId, navigate]);
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
@@ -30,7 +35,7 @@ const App = () => {
 
       <Suspense>
         {isFetchingCurrent ? (
-          <SkeletonLoader page="/home/" />
+          <p>Loading</p>
         ) : (
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -41,20 +46,20 @@ const App = () => {
 
               <Route
                 path="welcome"
-                element={<PublicPage component={<Welcome />} />}
+                element={!isLoggedIn ? <Welcome /> : <Navigate to="/home" />}
               />
               <Route
                 path="auth/:id"
-                element={<PublicPage component={<AuthPage />} />}
+                element={!isLoggedIn ? <AuthPage /> : <Navigate to="/home" />}
               />
 
               <Route
                 path="home"
-                element={<PrivatePage component={<HomePage />} />}
+                element={isLoggedIn ? <HomePage /> : <Navigate to="/welcome" />}
               >
                 <Route
                   path=":boardId"
-                  element={<PrivatePage component={<Board />} />}
+                  element={<PrivatePage component={Board} />}
                 />
               </Route>
               <Route path="*" element={<ErrorPage />} />

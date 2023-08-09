@@ -1,5 +1,5 @@
-import { selectAllTasks } from 'redux/tasks/selectors';
 import { createSelector } from 'reselect';
+import { selectAllTasks } from 'redux/tasks/selectors';
 
 export const selectLoading = state => state.columns.isLoading;
 export const selectAllColumns = state => state.columns.items;

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { cardOperations } from 'redux/tasks';
+import { boardsOperations } from 'redux/boards';
 
 const cardModel = {
   title: '',
@@ -9,15 +9,10 @@ const cardModel = {
   deadline: 0,
 };
 
-const useCard = (columnId, cardIndex, currentCard, closeModal) => {
+const useCard = (columnId, currentCard, closeModal) => {
   const initialCard = currentCard
     ? currentCard
-    : {
-        ...cardModel,
-        deadline: new Date(),
-        cardOwner: columnId,
-        orderTask: cardIndex,
-      };
+    : { ...cardModel, deadline: new Date() };
 
   const [title, setTitle] = useState(initialCard?.title);
   const [description, setDescription] = useState(initialCard?.description);
@@ -36,19 +31,17 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
       }, 500);
       return;
     }
-
     const { id, ...rest } = card;
-
-    currentCard
-      ? dispatch(
-          cardOperations.updateTask({
-            taskId: id,
-            updatedData: rest,
-          })
-        )
-      : dispatch(cardOperations.addTask(rest));
-
-    closeModal();
+    console.log('fggdf', { ...rest, cardOwner: columnId, orderTask: 0 });
+    // currentCard
+    //   ? dispatch(
+    //       boardsOperations.updateBoard({
+    //         boardId: id,
+    //         updatedData: rest,
+    //       })
+    //     )
+    //   : dispatch(boardsOperations.addBoard(rest));
+    // closeModal();
   };
 
   const handleInput = useCallback(e => {
@@ -70,7 +63,7 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   };
 
   useEffect(() => {
-    setCard(prev => ({ ...prev, title, description, priority, deadline }));
+    setCard({ title, description, priority, deadline });
   }, [deadline, description, priority, title]);
 
   return {

@@ -23,8 +23,7 @@ export const Priority = styled.div`
 
 export const Radio = styled.input`
   position: relative;
-  visibility: hidden;
-  cursor: pointer;
+  // visibility: hidden;
   &::after {
     visibility: visible;
     top: 0;
