@@ -4,7 +4,9 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from 'hooks';
 import { moveColumn } from 'redux/columns/operations';
+import { moveTaskToColumn } from 'redux/columns/operations';
 import columnsSelectors from 'redux/columns/selectors';
+import { selectLoading } from 'redux/columns/selectors';
 import { moveTask } from 'redux/tasks/operations';
 
 import { Modal } from 'components';
@@ -13,6 +15,7 @@ import { ButtonPlus } from 'components';
 import { CardItem, PrimaryButton } from 'components';
 import { SvgIcon } from 'components';
 
+import CustomScrollBar from './CustomScrollBar';
 import { updateOrderField } from './updateOrder';
 
 import {
@@ -43,6 +46,7 @@ const CardsList = () => {
   const dispatch = useDispatch();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
+  const isColumnLoading = useSelector(selectLoading);
   const onDragEnd = result => {
     if (!result.destination) {
       return;
@@ -101,6 +105,7 @@ const CardsList = () => {
           dataOld,
           dataNew
         );
+        dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
         // Logics for moving items within the same column
         console.log('row moving');
@@ -124,107 +129,115 @@ const CardsList = () => {
           <ColumnPopUp onClose={toggleModal} />
         </Modal>
       )}
-      <ContainerWrapper>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <StrictModeDroppable
-            droppableId="all-columns"
-            direction="horizontal"
-            type="column"
-          >
-            {provided => (
-              <ColumnsContainer
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {columnsAndTasks
-                  .sort((a, b) => a.order - b.order) // Sort columns by order
-                  .map((column, index) => (
-                    <Draggable
-                      key={column.id}
-                      draggableId={column.id}
-                      index={index}
-                    >
-                      {provided => (
-                        <Column
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                        >
-                          <ColumnHeading {...provided.dragHandleProps}>
-                            <ColumnHeadingText>
-                              {column.title}
-                            </ColumnHeadingText>
+      <CustomScrollBar>
+        <ContainerWrapper>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <StrictModeDroppable
+              droppableId="all-columns"
+              direction="horizontal"
+              type="column"
+            >
+              {provided => (
+                <ColumnsContainer
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {columnsAndTasks
+                    .sort((a, b) => a.order - b.order) // Sort columns by order
+                    .map((column, index) => (
+                      <Draggable
+                        key={column.id}
+                        draggableId={column.id}
+                        index={index}
+                      >
+                        {provided => (
+                          <Column
+                            isLoading={isColumnLoading}
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                          >
+                            <ColumnHeading
+                              isLoading={isColumnLoading}
+                              {...provided.dragHandleProps}
+                            >
+                              <ColumnHeadingText>
+                                {column.title}
+                              </ColumnHeadingText>
 
-                            <IconsContainer>
-                              <button type="button" onClick={toggleModal}>
+                              <IconsContainer>
+                                <button type="button" onClick={toggleModal}>
+                                  <SvgIcon
+                                    svgName="icon-pencil"
+                                    size={16}
+                                    stroke="rgba(255, 255, 255, 0.5)"
+                                  />
+                                </button>
                                 <SvgIcon
-                                  svgName="icon-pencil"
+                                  svgName="icon-trash"
                                   size={16}
-                                  stroke="rgba(255, 255, 255, 0.5)"
+                                  stroke="#FFFFFF80"
                                 />
-                              </button>
-                              <SvgIcon
-                                svgName="icon-trash"
-                                size={16}
-                                stroke="#FFFFFF80"
-                              />
-                            </IconsContainer>
-                          </ColumnHeading>
-                          <StrictModeDroppable
-                            droppableId={column.id}
-                            type="item"
-                            isCombineEnabled={true}
-                          >
-                            {provided => (
-                              <ItemsContainer
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                              >
-                                {column.items
-                                  .sort((a, b) => a.order - b.order) // Sort items by order
-                                  .map((item, index) => (
-                                    <Draggable
-                                      key={item.id}
-                                      draggableId={item.id}
-                                      index={index}
-                                    >
-                                      {provided => (
-                                        <div
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                          ref={provided.innerRef}
+                              </IconsContainer>
+                            </ColumnHeading>
+                            <StrictModeDroppable
+                              droppableId={column.id}
+                              type="item"
+                              isCombineEnabled={true}
+                            >
+                              {provided => (
+                                <CustomScrollBar>
+                                  <ItemsContainer
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                  >
+                                    {column.items
+                                      .sort((a, b) => a.order - b.order) // Sort items by order
+                                      .map((item, index) => (
+                                        <Draggable
+                                          key={item.id}
+                                          draggableId={item.id}
+                                          index={index}
                                         >
-                                          <CardItem item={{ ...item }} />
-                                        </div>
-                                      )}
-                                    </Draggable>
-                                  ))}
-                                {provided.placeholder}
-                              </ItemsContainer>
-                            )}
-                          </StrictModeDroppable>
-                          <PrimaryButton
-                            hasIcon={false}
-                            type="button"
-                            height={56}
-                          >
-                            Add another card
-                          </PrimaryButton>
-                        </Column>
-                      )}
-                    </Draggable>
-                  ))}
-                {provided.placeholder}
-              </ColumnsContainer>
-            )}
-          </StrictModeDroppable>
-        </DragDropContext>
-        <Column>
-          <button type="button" onClick={toggleModal}>
-            <ButtonPlus width={334} height={56} />
-            Add another column
-          </button>
-        </Column>
-      </ContainerWrapper>
+                                          {provided => (
+                                            <div
+                                              {...provided.draggableProps}
+                                              {...provided.dragHandleProps}
+                                              ref={provided.innerRef}
+                                            >
+                                              <CardItem item={{ ...item }} />
+                                            </div>
+                                          )}
+                                        </Draggable>
+                                      ))}
+                                    {provided.placeholder}
+                                  </ItemsContainer>
+                                </CustomScrollBar>
+                              )}
+                            </StrictModeDroppable>
+                            <PrimaryButton
+                              hasIcon={false}
+                              type="button"
+                              height={56}
+                            >
+                              Add another card
+                            </PrimaryButton>
+                          </Column>
+                        )}
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </ColumnsContainer>
+              )}
+            </StrictModeDroppable>
+          </DragDropContext>
+          <Column>
+            <button type="button" onClick={toggleModal}>
+              <ButtonPlus width={334} height={56} />
+              Add another column
+            </button>
+          </Column>
+        </ContainerWrapper>
+      </CustomScrollBar>
     </>
   );
 };
