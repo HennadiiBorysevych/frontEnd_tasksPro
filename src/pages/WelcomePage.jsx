@@ -26,10 +26,12 @@ const WelcomePage = () => {
           Pro - Don't wait, start achieving your goals now!
         </WelcomeText>
         <NavLinks>
-          <NavLink to="/auth/register">
-            <RegisterLink>Registration</RegisterLink>
-          </NavLink>
-          <NavLink to="/auth/login">Log In</NavLink>
+          <RegisterLink>
+            <NavLink to="/auth/register">Registration </NavLink>
+          </RegisterLink>
+          <li>
+            <NavLink to="/auth/login">Log In</NavLink>
+          </li>
         </NavLinks>
       </Container>
     </Background>
