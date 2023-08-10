@@ -104,11 +104,9 @@ export const updateUserTheme = createAsyncThunk(
 
 export const updateUserHelp = createAsyncThunk(
   'auth/updateUserHelp',
-  async (updatedHelp, thunkAPI) => {
+  async (helpRequest, thunkAPI) => {
     try {
-      const response = await axios.patch('/api/users/help', {
-        help: updatedHelp,
-      });
+      const response = await axios.patch('/api/users/help', helpRequest);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
