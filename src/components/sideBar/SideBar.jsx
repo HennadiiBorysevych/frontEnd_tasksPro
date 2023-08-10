@@ -1,6 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useModal } from 'hooks';
+import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 
 import {
@@ -8,13 +7,12 @@ import {
   ButtonPlus,
   Logo,
   Modal,
-  SideBarItem,
+  SideBarBoardsList,
   SignOut,
   Support,
 } from 'components';
 
 import {
-  BoardList,
   CreateBoard,
   Overlay,
   SideBarWrapper,
@@ -29,8 +27,7 @@ const SideBar = ({
   onToggleModalAndSideBar,
 }) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const { boardName } = useParams();
-  const boards = [];
+  const { activeBoardId } = useBoardContext();
 
   return (
     <>
@@ -57,12 +54,10 @@ const SideBar = ({
               size={20}
             />
           </CreateBoard>
-          {boardName && (
-            <BoardList>
-              {boards.map(({ id, iconName, title }) => (
-                <SideBarItem key={id} iconName={iconName} title={title} />
-              ))}
-            </BoardList>
+          {activeBoardId && (
+            <SideBarBoardsList
+              onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
+            />
           )}
         </div>
         <div>

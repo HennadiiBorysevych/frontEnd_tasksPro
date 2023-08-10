@@ -5,13 +5,14 @@ import { Filters } from 'components';
 
 import { BoardTitle, Header } from './boardHead.styled';
 
-const BoardHead = () => {
+const BoardHead = ({ activeBoard }) => {
   const { boardId } = useParams();
   const decodedTitle = decodeURIComponent(boardId);
+
   return (
     <>
-      <Header boardName={decodedTitle}>
-        {!!boardId && <BoardTitle>{decodedTitle}</BoardTitle>}
+      <Header boardName={activeBoard}>
+        {!!decodedTitle && <BoardTitle>{decodedTitle}</BoardTitle>}
         <Filters />
       </Header>
     </>

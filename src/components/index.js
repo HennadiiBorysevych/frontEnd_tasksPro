@@ -21,6 +21,7 @@ export { default as PrimaryButton } from './primaryButton/PrimaryButton';
 export { default as Profile } from './profile/Profile';
 export { default as ProfilePopUp } from './profilePopUp/ProfilePopUp';
 export { default as SideBar } from './sideBar/SideBar';
+export { default as SideBarBoardsList } from './sideBarBoardsList/SideBarBoardsList';
 export { default as SideBarItem } from './sideBarItem/SideBarItem';
 export { default as SignOut } from './signOut/SignOut';
 export { default as Support } from './support/Support';

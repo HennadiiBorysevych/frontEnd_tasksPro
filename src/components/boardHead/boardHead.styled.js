@@ -7,6 +7,7 @@ export const Header = styled.div`
     boardName ? 'flex-end' : 'space-between'};
   color: #ffffff;
   margin-bottom: 39px;
+  width: 100%;
 
   @media screen and (min-width: 768px) {
     margin-bottom: 26px;

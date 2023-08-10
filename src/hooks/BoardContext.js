@@ -14,6 +14,11 @@ const BoardProvider = ({ children }) => {
   const [boards, setBoards] = useState(initialBoards);
   console.log(boards);
 
+  const setBoardsState = newBoards => {
+    setActiveBoard(null);
+    setBoards(newBoards);
+  };
+
   return (
     <BoardContext.Provider
       value={{
@@ -22,6 +27,7 @@ const BoardProvider = ({ children }) => {
         activeBoard,
         setActiveBoard,
         setBoards,
+        setBoardsState,
       }}
     >
       {children}
