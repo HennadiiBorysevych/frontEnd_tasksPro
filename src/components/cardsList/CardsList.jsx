@@ -18,7 +18,6 @@ import { SvgIcon } from 'components';
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
 import {
-  AddColumnButton,
   ButtonWrapper,
   Column,
   ColumnHeading,
@@ -227,11 +226,27 @@ const CardsList = () => {
             </StrictModeDroppable>
           </DragDropContext>
           <Column>
-            <AddColumnButton type="button" onClick={toggleModal}>
-              <ButtonPlus stroke="#121212" backgroundColor="#fff" />
-              <span>Add another column</span>
-
-            </AddColumnButton>
+            <button
+              type="button"
+              onClick={toggleModal}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                width: '334px',
+                justifyContent: 'center',
+                padding: '14px 0',
+                borderRadius: '8px',
+              }}
+            >
+              <ButtonPlus
+                stroke="#121212"
+                width={28}
+                height={28}
+                backgroundColor="#ffffff"
+              />
+              Add another column
+            </button>
           </Column>
         </ContainerWrapper>
       </CustomScrollBar>
