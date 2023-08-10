@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
-import operations from 'redux/boards/boardOperations';
 
 import { logOut } from '../auth/authOperations';
 
 import {
   addColumn,
   deleteColumn,
+  fetchColumns,
   getColumn,
   moveColumn,
-  moveTaskToColumn,
   updateColumn,
 } from './operations';
 
@@ -35,24 +34,26 @@ const columnsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(operations.fetchColumnsTasks.pending, handlePending)
-      .addCase(moveTaskToColumn.pending, handlePending)
+      .addCase(fetchColumns.pending, handlePending)
+
       .addCase(moveColumn.pending, handlePending)
       .addCase(addColumn.pending, handlePending)
       .addCase(deleteColumn.pending, handlePending)
       .addCase(getColumn.pending, handlePending)
       .addCase(updateColumn.pending, handlePending)
-      .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
-      .addCase(moveTaskToColumn.rejected, handleRejected)
+      .addCase(fetchColumns.rejected, handleRejected)
+
       .addCase(moveColumn.rejected, handleRejected)
       .addCase(addColumn.rejected, handleRejected)
       .addCase(deleteColumn.rejected, handleRejected)
       .addCase(getColumn.rejected, handleRejected)
       .addCase(updateColumn.rejected, handleRejected)
-      .addCase(operations.fetchColumnsTasks.fulfilled, (state, action) => {
+      .addCase(fetchColumns.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.columns;
+        console.log(' fetchColumns state.items=', state.items);
+        state.items = action.payload;
+        console.log(' fetchColumns state.items=', state.items);
       })
       .addCase(moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -60,11 +61,7 @@ const columnsSlice = createSlice({
         // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
-      .addCase(moveTaskToColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        // state.items = action.payload;
-      })
+
       .addCase(addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;

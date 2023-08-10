@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
-import operations from 'redux/boards/boardOperations';
-import { moveTaskToColumn } from 'redux/columns/operations';
 
 import { logOut } from '../auth/authOperations';
 
 import {
   addTask,
   deleteTask,
+  fetchTasks,
   getTask,
   moveTask,
+  moveTaskToColumn,
   updateTask,
 } from './cardOperations';
 
@@ -35,23 +35,23 @@ const tasksSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(operations.fetchColumnsTasks.pending, handlePending)
+      .addCase(fetchTasks.pending, handlePending)
       .addCase(moveTaskToColumn.pending, handlePending)
       .addCase(addTask.pending, handlePending)
       .addCase(deleteTask.pending, handlePending)
       .addCase(getTask.pending, handlePending)
       .addCase(updateTask.pending, handlePending)
-      .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
+      .addCase(fetchTasks.rejected, handleRejected)
       .addCase(moveTaskToColumn.rejected, handleRejected)
       .addCase(moveTask.rejected, handleRejected)
       .addCase(addTask.rejected, handleRejected)
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(getTask.rejected, handleRejected)
       .addCase(updateTask.rejected, handleRejected)
-      .addCase(operations.fetchColumnsTasks.fulfilled, (state, action) => {
+      .addCase(fetchTasks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.tasks;
+        state.items = action.payload;
       })
       .addCase(moveTask.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -61,6 +61,26 @@ const tasksSlice = createSlice({
       .addCase(moveTaskToColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        console.log('action.payload=', action.payload);
+        console.log(' moveTaskToColumn state.items=', state.items);
+        state.items = state.items.map(item => {
+          const changedTask = action.payload.find(({ id }) => id === item.id);
+          console.log(
+            '🚀 ~ file: cardSlice.js:67 ~ .addCase ~ changedTask, :',
+            changedTask
+          );
+          console.log('🚀 ~ file: cardSlice.js:67 ~ .addCase ~ item:', item);
+          return changedTask ? item : changedTask;
+        });
+        // state.items = [...state.items].map(item => {
+        //   const changedTask = action.payload.find(({ id }) => id === item.id);
+        //   console.log(
+        //     '🚀 ~ file: cardSlice.js:67 ~ .addCase ~ changedTask, :',
+        //     changedTask
+        //   );
+        //   console.log('🚀 ~ file: cardSlice.js:67 ~ .addCase ~ item:', item);
+        //   return changedTask ? item : changedTask;
+        // });
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;

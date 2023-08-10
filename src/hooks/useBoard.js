@@ -18,9 +18,11 @@ const useBoard = (currentBoard, closeModal) => {
   const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
 
+  console.log(currentBoard);
+  console.log(initialBoard);
   const dispatch = useDispatch();
 
-  const handleBoradSubmit = useCallback(() => {
+  const handleBoradSubmit = useCallback(async () => {
     if (title === '' && !currentBoard) {
       seTitleChecker(true);
       setTimeout(() => {
@@ -29,15 +31,24 @@ const useBoard = (currentBoard, closeModal) => {
       return;
     }
     const { id, ...rest } = board;
-    currentBoard
-      ? dispatch(
+    console.log(rest);
+
+    try {
+      if (currentBoard) {
+        dispatch(
           boardsOperations.updateBoard({
             boardId: id,
             updatedData: rest,
           })
-        )
-      : dispatch(boardsOperations.addBoard(rest));
-    closeModal();
+        );
+      } else {
+        dispatch(boardsOperations.addBoard(rest));
+      }
+
+      closeModal();
+    } catch (error) {
+      console.error('An error occurred while adding or editing a board', error);
+    }
   }, [board, closeModal, currentBoard, dispatch, title]);
 
   const handleTitle = useCallback(e => {
