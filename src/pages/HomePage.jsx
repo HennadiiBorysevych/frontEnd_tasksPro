@@ -4,6 +4,9 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
 import { fetchBoards } from 'redux/boards/boardOperations';
 import operations from 'redux/boards/boardOperations';
+
+import { fetchColumns } from 'redux/columns/operations';
+import { fetchTasks } from 'redux/tasks/cardOperations';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal } from 'components';
@@ -19,8 +22,6 @@ const HomePage = () => {
   const { activeBoardId, boards } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground('moon');
-
-  console.log(boards);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,10 +43,12 @@ const HomePage = () => {
 
   useEffect(() => {
     if (activeBoardId) {
-      dispatch(operations.fetchColumnsTasks(activeBoardId));
+      dispatch(fetchColumns(activeBoardId));
+      dispatch(fetchTasks(activeBoardId));
+//    dispatch(operations.fetchColumnsTasks(activeBoardId));
+
     }
   }, [dispatch, activeBoardId]);
-  console.log(activeBoardId);
 
   return (
     <SharedLayout>

@@ -1,45 +1,35 @@
 import styled from '@emotion/styled';
 
 export const ContainerWrapper = styled.div`
-  width: 100%;
   display: flex;
-  padding: 8px;
+  flex-wrap: nowrap;
+  padding-right: 18px;
+  padding-bottom: 18px;
 `;
 
 export const ColumnsContainer = styled.div`
-  display: grid;
-  grid-auto-columns: minmax(334px, 334px);
-  grid-auto-flow: column;
-  grid-gap: 8px;
-  width: fit-content;
-  @media screen and (max-width: 768px) {
-    display: grid;
-    grid-auto-columns: minmax(50%, 50%);
-    background-color: rgb(184, 187, 182);
-  }
-
-  @media screen and (max-width: 500px) {
-    display: flex;
-    flex-direction: column;
-    background-color: aqua;
-  }
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 21px;
 `;
 
 export const Column = styled.div`
-  padding: 8px;
-  background-color: #1f1f1f;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 350px;
   opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
   filter: ${({ isLoading }) => (isLoading ? 'blur(8px)' : 'none')};
-  transition: opacity 0.3s ease, filter 0.3s ease; /* Add transition properties */
+  transition: opacity 0.3s ease, filter 0.3s ease;
 `;
 
 export const ColumnHeading = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 20px;
-  margin-bottom: 14px;
+  width: 334px;
+  height: 56px;
+  padding: 0 20px;
   background-color: #121212;
   border-radius: 8px;
 `;
@@ -52,12 +42,10 @@ export const ColumnHeadingText = styled.h3`
 `;
 
 export const ItemsContainer = styled.div`
-  min-height: 100px;
-  max-height: 300px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 14px;
+  min-height: 100px;
 `;
 
 export const IconsContainer = styled.div`
@@ -70,8 +58,26 @@ export const AddColumnButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 334px;
   justify-content: center;
-  padding: 14px 0;
+  width: 334px;
+  height: 56px;
+  background-color: #121212;
   border-radius: 8px;
+  transition: 0.3s opacity ease;
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+export const IconButton = styled.button`
+  display: flex;
+  transition: 0.3s opacity ease;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  margin-right: 16px;
+  height: 56px;
 `;
