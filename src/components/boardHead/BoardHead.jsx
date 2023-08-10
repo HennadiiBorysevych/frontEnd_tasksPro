@@ -1,20 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Filters } from 'components';
 
 import { BoardTitle, Header } from './boardHead.styled';
 
-const BoardHead = ({ boardName }) => {
+const BoardHead = () => {
+  const { boardId } = useParams();
+  const decodedTitle = decodeURIComponent(boardId);
   return (
     <>
-      <Header
-        style={
-          boardName
-            ? { justifyContent: 'space-between' }
-            : { justifyContent: 'flex-end' }
-        }
-      >
-        {!!boardName && <BoardTitle>{boardName}Project Office</BoardTitle>}
+      <Header boardName={decodedTitle}>
+        {!!boardId && <BoardTitle>{decodedTitle}</BoardTitle>}
         <Filters />
       </Header>
     </>

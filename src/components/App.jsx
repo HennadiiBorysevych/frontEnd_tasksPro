@@ -1,10 +1,9 @@
 import { lazy, Suspense, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from 'hooks';
-
-import PublicPage from 'routes/PublicPage';
+import { BoardProvider } from 'hooks';
 import PrivatePage from 'routes/PrivatePage';
+import PublicPage from 'routes/PublicPage';
 
 import GlobalStyles from '../GlobalStyles';
 
@@ -25,11 +24,11 @@ const App = () => {
   }, [fetchUser]);
 
   return (
-    <>
+    <BoardProvider>
       <GlobalStyles />
 
       <Suspense>
-        {true ? (
+        {isFetchingCurrent ? (
           <SkeletonLoader page="/home/" />
         ) : (
           <Routes>
@@ -62,7 +61,7 @@ const App = () => {
           </Routes>
         )}
       </Suspense>
-    </>
+    </BoardProvider>
   );
 };
 

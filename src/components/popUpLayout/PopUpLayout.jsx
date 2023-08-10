@@ -20,7 +20,8 @@ const PopUpLayout = ({ title, handleClose, children }) => {
 PopUpLayout.propTypes = {
   title: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.node.isRequired,
+  // children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default PopUpLayout;

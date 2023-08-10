@@ -17,9 +17,8 @@ export const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
-    height: 473px;
-    width: 438px;
+  @media screen and (min-width: 1439px) {
+    width: 473px;
   }
 `;
 

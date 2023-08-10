@@ -1,4 +1,4 @@
-import { selectAllTasks } from 'redux/tasks/selectors';
+import { selectAllTasks } from 'redux/tasks/cardSelectors';
 import { createSelector } from 'reselect';
 
 export const selectLoading = state => state.columns.isLoading;
