@@ -18,6 +18,7 @@ export const addBoard = createAsyncThunk(
   async (name, thunkAPI) => {
     try {
       const response = await axios.post('/api/boards', name);
+      console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -30,6 +31,7 @@ export const updateBoard = createAsyncThunk(
   async ({ boardId, updatedData }, thunkAPI) => {
     try {
       const response = await axios.patch(`/api/boards/${boardId}`, updatedData);
+      console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -42,6 +44,7 @@ export const getBoard = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const response = await axios.get(`/api/boards/${boardId}`);
+      console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -54,6 +57,7 @@ export const deleteBoard = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const response = await axios.delete(`/api/boards/${boardId}`);
+      console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

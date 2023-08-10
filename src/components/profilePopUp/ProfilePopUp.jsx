@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useEditProfile } from 'hooks';
 import PropTypes from 'prop-types';
+import { userUpdateSchema } from 'validationSchemas/';
 
 import {
   Input,
@@ -9,8 +10,6 @@ import {
   SvgIcon,
   UserAvatar,
 } from 'components';
-
-import userUpdateSchema from '../../validationSchemas/userUpdateSchema';
 
 import {
   AddButtonWrap,
