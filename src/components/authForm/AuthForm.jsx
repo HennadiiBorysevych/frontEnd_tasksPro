@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import { useAuth } from 'hooks';
+import { authSchema } from 'validationSchemas';
 
 import { Input, PrimaryButton } from 'components';
-
-import operations from '../../redux/auth/authOperations';
-import authSchema from '../../validationSchemas/authSchema';
 
 const initialValues = {
   name: '',
@@ -20,7 +18,8 @@ const formStyle = {
 };
 
 const AuthForm = ({ value, chgForm }) => {
-  const dispatch = useDispatch();
+  const { signIn, signUp } = useAuth();
+
   useEffect(() => {
     async function breakFormikInputs() {
       await setValues({
@@ -44,10 +43,10 @@ const AuthForm = ({ value, chgForm }) => {
 
   const onHandleSubmit = async ({ name, email, password }, { resetForm }) => {
     if (value === 0) {
-      await dispatch(operations.register({ name, email, password }));
-      await dispatch(operations.logIn({ email, password }));
+      await signUp({ name, email, password });
+      await signIn({ email, password });
     } else {
-      await dispatch(operations.logIn({ email, password }));
+      await signIn({ email, password });
     }
 
     resetForm();

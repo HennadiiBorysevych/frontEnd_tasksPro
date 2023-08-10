@@ -230,6 +230,7 @@ const CardsList = () => {
             <AddColumnButton type="button" onClick={toggleModal}>
               <ButtonPlus stroke="#121212" backgroundColor="#fff" />
               <span>Add another column</span>
+
             </AddColumnButton>
           </Column>
         </ContainerWrapper>

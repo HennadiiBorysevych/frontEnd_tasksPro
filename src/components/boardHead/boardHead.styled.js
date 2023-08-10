@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  background-color: #1f1f1f;
+  justify-content: ${({ boardName }) =>
+    boardName ? 'flex-end' : 'space-between'};
   color: #ffffff;
   margin-bottom: 39px;
 

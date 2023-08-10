@@ -1,43 +1,51 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useBackground, useModal } from 'hooks';
+import { useBackground, useBoardContext, useModal } from 'hooks';
 import { fetchBoards } from 'redux/boards/boardOperations';
 import operations from 'redux/boards/boardOperations';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { fetchColumns } from 'redux/columns/operations';
 import { fetchTasks } from 'redux/tasks/cardOperations';
 import SharedLayout from 'sharedLayout/SharedLayout';
-
 import { BoardHead, BoardPopUp, Modal } from 'components';
 
 import {
-  BoardBody,
   BoardWrap,
   CreateBoardLink,
+  DefaultWrapper,
   WelcomeText,
 } from './homePage.styled';
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const activeBoardId = useSelector(selectActiveBoardId);
+  // const activeBoardId = useSelector(selectActiveBoardId);
+  const { activeBoardId, boards } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground('moon');
-  // const boardName = false;
+
   const navigate = useNavigate();
-  let BoardTitle = 'Project Office';
-  let icon = '';
-  let bg = '';
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchBoards());
   }, [dispatch]);
 
+  // Для розкодування id в назву для додавання в адресний рядок
   useEffect(() => {
     if (activeBoardId) {
-      navigate(`/home/${activeBoardId}`);
+      const activeBoard = boards.find(board => board.id === activeBoardId);
+      if (activeBoard) {
+        const encodedTitle = encodeURIComponent(activeBoard.title);
+        navigate(`${encodedTitle}`);
+      }
     }
-  }, [activeBoardId, navigate]);
+  }, [activeBoardId, boards, navigate]);
+
+  // useEffect(() => {
+  //   if (activeBoardId) {
+  //     navigate(`/home/${activeBoardId}`);
+  //   }
+  // }, [activeBoardId, navigate]);
 
   useEffect(() => {
     if (activeBoardId) {
@@ -45,18 +53,20 @@ const HomePage = () => {
       dispatch(fetchTasks(activeBoardId));
     }
   }, [dispatch, activeBoardId]);
+  console.log(activeBoardId);
 
   return (
     <SharedLayout>
       <BoardWrap bg={backgroundImage}>
         <BoardHead boardName={activeBoardId} />
-        <BoardBody>
-          {activeBoardId ? (
-            <>
-              <Outlet />
-            </>
-          ) : (
-            <>
+        {activeBoardId ? (
+          <>
+            <Outlet />
+            {/* <Outlet activeBoardId={activeBoardId} /> */}
+          </>
+        ) : (
+          <>
+            <DefaultWrapper>
               <WelcomeText>
                 Before starting your project, it is essential to{' '}
                 <CreateBoardLink onClick={toggleModal}>
@@ -66,19 +76,14 @@ const HomePage = () => {
                 This board serves as a powerful tool to organize the workflow
                 and ensure effective collaboration among team members.
               </WelcomeText>
-            </>
-          )}
-          {isModal && (
-            <Modal onBackdropClick={onBackdropClick}>
-              <BoardPopUp
-                title={BoardTitle}
-                iconName={icon}
-                bg={bg}
-                onClose={toggleModal}
-              />
-            </Modal>
-          )}
-        </BoardBody>
+            </DefaultWrapper>
+          </>
+        )}
+        {isModal && (
+          <Modal onBackdropClick={onBackdropClick}>
+            <BoardPopUp onClose={toggleModal} />
+          </Modal>
+        )}
       </BoardWrap>
     </SharedLayout>
   );

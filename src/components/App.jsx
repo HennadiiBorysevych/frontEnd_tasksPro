@@ -1,7 +1,10 @@
 import { lazy, Suspense, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from 'hooks';
+
+
+import { BoardProvider } from 'hooks';
+
 import PrivatePage from 'routes/PrivatePage';
 import PublicPage from 'routes/PublicPage';
 
@@ -24,7 +27,7 @@ const App = () => {
   }, [fetchUser]);
 
   return (
-    <>
+    <BoardProvider>
       <GlobalStyles />
 
       <Suspense>
@@ -61,7 +64,7 @@ const App = () => {
           </Routes>
         )}
       </Suspense>
-    </>
+    </BoardProvider>
   );
 };
 
