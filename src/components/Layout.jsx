@@ -1,6 +1,6 @@
+import { Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Suspense } from 'react';
 import SkeletonLoader from './skeleton/SkeletonLoader';
 
 const Layout = () => {

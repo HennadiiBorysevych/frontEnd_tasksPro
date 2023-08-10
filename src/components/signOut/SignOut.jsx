@@ -12,7 +12,7 @@ const SignOut = () => {
 
   const handleSignOut = () => {
     signOut();
-    navigate('/');
+    navigate('/welcome');
   };
 
   return (

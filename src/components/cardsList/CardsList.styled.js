@@ -28,6 +28,7 @@ export const ColumnsContainer = styled.div`
 export const Column = styled.div`
   padding: 8px;
   background-color: #1f1f1f;
+  border-radius: 8px;
   opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
   filter: ${({ isLoading }) => (isLoading ? 'blur(8px)' : 'none')};
   transition: opacity 0.3s ease, filter 0.3s ease; /* Add transition properties */
@@ -63,4 +64,14 @@ export const IconsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+export const AddColumnButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 334px;
+  justify-content: center;
+  padding: 14px 0;
+  border-radius: 8px;
 `;
