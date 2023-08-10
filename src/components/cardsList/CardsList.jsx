@@ -4,16 +4,19 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
 import { useModal } from 'hooks';
-import { moveColumn } from 'redux/columns/operations';
-import columnsSelectors from 'redux/columns/selectors';
-import { selectLoading } from 'redux/columns/selectors';
-import { moveTask, moveTaskToColumn } from 'redux/tasks/cardOperations';
+import { columnsSelectors } from 'redux/columns';
+import { moveColumn, moveTaskToColumn } from 'redux/columns/columnOperations';
+import { moveTask } from 'redux/tasks/cardOperations';
+import {
+  ButtonPlus,
+  CardItem,
+  ColumnPopUp,
+  Modal,
+  PrimaryButton,
+  SvgIcon,
+} from 'components';
 
-import { Modal } from 'components';
-import { ColumnPopUp } from 'components';
-import { ButtonPlus } from 'components';
-import { CardItem, PrimaryButton } from 'components';
-import { SvgIcon } from 'components';
+import { selectLoading } from '../../redux/columns/columnSelectors';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
@@ -28,6 +31,7 @@ import {
   IconsContainer,
   ItemsContainer,
 } from './CardsList.styled';
+
 export const StrictModeDroppable = ({ children, ...props }) => {
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
