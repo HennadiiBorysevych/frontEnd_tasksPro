@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
 import { useModal } from 'hooks';
 import { moveColumn } from 'redux/columns/operations';
-import { moveTaskToColumn } from 'redux/columns/operations';
 import columnsSelectors from 'redux/columns/selectors';
 import { selectLoading } from 'redux/columns/selectors';
-import { moveTask } from 'redux/tasks/cardOperations';
+import { moveTask, moveTaskToColumn } from 'redux/tasks/cardOperations';
 
 import { Modal } from 'components';
 import { ColumnPopUp } from 'components';
@@ -16,15 +15,17 @@ import { ButtonPlus } from 'components';
 import { CardItem, PrimaryButton } from 'components';
 import { SvgIcon } from 'components';
 
-import CustomScrollBar from './CustomScrollBar';
+import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
 import {
   AddColumnButton,
+  ButtonWrapper,
   Column,
   ColumnHeading,
   ColumnHeadingText,
   ColumnsContainer,
   ContainerWrapper,
+  IconButton,
   IconsContainer,
   ItemsContainer,
 } from './CardsList.styled';
@@ -158,13 +159,13 @@ const CardsList = () => {
                               </ColumnHeadingText>
 
                               <IconsContainer>
-                                <button type="button" onClick={toggleModal}>
+                                <IconButton type="button" onClick={toggleModal}>
                                   <SvgIcon
                                     svgName="icon-pencil"
                                     size={16}
                                     stroke="rgba(255, 255, 255, 0.5)"
                                   />
-                                </button>
+                                </IconButton>
                                 <SvgIcon
                                   svgName="icon-trash"
                                   size={16}
@@ -207,13 +208,15 @@ const CardsList = () => {
                                 </CustomScrollBar>
                               )}
                             </StrictModeDroppable>
-                            <PrimaryButton
-                              hasIcon={false}
-                              type="button"
-                              height={56}
-                            >
-                              Add another card
-                            </PrimaryButton>
+                            <ButtonWrapper>
+                              <PrimaryButton
+                                hasIcon={true}
+                                type="button"
+                                svgName={'icon-plus'}
+                              >
+                                Add another card
+                              </PrimaryButton>
+                            </ButtonWrapper>
                           </Column>
                         )}
                       </Draggable>
@@ -225,13 +228,9 @@ const CardsList = () => {
           </DragDropContext>
           <Column>
             <AddColumnButton type="button" onClick={toggleModal}>
-              <ButtonPlus
-                stroke="#121212"
-                width={334}
-                height={56}
-                backgroundColor="#ffffff"
-              />
-              Add another column
+              <ButtonPlus stroke="#121212" backgroundColor="#fff" />
+              <span>Add another column</span>
+
             </AddColumnButton>
           </Column>
         </ContainerWrapper>
