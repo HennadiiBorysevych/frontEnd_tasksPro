@@ -25,7 +25,7 @@ export const BoardListItem = styled.li`
         content: '';
         position: absolute;
         top: 0;
-        right: 8px;
+        right: 0;
         height: 100%;
         width: 4px;
         background-color: #bedbb0;
@@ -37,18 +37,12 @@ export const BoardListItem = styled.li`
 export const AfterPseudoElement = styled.div``;
 
 export const BoardName = styled.h2`
-  /* color: rgba(255, 255, 255, 0.5); */
   font-size: 14px;
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.28px;
   color: ${({ isActive }) =>
     isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
-  /* ${props =>
-    props.isActive &&
-    css`
-      color: #ffffff;
-    `}; */
 `;
 
 export const BoardIdentificationItem = styled.button`
@@ -56,6 +50,7 @@ export const BoardIdentificationItem = styled.button`
   align-items: center;
   gap: 4px;
   padding: 20px 0;
+  cursor: pointer;
 `;
 
 export const BoardItemControl = styled.div`

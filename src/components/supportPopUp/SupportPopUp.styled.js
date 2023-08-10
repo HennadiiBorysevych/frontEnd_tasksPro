@@ -12,6 +12,6 @@ export const Container = styled.div({
     width: '335px',
   },
   '@media (min-width: 768px)': {
-    width: '350px',
+    width: '400px',
   },
 });
