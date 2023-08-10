@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useBoardContext } from 'hooks';
+import PropTypes from 'prop-types';
 import {
   deleteBoard,
   fetchBoards,
@@ -26,12 +27,14 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
     try {
       await dispatch(getBoard(boardId));
       await setActiveBoard(boardId);
+      setIsControlVisible(true);
       const activatedBoard = boards.find(board => board.id === boardId);
+
       if (activatedBoard) {
         const encodedTitle = encodeURIComponent(activatedBoard.title);
         navigate(`${encodedTitle}`);
       }
-      setIsControlVisible(!isControlVisible);
+      setIsControlVisible(true);
     } catch (error) {
       console.error('Error getting board data', error);
     }
@@ -63,6 +66,7 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
           onDeleteClick={() => handleDeleteBoard(id)}
           onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
           boards={boards}
+          onToggleControl={() => setIsControlVisible(prev => !prev)}
         />
       ))}
     </BoardList>
@@ -70,3 +74,7 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
 };
 
 export default SideBarBoardsList;
+
+SideBarBoardsList.propTypes = {
+  onToggleModalAndSideBar: PropTypes.func.isRequired,
+};
