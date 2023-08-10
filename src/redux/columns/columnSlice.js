@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
 import operations from 'redux/boards/boardOperations';
-import { moveTaskToColumn } from 'redux/columns/columnOperations';
 
 import { logOut } from '../auth/authOperations';
 
 import {
-  addTask,
-  deleteTask,
-  getTask,
-  moveTask,
-  updateTask,
-} from './cardOperations';
+  addColumn,
+  deleteColumn,
+  getColumn,
+  moveColumn,
+  moveTaskToColumn,
+  updateColumn,
+} from './columnOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -29,40 +29,43 @@ const initialState = {
   error: null,
 };
 
-const tasksSlice = createSlice({
-  name: 'tasks',
+const columnsSlice = createSlice({
+  name: 'columns',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
       .addCase(operations.fetchColumnsTasks.pending, handlePending)
       .addCase(moveTaskToColumn.pending, handlePending)
-      .addCase(addTask.pending, handlePending)
-      .addCase(deleteTask.pending, handlePending)
-      .addCase(getTask.pending, handlePending)
-      .addCase(updateTask.pending, handlePending)
+      .addCase(moveColumn.pending, handlePending)
+      .addCase(addColumn.pending, handlePending)
+      .addCase(deleteColumn.pending, handlePending)
+      .addCase(getColumn.pending, handlePending)
+      .addCase(updateColumn.pending, handlePending)
       .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
       .addCase(moveTaskToColumn.rejected, handleRejected)
-      .addCase(moveTask.rejected, handleRejected)
-      .addCase(addTask.rejected, handleRejected)
-      .addCase(deleteTask.rejected, handleRejected)
-      .addCase(getTask.rejected, handleRejected)
-      .addCase(updateTask.rejected, handleRejected)
+      .addCase(moveColumn.rejected, handleRejected)
+      .addCase(addColumn.rejected, handleRejected)
+      .addCase(deleteColumn.rejected, handleRejected)
+      .addCase(getColumn.rejected, handleRejected)
+      .addCase(updateColumn.rejected, handleRejected)
       .addCase(operations.fetchColumnsTasks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.tasks;
+        state.items = action.payload.columns;
       })
-      .addCase(moveTask.fulfilled, (state, action) => {
+      .addCase(moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
       .addCase(moveTaskToColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        // state.items = action.payload;
       })
-      .addCase(addTask.fulfilled, (state, action) => {
+      .addCase(addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const {
@@ -71,34 +74,31 @@ const tasksSlice = createSlice({
           updatedAt,
           ...rest
         } = action.payload.result;
-        state.items.push({
-          id,
-          ...rest,
-        });
-        console.log(`${action.payload.result.title} added to your tasks`);
+        state.items.push({ id, ...rest });
+        console.log(`${action.payload.name} added to your columns`);
       })
-      .addCase(deleteTask.fulfilled, (state, action) => {
+      .addCase(deleteColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
-          task => task.id === action.payload.id
+          column => column.id === action.payload.id
         );
         if (index !== -1) {
           state.items.splice(index, 1);
-          console.log('Task deleted');
+          console.log('Column deleted');
         }
       })
-      .addCase(getTask.fulfilled, (state, action) => {
+      .addCase(getColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
-          task => task.id === action.payload.id
+          column => column.id === action.payload.id
         );
         if (index !== -1) {
           state.items[index] = action.payload;
         }
       })
-      .addCase(updateTask.fulfilled, (state, action) => {
+      .addCase(updateColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const {
@@ -107,13 +107,10 @@ const tasksSlice = createSlice({
           updatedAt,
           ...rest
         } = action.payload.result;
-        const index = state.items.findIndex(task => task.id === id);
+        const index = state.items.findIndex(column => column.id === id);
         if (index !== -1) {
-          state.items[index] = {
-            id,
-            ...rest,
-          };
-          console.log('Task updated');
+          state.items[index] = { id, ...rest };
+          console.log('Column updated');
         }
       })
       .addCase(logOut.fulfilled, state => {
@@ -124,4 +121,4 @@ const tasksSlice = createSlice({
   },
 });
 
-export default tasksSlice.reducer;
+export default columnsSlice.reducer;
