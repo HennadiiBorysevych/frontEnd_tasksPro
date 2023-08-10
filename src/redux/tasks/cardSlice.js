@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
 import operations from 'redux/boards/boardOperations';
-import { moveTaskToColumn } from 'redux/columns/columnOperations';
 import { logOut } from '../auth/authOperations';
 
 import {

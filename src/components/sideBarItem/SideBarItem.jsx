@@ -50,6 +50,7 @@ const SideBarItem = ({
         {active && (
           <BoardItemControl>
             <button
+              aria-label="Edit board"
               onClick={() => {
                 toggleModal();
                 onToggleModalAndSideBar();
@@ -61,7 +62,8 @@ const SideBarItem = ({
                 stroke="rgba(255,255,255,0.5)"
               />
             </button>
-            <button onClick={onDeleteClick}>
+
+            <button aria-label="Delete board" onClick={onDeleteClick}>
               <SvgIcon
                 svgName="icon-trash"
                 size={16}
