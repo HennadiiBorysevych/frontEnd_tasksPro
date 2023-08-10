@@ -7,6 +7,7 @@ import { useModal } from 'hooks';
 import { columnsSelectors } from 'redux/columns';
 import { moveColumn, moveTaskToColumn } from 'redux/columns/columnOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
+
 import {
   ButtonPlus,
   CardItem,
@@ -17,7 +18,6 @@ import {
 } from 'components';
 
 import { selectLoading } from '../../redux/columns/columnSelectors';
-
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
 import {

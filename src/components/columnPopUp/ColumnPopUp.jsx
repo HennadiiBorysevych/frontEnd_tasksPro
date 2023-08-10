@@ -1,7 +1,10 @@
 import React from 'react';
-import { Container } from './ColumnPopUp.styled';
-import { PopUpLayout, Input, PrimaryButton } from 'components';
+
+import { Input, PopUpLayout, PrimaryButton } from 'components';
+
 import useColumn from '../../hooks/useColumn';
+
+import { Container } from './ColumnPopUp.styled';
 
 const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
   const { titleChecker, handleTitle, handleColumnSubmit } = useColumn(

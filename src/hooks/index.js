@@ -6,3 +6,4 @@ export { default as useCard } from './useCard.js';
 export { default as useColumn } from './useColumn';
 export { default as useEditProfile } from './useEditProfile';
 export { default as useModal } from './useModal';
+export { default as useSupport } from './useSupport';
