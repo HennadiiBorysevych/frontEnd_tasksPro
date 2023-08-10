@@ -5,6 +5,8 @@ import { useBackground, useModal } from 'hooks';
 import { fetchBoards } from 'redux/boards/boardOperations';
 import operations from 'redux/boards/boardOperations';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
+import { fetchColumns } from 'redux/columns/operations';
+import { fetchTasks } from 'redux/tasks/cardOperations';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardHead, BoardPopUp, Modal } from 'components';
@@ -39,7 +41,8 @@ const HomePage = () => {
 
   useEffect(() => {
     if (activeBoardId) {
-      dispatch(operations.fetchColumnsTasks(activeBoardId));
+      dispatch(fetchColumns(activeBoardId));
+      dispatch(fetchTasks(activeBoardId));
     }
   }, [dispatch, activeBoardId]);
 

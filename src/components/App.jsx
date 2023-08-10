@@ -2,9 +2,8 @@ import { lazy, Suspense, useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuth } from 'hooks';
-
-import PublicPage from 'routes/PublicPage';
 import PrivatePage from 'routes/PrivatePage';
+import PublicPage from 'routes/PublicPage';
 
 import GlobalStyles from '../GlobalStyles';
 
@@ -29,7 +28,7 @@ const App = () => {
       <GlobalStyles />
 
       <Suspense>
-        {true ? (
+        {isFetchingCurrent ? (
           <SkeletonLoader page="/home/" />
         ) : (
           <Routes>

@@ -1,4 +1,4 @@
-import { selectAllTasks } from 'redux/tasks/selectors';
+import { selectAllTasks } from 'redux/tasks/cardSelectors';
 import { createSelector } from 'reselect';
 
 export const selectLoading = state => state.columns.isLoading;
@@ -10,6 +10,9 @@ export const selectOneColumn = (state, columnId) => {
 export const selectColumnsAndTasks = createSelector(
   [selectAllColumns, selectAllTasks],
   (columns, tasks) => {
+    console.log('🚀 ~ file: selectors.js:13 ~ tasks:', tasks);
+    console.log('🚀 ~ file: selectors.js:13 ~ columns:', columns);
+
     return columns.map(column => {
       const ownTasks = tasks.filter(task => task.cardOwner === column.id);
       return {

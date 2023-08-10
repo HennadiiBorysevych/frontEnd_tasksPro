@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { OverlayScrollbars } from 'overlayscrollbars';
 
 import 'overlayscrollbars/overlayscrollbars.css';
+import './CustomScrollBar.css';
 
 const CustomScrollbar = ({ width, height, children }) => {
   const containerRef = useRef(null);
@@ -23,13 +24,26 @@ const CustomScrollbar = ({ width, height, children }) => {
             '.os-scrollbar-horizontal'
           );
           if (scrollbar) {
-            scrollbar.style.width = '8px';
-            scrollbar.style.height = '8px';
+            scrollbar.style.width = '18px';
+            scrollbar.style.height = '18px';
           }
         },
       },
     });
+    // const scrollbarHorizontal = containerElement.querySelector(
+    //   '.os-scrollbar-horizontal'
+    // );
+    // const scrollbarVertical = containerElement.querySelector(
+    //   '.os-scrollbar-vertical'
+    // );
 
+    // if (scrollbarHorizontal) {
+    //   scrollbarHorizontal.style.background = '#b9b91d';
+    // }
+
+    // if (scrollbarVertical) {
+    //   scrollbarVertical.style.background = '#724aad';
+    // }
     // Clean up the OverlayScrollbars instance when the component unmounts
     return () => {
       if (containerElement && containerElement.overlayScrollbars) {
