@@ -64,19 +64,19 @@ const boardsSlice = createSlice({
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        // const deletedBoardId = action.payload.id;
-        // state.items = state.items.filter(item => item.id !== deletedBoardId);
-
-        // if (state.activeBoardIndex === deletedBoardId) {
-        //   state.activeBoardIndex = null;
-        // }
-        const index = state.items.findIndex(
-          board => board.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.items.splice(index, 1);
-          console.log('Board deleted');
+        const deletedBoardId = action.payload.id;
+        state.items = state.items.filter(item => item.id !== deletedBoardId);
+        console.log('Filter: Board deleted');
+        if (state.activeBoardIndex === deletedBoardId) {
+          state.activeBoardIndex = null;
         }
+        // const index = state.items.findIndex(
+        //   board => board.id === action.payload.id
+        // );
+        // if (index !== -1) {
+        //   state.items.splice(index, 1);
+        //   console.log('Board deleted');
+        // }
       })
       .addCase(getBoard.fulfilled, (state, action) => {
         state.isLoading = false;

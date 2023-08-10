@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+
+import styled from '@emotion/styled';
 
 export const SideBarWrapper = styled.div`
   padding: 14px 14px 24px 14px;
@@ -12,16 +13,19 @@ export const SideBarWrapper = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   color: #ffffff;
 
+  @media screen and (max-width: 767px) {
+    left: ${({ isOpen }) => (isOpen ? '0' : '-225px')};
+  }
+
   @media screen and (max-width: 1439px) {
     position: fixed;
     top: 0;
-    left: ${({ isOpen }) => (isOpen ? '0' : '-225px')};
+    left: ${({ isOpen }) => (isOpen ? '0' : '-260px')};
     transition: left 0.3s ease-in-out;
     z-index: 1000;
   }
   @media screen and (min-width: 768px) {
     padding: 24px;
-    left: ${({ isOpen }) => (isOpen ? '0' : '-260px')};
     width: 260px;
   }
 
@@ -78,5 +82,16 @@ export const TitleButton = styled.p`
 `;
 
 export const BoardList = styled.ul`
-  margin-bottom: 55px;
+  position: relative;
+  margin-bottom: 40px;
+  max-height: 256px;
+  overflow-y: auto;
+
+  @media screen and (min-width: 768px) {
+    max-height: 380px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-height: 126px;
+  }
 `;

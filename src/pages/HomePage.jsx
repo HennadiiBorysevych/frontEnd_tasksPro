@@ -4,10 +4,9 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
 import { fetchBoards } from 'redux/boards/boardOperations';
 import operations from 'redux/boards/boardOperations';
-// import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
-import { BoardHead, BoardPopUp, Modal } from 'components';
+import { BoardPopUp, Modal } from 'components';
 
 import {
   BoardWrap,
@@ -17,10 +16,11 @@ import {
 } from './homePage.styled';
 
 const HomePage = () => {
-  // const activeBoardId = useSelector(selectActiveBoardId);
   const { activeBoardId, boards } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground('moon');
+
+  console.log(boards);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const HomePage = () => {
     dispatch(fetchBoards());
   }, [dispatch]);
 
-  // Для розкодування id в назву для додавання в адресний рядок
+  // Розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
     if (activeBoardId) {
       const activeBoard = boards.find(board => board.id === activeBoardId);
@@ -39,12 +39,6 @@ const HomePage = () => {
       }
     }
   }, [activeBoardId, boards, navigate]);
-
-  // useEffect(() => {
-  //   if (activeBoardId) {
-  //     navigate(`/home/${activeBoardId}`);
-  //   }
-  // }, [activeBoardId, navigate]);
 
   useEffect(() => {
     if (activeBoardId) {
@@ -56,11 +50,9 @@ const HomePage = () => {
   return (
     <SharedLayout>
       <BoardWrap bg={backgroundImage}>
-        <BoardHead boardName={activeBoardId} />
         {activeBoardId ? (
           <>
-            <Outlet />
-            {/* <Outlet activeBoardId={activeBoardId} /> */}
+            <Outlet activeBoard={activeBoardId} />
           </>
         ) : (
           <>

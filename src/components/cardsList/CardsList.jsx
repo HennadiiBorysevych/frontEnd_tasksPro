@@ -224,15 +224,27 @@ const CardsList = () => {
             </StrictModeDroppable>
           </DragDropContext>
           <Column>
-            <AddColumnButton type="button" onClick={toggleModal}>
+            <button
+              type="button"
+              onClick={toggleModal}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                width: '334px',
+                justifyContent: 'center',
+                padding: '14px 0',
+                borderRadius: '8px',
+              }}
+            >
               <ButtonPlus
                 stroke="#121212"
-                width={334}
-                height={56}
+                width={28}
+                height={28}
                 backgroundColor="#ffffff"
               />
               Add another column
-            </AddColumnButton>
+            </button>
           </Column>
         </ContainerWrapper>
       </CustomScrollBar>
