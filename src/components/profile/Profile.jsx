@@ -17,7 +17,6 @@ const Profile = () => {
         <UserName>{user?.name ?? 'No User'}</UserName>
         <UserAvatar avatar={user?.avatarURL} width="32px" height="32px" />
       </ClickWrap>
-
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
           <ProfilePopUp user={user} handleModalClose={toggleModal} />
