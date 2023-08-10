@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { CardsList } from 'components';
+import { BoardHead, CardsList } from 'components';
 
-export const Board = ({ boardName }) => {
+export const Board = () => {
   return (
     <>
+      <BoardHead />
       <CardsList />
     </>
   );

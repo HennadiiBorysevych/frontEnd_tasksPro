@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Container, ScreenWrapper, MainWrapper } from './SharedLayouts.styled';
-import { SideBar, Header } from 'components';
+
+import { Header, SideBar } from 'components';
+
+import { Container, MainWrapper, ScreenWrapper } from './SharedLayouts.styled';
 
 const SharedLayout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +39,7 @@ const SharedLayout = ({ children }) => {
     setIsScrollDisabled(false);
   };
 
-  const createBoardClick = () => {
+  const toggleModalAndSideBar = () => {
     closeSideBar();
   };
 
@@ -48,7 +50,7 @@ const SharedLayout = ({ children }) => {
           isOpen={isOpen}
           isClose={closeSideBar}
           windowHeight={windowHeight}
-          onCreateBoardClick={createBoardClick}
+          onToggleModalAndSideBar={toggleModalAndSideBar}
         />
         <MainWrapper style={{ width: '100%' }}>
           <Header isOpenSideBar={openSidebar} />

@@ -7,10 +7,11 @@ export const BoardWrap = styled.div`
   background-image: url(${props => props.bg});
   background-size: cover;
   color: #ffffff;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
 
   @media screen and (min-width: 768px) {
     padding: 26px 32px 96px;
+    min-height: calc(100vh - 68px);
   }
 
   @media screen and (min-width: 1440px) {
@@ -18,11 +19,15 @@ export const BoardWrap = styled.div`
   }
 `;
 
-export const BoardBody = styled.div`
-  min-height: 100vh;
+export const DefaultWrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 190.5px);
+
+  @media screen and (min-width: 768px) {
+    min-height: calc(100vh - 134.5px);
+  }
 `;
 
 export const WelcomeText = styled.p`

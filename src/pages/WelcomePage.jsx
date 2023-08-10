@@ -1,15 +1,16 @@
-import { Logo, SvgIcon } from 'components';
+import { NavLink } from 'react-router-dom';
 import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
-import { NavLink, useLocation } from 'react-router-dom';
+
+import { Logo } from 'components';
 
 import {
+  AppLogo,
   Background,
   Container,
-  AppLogo,
-  UserImage,
-  WelcomeText,
   NavLinks,
   RegisterLink,
+  UserImage,
+  WelcomeText,
 } from './pages.styled';
 
 const WelcomePage = () => {
@@ -21,8 +22,7 @@ const WelcomePage = () => {
           <Logo variant="welcome" />
         </AppLogo>
         <WelcomeText>
-          Supercharge your productivity and take control of your tasks with Task{' '}
-          <br />
+          Supercharge your productivity and take control of your tasks with Task
           Pro - Don't wait, start achieving your goals now!
         </WelcomeText>
         <NavLinks>

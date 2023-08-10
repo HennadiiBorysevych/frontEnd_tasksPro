@@ -22,7 +22,12 @@ import {
   TitleButton,
 } from './SideBar.styled';
 
-const SideBar = ({ isOpen, isClose, windowHeight, onCreateBoardClick }) => {
+const SideBar = ({
+  isOpen,
+  isClose,
+  windowHeight,
+  onToggleModalAndSideBar,
+}) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { boardName } = useParams();
   const boards = [];
@@ -37,7 +42,7 @@ const SideBar = ({ isOpen, isClose, windowHeight, onCreateBoardClick }) => {
             type="button"
             onClick={() => {
               toggleModal();
-              onCreateBoardClick();
+              onToggleModalAndSideBar();
             }}
           >
             <TitleButton>
@@ -80,5 +85,5 @@ export default SideBar;
 SideBar.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   isClose: PropTypes.func.isRequired,
-  onCreateBoardClick: PropTypes.func.isRequired,
+  onToggleModalAndSideBar: PropTypes.func.isRequired,
 };
