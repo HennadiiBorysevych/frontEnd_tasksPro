@@ -20,22 +20,25 @@ const SideBarItem = ({
   onHandleActiveBoard,
   onDeleteClick,
   onToggleModalAndSideBar,
-  controlVisible,
+  onToggleControl,
 }) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
   const boards = useSelector(selectAllBoards);
 
   console.log(active);
-  console.log(activeBoardId);
+  console.log(onToggleControl);
 
   const editingBoard = boards.find(board => board.id === activeBoardId);
   return (
     <>
-      <BoardListItem>
+      <BoardListItem isActive={active}>
         <BoardIdentificationItem
           isActive={active}
-          onClick={onHandleActiveBoard}
+          onClick={() => {
+            onHandleActiveBoard();
+            onToggleControl();
+          }}
         >
           <SvgIcon
             svgName={`${iconName}`}
@@ -47,6 +50,7 @@ const SideBarItem = ({
         {active && (
           <BoardItemControl>
             <button
+              aria-label="Edit board"
               onClick={() => {
                 toggleModal();
                 onToggleModalAndSideBar();
@@ -58,7 +62,8 @@ const SideBarItem = ({
                 stroke="rgba(255,255,255,0.5)"
               />
             </button>
-            <button onClick={onDeleteClick}>
+
+            <button aria-label="Delete board" onClick={onDeleteClick}>
               <SvgIcon
                 svgName="icon-trash"
                 size={16}
@@ -83,7 +88,7 @@ SideBarItem.propTypes = {
   onHandleActiveBoard: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
   onToggleModalAndSideBar: PropTypes.func.isRequired,
-  controlVisible: PropTypes.func.isRequired,
+  onToggleControl: PropTypes.func.isRequired,
 };
 
 export default SideBarItem;
