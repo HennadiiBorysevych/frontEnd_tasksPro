@@ -119,11 +119,12 @@ const CardsList = () => {
       }
     }
   };
+
   return (
     <>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp onClose={toggleModal} />
+          <ColumnPopUp handleModalClose={toggleModal} />
         </Modal>
       )}
       <CustomScrollBar>
