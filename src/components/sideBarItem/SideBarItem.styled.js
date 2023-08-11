@@ -8,7 +8,7 @@ export const BoardListItem = styled.li`
   align-items: center;
   justify-content: space-between;
   background-color: #121212;
-  clip-path: inset(0 -100vmax);
+  padding: 0 24px;
 
   & + & {
     margin-top: 4px;
