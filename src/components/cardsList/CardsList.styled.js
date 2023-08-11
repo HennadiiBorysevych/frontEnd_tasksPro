@@ -18,20 +18,23 @@ export const Column = styled.div`
   flex-direction: column;
   gap: 14px;
   width: 350px;
-  opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
-  filter: ${({ isLoading }) => (isLoading ? 'blur(8px)' : 'none')};
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
+  transition: filter 0.4s ease-in-out;
+  @media (max-width: 375px) {
+    width: calc(100vw - 40px);
+  }
 `;
 
 export const ColumnHeading = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 334px;
+  width: calc(100% - 16px);
   height: 56px;
   padding: 0 20px;
   background-color: #121212;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const ColumnHeadingText = styled.h3`

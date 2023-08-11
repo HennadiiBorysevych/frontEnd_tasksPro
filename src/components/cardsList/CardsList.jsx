@@ -2,12 +2,14 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
+import { updateOrdersFromIndex } from 'helpers';
 import { useModal } from 'hooks';
 import { columnsSelectors } from 'redux/columns';
-import { moveColumn, moveTaskToColumn } from 'redux/columns/columnOperations';
-import { selectLoading } from 'redux/columns/columnSelectors';
+import { moveColumn } from 'redux/columns/columnOperations';
+import columnSelectors from 'redux/columns/columnSelectors';
+import { moveTaskToColumn } from 'redux/tasks/cardOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
+import cardSelectors from 'redux/tasks/cardSelectors';
 
 import {
   ButtonPlus,
@@ -51,15 +53,15 @@ const CardsList = () => {
   const dispatch = useDispatch();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
-  const isColumnLoading = useSelector(selectLoading);
+  const isColumnLoading = useSelector(columnSelectors.selectLoading);
+  const isTasksLoading = useSelector(cardSelectors.selectLoading);
   const onDragEnd = result => {
     if (!result.destination) {
       return;
     }
-    console.log('onDragEnd..');
 
     if (result.type === 'column') {
-      console.log('column moving');
+      // whole column moving
       const dataArray = Array.from(columnsAndTasks);
       const idTask = result.draggableId;
       const destinationIndex = result.destination.index;
@@ -68,6 +70,10 @@ const CardsList = () => {
         destinationIndex,
         dataArray,
       });
+      // columnsAndTasks = updateOrdersFromArray(
+      //   columnsAndTasks,
+      //   updatingDataStripped
+      // );
       dispatch(moveColumn({ updatingDataFull, updatingDataStripped }));
     } else {
       const dataArray = Array.from(columnsAndTasks);
@@ -77,7 +83,7 @@ const CardsList = () => {
       const isSameColumn = columnId === idColumnNew;
 
       if (!isSameColumn) {
-        console.log('column+row moving');
+        // task to another column moving
         const idTask = result.draggableId;
         const destinationIndex = result.destination.index;
         const sourceColumnItems = dataArray.find(
@@ -101,11 +107,13 @@ const CardsList = () => {
           destinationIndex,
           dataArray: destinationColumnItems,
         });
-
+        // columnsAndTasks.forEach(column => {
+        //   column.items = updateOrdersFromArray(column.items, dataNew);
+        // });
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
-        console.log('row moving');
-        const column = columnsAndTasks.find(col => col.id === columnId);
+        // row moving
+        let column = columnsAndTasks.find(col => col.id === columnId);
         const dataArray = Array.from(column.items);
         const idTask = dataArray[source.index].id;
         const destinationIndex = destination.index;
@@ -115,10 +123,16 @@ const CardsList = () => {
             destinationIndex,
             dataArray,
           });
+        // column.items = updateOrdersFromArray(
+        //   column.items,
+        //   updatingDataStripped
+        // );
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
   };
+
+  const isLoading = isColumnLoading || isTasksLoading;
 
   return (
     <>
@@ -150,12 +164,12 @@ const CardsList = () => {
                       >
                         {provided => (
                           <Column
-                            isLoading={isColumnLoading}
+                            isLoading={isLoading}
                             {...provided.draggableProps}
                             ref={provided.innerRef}
                           >
                             <ColumnHeading
-                              isLoading={isColumnLoading}
+                              isLoading={isLoading}
                               {...provided.dragHandleProps}
                             >
                               <ColumnHeadingText>
