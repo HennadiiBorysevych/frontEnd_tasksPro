@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
-import { fetchBoards } from 'redux/boards/boardOperations';
-import operations from 'redux/boards/boardOperations';
-import { fetchColumns } from 'redux/columns/operations';
-import { fetchTasks } from 'redux/tasks/cardOperations';
+import { boardsOperations } from 'redux/boards';
+import { selectAllBoards } from 'redux/boards/boardSelectors';
+import { columnsOperations } from 'redux/columns';
+import { cardOperations } from 'redux/tasks';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal } from 'components';
@@ -18,42 +19,46 @@ import {
 } from './styles/homePage.styled';
 
 const HomePage = () => {
-  const { activeBoardId, boards } = useBoardContext();
+  const { activeBoardId, activeBoard, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const [backgroundImage] = useBackground('moon');
+  const [backgroundImage] = useBackground();
+  const boards = useSelector(selectAllBoards);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    dispatch(boardsOperations.fetchBoards());
   }, [dispatch]);
 
-  // Розкодування id в назву і її додавання до адресного рядка
+  // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (activeBoardId) {
-      const activeBoard = boards.find(board => board.id === activeBoardId);
-      if (activeBoard) {
-        const encodedTitle = encodeURIComponent(activeBoard.title);
+    if (boards.length > 0 && !activeBoard) {
+      const firstBoard = boards[0];
+
+      if (firstBoard) {
+        setActiveBoard(firstBoard.id);
+
+        const encodedTitle = encodeURIComponent(firstBoard.title);
         navigate(`${encodedTitle}`);
       }
     }
-  }, [activeBoardId, boards, navigate]);
+  }, [activeBoard, activeBoardId, boards, navigate, setActiveBoard]);
 
-  useEffect(() => {
-    if (activeBoardId) {
-      dispatch(fetchColumns(activeBoardId));
-      dispatch(fetchTasks(activeBoardId));
-      //    dispatch(operations.fetchColumnsTasks(activeBoardId));
-    }
-  }, [dispatch, activeBoardId]);
+  // useEffect(() => {
+  //   if (activeBoardId) {
+  //     dispatch(columnsOperations.fetchColumns(activeBoardId));
+  //     dispatch(cardOperations.fetchTasks(activeBoardId));
+  //     //    dispatch(operations.fetchColumnsTasks(activeBoardId));
+  //   }
+  // }, [dispatch, activeBoardId]);
 
   return (
     <SharedLayout>
       <BoardWrap bg={backgroundImage}>
         {activeBoardId ? (
           <>
-            <Outlet activeBoard={activeBoardId} />
+            <Outlet />
           </>
         ) : (
           <>

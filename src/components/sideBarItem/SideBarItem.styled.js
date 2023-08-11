@@ -8,11 +8,12 @@ export const BoardListItem = styled.li`
   align-items: center;
   justify-content: space-between;
   background-color: #121212;
-  clip-path: inset(0 -100vmax);
+  padding: 0 24px;
 
   & + & {
     margin-top: 4px;
   }
+
   ${props =>
     props.isActive &&
     css`
@@ -40,8 +41,6 @@ export const BoardName = styled.h2`
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.28px;
-  color: ${({ isActive }) =>
-    isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
 `;
 
 export const BoardIdentificationItem = styled.button`

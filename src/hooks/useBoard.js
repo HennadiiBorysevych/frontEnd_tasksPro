@@ -18,8 +18,6 @@ const useBoard = (currentBoard, closeModal) => {
   const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
 
-  console.log(currentBoard);
-  console.log(initialBoard);
   const dispatch = useDispatch();
 
   const handleBoradSubmit = useCallback(async () => {
@@ -31,7 +29,6 @@ const useBoard = (currentBoard, closeModal) => {
       return;
     }
     const { id, ...rest } = board;
-    console.log(rest);
 
     try {
       if (currentBoard) {

@@ -16,20 +16,28 @@ import { columnsReducer } from './columns';
 import { cardReducer } from './tasks';
 import userFilterReducer from './userFilterSlice';
 
-const persistConfig = {
+const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
 };
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const userFilterPersistConfig = {
+  key: 'userFilter',
+  storage,
+};
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedUserFilterReducer = persistReducer(
+  userFilterPersistConfig,
+  userFilterReducer
+);
 
 export const store = configureStore({
   reducer: {
-    auth: persistedReducer,
+    auth: persistedAuthReducer,
     boards: boardsReducer,
     columns: columnsReducer,
     tasks: cardReducer,
-    userFilter: userFilterReducer,
+    userFilter: persistedUserFilterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

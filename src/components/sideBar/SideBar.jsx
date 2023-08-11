@@ -1,7 +1,9 @@
 import React from 'react';
+// import { useDispatch } from 'react-redux';
 import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 
+// import { boardsOperations } from 'redux/boards';
 import {
   BoardPopUp,
   ButtonPlus,
@@ -28,6 +30,11 @@ const SideBar = ({
 }) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(boardsOperations.fetchBoards());
+  // }, [dispatch]);
 
   return (
     <>

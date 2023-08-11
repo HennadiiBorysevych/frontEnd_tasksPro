@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 const userFilterSlice = createSlice({
   name: 'userFilter',
-  initialState: '', 
+  initialState: {
+    value: 'without',
+  },
   reducers: {
     setUserFilter: (state, action) => {
-      return action.payload;
+      state.value = action.payload;
     },
   },
 });
 
-export const selectUserFilter = (state) => state.userFilter;
+export const selectUserFilter = state => state.userFilter.value;
 export const { setUserFilter } = userFilterSlice.actions;
 export default userFilterSlice.reducer;
-
