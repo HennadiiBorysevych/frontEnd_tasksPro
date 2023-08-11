@@ -4,6 +4,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
 import { useModal } from 'hooks';
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsSelectors } from 'redux/columns';
 import { moveColumn } from 'redux/columns/columnOperations';
 import columnSelectors from 'redux/columns/columnSelectors';
@@ -12,11 +13,11 @@ import { moveTask } from 'redux/tasks/cardOperations';
 import cardSelectors from 'redux/tasks/cardSelectors';
 
 import {
+  AddCardBtn,
   ButtonPlus,
   CardItem,
   ColumnPopUp,
   Modal,
-  PrimaryButton,
   SvgIcon,
 } from 'components';
 
@@ -51,6 +52,7 @@ export const StrictModeDroppable = ({ children, ...props }) => {
 
 const CardsList = () => {
   const dispatch = useDispatch();
+  const activeBoardId = useSelector(selectActiveBoardId);
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
@@ -138,7 +140,11 @@ const CardsList = () => {
     <>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp handleModalClose={toggleModal} />
+          <ColumnPopUp
+            boardId={activeBoardId}
+            columnIndex={columnsAndTasks.length}
+            handleModalClose={toggleModal}
+          />
         </Modal>
       )}
       <CustomScrollBar>
@@ -227,13 +233,10 @@ const CardsList = () => {
                               )}
                             </StrictModeDroppable>
                             <ButtonWrapper>
-                              <PrimaryButton
-                                hasIcon={true}
-                                type="button"
-                                svgName={'icon-plus'}
-                              >
-                                Add another card
-                              </PrimaryButton>
+                              <AddCardBtn
+                                columnId={column.id}
+                                cardIndex={columnsAndTasks.length}
+                              />
                             </ButtonWrapper>
                           </Column>
                         )}

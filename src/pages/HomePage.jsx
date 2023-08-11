@@ -45,13 +45,13 @@ const HomePage = () => {
     }
   }, [activeBoard, activeBoardId, boards, navigate, setActiveBoard]);
 
-  // useEffect(() => {
-  //   if (activeBoardId) {
-  //     dispatch(columnsOperations.fetchColumns(activeBoardId));
-  //     dispatch(cardOperations.fetchTasks(activeBoardId));
-  //     //    dispatch(operations.fetchColumnsTasks(activeBoardId));
-  //   }
-  // }, [dispatch, activeBoardId]);
+  useEffect(() => {
+    if (activeBoardId) {
+      dispatch(columnsOperations.fetchColumns(activeBoardId));
+      dispatch(cardOperations.fetchTasks(activeBoardId));
+      // dispatch(columnsOperations.fetchColumnsTasks(activeBoardId));
+    }
+  }, [dispatch, activeBoardId]);
 
   return (
     <SharedLayout>
