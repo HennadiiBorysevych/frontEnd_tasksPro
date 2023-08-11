@@ -47,9 +47,9 @@ const HomePage = () => {
 
   useEffect(() => {
     if (activeBoardId) {
-      // dispatch(columnsOperations.fetchColumns(activeBoardId));
-      // dispatch(cardOperations.fetchTasks(activeBoardId));
-      //    dispatch(operations.fetchColumnsTasks(activeBoardId));
+      dispatch(columnsOperations.fetchColumns(activeBoardId));
+      dispatch(cardOperations.fetchTasks(activeBoardId));
+      // dispatch(columnsOperations.fetchColumnsTasks(activeBoardId));
     }
   }, [dispatch, activeBoardId]);
 

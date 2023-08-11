@@ -4,17 +4,18 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
 import { useModal } from 'hooks';
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsSelectors } from 'redux/columns';
 import { moveColumn, moveTaskToColumn } from 'redux/columns/columnOperations';
 import { selectLoading } from 'redux/columns/columnSelectors';
 import { moveTask } from 'redux/tasks/cardOperations';
-import { selectActiveBoardId } from 'redux/boards/boardSelectors';
+
 import {
+  AddCardBtn,
   ButtonPlus,
   CardItem,
   ColumnPopUp,
   Modal,
-  PrimaryButton,
   SvgIcon,
 } from 'components';
 
@@ -218,13 +219,10 @@ const CardsList = () => {
                               )}
                             </StrictModeDroppable>
                             <ButtonWrapper>
-                              <PrimaryButton
-                                hasIcon={true}
-                                type="button"
-                                svgName={'icon-plus'}
-                              >
-                                Add another card
-                              </PrimaryButton>
+                              <AddCardBtn
+                                columnId={column.id}
+                                cardIndex={columnsAndTasks.length}
+                              />
                             </ButtonWrapper>
                           </Column>
                         )}

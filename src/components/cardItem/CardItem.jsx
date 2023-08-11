@@ -1,5 +1,7 @@
 import React from 'react';
+import { useModal } from 'hooks';
 
+import { Modal, CardPopUp } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
 
 import {
@@ -16,6 +18,7 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
+  const { isModal, onBackdropClick, toggleModal } = useModal();
   const { title, description, priority, deadline } = item;
   const currentDate = new Date();
   const deadlineDate = new Date(deadline);
@@ -47,10 +50,23 @@ const CardItem = ({ item }) => {
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} stroke="#BEDBB0" />
           )}
-          <SvgIcon svgName="icon-pencil" size={16} stroke="#FFFFFF80" />
+          <div onClick={toggleModal}>
+            <SvgIcon svgName="icon-pencil" size={16} stroke="#FFFFFF80" />
+          </div>
+
           <SvgIcon svgName="icon-trash" size={16} stroke="#FFFFFF80" />
         </IconsContainer>
       </Details>
+      {isModal && (
+        <Modal onBackdropClick={onBackdropClick}>
+          <CardPopUp
+            card={item}
+            // columnId={columnId}
+            // cardIndex={cardIndex}
+            handleModalClose={toggleModal}
+          />
+        </Modal>
+      )}
     </CardContainer>
   );
 };

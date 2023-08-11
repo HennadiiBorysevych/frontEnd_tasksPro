@@ -5,7 +5,13 @@ import { CardsSettings, Input, PopUpLayout, PrimaryButton } from 'components';
 
 import { Container } from './CardPopUp.styled';
 
-const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
+const CardPopUp = ({
+  columnId,
+  cardIndex,
+  card,
+  handleModalClose,
+  ...rest
+}) => {
   const {
     priority,
     deadline,
@@ -17,7 +23,7 @@ const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
   } = useCard(columnId, cardIndex, card, handleModalClose);
 
   return (
-    <Container>
+    <Container {...rest}>
       <PopUpLayout
         title={card ? 'Edit card' : 'Add card'}
         handleClose={handleModalClose}

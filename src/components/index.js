@@ -1,3 +1,4 @@
+export { default as AddCardBtn } from './addCardBtn/AddCardBtn';
 export { default as AuthForm } from './authForm/AuthForm';
 export { default as BoardHead } from './boardHead/BoardHead';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
