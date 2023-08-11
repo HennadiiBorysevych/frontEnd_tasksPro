@@ -45,7 +45,6 @@ const boardsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        console.log(action.payload);
         state.activeBoardIndex = action.payload[0].id; // рахуємо з 1
       })
       .addCase(addBoard.fulfilled, (state, action) => {
@@ -71,17 +70,23 @@ const boardsSlice = createSlice({
         if (state.activeBoardIndex === deletedBoardId) {
           state.activeBoardIndex = null;
         }
+        // const index = state.items.findIndex(
+        //   board => board.id === action.payload.id
+        // );
+        // if (index !== -1) {
+        //   state.items.splice(index, 1);
+        //   console.log('Board deleted');
+        // }
       })
       .addCase(getBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const { _id: id, ...rest } = action.payload.board;
-        const index = state.items.findIndex(board => board.id === id);
-
+        const index = state.items.findIndex(
+          board => board.id === action.payload.board._id
+        );
         if (index !== -1) {
-          state.items[index] = { id, ...rest };
+          state.items[index] = action.payload;
         }
-        state.activeBoardIndex = id;
       })
       .addCase(updateBoard.fulfilled, (state, action) => {
         state.isLoading = false;

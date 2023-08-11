@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { columnsOperations } from 'redux/columns';
 
 const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
+  console.log(currentColumn, columnIndex, boardId, closeModal);
   const [title, setTitle] = useState(currentColumn ? currentColumn?.title : '');
   const [titleChecker, seTitleChecker] = useState(false);
 
@@ -16,21 +17,24 @@ const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
       }, 500);
       return;
     }
-    const { id, ...rest } = currentColumn;
-    currentColumn
-      ? dispatch(
-          columnsOperations.updateColumn({
-            columnId: id,
-            updatedData: { ...rest, title },
-          })
-        )
-      : dispatch(
-          columnsOperations.addColumn({
-            title,
-            columnOwner: boardId,
-            orderColumn: columnIndex,
-          })
-        );
+    if (currentColumn) {
+      const { id, ...rest } = currentColumn;
+      dispatch(
+        columnsOperations.updateColumn({
+          columnId: id,
+          updatedData: { ...rest, title },
+        })
+      );
+    } else {
+      dispatch(
+        columnsOperations.addColumn({
+          title,
+          columnOwner: boardId,
+          orderColumn: columnIndex,
+        })
+      );
+    }
+
     closeModal();
   };
 

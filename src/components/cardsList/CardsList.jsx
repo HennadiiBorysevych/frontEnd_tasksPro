@@ -8,7 +8,7 @@ import { columnsSelectors } from 'redux/columns';
 import { moveColumn, moveTaskToColumn } from 'redux/columns/columnOperations';
 import { selectLoading } from 'redux/columns/columnSelectors';
 import { moveTask } from 'redux/tasks/cardOperations';
-
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import {
   ButtonPlus,
   CardItem,
@@ -49,6 +49,7 @@ export const StrictModeDroppable = ({ children, ...props }) => {
 
 const CardsList = () => {
   const dispatch = useDispatch();
+  const activeBoardId = useSelector(selectActiveBoardId);
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
   const isColumnLoading = useSelector(selectLoading);
@@ -124,7 +125,11 @@ const CardsList = () => {
     <>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp handleModalClose={toggleModal} />
+          <ColumnPopUp
+            boardId={activeBoardId}
+            columnIndex={columnsAndTasks.length}
+            handleModalClose={toggleModal}
+          />
         </Modal>
       )}
       <CustomScrollBar>
