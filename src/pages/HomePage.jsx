@@ -35,10 +35,13 @@ const HomePage = () => {
   useEffect(() => {
     if (boards.length > 0 || !activeBoardId) {
       const firstBoard = boards[0];
-      setActiveBoard(firstBoard.id);
+      console.log(firstBoard);
+      if (firstBoard) {
+        setActiveBoard(firstBoard.id);
 
-      const encodedTitle = encodeURIComponent(firstBoard.title);
-      navigate(`${encodedTitle}`);
+        const encodedTitle = encodeURIComponent(firstBoard.title);
+        navigate(`${encodedTitle}`);
+      }
     }
   }, [activeBoardId, boards, navigate, setActiveBoard]);
 
