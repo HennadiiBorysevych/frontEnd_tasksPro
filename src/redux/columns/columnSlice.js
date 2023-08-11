@@ -39,14 +39,14 @@ const columnsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(operations.fetchColumns.pending, handlePending)
-      .addCase(operations.moveTaskToColumn.pending, handlePending)
+      // .addCase(operations.moveTaskToColumn.pending, handlePending)
       .addCase(operations.moveColumn.pending, handlePending)
       .addCase(operations.addColumn.pending, handlePending)
       .addCase(operations.deleteColumn.pending, handlePending)
       .addCase(operations.getColumn.pending, handlePending)
       .addCase(operations.updateColumn.pending, handlePending)
       .addCase(operations.fetchColumns.rejected, handleRejected)
-      .addCase(operations.moveTaskToColumn.rejected, handleRejected)
+      // .addCase(operations.moveTaskToColumn.rejected, handleRejected)
       .addCase(operations.moveColumn.rejected, handleRejected)
       .addCase(operations.addColumn.rejected, handleRejected)
       .addCase(operations.deleteColumn.rejected, handleRejected)
@@ -63,11 +63,11 @@ const columnsSlice = createSlice({
         // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
-      .addCase(operations.moveTaskToColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        // state.items = action.payload;
-      })
+      // .addCase(operations.moveTaskToColumn.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   // state.items = action.payload;
+      // })
       .addCase(operations.addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;

@@ -1,18 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// export const fetchTasks = createAsyncThunk(
-//   'tasks/fetchAll',
-//   async (boardId, thunkAPI) => {
-//     try {
-//       const res = await axios.get(`/api/boards/${boardId}`);
-//       return res.data.cards.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const fetchTasks = createAsyncThunk(
   'tasks/fetchAll',
   async (boardId, thunkAPI) => {
@@ -97,10 +85,10 @@ export const moveTaskToColumn = createAsyncThunk(
   'tasks/moveTaskToColumn',
   async (data, thunkAPI) => {
     try {
-      //add correct result processing!!!
       const response = await axios.put(`/api/cards/movetasktocolumn`, data);
-      return response.data?.data.map(({ _id, ...rest }) => ({
+      return response.data?.data.map(({ _id, orderTask, ...rest }) => ({
         id: _id,
+        order: orderTask,
         ...rest,
       }));
     } catch (error) {

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
-import operations from 'redux/boards/boardOperations';
 
 import { logOut } from '../auth/authOperations';
 
@@ -38,6 +37,7 @@ const tasksSlice = createSlice({
     builder
       .addCase(fetchTasks.pending, handlePending)
       .addCase(moveTaskToColumn.pending, handlePending)
+      .addCase(moveTask.pending, handlePending)
       .addCase(addTask.pending, handlePending)
       .addCase(deleteTask.pending, handlePending)
       .addCase(getTask.pending, handlePending)
@@ -62,26 +62,19 @@ const tasksSlice = createSlice({
       .addCase(moveTaskToColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        console.log('action.payload=', action.payload);
-        console.log(' moveTaskToColumn state.items=', state.items);
         state.items = state.items.map(item => {
-          const changedTask = action.payload.find(({ id }) => id === item.id);
-          console.log(
-            '🚀 ~ file: cardSlice.js:67 ~ .addCase ~ changedTask, :',
-            changedTask
+          const matchingPayloadItem = action.payload.find(
+            payloadItem => payloadItem.id === item.id
           );
-          console.log('🚀 ~ file: cardSlice.js:67 ~ .addCase ~ item:', item);
-          return changedTask ? item : changedTask;
+          if (matchingPayloadItem) {
+            return {
+              ...item,
+              ...matchingPayloadItem,
+            };
+          } else {
+            return item;
+          }
         });
-        // state.items = [...state.items].map(item => {
-        //   const changedTask = action.payload.find(({ id }) => id === item.id);
-        //   console.log(
-        //     '🚀 ~ file: cardSlice.js:67 ~ .addCase ~ changedTask, :',
-        //     changedTask
-        //   );
-        //   console.log('🚀 ~ file: cardSlice.js:67 ~ .addCase ~ item:', item);
-        //   return changedTask ? item : changedTask;
-        // });
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;
