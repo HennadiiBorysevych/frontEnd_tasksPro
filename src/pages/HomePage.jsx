@@ -21,7 +21,7 @@ import {
 const HomePage = () => {
   const { activeBoardId, activeBoard, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const [backgroundImage] = useBackground('moon');
+  const [backgroundImage] = useBackground();
   const boards = useSelector(selectAllBoards);
 
   const navigate = useNavigate();
