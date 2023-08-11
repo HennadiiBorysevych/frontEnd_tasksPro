@@ -10,9 +10,9 @@ import {
 } from 'redux-persist/es/constants';
 import storage from 'redux-persist/lib/storage';
 
-import { columnsReducer } from './columns/slice';
 import { authReducer } from './auth';
 import { boardsReducer } from './boards';
+import { columnsReducer } from './columns';
 import { cardReducer } from './tasks';
 import userFilterReducer from './userFilterSlice';
 
@@ -26,7 +26,10 @@ const userFilterPersistConfig = {
   storage,
 };
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
-const persistedUserFilterReducer = persistReducer(userFilterPersistConfig, userFilterReducer);
+const persistedUserFilterReducer = persistReducer(
+  userFilterPersistConfig,
+  userFilterReducer
+);
 
 export const store = configureStore({
   reducer: {
