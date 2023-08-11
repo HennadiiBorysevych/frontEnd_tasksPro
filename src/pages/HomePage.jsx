@@ -4,10 +4,7 @@ import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
 import { boardsOperations } from 'redux/boards';
-import {
-  selectActiveBoardId,
-  selectAllBoards,
-} from 'redux/boards/boardSelectors';
+import { selectAllBoards } from 'redux/boards/boardSelectors';
 import { columnsOperations } from 'redux/columns';
 import { cardOperations } from 'redux/tasks';
 import SharedLayout from 'sharedLayout/SharedLayout';
@@ -34,10 +31,9 @@ const HomePage = () => {
     dispatch(boardsOperations.fetchBoards());
   }, [dispatch]);
 
-  console.log(activeBoard);
   // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (boards.length > 0 && activeBoardId) {
+    if (boards.length > 0 && !activeBoard) {
       const firstBoard = boards[0];
 
       if (firstBoard) {
@@ -47,7 +43,7 @@ const HomePage = () => {
         navigate(`${encodedTitle}`);
       }
     }
-  }, [activeBoardId, boards, navigate, setActiveBoard]);
+  }, [activeBoard, activeBoardId, boards, navigate, setActiveBoard]);
 
   useEffect(() => {
     if (activeBoardId) {
@@ -62,7 +58,7 @@ const HomePage = () => {
       <BoardWrap bg={backgroundImage}>
         {activeBoardId ? (
           <>
-            <Outlet activeBoard={activeBoard} />
+            <Outlet />
           </>
         ) : (
           <>
