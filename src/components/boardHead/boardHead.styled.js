@@ -4,7 +4,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${({ boardName }) =>
-    boardName ? 'flex-end' : 'space-between'};
+    boardName ? 'space-between' : 'flex-end'};
   color: #ffffff;
   margin-bottom: 39px;
   width: 100%;

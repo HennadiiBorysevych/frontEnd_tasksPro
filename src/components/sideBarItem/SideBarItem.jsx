@@ -41,7 +41,11 @@ const SideBarItem = ({
             size={18}
             stroke={active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'}
           />
-          <BoardName>{title}</BoardName>
+          <BoardName
+            style={{ color: active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)' }}
+          >
+            {title}
+          </BoardName>
         </BoardIdentificationItem>
         {active && (
           <BoardItemControl>

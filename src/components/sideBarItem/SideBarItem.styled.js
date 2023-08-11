@@ -13,9 +13,9 @@ export const BoardListItem = styled.li`
   & + & {
     margin-top: 4px;
   }
+
   ${props =>
-    // props.isActive &&
-    props.visible &&
+    props.isActive &&
     css`
       background-color: #1f1f1f;
     `}
@@ -41,8 +41,6 @@ export const BoardName = styled.h2`
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.28px;
-  color: ${({ isActive }) =>
-    isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
 `;
 
 export const BoardIdentificationItem = styled.button`

@@ -45,7 +45,7 @@ const boardsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        console.log(action.payload);
+        // console.log(action.payload);
         state.activeBoardIndex = action.payload[0].id; // рахуємо з 1
       })
       .addCase(addBoard.fulfilled, (state, action) => {

@@ -6,7 +6,7 @@ export const selectOneBoard = (state, boardId) => {
 
 export const selectActiveBoardId = state => {
   const activeIndex = state.boards.activeBoardIndex;
-  console.log(activeIndex);
+  // console.log(activeIndex);
   return activeIndex || state.boards.items.length ? activeIndex : null;
 };
 
