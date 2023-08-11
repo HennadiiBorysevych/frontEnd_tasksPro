@@ -1,17 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
-import operations from 'redux/boards/boardOperations';
 
 import { logOut } from '../auth/authOperations';
 
-import {
-  addColumn,
-  deleteColumn,
-  getColumn,
-  moveColumn,
-  moveTaskToColumn,
-  updateColumn,
-} from './columnOperations';
+// import operations from 'redux/boards/boardOperations';
+import operations from './columnOperations';
+
+// import {
+//   addColumn,
+//   deleteColumn,
+//   getColumn,
+//   moveColumn,
+//   moveTaskToColumn,
+//   updateColumn,
+//   fetchColumns,
+// } from './columnOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -35,37 +38,37 @@ const columnsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(operations.fetchColumnsTasks.pending, handlePending)
-      .addCase(moveTaskToColumn.pending, handlePending)
-      .addCase(moveColumn.pending, handlePending)
-      .addCase(addColumn.pending, handlePending)
-      .addCase(deleteColumn.pending, handlePending)
-      .addCase(getColumn.pending, handlePending)
-      .addCase(updateColumn.pending, handlePending)
-      .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
-      .addCase(moveTaskToColumn.rejected, handleRejected)
-      .addCase(moveColumn.rejected, handleRejected)
-      .addCase(addColumn.rejected, handleRejected)
-      .addCase(deleteColumn.rejected, handleRejected)
-      .addCase(getColumn.rejected, handleRejected)
-      .addCase(updateColumn.rejected, handleRejected)
-      .addCase(operations.fetchColumnsTasks.fulfilled, (state, action) => {
+      .addCase(operations.fetchColumns.pending, handlePending)
+      .addCase(operations.moveTaskToColumn.pending, handlePending)
+      .addCase(operations.moveColumn.pending, handlePending)
+      .addCase(operations.addColumn.pending, handlePending)
+      .addCase(operations.deleteColumn.pending, handlePending)
+      .addCase(operations.getColumn.pending, handlePending)
+      .addCase(operations.updateColumn.pending, handlePending)
+      .addCase(operations.fetchColumns.rejected, handleRejected)
+      .addCase(operations.moveTaskToColumn.rejected, handleRejected)
+      .addCase(operations.moveColumn.rejected, handleRejected)
+      .addCase(operations.addColumn.rejected, handleRejected)
+      .addCase(operations.deleteColumn.rejected, handleRejected)
+      .addCase(operations.getColumn.rejected, handleRejected)
+      .addCase(operations.updateColumn.rejected, handleRejected)
+      .addCase(operations.fetchColumns.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.columns;
+        state.items = action.payload;
       })
-      .addCase(moveColumn.fulfilled, (state, action) => {
+      .addCase(operations.moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
-      .addCase(moveTaskToColumn.fulfilled, (state, action) => {
+      .addCase(operations.moveTaskToColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         // state.items = action.payload;
       })
-      .addCase(addColumn.fulfilled, (state, action) => {
+      .addCase(operations.addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const {
@@ -77,7 +80,7 @@ const columnsSlice = createSlice({
         state.items.push({ id, ...rest });
         console.log(`${action.payload.name} added to your columns`);
       })
-      .addCase(deleteColumn.fulfilled, (state, action) => {
+      .addCase(operations.deleteColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
@@ -88,7 +91,7 @@ const columnsSlice = createSlice({
           console.log('Column deleted');
         }
       })
-      .addCase(getColumn.fulfilled, (state, action) => {
+      .addCase(operations.getColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
@@ -98,7 +101,7 @@ const columnsSlice = createSlice({
           state.items[index] = action.payload;
         }
       })
-      .addCase(updateColumn.fulfilled, (state, action) => {
+      .addCase(operations.updateColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const {

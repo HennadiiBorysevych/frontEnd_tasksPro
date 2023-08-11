@@ -6,6 +6,7 @@ import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
 import { useModal } from 'hooks';
 import { columnsSelectors } from 'redux/columns';
 import { moveColumn, moveTaskToColumn } from 'redux/columns/columnOperations';
+import { selectLoading } from 'redux/columns/columnSelectors';
 import { moveTask } from 'redux/tasks/cardOperations';
 
 import {
@@ -17,7 +18,6 @@ import {
   SvgIcon,
 } from 'components';
 
-import { selectLoading } from '../../redux/columns/columnSelectors';
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
 import {
@@ -119,11 +119,12 @@ const CardsList = () => {
       }
     }
   };
+
   return (
     <>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp onClose={toggleModal} />
+          <ColumnPopUp handleModalClose={toggleModal} />
         </Modal>
       )}
       <CustomScrollBar>
