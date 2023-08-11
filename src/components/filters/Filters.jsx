@@ -57,10 +57,10 @@ const Filters = () => {
             </FilterHeader>
             <SettingsBlock>
               <Priority>
-                <Label htmlFor="ithout priority">
+                <Label htmlFor="without priority">
                   <Radio
                     type="radio"
-                    id="without"
+                    id="without priority"
                     name="priority"
                     value="without"
                     checked={userFilter === 'without'}
