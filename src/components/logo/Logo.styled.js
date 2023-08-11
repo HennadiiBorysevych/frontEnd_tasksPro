@@ -3,7 +3,10 @@ import styled from '@emotion/styled';
 export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: ${({ variant }) =>
+    variant === 'welcome' ? 'center' : 'flex-start'};
   gap: ${({ variant }) => (variant === 'welcome' ? '14px' : '8px')};
+  margin-top: ${({ variant }) => (variant === 'welcome' ? '14px' : '0')};
 `;
 
 export const Welcome = styled.h1`

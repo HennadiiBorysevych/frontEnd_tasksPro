@@ -1,19 +1,20 @@
 import { NavLink } from 'react-router-dom';
+
+import { Background, Container } from './styles/commonStyles';
+
+// import { useAuth } from 'hooks';
 import {
-  Background,
-  Container,
-  RegisterLink,
-  ErrorPageHeader,
   ErrorPageCode,
   ErrorPageDescription,
-  ErrorPageText,
-  ErrorPageNum,
+  ErrorPageHeader,
   ErrorPageInviteText,
-} from './pages.styled';
-import { useAuth } from 'hooks';
+  ErrorPageNum,
+  ErrorPageText,
+} from './styles/errorPage.styled';
+import { RegisterLink } from './styles/welcomePage.styled';
 
 const ErrorPage = () => {
-  const { isLoggedIn } = useAuth();
+  // const { isLoggedIn } = useAuth();
 
   return (
     <Background>

@@ -8,6 +8,7 @@ export const BoardListItem = styled.li`
   align-items: center;
   justify-content: space-between;
   background-color: #121212;
+  clip-path: inset(0 -100vmax);
 
   & + & {
     margin-top: 4px;
@@ -33,8 +34,6 @@ export const BoardListItem = styled.li`
       `}
   }
 `;
-
-export const AfterPseudoElement = styled.div``;
 
 export const BoardName = styled.h2`
   font-size: 14px;
