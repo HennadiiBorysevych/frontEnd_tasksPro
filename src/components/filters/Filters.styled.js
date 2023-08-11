@@ -84,7 +84,7 @@ export const Radio = styled.input`
           return `background-color: #e09cb5`;
         case 'high':
           return `background-color: #bedbb0`;
-        case 'without':
+        case 'without priority':
           return `background-color: rgba(255, 255, 255, 0.3)`;
         default:
           return;
@@ -126,7 +126,7 @@ export const Radio = styled.input`
               return `border-color: #e09cb5`;
             case 'high':
               return `border-color: #bedbb0`;
-            case 'without':
+            case 'without priority':
               return `border-color: rgba(255, 255, 255, 0.3)`;
             default:
               return;

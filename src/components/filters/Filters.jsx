@@ -62,8 +62,8 @@ const Filters = () => {
                     type="radio"
                     id="without priority"
                     name="priority"
-                    value="without"
-                    checked={userFilter === 'without'}
+                    value="without priority"
+                    checked={userFilter === 'without priority'}
                     onChange={changeValue}
                   />
                   Without priority
