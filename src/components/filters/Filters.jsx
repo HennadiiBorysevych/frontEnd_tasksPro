@@ -22,13 +22,10 @@ const Filters = () => {
 
   const userFilter = useSelector(selectUserFilter);
 
-  // const [value, setValue] = useState('without');
-
   const { isModal, toggleModal, onBackdropClick } = useModal();
 
   function changeValue(event) {
     const newValue = event.target.value;
-    console.log(newValue);
     dispatch(setUserFilter(newValue));
   }
 
@@ -43,7 +40,7 @@ const Filters = () => {
           <PopUpLayout title="Filters" handleClose={toggleModal}>
             <FilterHeader>
               <LabelsTitle>Label color</LabelsTitle>
-              <ShowAllLabel htmlFor="Show all">
+              <ShowAllLabel htmlFor="showAll">
                 <ShowAllRadio
                   type="radio"
                   id="showAll"
@@ -57,13 +54,13 @@ const Filters = () => {
             </FilterHeader>
             <SettingsBlock>
               <Priority>
-                <Label htmlFor="without priority">
+                <Label htmlFor="without">
                   <Radio
                     type="radio"
-                    id="without priority"
+                    id="without"
                     name="priority"
-                    value="without priority"
-                    checked={userFilter === 'without priority'}
+                    value="without"
+                    checked={userFilter === 'without'}
                     onChange={changeValue}
                   />
                   Without priority
