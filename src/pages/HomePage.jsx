@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
 import { fetchBoards } from 'redux/boards/boardOperations';
 import operations from 'redux/boards/boardOperations';
-
 import { fetchColumns } from 'redux/columns/operations';
 import { fetchTasks } from 'redux/tasks/cardOperations';
 import SharedLayout from 'sharedLayout/SharedLayout';
@@ -16,7 +15,7 @@ import {
   CreateBoardLink,
   DefaultWrapper,
   WelcomeText,
-} from './homePage.styled';
+} from './styles/homePage.styled';
 
 const HomePage = () => {
   const { activeBoardId, boards } = useBoardContext();
@@ -45,8 +44,7 @@ const HomePage = () => {
     if (activeBoardId) {
       dispatch(fetchColumns(activeBoardId));
       dispatch(fetchTasks(activeBoardId));
-//    dispatch(operations.fetchColumnsTasks(activeBoardId));
-
+      //    dispatch(operations.fetchColumnsTasks(activeBoardId));
     }
   }, [dispatch, activeBoardId]);
 
