@@ -17,7 +17,9 @@ const useBackground = () => {
     const boardBG = boardBackground.find(board => {
       return board.id === indexBoard;
     })?.background;
-
+    if (boardBG === 'default' || boardBG === undefined) {
+      return null;
+    }
     const imageUrl = backgroundImage(boardBG);
     setBgPic(imageUrl);
   }, [boardBackground, indexBoard]);
