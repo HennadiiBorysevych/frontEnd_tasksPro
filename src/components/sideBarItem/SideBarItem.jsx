@@ -26,9 +26,6 @@ const SideBarItem = ({
   const { activeBoardId } = useBoardContext();
   const boards = useSelector(selectAllBoards);
 
-  console.log(active);
-  console.log(onToggleControl);
-
   const editingBoard = boards.find(board => board.id === activeBoardId);
   return (
     <>

@@ -55,6 +55,7 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
     }
   };
   return (
+    // <CustomScrollbar>
     <BoardList>
       {boards.map(({ id, icon, title }) => (
         <SideBarItem
@@ -70,6 +71,7 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
         />
       ))}
     </BoardList>
+    // </CustomScrollbar>
   );
 };
 

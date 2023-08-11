@@ -8,7 +8,7 @@ export const SideBarWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 225px;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #121212;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   color: #ffffff;

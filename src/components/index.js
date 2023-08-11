@@ -10,6 +10,7 @@ export { default as CardsList } from './cardsList/CardsList';
 export { default as CardsSettings } from './cardsSettings/CardsSettings';
 export { default as CardsState } from './cardsState/CardsState';
 export { default as ColumnPopUp } from './columnPopUp/ColumnPopUp';
+export { default as CustomScrollbar } from './customScrollBar/CustomScrollBar';
 export { default as Filters } from './filters/Filters';
 export { default as Header } from './header/Header';
 export { default as Input } from './input/Input';
