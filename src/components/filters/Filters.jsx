@@ -43,7 +43,7 @@ const Filters = () => {
           <PopUpLayout title="Filters" handleClose={toggleModal}>
             <FilterHeader>
               <LabelsTitle>Label color</LabelsTitle>
-              <ShowAllLabel htmlFor="Show all">
+              <ShowAllLabel htmlFor="showAll">
                 <ShowAllRadio
                   type="radio"
                   id="showAll"
@@ -57,13 +57,13 @@ const Filters = () => {
             </FilterHeader>
             <SettingsBlock>
               <Priority>
-                <Label htmlFor="without priority">
+                <Label htmlFor="without">
                   <Radio
                     type="radio"
-                    id="without priority"
+                    id="without"
                     name="priority"
-                    value="without priority"
-                    checked={userFilter === 'without priority'}
+                    value="without"
+                    checked={userFilter === 'without'}
                     onChange={changeValue}
                   />
                   Without priority

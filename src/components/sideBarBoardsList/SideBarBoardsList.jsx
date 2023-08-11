@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,14 +11,13 @@ import {
 } from 'redux/boards/boardOperations';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
 
-import { SideBarItem } from 'components';
+import { CustomScrollbar, SideBarItem } from 'components';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = onToggleModalAndSideBar => {
-  const { activeBoardId, setActiveBoard } = useBoardContext();
+  const { activeBoardId } = useBoardContext();
   const boards = useSelector(selectAllBoards);
-  const [isControlVisible, setIsControlVisible] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,15 +25,12 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
   const handleActiveBoard = async boardId => {
     try {
       await dispatch(getBoard(boardId));
-      await setActiveBoard(boardId);
-      setIsControlVisible(true);
       const activatedBoard = boards.find(board => board.id === boardId);
 
       if (activatedBoard) {
         const encodedTitle = encodeURIComponent(activatedBoard.title);
         navigate(`${encodedTitle}`);
       }
-      setIsControlVisible(true);
     } catch (error) {
       console.error('Error getting board data', error);
     }
@@ -60,18 +56,17 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
       {boards.map(({ id, icon, title }) => (
         <SideBarItem
           key={id}
+          id={id}
           iconName={icon}
           title={title}
           active={activeBoardId === id}
           onHandleActiveBoard={() => handleActiveBoard(id)}
           onDeleteClick={() => handleDeleteBoard(id)}
           onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-          boards={boards}
-          onToggleControl={() => setIsControlVisible(prev => !prev)}
         />
       ))}
     </BoardList>
-    // </CustomScrollbar>
+    //</CustomScrollbar>
   );
 };
 

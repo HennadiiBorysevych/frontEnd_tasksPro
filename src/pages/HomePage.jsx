@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
-import { fetchBoards } from 'redux/boards/boardOperations';
-import { selectAllBoards } from 'redux/boards/boardSelectors';
-import { fetchColumns } from 'redux/columns/operations';
-import { fetchTasks } from 'redux/tasks/cardOperations';
+import { boardsOperations } from 'redux/boards';
+import {
+  selectActiveBoardId,
+  selectAllBoards,
+} from 'redux/boards/boardSelectors';
+import { columnsOperations } from 'redux/columns';
+import { cardOperations } from 'redux/tasks';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal } from 'components';
@@ -19,7 +22,7 @@ import {
 } from './styles/homePage.styled';
 
 const HomePage = () => {
-  const { activeBoardId, setActiveBoard } = useBoardContext();
+  const { activeBoardId, activeBoard, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground('moon');
   const boards = useSelector(selectAllBoards);
@@ -28,14 +31,15 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    dispatch(boardsOperations.fetchBoards());
   }, [dispatch]);
 
-  // Отримання id активної дошки та озкодування id в назву і її додавання до адресного рядка
+  console.log(activeBoard);
+  // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (boards.length > 0 || !activeBoardId) {
+    if (boards.length > 0 && activeBoardId) {
       const firstBoard = boards[0];
-      console.log(firstBoard);
+
       if (firstBoard) {
         setActiveBoard(firstBoard.id);
 
@@ -45,20 +49,20 @@ const HomePage = () => {
     }
   }, [activeBoardId, boards, navigate, setActiveBoard]);
 
-  useEffect(() => {
-    if (activeBoardId) {
-      dispatch(fetchColumns(activeBoardId));
-      dispatch(fetchTasks(activeBoardId));
-      //    dispatch(operations.fetchColumnsTasks(activeBoardId));
-    }
-  }, [dispatch, activeBoardId]);
+  // useEffect(() => {
+  //   if (activeBoardId) {
+  //     dispatch(columnsOperations.fetchColumns(activeBoardId));
+  //     dispatch(cardOperations.fetchTasks(activeBoardId));
+  //     //    dispatch(operations.fetchColumnsTasks(activeBoardId));
+  //   }
+  // }, [dispatch, activeBoardId]);
 
   return (
     <SharedLayout>
       <BoardWrap bg={backgroundImage}>
         {activeBoardId ? (
           <>
-            <Outlet activeBoard={activeBoardId} />
+            <Outlet activeBoard={activeBoard} />
           </>
         ) : (
           <>

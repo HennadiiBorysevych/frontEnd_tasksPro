@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const userFilterSlice = createSlice({
   name: 'userFilter',
   initialState: {
-    value: 'without priority',
+    value: 'without',
   },
   reducers: {
     setUserFilter: (state, action) => {
@@ -11,6 +11,6 @@ const userFilterSlice = createSlice({
   },
 });
 
-export const selectUserFilter = (state) => state.userFilter.value;
+export const selectUserFilter = state => state.userFilter.value;
 export const { setUserFilter } = userFilterSlice.actions;
 export default userFilterSlice.reducer;

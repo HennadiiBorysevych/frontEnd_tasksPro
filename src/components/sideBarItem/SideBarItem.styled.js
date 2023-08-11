@@ -14,7 +14,8 @@ export const BoardListItem = styled.li`
     margin-top: 4px;
   }
   ${props =>
-    props.isActive &&
+    // props.isActive &&
+    props.visible &&
     css`
       background-color: #1f1f1f;
     `}
