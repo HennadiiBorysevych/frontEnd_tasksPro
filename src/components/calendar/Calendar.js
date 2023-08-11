@@ -131,18 +131,15 @@ const CustomCalendar = styled(Calendar)`
 `;
 
 const Calend = ({ selectedDate, setSelectedDate }) => {
-  console.log(selectedDate);
 
   const today = new Date();
-  console.log('today', today);
+
   const futureDate = new Date();
   futureDate.setFullYear(today.getFullYear() + 5);
 
-  // const [selectedDate, setSelectedDate] = useState(today);
+  const initialSelectedDate = selectedDate || today;
+
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
 
   const toggleCalendarVisibility = () => {
     setIsCalendarVisible(prevValue => !prevValue);
@@ -177,7 +174,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
       return 'react-calendar__tile--active';
     }
 
-    if (date.toDateString() === today.toDateString()) {
+    if (date.toDateString() === initialSelectedDate.toDateString()) {
       return 'react-calendar__tile--today';
     }
     return null;
@@ -230,8 +227,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
           {isCalendarVisible && (
             <CustomCalendar
-              onChange={handleDateChange}
-              value={selectedDate}
+              value={initialSelectedDate}
               minDate={today}
               maxDate={futureDate}
               formatShortWeekday={formatShortWeekday}
