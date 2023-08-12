@@ -29,13 +29,12 @@ const SideBarItem = ({
   const editingBoard = boards.find(board => board.id === activeBoardId);
   return (
     <>
-      <BoardListItem
-        isActive={active}
-        onClick={() => {
-          onHandleActiveBoard(id);
-        }}
-      >
-        <BoardIdentificationItem>
+      <BoardListItem isActive={active}>
+        <BoardIdentificationItem
+          onClick={() => {
+            onHandleActiveBoard(id);
+          }}
+        >
           <SvgIcon
             svgName={`${iconName}`}
             size={18}
