@@ -17,11 +17,12 @@ const useBackground = () => {
     const boardBG = boardBackground.find(board => {
       return board.id === indexBoard;
     })?.background;
-    if (boardBG === 'default' || boardBG === undefined) {
-      return null;
+    if (boardBG === 'default' || boardBG === undefined || boardBG === 'empty') {
+      setBgPic('#1f1f1f');
+    } else {
+      const imageUrl = backgroundImage(boardBG);
+      setBgPic(imageUrl);
     }
-    const imageUrl = backgroundImage(boardBG);
-    setBgPic(imageUrl);
   }, [boardBackground, indexBoard]);
 
   useEffect(() => {

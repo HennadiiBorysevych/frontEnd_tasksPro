@@ -1,4 +1,5 @@
 export { default as AddCardBtn } from './addCardBtn/AddCardBtn';
+export { default as AddColumnBtn } from './addColumnBtn/AddColumnBtn';
 export { default as AuthForm } from './authForm/AuthForm';
 export { default as BoardHead } from './boardHead/BoardHead';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
@@ -12,6 +13,7 @@ export { default as CardsSettings } from './cardsSettings/CardsSettings';
 export { default as CardsState } from './cardsState/CardsState';
 export { default as ColumnPopUp } from './columnPopUp/ColumnPopUp';
 export { default as CustomScrollbar } from './customScrollBar/CustomScrollBar';
+export { default as EditColumnBtn } from './editColumnBtn/EditColumnBtn';
 export { default as Filters } from './filters/Filters';
 export { default as Header } from './header/Header';
 export { default as Input } from './input/Input';

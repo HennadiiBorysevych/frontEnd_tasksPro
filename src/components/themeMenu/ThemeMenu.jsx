@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { SvgIcon } from 'components';
-
+import { authOperations } from 'redux/auth';
 import {
-DropdownButton,
+  DropdownButton,
   DropdownItem,
   DropdownMenu,
-  DropdownWrapper, } from './ThemeMenu.styled';
+  DropdownWrapper,
+} from './ThemeMenu.styled';
+import { selectTheme } from 'redux/auth/authSelectors';
 
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState('Dark');
 
   const themes = ['Dark', 'Light', 'Violet'];
+
+  const dispatch = useDispatch();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleThemeChange = (theme) => {
-    setSelectedTheme(theme);
+  const selectedTheme = useSelector(selectTheme);
+
+  const handleThemeChange = async theme => {
     setIsOpen(false);
-  }
-  
+
+    try {
+      await dispatch(authOperations.updateUserTheme(theme));
+    } catch (error) {
+      console.error('Error updating theme:', error);
+    }
+  };
+
   return (
     <DropdownWrapper>
       <DropdownButton onClick={toggleDropdown}>

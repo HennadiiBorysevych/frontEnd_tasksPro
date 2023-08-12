@@ -8,11 +8,11 @@ import {
   BackgroundLogin,
   BoardBody,
   Button,
-  Filters,
   Header,
   ListWrapper,
   Logo,
   ProjectName,
+  SideBar,
   Tabs,
   Theme,
   UserName,
@@ -39,7 +39,7 @@ const SkeletonLoader = ({ page }) => {
         <Skeleton
           key={index}
           height={154}
-          style={{ marginLeft: 20, marginBottom: 5 }}
+          style={{ marginBottom: 10, marginLeft: screenWidth < 776 ? 60 : 0 }}
         />
       ));
   };
@@ -94,6 +94,7 @@ const SkeletonLoader = ({ page }) => {
         <>
           <SkeletonTheme baseColor="#161616" highlightColor="#1f1f1f">
             <BackgroundHome>
+              {screenWidth > 1150 && <SideBar></SideBar>}
               <Header>
                 <Logo>
                   <Skeleton />
@@ -127,8 +128,8 @@ const SkeletonLoader = ({ page }) => {
                 <div
                   style={{
                     display: 'flex',
-                    gap: '40px',
-                    marginTop: 30,
+                    gap: '30px',
+                    marginTop: 6,
                     justifyContent: 'space-between',
                   }}
                 >
