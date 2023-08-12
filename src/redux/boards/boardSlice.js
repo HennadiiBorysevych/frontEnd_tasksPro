@@ -82,10 +82,11 @@ const boardsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
-          board => board.id === action.payload.board._id
+          board => board.id === action.payload.board.id
         );
         if (index !== -1) {
-          state.items[index] = action.payload;
+          state.items[index] = action.payload.board;
+          state.activeBoardIndex = action.payload.board.id;
         }
       })
       .addCase(updateBoard.fulfilled, (state, action) => {
