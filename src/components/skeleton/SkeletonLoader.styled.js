@@ -41,6 +41,12 @@ export const Header = styled.header`
   align-items: start;
   padding: 20px;
 `;
+export const SideBar = styled.aside`
+  background-color: #161616;
+  height: 100vh;
+  width: 260px;
+  position: absolute;
+`;
 export const Logo = styled.div`
   width: 30px;
   height: 120px;
@@ -72,7 +78,6 @@ export const UserName = styled.div`
 `;
 
 export const BoardBody = styled.div`
-  height: 100vh;
   padding-top: 14px;
   background-color: #1f1f1f;
 `;
@@ -99,11 +104,11 @@ export const Button = styled.div`
   width: 80%;
 
   @media (min-width: 778px) {
-    width: 90%;
+    width: 80%;
   }
 `;
 export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
 `;
