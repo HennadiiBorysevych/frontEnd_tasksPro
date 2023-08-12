@@ -44,8 +44,9 @@ export const getBoard = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const response = await axios.get(`/api/boards/${boardId}`);
-      // console.log(response.data);
-      return response.data;
+      const { _id, ...rest } = response.data.board;
+      const board = { id: _id, ...rest };
+      return { board };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

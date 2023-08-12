@@ -1,4 +1,4 @@
-.os-scrollbar-vertical {
+/* .os-scrollbar-vertical {
   background-color: #212121;
 }
 .os-scrollbar-vertical::before {
@@ -22,4 +22,4 @@
 // vertical scrollbar is 8px
 .os-theme-custom.os-scrollbar-vertical {
   --os-size: 8px;
-}
+} */
