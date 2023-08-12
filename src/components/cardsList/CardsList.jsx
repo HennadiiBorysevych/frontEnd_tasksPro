@@ -147,7 +147,7 @@ const CardsList = () => {
           />
         </Modal>
       )}
-      <CustomScrollBar>
+      <CustomScrollBar height="500px">
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
             <StrictModeDroppable

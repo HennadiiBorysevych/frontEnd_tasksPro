@@ -52,22 +52,22 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
     }
   };
   return (
-    // <CustomScrollbar>
-    <BoardList>
-      {boards.map(({ id, icon, title }) => (
-        <SideBarItem
-          key={id}
-          id={id}
-          iconName={icon}
-          title={title}
-          active={activeBoardId === id}
-          onHandleActiveBoard={() => handleActiveBoard(id)}
-          onDeleteClick={() => handleDeleteBoard(id)}
-          onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-        />
-      ))}
-    </BoardList>
-    //</CustomScrollbar>
+    <CustomScrollbar height="100%">
+      <BoardList>
+        {boards.map(({ id, icon, title }) => (
+          <SideBarItem
+            key={id}
+            id={id}
+            iconName={icon}
+            title={title}
+            active={activeBoardId === id}
+            onHandleActiveBoard={() => handleActiveBoard(id)}
+            onDeleteClick={() => handleDeleteBoard(id)}
+            onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
+          />
+        ))}
+      </BoardList>
+    </CustomScrollbar>
   );
 };
 
