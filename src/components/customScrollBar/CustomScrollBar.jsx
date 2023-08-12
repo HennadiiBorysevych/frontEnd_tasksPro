@@ -58,11 +58,9 @@ const CustomScrollbar = ({ width, height, children }) => {
       style={{
         width,
         height,
-<<<<<<< HEAD
-        paddingRight: '16px',
-=======
+
         // paddingRight: '16px',
->>>>>>> dev
+
         overflow: 'hidden',
       }}
     >

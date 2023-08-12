@@ -51,11 +51,7 @@ const SideBarBoardsList = () => {
     }
   };
   return (
-<<<<<<< HEAD
-    <CustomScrollbar>
-=======
     <CustomScrollbar height="100%">
->>>>>>> dev
       <BoardList>
         {boards.map(({ id, icon, title }) => (
           <SideBarItem
@@ -66,10 +62,6 @@ const SideBarBoardsList = () => {
             active={activeBoardId === id}
             onHandleActiveBoard={() => handleActiveBoard(id)}
             onDeleteClick={() => handleDeleteBoard(id)}
-<<<<<<< HEAD
-            onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-=======
->>>>>>> dev
           />
         ))}
       </BoardList>

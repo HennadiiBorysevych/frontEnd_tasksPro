@@ -94,13 +94,9 @@ const tasksSlice = createSlice({
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex(
-          task => task.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.items.splice(index, 1);
-          console.log('Task deleted');
-        }
+        const deletedCardId = action.payload;
+        state.items = state.items.filter(item => item.id !== deletedCardId);
+        console.log('Filter: Card deleted');
       })
       .addCase(getTask.fulfilled, (state, action) => {
         state.isLoading = false;

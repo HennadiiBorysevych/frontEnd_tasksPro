@@ -176,11 +176,20 @@ const CardsList = () => {
                                     stroke="rgba(255, 255, 255, 0.5)"
                                   /> */}
                                 </IconButton>
-                                <SvgIcon
-                                  svgName="icon-trash"
-                                  size={16}
-                                  stroke="#FFFFFF80"
-                                />
+                                <IconButton
+                                  type="button"
+                                  onClick={() =>
+                                    dispatch(
+                                      columnOperations.deleteColumn(column.id)
+                                    )
+                                  }
+                                >
+                                  <SvgIcon
+                                    svgName="icon-trash"
+                                    size={16}
+                                    stroke="#FFFFFF80"
+                                  />
+                                </IconButton>
                               </IconsContainer>
                             </ColumnHeading>
                             <StrictModeDroppable
@@ -195,6 +204,11 @@ const CardsList = () => {
                                     ref={provided.innerRef}
                                   >
                                     {column.items
+                                      .filter(({ priority }) =>
+                                        priority
+                                          .toLowerCase()
+                                          .includes(userFilter)
+                                      )
                                       .sort((a, b) => a.order - b.order) // Sort items by order
                                       .map((item, index) => (
                                         <Draggable
