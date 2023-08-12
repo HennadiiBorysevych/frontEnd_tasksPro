@@ -21,7 +21,7 @@ export const Welcome = styled.h1`
   }
 `;
 
-export const Bord = styled.h1`
+export const SideBar = styled.h1`
   color: #fff;
   font-size: 16px;
   font-weight: 600;
