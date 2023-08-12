@@ -48,7 +48,7 @@ const CardsSettings = ({ priority, deadline, setPriority, setDeadline }) => {
       </Label>
       <Label>
         Deadline
-        {/* <Calend selectedDate={deadline} setSelectedDate={setDeadline} /> */}
+        <Calend selectedDate={deadline} setSelectedDate={setDeadline} />
       </Label>
     </SettingsBlock>
   );
