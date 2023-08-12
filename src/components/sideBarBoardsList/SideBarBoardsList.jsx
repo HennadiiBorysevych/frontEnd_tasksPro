@@ -23,8 +23,11 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
   const dispatch = useDispatch();
 
   const handleActiveBoard = async boardId => {
+    console.log(boardId);
     try {
+      console.log('handleActiveBoard', boardId);
       await dispatch(getBoard(boardId));
+
       const activatedBoard = boards.find(board => board.id === boardId);
 
       if (activatedBoard) {

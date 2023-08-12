@@ -56,6 +56,7 @@ const columnsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
+        console.log('fetchCol: ', action.payload);
       })
       .addCase(operations.moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;

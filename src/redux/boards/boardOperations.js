@@ -59,7 +59,8 @@ export const deleteBoard = createAsyncThunk(
     try {
       const response = await axios.delete(`/api/boards/${boardId}`);
       // console.log(response.data);
-      return response.data;
+      // return response.data; треба виправити!!
+      return boardId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
