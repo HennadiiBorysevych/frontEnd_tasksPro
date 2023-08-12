@@ -49,7 +49,7 @@ const CardPopUp = ({
 
         <CardsSettings
           priority={priority}
-          deadline={deadline}
+          deadline={new Date(deadline)}
           setPriority={handlePriority}
           setDeadline={setDeadline}
         />
