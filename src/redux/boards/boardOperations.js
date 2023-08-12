@@ -6,6 +6,7 @@ export const fetchBoards = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get('/api/boards');
+      console.log(res);
       return res.data?.result.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -44,8 +45,9 @@ export const getBoard = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const response = await axios.get(`/api/boards/${boardId}`);
-      // console.log(response.data);
-      return response.data;
+      const { _id, ...rest } = response.data.board;
+      const board = { id: _id, ...rest };
+      return { board };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -57,8 +59,9 @@ export const deleteBoard = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const response = await axios.delete(`/api/boards/${boardId}`);
-      // console.log(response.data);
-      return response.data;
+      console.log(response.data);
+      // return response.data; треба виправити!!
+      return boardId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

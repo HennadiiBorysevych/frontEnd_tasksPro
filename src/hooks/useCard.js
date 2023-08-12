@@ -11,7 +11,7 @@ const cardModel = {
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const initialCard = currentCard
-    ? currentCard
+    ? getFormattedCard(currentCard)
     : {
         ...cardModel,
         deadline: new Date(),
@@ -72,6 +72,11 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   useEffect(() => {
     setCard(prev => ({ ...prev, title, description, priority, deadline }));
   }, [deadline, description, priority, title]);
+
+  function getFormattedCard(card) {
+    const { order, ...rest } = card;
+    return { ...rest, orderTask: order };
+  }
 
   return {
     priority,

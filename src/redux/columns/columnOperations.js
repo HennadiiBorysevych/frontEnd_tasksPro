@@ -5,7 +5,9 @@ export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',
   async (boardId, thunkAPI) => {
     try {
+      console.log('Fetch columns: ');
       const res = await axios.get(`/api/boards/${boardId}`);
+
       return res.data.columns.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -45,6 +47,7 @@ export const getColumn = createAsyncThunk(
   'columns/getColumn',
   async (columnId, thunkAPI) => {
     try {
+      console.log('Get columns: ');
       const response = await axios.get(`/api/columns/${columnId}`);
       return response.data;
     } catch (e) {
