@@ -57,11 +57,7 @@ const SideBar = ({
               size={20}
             />
           </CreateBoard>
-          {activeBoardId && (
-            <SideBarBoardsList
-              onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-            />
-          )}
+          {activeBoardId && <SideBarBoardsList />}
         </div>
         <div>
           <Support />

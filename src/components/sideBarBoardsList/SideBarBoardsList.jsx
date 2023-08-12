@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useBoardContext } from 'hooks';
-import PropTypes from 'prop-types';
 import {
   deleteBoard,
   fetchBoards,
@@ -15,7 +14,7 @@ import { CustomScrollbar, SideBarItem } from 'components';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
-const SideBarBoardsList = onToggleModalAndSideBar => {
+const SideBarBoardsList = () => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const boards = useSelector(selectAllBoards);
 
@@ -63,7 +62,6 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
             active={activeBoardId === id}
             onHandleActiveBoard={() => handleActiveBoard(id)}
             onDeleteClick={() => handleDeleteBoard(id)}
-            onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
           />
         ))}
       </BoardList>
@@ -72,7 +70,3 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
 };
 
 export default SideBarBoardsList;
-
-SideBarBoardsList.propTypes = {
-  onToggleModalAndSideBar: PropTypes.func.isRequired,
-};
