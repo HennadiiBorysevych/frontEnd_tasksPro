@@ -3,18 +3,7 @@ import { updateOrdersFromArray } from 'helpers';
 
 import { logOut } from '../auth/authOperations';
 
-// import operations from 'redux/boards/boardOperations';
 import operations from './columnOperations';
-
-// import {
-//   addColumn,
-//   deleteColumn,
-//   getColumn,
-//   moveColumn,
-//   moveTaskToColumn,
-//   updateColumn,
-//   fetchColumns,
-// } from './columnOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -56,7 +45,6 @@ const columnsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        console.log('fetchCol: ', action.payload);
       })
       .addCase(operations.moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;

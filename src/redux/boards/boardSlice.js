@@ -66,7 +66,6 @@ const boardsSlice = createSlice({
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        console.log(action.payload);
         const deletedBoardId = action.payload;
         state.items = state.items.filter(item => item.id !== deletedBoardId);
         console.log('Filter: Board deleted');
@@ -103,7 +102,6 @@ const boardsSlice = createSlice({
           isActive,
         } = action.payload.result;
         const index = state.items.findIndex(board => board.id === id);
-        console.log(index);
         if (index !== -1) {
           state.items[index] = {
             id,

@@ -53,7 +53,6 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        console.log('fetchTasks: ', action.payload);
       })
       .addCase(moveTask.fulfilled, (state, action) => {
         state.isLoading = false;

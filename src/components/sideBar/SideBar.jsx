@@ -31,11 +31,6 @@ const SideBar = ({
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(boardsOperations.fetchBoards());
-  // }, [dispatch]);
-
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
