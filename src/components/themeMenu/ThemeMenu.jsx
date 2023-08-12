@@ -14,9 +14,9 @@ import {
   DropdownWrapper,
 } from './ThemeMenu.styled';
 
-const ThemeMenu = () => {
+const ThemeMenu = props => {
   const [isOpen, setIsOpen] = useState(false);
-   const dropdownRef = useRef(null); 
+  const dropdownRef = useRef(null);
 
   const selectedTheme = useSelector(selectTheme);
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const ThemeMenu = () => {
     <DropdownWrapper ref={dropdownRef}>
       <DropdownButton onClick={toggleDropdown}>
         Theme
-        <SvgIcon svgName="icon-arrow-down"></SvgIcon>
+        <SvgIcon svgName="icon-arrow-down" variant='header'></SvgIcon>
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>

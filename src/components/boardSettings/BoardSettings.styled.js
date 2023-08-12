@@ -14,7 +14,7 @@ export const RadioField = styled.input`
 
   &:hover ~ .background-label,
   &:checked ~ .background-label {
-    outline: 1px solid #bedbb0;
+    outline: 1px solid ${props => props.theme.palette.hover.inputAndIcon};
   }
 
   &:hover ~ .icon-label,
@@ -41,7 +41,7 @@ export const BoardText = styled.p`
   line-height: 21px;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
-  color: #ffffff;
+  color: ${props => props.theme.palette.text.primary};
 `;
 
 export const BackgroundImage = styled.div(props => ({

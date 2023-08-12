@@ -7,9 +7,10 @@ export const SpanStyled = styled.span`
   border-radius: 8px;
   width: ${props => (props.width ? `${props.width}px` : '28px')};
   height: ${props => (props.height ? `${props.height}px` : '28px')};
-  stroke: ${props => props.theme.palette.primary.icon};
   background-color: ${props =>
-    props.theme.palette.background.primaryButtonPlus};
+    props.variant === 'sidemenu'
+      ? props.theme.palette.background.buttonPlus
+      : props.theme.palette.background.primaryButtonPlus};
   transition: all 250ms linear;
   cursor: pointer;
 

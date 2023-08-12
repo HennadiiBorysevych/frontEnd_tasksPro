@@ -53,13 +53,7 @@ const SideBar = ({
               Create a <br />
               new board
             </TitleButton>
-            <ButtonPlus
-              width={40}
-              height={36}
-              stroke="#121212"
-              backgroundColor="#BEDBB0"
-              size={20}
-            />
+            <ButtonPlus width={40} height={36} variant="sidemenu" size={20} />
           </CreateBoard>
           {activeBoardId && (
             <SideBarBoardsList

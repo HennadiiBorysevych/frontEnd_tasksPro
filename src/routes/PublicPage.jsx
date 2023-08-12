@@ -1,10 +1,8 @@
-import { useAuth } from 'hooks';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from 'hooks';
 
 const PublicPage = ({ component: Component, redirectTo = '/home' }) => {
   const { isLoggedIn } = useAuth();
-  console.log(isLoggedIn);
-  console.log(Component);
 
   return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 };

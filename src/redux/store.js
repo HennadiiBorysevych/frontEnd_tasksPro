@@ -39,6 +39,7 @@ export const store = configureStore({
     columns: columnsReducer,
     tasks: cardReducer,
     userFilter: persistedUserFilterReducer,
+    theme: themeReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

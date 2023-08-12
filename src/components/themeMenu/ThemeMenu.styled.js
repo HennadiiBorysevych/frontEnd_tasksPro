@@ -5,7 +5,6 @@ export const DropdownWrapper = styled.div`
 `;
 
 export const DropdownButton = styled.button`
-  color: ${props => `${props.theme.palette.text.primary}CC`};
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.28px;

@@ -1,0 +1,25 @@
+/* .os-scrollbar-vertical {
+  background-color: #212121;
+}
+.os-scrollbar-vertical::before {
+  content: '';
+  background-color: blue;
+  width: 3px;
+  height: 100%;
+}
+.os-scrollbar--os-padding-axis {
+  background-color: red;
+}
+
+.--os-track-bg {
+  background-color: red;
+}
+
+// horizontal scrollbar is 12px
+.os-theme-custom.os-scrollbar-horizontal {
+  --os-size: 12px;
+}
+// vertical scrollbar is 8px
+.os-theme-custom.os-scrollbar-vertical {
+  --os-size: 8px;
+} */
