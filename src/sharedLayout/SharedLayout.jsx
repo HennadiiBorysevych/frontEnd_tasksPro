@@ -52,7 +52,7 @@ const SharedLayout = ({ children }) => {
           windowHeight={windowHeight}
           onToggleModalAndSideBar={toggleModalAndSideBar}
         />
-        <MainWrapper style={{ width: '100%' }}>
+        <MainWrapper style={{ width: '82vw' }}>
           <Header isOpenSideBar={openSidebar} />
           {children}
         </MainWrapper>
