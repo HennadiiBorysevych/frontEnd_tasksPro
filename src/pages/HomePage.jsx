@@ -4,8 +4,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
 import { boardsOperations } from 'redux/boards';
 import { boardsSelectors } from 'redux/boards';
-import { columnsOperations } from 'redux/columns';
-import { cardOperations } from 'redux/tasks';
+// import { columnsOperations } from 'redux/columns';
+// import { cardOperations } from 'redux/tasks';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal } from 'components';
