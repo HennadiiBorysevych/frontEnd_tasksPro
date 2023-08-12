@@ -7,7 +7,7 @@ import { SvgStyled } from './svgIcon.styled';
 const SvgIcon = ({
   svgName,
   size = '14px',
-  stroke = '#FFFFFF',
+  stroke,
   fill = 'none',
 }) => {
   return (

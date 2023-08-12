@@ -14,6 +14,7 @@ const PrimaryButton = ({
   svgName,
   ...rest
 }) => {
+
   return (
     <ButtonStyled
       onClick={onClick}
