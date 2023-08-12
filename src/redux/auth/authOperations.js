@@ -92,7 +92,7 @@ export const updateUserTheme = createAsyncThunk(
   'auth/updateUserTheme',
   async (updatedTheme, thunkAPI) => {
     try {
-      const response = await axios.patch('/api/users/theme', {
+      const response = await axios.patch('/api/users/themes', {
         theme: updatedTheme,
       });
       return response.data;

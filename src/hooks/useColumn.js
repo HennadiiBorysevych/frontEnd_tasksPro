@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { columnsOperations } from 'redux/columns';
 
 const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
-  console.log(currentColumn, columnIndex, boardId, closeModal);
   const [title, setTitle] = useState(currentColumn ? currentColumn?.title : '');
   const [titleChecker, seTitleChecker] = useState(false);
 
@@ -18,7 +17,7 @@ const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
       return;
     }
     if (currentColumn) {
-      const { id, ...rest } = currentColumn;
+      const { id, items, ...rest } = currentColumn;
       dispatch(
         columnsOperations.updateColumn({
           columnId: id,
