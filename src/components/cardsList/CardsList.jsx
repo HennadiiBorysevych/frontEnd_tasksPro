@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
-import { useModal } from 'hooks';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsSelectors } from 'redux/columns';
 import { moveColumn } from 'redux/columns/columnOperations';
@@ -14,10 +13,9 @@ import cardSelectors from 'redux/tasks/cardSelectors';
 
 import {
   AddCardBtn,
-  ButtonPlus,
+  AddColumnBtn,
   CardItem,
-  ColumnPopUp,
-  Modal,
+  EditColumnBtn,
   SvgIcon,
 } from 'components';
 
@@ -53,7 +51,6 @@ export const StrictModeDroppable = ({ children, ...props }) => {
 const CardsList = () => {
   const dispatch = useDispatch();
   const activeBoardId = useSelector(selectActiveBoardId);
-  const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
@@ -138,15 +135,6 @@ const CardsList = () => {
 
   return (
     <>
-      {isModal && (
-        <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp
-            boardId={activeBoardId}
-            columnIndex={columnsAndTasks.length}
-            handleModalClose={toggleModal}
-          />
-        </Modal>
-      )}
       <CustomScrollBar height="500px">
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
@@ -183,12 +171,13 @@ const CardsList = () => {
                               </ColumnHeadingText>
 
                               <IconsContainer>
-                                <IconButton type="button" onClick={toggleModal}>
-                                  <SvgIcon
+                                <EditColumnBtn column={column} />
+                                <IconButton>
+                                  {/* <SvgIcon
                                     svgName="icon-pencil"
                                     size={16}
                                     stroke="rgba(255, 255, 255, 0.5)"
-                                  />
+                                  /> */}
                                 </IconButton>
                                 <SvgIcon
                                   svgName="icon-trash"
@@ -248,27 +237,10 @@ const CardsList = () => {
             </StrictModeDroppable>
           </DragDropContext>
           <Column>
-            <button
-              type="button"
-              onClick={toggleModal}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                width: '334px',
-                justifyContent: 'center',
-                padding: '14px 0',
-                borderRadius: '8px',
-              }}
-            >
-              <ButtonPlus
-                stroke="#121212"
-                width={28}
-                height={28}
-                backgroundColor="#ffffff"
-              />
-              Add another column
-            </button>
+            <AddColumnBtn
+              boardId={activeBoardId}
+              columnIndex={columnsAndTasks.length}
+            />
           </Column>
         </ContainerWrapper>
       </CustomScrollBar>
