@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const Background = styled.section`
   background-image: var(--welcomeBgColor);
+
   text-align: center;
   display: flex;
   align-items: center;
