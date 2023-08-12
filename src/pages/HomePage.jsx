@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useBackground, useBoardContext, useModal } from 'hooks';
 import { boardsOperations } from 'redux/boards';
-import { boardsSelectors } from 'redux/boards';
-// import { columnsOperations } from 'redux/columns';
-// import { cardOperations } from 'redux/tasks';
+import { selectAllBoards } from 'redux/boards/boardSelectors';
+import { columnsOperations } from 'redux/columns';
+import { cardOperations } from 'redux/tasks';
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal } from 'components';
@@ -21,7 +22,7 @@ const HomePage = () => {
   const { activeBoardId, activeBoard, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
-  const boards = useSelector(boardsSelectors.selectAllBoards);
+  const boards = useSelector(selectAllBoards);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

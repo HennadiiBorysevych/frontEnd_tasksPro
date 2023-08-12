@@ -3,25 +3,28 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useBoardContext } from 'hooks';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import PropTypes from 'prop-types';
-import { boardsOperations } from 'redux/boards';
-import { boardsSelectors } from 'redux/boards';
+import {
+  deleteBoard,
+  fetchBoards,
+  getBoard,
+} from 'redux/boards/boardOperations';
+import { selectAllBoards } from 'redux/boards/boardSelectors';
 
-import { SideBarItem } from 'components';
+import { CustomScrollbar, SideBarItem } from 'components';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = onToggleModalAndSideBar => {
   const { activeBoardId } = useBoardContext();
-  const boards = useSelector(boardsSelectors.selectAllBoards);
+  const boards = useSelector(selectAllBoards);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleActiveBoard = async boardId => {
     try {
-      await dispatch(boardsOperations.getBoard(boardId));
+      await dispatch(getBoard(boardId));
       const activatedBoard = boards.find(board => board.id === boardId);
 
       if (activatedBoard) {
@@ -39,40 +42,31 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
     );
     try {
       if (confirmDelete) {
-        await dispatch(boardsOperations.deleteBoard(id));
+        await dispatch(deleteBoard(id));
         console.log('Board has deleted');
-        await dispatch(boardsOperations.fetchBoards());
+        await dispatch(fetchBoards());
       }
     } catch (error) {
       console.error(error.message);
     }
   };
   return (
-    <>
-      <BoardList>
-        {boards.map(({ id, icon, title }) => (
-          <SideBarItem
-            key={id}
-            id={id}
-            iconName={icon}
-            title={title}
-            active={activeBoardId === id}
-            onHandleActiveBoard={() => handleActiveBoard(id)}
-            onDeleteClick={() => handleDeleteBoard(id)}
-            onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-          />
-        ))}
-      </BoardList>
-      <OverlayScrollbarsComponent
-        className="overlayscrollbars-react"
-        style={{ width: '100px', height: '100px' }}
-        options={{
-          overflow: { x: 'hidden', y: 'scroll' },
-          scrollbars: { theme: 'os-theme-dark' },
-        }}
-        defer
-      />
-    </>
+    // <CustomScrollbar>
+    <BoardList>
+      {boards.map(({ id, icon, title }) => (
+        <SideBarItem
+          key={id}
+          id={id}
+          iconName={icon}
+          title={title}
+          active={activeBoardId === id}
+          onHandleActiveBoard={() => handleActiveBoard(id)}
+          onDeleteClick={() => handleDeleteBoard(id)}
+          onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
+        />
+      ))}
+    </BoardList>
+    //</CustomScrollbar>
   );
 };
 
