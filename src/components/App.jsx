@@ -29,7 +29,7 @@ const App = () => {
       <GlobalStyles />
 
       <Suspense>
-        {true ? (
+        {isFetchingCurrent ? (
           <SkeletonLoader page="/home/" />
         ) : (
           <Routes>
