@@ -11,7 +11,7 @@ import {
 } from 'redux/boards/boardOperations';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
 
-import { SideBarItem } from 'components';
+import { CustomScrollbar, SideBarItem } from 'components';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
