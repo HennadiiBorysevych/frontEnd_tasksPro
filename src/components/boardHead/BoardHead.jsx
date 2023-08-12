@@ -14,7 +14,7 @@ const BoardHead = () => {
 
   return (
     <>
-      <Header boardName={activeBoard}>
+      <Header boardName={activeBoard} active={decodedTitle === activeBoard}>
         {!!decodedTitle && <BoardTitle>{decodedTitle}</BoardTitle>}
         <Filters />
       </Header>

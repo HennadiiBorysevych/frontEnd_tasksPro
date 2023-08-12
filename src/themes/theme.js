@@ -21,6 +21,8 @@ const darkTheme = createTheme({
       primaryButtonPlus: '#161616',
       bord: '#1F1F1F',
       support: '#1F1F1F',
+      popUp: '#151515',
+      profile: '#BEDBB0',
     },
     text: {
       primary: '#FFFFFF',
@@ -58,6 +60,8 @@ const lightTheme = createTheme({
       primaryButtonPlus: '#161616',
       bord: '#F6F6F7',
       support: '#F6F6F7',
+      popUp: '#FCFCFC',
+      profile: '#BEDBB0',
     },
     text: {
       primary: '#161616',
@@ -95,6 +99,8 @@ const violetTheme = createTheme({
       primaryButtonPlus: '#FFFFFF',
       bord: '#ECEDFD',
       support: '#ECEDFD66',
+      popUp: '#FCFCFC',
+      profile: '#ECEDFD',
     },
     text: {
       primary: '#161616',

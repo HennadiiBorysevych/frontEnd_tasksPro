@@ -23,12 +23,7 @@ const ButtonPlus = ({
       variant={variant}
       {...rest}
     >
-      <SvgIcon
-        svgName="icon-plus"
-        variant="buttonPlus"
-        size={size}
-      
-      />
+      <SvgIcon svgName="icon-plus" variant={variant} size={size} />
     </SpanStyled>
   );
 };

@@ -7,12 +7,11 @@ import {  SvgStyled } from './svgIcon.styled';
 const SvgIcon = ({
   svgName,
   size = '14px',
-  variant = 'header',
-  stroke='none',
+  variant,
+  stroke = 'none',
   fill = 'none',
 }) => {
-
-    
+ 
   return (
     <SvgStyled
       width={size}

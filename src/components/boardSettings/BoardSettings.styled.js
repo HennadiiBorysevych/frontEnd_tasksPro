@@ -63,3 +63,9 @@ export const BackgroundImage = styled.div(props => ({
       backgroundImage: `url(${props.bgIndex.x3})`,
     },
 }));
+
+
+export const svgIconStyles = {
+  primaryStroke: props => props.theme.palette.text.primary,
+  primary80Stroke: props => `${props.theme.palette.text.primary}80`,
+};
