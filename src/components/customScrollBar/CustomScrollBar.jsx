@@ -57,7 +57,7 @@ const CustomScrollbar = ({ width, height, children }) => {
       ref={containerRef}
       style={{
         width,
-        height: "300px",
+        height: '300px',
         // paddingRight: '16px',
         overflow: 'hidden',
       }}

@@ -1,7 +1,7 @@
 // import React, { useEffect, useState } from 'react';
 import { SvgIcon } from 'components';
 
-import { Bord, LogoWrapper, Welcome } from './Logo.styled';
+import { LogoWrapper, SideBar, Welcome } from './Logo.styled';
 // import { useTheme } from '/ThemeProvider';
 
 const Logo = ({ variant }) => {
@@ -31,7 +31,7 @@ const Logo = ({ variant }) => {
       {variant === 'welcome' ? (
         <Welcome>Task Pro</Welcome>
       ) : (
-        <Bord>Task Pro</Bord>
+        <SideBar>Task Pro</SideBar>
       )}
     </LogoWrapper>
   );
