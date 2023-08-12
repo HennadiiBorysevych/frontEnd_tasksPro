@@ -59,6 +59,7 @@ const boardsSlice = createSlice({
           background,
           isActive,
         } = action.payload.result;
+
         state.items.unshift({ id, title, icon, background, isActive });
         state.activeBoardIndex = id;
         console.log(`${action.payload.result.title} added to your boards`);
