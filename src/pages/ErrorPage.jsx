@@ -1,46 +1,83 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
-import { Background, Container } from './styles/commonStyles';
-
-// import { useAuth } from 'hooks';
 import {
-  ErrorPageCode,
-  ErrorPageDescription,
-  ErrorPageHeader,
-  ErrorPageInviteText,
-  ErrorPageNum,
-  ErrorPageText,
+  ErrorBackground,
+  Container,
+  Header,
+  Code,
+  Num,
+  Description,
+  Start,
+  Text,
+  Link,
 } from './styles/errorPage.styled';
-import { RegisterLink } from './styles/welcomePage.styled';
+import { useAuth, useBoardContext } from 'hooks';
+
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { authSelectors } from 'redux/auth';
 
 const ErrorPage = () => {
-  // const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
+  const [userTheme, setUserTheme] = useState('');
+  const user = useSelector(authSelectors.selectUser);
+
+  const { activeBoardId, activeBoard } = useBoardContext();
+
+  const loc = useLocation();
+
+  useEffect(() => {
+    if (!user.name) {
+      setUserTheme('Void');
+      return;
+    }
+
+    console.log(activeBoardId, activeBoard);
+    console.log(loc.pathname);
+    setUserTheme(user.theme);
+  }, []);
+
+  const errDis = {
+    start: isLoggedIn ? 'Well...yeah. Not gonna happened, sorry.' : null,
+    desc: isLoggedIn
+      ? `Seems such
+    "page" doesn't exist.`
+      : 'Oh. Hello there! Looks like you are lost a bit.',
+    text: isLoggedIn
+      ? "Don't worry, we'll highlight the trail to a safer place."
+      : 'If you are looking for us you were very close. Here, follow the link and let us know if you needed something.',
+    nav: isLoggedIn ? '/home' : '/welcome',
+    link: isLoggedIn
+      ? "This link to Home, yeah. You've get it."
+      : 'Start achieving your goals now!',
+    underLinkText: isLoggedIn
+      ? '(...You should check the exact address there you want to go. Or, try to tap a bit slower next time.)'
+      : '(...In the case you happened here randomly...well, welcome anyway.)',
+  };
 
   return (
-    <Background>
+    <ErrorBackground txtColor={userTheme} bgColor={userTheme} bgImg={userTheme}>
       <Container>
-        <ErrorPageHeader>
-          <ErrorPageCode>
-            <ErrorPageNum>404</ErrorPageNum>
+        <Header>
+          <Code>
+            <Num>404</Num>
             error
-          </ErrorPageCode>
-          <ErrorPageDescription>
-            It looks like you are trying to reach some other address of some
-            other dashboards.
-          </ErrorPageDescription>
-        </ErrorPageHeader>
-        <ErrorPageText>
-          If you are looking for us you just missed a bit. Here, follow the link
-          and let us know if you needed something.
-        </ErrorPageText>
-        <NavLink to="/welcome">
-          <RegisterLink>Start achieving your goals now!</RegisterLink>
+          </Code>
+          <Description>
+            <Start>{errDis.start}</Start>
+            {errDis.desc}
+          </Description>
+        </Header>
+        <Text>{errDis.text}</Text>
+        <NavLink to={errDis.nav}>
+          <Link btnColor={userTheme} btnBgColor={userTheme}>
+            {errDis.link}
+          </Link>
         </NavLink>
-        <ErrorPageInviteText>
-          (...In the case you happened here randomly...well, welcome anyway.)
-        </ErrorPageInviteText>
+        <Text>{errDis.underLinkText}</Text>
       </Container>
-    </Background>
+    </ErrorBackground>
   );
 };
 

@@ -45,7 +45,9 @@ const boardsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        state.activeBoardIndex = action.payload[0].id; // рахуємо з 1
+        if (action.payload.length > 0) {
+          state.activeBoardIndex = action.payload[0].id;
+        } // рахуємо з 1
       })
       .addCase(addBoard.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -57,14 +59,14 @@ const boardsSlice = createSlice({
           background,
           isActive,
         } = action.payload.result;
-        state.items.push({ id, title, icon, background, isActive });
-        state.activeBoardIndex = state.items.length;
-        console.log(`${action.payload.name} added to your boards`);
+        state.items.unshift({ id, title, icon, background, isActive });
+        state.activeBoardIndex = id;
+        console.log(`${action.payload.result.title} added to your boards`);
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const deletedBoardId = action.payload.id;
+        const deletedBoardId = action.payload;
         state.items = state.items.filter(item => item.id !== deletedBoardId);
         console.log('Filter: Board deleted');
         if (state.activeBoardIndex === deletedBoardId) {
@@ -100,7 +102,6 @@ const boardsSlice = createSlice({
           isActive,
         } = action.payload.result;
         const index = state.items.findIndex(board => board.id === id);
-        console.log(index);
         if (index !== -1) {
           state.items[index] = {
             id,

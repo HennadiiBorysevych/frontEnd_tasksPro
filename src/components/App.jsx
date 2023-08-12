@@ -1,9 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from 'hooks';
-
 import { BoardProvider } from 'hooks';
-
 import PrivatePage from 'routes/PrivatePage';
 import PublicPage from 'routes/PublicPage';
 
@@ -16,8 +14,7 @@ const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
 const HomePage = lazy(() => import('../pages/HomePage'));
 const Board = lazy(() => import('../pages/Board'));
-const PublicErrorPage = lazy(() => import('../pages/PublicErrorPage'));
-const HomeErrorPage = lazy(() => import('../pages/HomeErrorPage'));
+const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
   const { isLoggedIn, isFetchingCurrent, fetchUser } = useAuth();
@@ -59,10 +56,7 @@ const App = () => {
                   element={<PrivatePage component={<Board />} />}
                 />
               </Route>
-              <Route
-                path="*"
-                element={!isLoggedIn ? <PublicErrorPage /> : <HomeErrorPage />}
-              />
+              <Route path="*" element={<ErrorPage />} />
             </Route>
           </Routes>
         )}
