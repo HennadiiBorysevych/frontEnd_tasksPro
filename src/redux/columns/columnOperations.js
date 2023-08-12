@@ -18,6 +18,7 @@ export const addColumn = createAsyncThunk(
   async (name, thunkAPI) => {
     try {
       const response = await axios.post('/api/columns', name);
+      // console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -64,25 +65,25 @@ export const deleteColumn = createAsyncThunk(
   }
 );
 
-export const moveTaskToColumn = createAsyncThunk(
-  'columns/moveTaskToColumn',
-  async (data, thunkAPI) => {
-    try {
-      //add correct result processing!!!
-      await axios.put(`/api/drag/movetasktocolumn`, data);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const moveTaskToColumn = createAsyncThunk(
+//   'columns/moveTaskToColumn',
+//   async (data, thunkAPI) => {
+//     try {
+//       //add correct result processing!!!
+//       const response = await axios.put(`/api/cards/movetasktocolumn`, data);
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const moveColumn = createAsyncThunk(
   'columns/moveSome',
   async (columnData, thunkAPI) => {
     try {
       const response = await axios.put(
-        `/api/drag/movecolumn`,
+        `/api/columns/movecolumn`,
         columnData.updatingDataStripped
       );
       return response.data?.data;
@@ -91,3 +92,13 @@ export const moveColumn = createAsyncThunk(
     }
   }
 );
+const operations = {
+  fetchColumns,
+  getColumn,
+  addColumn,
+  updateColumn,
+  deleteColumn,
+  moveColumn,
+  // moveTaskToColumn,
+};
+export default operations;

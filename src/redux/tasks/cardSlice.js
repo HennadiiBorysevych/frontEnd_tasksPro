@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
-import operations from 'redux/boards/boardOperations';
-import { moveTaskToColumn } from 'redux/columns/operations';
 
 import { logOut } from '../auth/authOperations';
 
 import {
   addTask,
   deleteTask,
+  fetchTasks,
   getTask,
   moveTask,
+  moveTaskToColumn,
   updateTask,
 } from './cardOperations';
 
@@ -35,23 +35,24 @@ const tasksSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(operations.fetchColumnsTasks.pending, handlePending)
+      .addCase(fetchTasks.pending, handlePending)
       .addCase(moveTaskToColumn.pending, handlePending)
+      .addCase(moveTask.pending, handlePending)
       .addCase(addTask.pending, handlePending)
       .addCase(deleteTask.pending, handlePending)
       .addCase(getTask.pending, handlePending)
       .addCase(updateTask.pending, handlePending)
-      .addCase(operations.fetchColumnsTasks.rejected, handleRejected)
+      .addCase(fetchTasks.rejected, handleRejected)
       .addCase(moveTaskToColumn.rejected, handleRejected)
       .addCase(moveTask.rejected, handleRejected)
       .addCase(addTask.rejected, handleRejected)
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(getTask.rejected, handleRejected)
       .addCase(updateTask.rejected, handleRejected)
-      .addCase(operations.fetchColumnsTasks.fulfilled, (state, action) => {
+      .addCase(fetchTasks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.tasks;
+        state.items = action.payload;
       })
       .addCase(moveTask.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -61,6 +62,19 @@ const tasksSlice = createSlice({
       .addCase(moveTaskToColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.items = state.items.map(item => {
+          const matchingPayloadItem = action.payload.find(
+            payloadItem => payloadItem.id === item.id
+          );
+          if (matchingPayloadItem) {
+            return {
+              ...item,
+              ...matchingPayloadItem,
+            };
+          } else {
+            return item;
+          }
+        });
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;

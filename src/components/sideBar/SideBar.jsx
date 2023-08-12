@@ -1,20 +1,20 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useModal } from 'hooks';
+// import { useDispatch } from 'react-redux';
+import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 
+// import { boardsOperations } from 'redux/boards';
 import {
   BoardPopUp,
   ButtonPlus,
   Logo,
   Modal,
-  SideBarItem,
+  SideBarBoardsList,
   SignOut,
   Support,
 } from 'components';
 
 import {
-  BoardList,
   CreateBoard,
   Overlay,
   SideBarWrapper,
@@ -29,8 +29,12 @@ const SideBar = ({
   onToggleModalAndSideBar,
 }) => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const { boardName } = useParams();
-  const boards = [];
+  const { activeBoardId } = useBoardContext();
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(boardsOperations.fetchBoards());
+  // }, [dispatch]);
 
   return (
     <>
@@ -57,12 +61,10 @@ const SideBar = ({
               size={20}
             />
           </CreateBoard>
-          {boardName && (
-            <BoardList>
-              {boards.map(({ id, iconName, title }) => (
-                <SideBarItem key={id} iconName={iconName} title={title} />
-              ))}
-            </BoardList>
+          {activeBoardId && (
+            <SideBarBoardsList
+              onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
+            />
           )}
         </div>
         <div>

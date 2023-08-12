@@ -87,7 +87,7 @@ const authSlice = createSlice({
       .addCase(authOperations.updateUserTheme.rejected, handleRejected)
 
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
-        state.user.help = action.payload.help;
+        state.user.help = action.payload.message;
         handleFulfilled(state);
       });
     // .addCase(authOperations.updateUserAvatar.fulfilled, (state, action) => {

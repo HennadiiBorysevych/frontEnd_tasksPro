@@ -10,28 +10,35 @@ import {
 } from 'redux-persist/es/constants';
 import storage from 'redux-persist/lib/storage';
 
-import { columnsReducer } from './columns/slice';
 import { authReducer } from './auth';
 import { boardsReducer } from './boards';
+import { columnsReducer } from './columns';
 import { cardReducer } from './tasks';
 import { themeReducer } from './theme';
 import userFilterReducer from './userFilterSlice';
 
-const persistConfig = {
+const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
 };
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const userFilterPersistConfig = {
+  key: 'userFilter',
+  storage,
+};
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedUserFilterReducer = persistReducer(
+  userFilterPersistConfig,
+  userFilterReducer
+);
 
 export const store = configureStore({
   reducer: {
-    auth: persistedReducer,
+    auth: persistedAuthReducer,
     boards: boardsReducer,
     columns: columnsReducer,
     tasks: cardReducer,
-    userFilter: userFilterReducer,
-    theme: themeReducer,
+    userFilter: persistedUserFilterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

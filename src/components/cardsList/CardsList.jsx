@@ -2,32 +2,39 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateOrdersFromIndex } from 'helpers/updateOrdersFromIndex';
+import { updateOrdersFromIndex } from 'helpers';
 import { useModal } from 'hooks';
-import { moveColumn } from 'redux/columns/operations';
-import { moveTaskToColumn } from 'redux/columns/operations';
-import columnsSelectors from 'redux/columns/selectors';
-import { selectLoading } from 'redux/columns/selectors';
+import { selectActiveBoardId } from 'redux/boards/boardSelectors';
+import { columnsSelectors } from 'redux/columns';
+import { moveColumn } from 'redux/columns/columnOperations';
+import columnSelectors from 'redux/columns/columnSelectors';
+import { moveTaskToColumn } from 'redux/tasks/cardOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
-
-import { Modal } from 'components';
-import { ColumnPopUp } from 'components';
-import { ButtonPlus } from 'components';
-import { CardItem, PrimaryButton } from 'components';
-import { SvgIcon } from 'components';
-
-import CustomScrollBar from './CustomScrollBar';
+import cardSelectors from 'redux/tasks/cardSelectors';
 
 import {
-  AddColumnButton,
+  AddCardBtn,
+  ButtonPlus,
+  CardItem,
+  ColumnPopUp,
+  Modal,
+  SvgIcon,
+} from 'components';
+
+import CustomScrollBar from '../customScrollBar/CustomScrollBar';
+
+import {
+  ButtonWrapper,
   Column,
   ColumnHeading,
   ColumnHeadingText,
   ColumnsContainer,
   ContainerWrapper,
+  IconButton,
   IconsContainer,
   ItemsContainer,
 } from './CardsList.styled';
+
 export const StrictModeDroppable = ({ children, ...props }) => {
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
@@ -45,17 +52,18 @@ export const StrictModeDroppable = ({ children, ...props }) => {
 
 const CardsList = () => {
   const dispatch = useDispatch();
+  const activeBoardId = useSelector(selectActiveBoardId);
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
-  const isColumnLoading = useSelector(selectLoading);
+  const isColumnLoading = useSelector(columnSelectors.selectLoading);
+  const isTasksLoading = useSelector(cardSelectors.selectLoading);
   const onDragEnd = result => {
     if (!result.destination) {
       return;
     }
-    console.log('onDragEnd..');
 
     if (result.type === 'column') {
-      console.log('column moving');
+      // whole column moving
       const dataArray = Array.from(columnsAndTasks);
       const idTask = result.draggableId;
       const destinationIndex = result.destination.index;
@@ -64,6 +72,10 @@ const CardsList = () => {
         destinationIndex,
         dataArray,
       });
+      // columnsAndTasks = updateOrdersFromArray(
+      //   columnsAndTasks,
+      //   updatingDataStripped
+      // );
       dispatch(moveColumn({ updatingDataFull, updatingDataStripped }));
     } else {
       const dataArray = Array.from(columnsAndTasks);
@@ -73,7 +85,7 @@ const CardsList = () => {
       const isSameColumn = columnId === idColumnNew;
 
       if (!isSameColumn) {
-        console.log('column+row moving');
+        // task to another column moving
         const idTask = result.draggableId;
         const destinationIndex = result.destination.index;
         const sourceColumnItems = dataArray.find(
@@ -97,11 +109,13 @@ const CardsList = () => {
           destinationIndex,
           dataArray: destinationColumnItems,
         });
-
+        // columnsAndTasks.forEach(column => {
+        //   column.items = updateOrdersFromArray(column.items, dataNew);
+        // });
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
-        console.log('row moving');
-        const column = columnsAndTasks.find(col => col.id === columnId);
+        // row moving
+        let column = columnsAndTasks.find(col => col.id === columnId);
         const dataArray = Array.from(column.items);
         const idTask = dataArray[source.index].id;
         const destinationIndex = destination.index;
@@ -111,15 +125,26 @@ const CardsList = () => {
             destinationIndex,
             dataArray,
           });
+        // column.items = updateOrdersFromArray(
+        //   column.items,
+        //   updatingDataStripped
+        // );
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
   };
+
+  const isLoading = isColumnLoading || isTasksLoading;
+
   return (
     <>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp onClose={toggleModal} />
+          <ColumnPopUp
+            boardId={activeBoardId}
+            columnIndex={columnsAndTasks.length}
+            handleModalClose={toggleModal}
+          />
         </Modal>
       )}
       <CustomScrollBar>
@@ -145,12 +170,12 @@ const CardsList = () => {
                       >
                         {provided => (
                           <Column
-                            isLoading={isColumnLoading}
+                            isLoading={isLoading}
                             {...provided.draggableProps}
                             ref={provided.innerRef}
                           >
                             <ColumnHeading
-                              isLoading={isColumnLoading}
+                              isLoading={isLoading}
                               {...provided.dragHandleProps}
                             >
                               <ColumnHeadingText>
@@ -158,13 +183,13 @@ const CardsList = () => {
                               </ColumnHeadingText>
 
                               <IconsContainer>
-                                <button type="button" onClick={toggleModal}>
+                                <IconButton type="button" onClick={toggleModal}>
                                   <SvgIcon
                                     svgName="icon-pencil"
                                     size={16}
                                     stroke="rgba(255, 255, 255, 0.5)"
                                   />
-                                </button>
+                                </IconButton>
                                 <SvgIcon
                                   svgName="icon-trash"
                                   size={16}
@@ -207,13 +232,12 @@ const CardsList = () => {
                                 </CustomScrollBar>
                               )}
                             </StrictModeDroppable>
-                            <PrimaryButton
-                              hasIcon={false}
-                              type="button"
-                              height={56}
-                            >
-                              Add another card
-                            </PrimaryButton>
+                            <ButtonWrapper>
+                              <AddCardBtn
+                                columnId={column.id}
+                                cardIndex={columnsAndTasks.length}
+                              />
+                            </ButtonWrapper>
                           </Column>
                         )}
                       </Draggable>
@@ -224,15 +248,27 @@ const CardsList = () => {
             </StrictModeDroppable>
           </DragDropContext>
           <Column>
-            <AddColumnButton type="button" onClick={toggleModal}>
+            <button
+              type="button"
+              onClick={toggleModal}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                width: '334px',
+                justifyContent: 'center',
+                padding: '14px 0',
+                borderRadius: '8px',
+              }}
+            >
               <ButtonPlus
                 stroke="#121212"
-                width={334}
-                height={56}
+                width={28}
+                height={28}
                 backgroundColor="#ffffff"
               />
               Add another column
-            </AddColumnButton>
+            </button>
           </Column>
         </ContainerWrapper>
       </CustomScrollBar>

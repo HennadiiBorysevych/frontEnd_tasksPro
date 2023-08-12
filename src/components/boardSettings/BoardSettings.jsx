@@ -72,7 +72,15 @@ const BoardSettings = ({
                   checked={chosenBackground === bgIndex.title}
                   onChange={() => setChosenBackground(bgIndex.title)}
                 />
-                <BackgroundImage bgIndex={bgIndex} />
+                <BackgroundImage
+                  bgIndex={bgIndex}
+                  style={{
+                    border:
+                      chosenBackground === bgIndex.title
+                        ? '1px solid #bedbb0'
+                        : 'none',
+                  }}
+                />
               </label>
             ))}
           </Row>

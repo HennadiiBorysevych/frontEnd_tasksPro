@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
+import { useNavigate, useParams } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
-import styled from '@emotion/styled';
-
-import { useParams, useNavigate } from 'react-router-dom';
+import Tabs from '@mui/material/Tabs';
 
 import { AuthForm } from 'components';
 
-import { Background, Container, AuthContainer } from './pages.styled';
+import { Background, Container } from './styles/commonStyles';
+
+import { AuthContainer } from './styles/authPage.styled';
+import styled from '@emotion/styled';
 
 const StyledTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {

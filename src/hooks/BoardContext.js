@@ -12,7 +12,11 @@ const BoardProvider = ({ children }) => {
   const initialBoards = useSelector(selectAllBoards);
   const [activeBoard, setActiveBoard] = useState(activeBoardId);
   const [boards, setBoards] = useState(initialBoards);
-  console.log(boards);
+
+  const setBoardsState = newBoards => {
+    setActiveBoard(null);
+    setBoards(newBoards);
+  };
 
   return (
     <BoardContext.Provider
@@ -22,6 +26,7 @@ const BoardProvider = ({ children }) => {
         activeBoard,
         setActiveBoard,
         setBoards,
+        setBoardsState,
       }}
     >
       {children}

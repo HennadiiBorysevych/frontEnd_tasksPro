@@ -21,6 +21,7 @@ export const selectColumnsAndTasks = createSelector(
 );
 
 const columnsSelectors = {
+  selectLoading,
   selectAllColumns,
   selectColumnsAndTasks,
 };

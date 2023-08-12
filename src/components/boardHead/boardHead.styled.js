@@ -4,9 +4,10 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${({ boardName }) =>
-    boardName ? 'flex-end' : 'space-between'};
+    boardName ? 'space-between' : 'flex-end'};
   color: #ffffff;
   margin-bottom: 39px;
+  width: 100%;
 
   @media screen and (min-width: 768px) {
     margin-bottom: 26px;
