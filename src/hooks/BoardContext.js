@@ -13,7 +13,6 @@ const BoardProvider = ({ children }) => {
   const [activeBoard, setActiveBoard] = useState(activeBoardId);
   const [boards, setBoards] = useState(initialBoards);
 
-  console.log(activeBoardId);
   const setBoardsState = newBoards => {
     setActiveBoard(null);
     setBoards(newBoards);

@@ -23,7 +23,7 @@ const HomePage = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
   const boards = useSelector(selectAllBoards);
-  console.log(activeBoardId);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const HomePage = () => {
   useEffect(() => {
     if (boards.length > 0 && !activeBoard) {
       const firstBoard = boards[0];
-      console.log(activeBoard);
+
       if (firstBoard) {
         setActiveBoard(firstBoard.id);
 
@@ -46,7 +46,6 @@ const HomePage = () => {
   }, [activeBoard, activeBoardId, boards, navigate, setActiveBoard]);
 
   useEffect(() => {
-    console.log(activeBoardId);
     if (activeBoardId) {
       dispatch(columnsOperations.fetchColumns(activeBoardId));
       dispatch(cardOperations.fetchTasks(activeBoardId));
