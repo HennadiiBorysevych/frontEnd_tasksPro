@@ -52,7 +52,7 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
     }
   };
   return (
-    <CustomScrollbar height="100%">
+    <CustomScrollbar width="100%" height="130px" overflow="auto">
       <BoardList>
         {boards.map(({ id, icon, title }) => (
           <SideBarItem
