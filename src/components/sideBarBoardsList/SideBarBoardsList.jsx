@@ -11,24 +11,22 @@ import {
 } from 'redux/boards/boardOperations';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
 
-import { CustomScrollbar, SideBarItem } from 'components';
+import { SideBarItem } from 'components';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = onToggleModalAndSideBar => {
-  const { activeBoardId } = useBoardContext();
+  const { activeBoardId, setActiveBoard } = useBoardContext();
   const boards = useSelector(selectAllBoards);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleActiveBoard = async boardId => {
-    console.log(boardId);
     try {
-      console.log('handleActiveBoard', boardId);
       await dispatch(getBoard(boardId));
-
-      const activatedBoard = boards.find(board => board.id === boardId);
+      await setActiveBoard(boardId);
+      const activatedBoard = await boards.find(board => board.id === boardId);
 
       if (activatedBoard) {
         const encodedTitle = encodeURIComponent(activatedBoard.title);
