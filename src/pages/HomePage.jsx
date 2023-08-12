@@ -35,7 +35,10 @@ const HomePage = () => {
   useEffect(() => {
     if (boards.length > 0 && !activeBoard) {
       const firstBoard = boards[0];
-
+      console.log(
+        '🚀 ~ file: HomePage.jsx:41 ~ useEffect ~ firstBoard.id:',
+        firstBoard.id
+      );
       if (firstBoard) {
         setActiveBoard(firstBoard.id);
 
@@ -47,6 +50,10 @@ const HomePage = () => {
 
   useEffect(() => {
     if (activeBoardId) {
+      console.log(
+        '🚀 ~ file: HomePage.jsx:53 ~ useEffect ~ activeBoardId:',
+        activeBoardId
+      );
       dispatch(columnsOperations.fetchColumns(activeBoardId));
       dispatch(cardOperations.fetchTasks(activeBoardId));
       // dispatch(columnsOperations.fetchColumnsTasks(activeBoardId));

@@ -6,7 +6,11 @@ export const fetchColumns = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const res = await axios.get(`/api/boards/${boardId}`);
-      return res.data.columns.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
+      return res.data.columns.map(({ _id, orderColumn, ...rest }) => ({
+        id: _id,
+        order: orderColumn,
+        ...rest,
+      }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
