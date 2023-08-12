@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
+import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal, SvgIcon } from 'components';
 
@@ -20,13 +21,18 @@ const SideBarItem = ({
   active,
   onHandleActiveBoard,
   onDeleteClick,
-  onToggleModalAndSideBar,
 }) => {
+  const onToggleModalAndSideBar = useToggleModalAndSideBar();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
   const boards = useSelector(selectAllBoards);
-
+  console.log(onToggleModalAndSideBar);
   const editingBoard = boards.find(board => board.id === activeBoardId);
+
+  const toggleWindows = () => {
+    toggleModal();
+    onToggleModalAndSideBar();
+  };
   return (
     <>
       <BoardListItem isActive={active}>
@@ -48,13 +54,7 @@ const SideBarItem = ({
         </BoardIdentificationItem>
         {active && (
           <BoardItemControl>
-            <button
-              aria-label="Edit board"
-              onClick={() => {
-                toggleModal();
-                onToggleModalAndSideBar();
-              }}
-            >
+            <button aria-label="Edit board" onClick={toggleWindows}>
               <SvgIcon
                 svgName="icon-pencil"
                 size={16}

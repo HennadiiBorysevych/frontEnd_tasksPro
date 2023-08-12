@@ -4,7 +4,6 @@ import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 
 import { CustomScrollbar } from 'components';
-
 // import { boardsOperations } from 'redux/boards';
 import {
   BoardPopUp,
@@ -58,11 +57,7 @@ const SideBar = ({
               size={20}
             />
           </CreateBoard>
-          {activeBoardId && (
-            <SideBarBoardsList
-              onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-            />
-          )}
+          {activeBoardId && <SideBarBoardsList />}
         </div>
         <div>
           <Support />

@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { Header, SideBar } from 'components';
 
 import { Container, MainWrapper, ScreenWrapper } from './SharedLayouts.styled';
+
+const ToggleContext = createContext();
 
 const SharedLayout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,20 +46,24 @@ const SharedLayout = ({ children }) => {
   };
 
   return (
-    <Container>
-      <ScreenWrapper>
-        <SideBar
-          isOpen={isOpen}
-          isClose={closeSideBar}
-          windowHeight={windowHeight}
-          onToggleModalAndSideBar={toggleModalAndSideBar}
-        />
-        <MainWrapper style={{ width: '82vw' }}>
-          <Header isOpenSideBar={openSidebar} />
-          {children}
-        </MainWrapper>
-      </ScreenWrapper>
-    </Container>
+    <ToggleContext.Provider value={toggleModalAndSideBar}>
+      <Container>
+        <ScreenWrapper>
+          <SideBar
+            isOpen={isOpen}
+            isClose={closeSideBar}
+            windowHeight={windowHeight}
+            onToggleModalAndSideBar={toggleModalAndSideBar}
+          />
+          {/* style={{ width: '82vw' }} */}
+          <MainWrapper>
+            <Header isOpenSideBar={openSidebar} />
+            {children}
+          </MainWrapper>
+        </ScreenWrapper>
+      </Container>
+    </ToggleContext.Provider>
   );
 };
+export const useToggleModalAndSideBar = () => useContext(ToggleContext);
 export default SharedLayout;
