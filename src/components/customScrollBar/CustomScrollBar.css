@@ -13,13 +13,12 @@
 
 .--os-track-bg {
   background-color: red;
-}
+} */
 
-// horizontal scrollbar is 12px
 .os-theme-custom.os-scrollbar-horizontal {
   --os-size: 12px;
 }
-// vertical scrollbar is 8px
+
 .os-theme-custom.os-scrollbar-vertical {
-  --os-size: 8px;
-} */
+  --os-size: 18px;
+}

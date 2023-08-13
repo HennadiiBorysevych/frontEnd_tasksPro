@@ -4,24 +4,25 @@ export const ContainerWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
   padding-right: 18px;
-  padding-bottom: 18px;
+  padding-bottom: 13px;
 `;
 
 export const ColumnsContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
   gap: 21px;
+  margin-right: 21px;
 `;
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: 350px;
+  width: 335px;
   filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
   transition: filter 0.4s ease-in-out;
   @media (max-width: 375px) {
-    width: calc(100vw - 40px);
+    width: calc(100vw - 60px);
   }
 `;
 
@@ -29,7 +30,8 @@ export const ColumnHeading = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 16px);
+  width: calc(100%);
+  /* width: calc(100% - 16px); */
   height: 56px;
   padding: 0 20px;
   background-color: #121212;
@@ -45,6 +47,7 @@ export const ColumnHeadingText = styled.h3`
 `;
 
 export const ItemsContainer = styled.div`
+  /* background-color: yellow; */
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -81,6 +84,6 @@ export const IconButton = styled.button`
 `;
 
 export const ButtonWrapper = styled.div`
-  margin-right: 16px;
+  /* margin-right: 16px; */
   height: 56px;
 `;

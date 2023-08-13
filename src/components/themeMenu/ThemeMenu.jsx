@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateUserTheme } from 'redux/auth/authOperations';
 import selectTheme from 'redux/theme/themeSelectors';
 import { setTheme } from 'redux/theme/themeSlice';
@@ -30,6 +29,18 @@ const ThemeMenu = props => {
   const closeDropdown = () => {
     setIsOpen(false);
   };
+
+  // const handleThemeChange = async theme => {
+  //   setIsOpen(false);
+
+  //   try {
+  //     await dispatch(authOperations.updateUserTheme(theme));
+  //   } catch (error) {
+  //     console.error('Error updating theme:', error);
+  //   }
+
+  //   closeDropdown();
+  // };
 
   const handleThemeChange = theme => {
     dispatch(setTheme(theme));

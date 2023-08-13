@@ -3,6 +3,7 @@ import React from 'react';
 import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 
+import { CustomScrollbar } from 'components';
 // import { boardsOperations } from 'redux/boards';
 import {
   BoardPopUp,
@@ -31,11 +32,6 @@ const SideBar = ({
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(boardsOperations.fetchBoards());
-  // }, [dispatch]);
-
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
@@ -55,11 +51,7 @@ const SideBar = ({
             </TitleButton>
             <ButtonPlus width={40} height={36} variant="sidemenu" size={20} />
           </CreateBoard>
-          {activeBoardId && (
-            <SideBarBoardsList
-              onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-            />
-          )}
+          {activeBoardId && <SideBarBoardsList />}
         </div>
         <div>
           <Support />

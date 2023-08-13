@@ -4,10 +4,14 @@ export const selectBoardIndex = state => state.boards.activeBoardIndex;
 export const selectOneBoard = (state, boardId) => {
   return state.boards.items.find(board => board.id === boardId);
 };
+export const selectActiveBoard = state => {
+  return state.boards.items.find(
+    board => board.id === state.boards.activeBoardIndex
+  );
+};
 
 export const selectActiveBoardId = state => {
   const activeIndex = state.boards.activeBoardIndex;
-  // console.log(activeIndex);
   return activeIndex || state.boards.items.length ? activeIndex : null;
 };
 

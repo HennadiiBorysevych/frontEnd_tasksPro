@@ -67,7 +67,7 @@ export const deleteTask = createAsyncThunk(
 );
 
 export const moveTask = createAsyncThunk(
-  'tasks/moveSome',
+  'tasks/moveColumn',
   async (tasksData, thunkAPI) => {
     try {
       const response = await axios.put(

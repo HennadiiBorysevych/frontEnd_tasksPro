@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useBoardContext } from 'hooks';
-import PropTypes from 'prop-types';
 import {
   deleteBoard,
   fetchBoards,
@@ -15,8 +14,8 @@ import { CustomScrollbar, SideBarItem } from 'components';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
-const SideBarBoardsList = onToggleModalAndSideBar => {
-  const { activeBoardId } = useBoardContext();
+const SideBarBoardsList = () => {
+  const { activeBoardId, setActiveBoard } = useBoardContext();
   const boards = useSelector(selectAllBoards);
 
   const navigate = useNavigate();
@@ -25,7 +24,8 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
   const handleActiveBoard = async boardId => {
     try {
       await dispatch(getBoard(boardId));
-      const activatedBoard = boards.find(board => board.id === boardId);
+      await setActiveBoard(boardId);
+      const activatedBoard = await boards.find(board => board.id === boardId);
 
       if (activatedBoard) {
         const encodedTitle = encodeURIComponent(activatedBoard.title);
@@ -51,27 +51,22 @@ const SideBarBoardsList = onToggleModalAndSideBar => {
     }
   };
   return (
-    // <CustomScrollbar>
-    <BoardList>
-      {boards.map(({ id, icon, title }) => (
-        <SideBarItem
-          key={id}
-          id={id}
-          iconName={icon}
-          title={title}
-          active={activeBoardId === id}
-          onHandleActiveBoard={() => handleActiveBoard(id)}
-          onDeleteClick={() => handleDeleteBoard(id)}
-          onToggleModalAndSideBar={() => onToggleModalAndSideBar()}
-        />
-      ))}
-    </BoardList>
-    //</CustomScrollbar>
+    <CustomScrollbar width="100%" height="130px" overflow="auto">
+      <BoardList>
+        {boards.map(({ id, icon, title }) => (
+          <SideBarItem
+            key={id}
+            id={id}
+            iconName={icon}
+            title={title}
+            active={activeBoardId === id}
+            onHandleActiveBoard={() => handleActiveBoard(id)}
+            onDeleteClick={() => handleDeleteBoard(id)}
+          />
+        ))}
+      </BoardList>
+    </CustomScrollbar>
   );
 };
 
 export default SideBarBoardsList;
-
-SideBarBoardsList.propTypes = {
-  onToggleModalAndSideBar: PropTypes.func.isRequired,
-};

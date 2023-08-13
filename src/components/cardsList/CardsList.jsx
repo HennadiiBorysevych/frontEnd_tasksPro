@@ -3,21 +3,20 @@ import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
-import { useModal } from 'hooks';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsSelectors } from 'redux/columns';
-import { moveColumn } from 'redux/columns/columnOperations';
+import columnOperations from 'redux/columns/columnOperations';
 import columnSelectors from 'redux/columns/columnSelectors';
 import { moveTaskToColumn } from 'redux/tasks/cardOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
 import cardSelectors from 'redux/tasks/cardSelectors';
+import { selectUserFilter } from 'redux/userFilterSlice';
 
 import {
   AddCardBtn,
-  ButtonPlus,
+  AddColumnBtn,
   CardItem,
-  ColumnPopUp,
-  Modal,
+  EditColumnBtn,
   SvgIcon,
 } from 'components';
 
@@ -53,10 +52,10 @@ export const StrictModeDroppable = ({ children, ...props }) => {
 const CardsList = () => {
   const dispatch = useDispatch();
   const activeBoardId = useSelector(selectActiveBoardId);
-  const { isModal, toggleModal, onBackdropClick } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
+  const userFilter = useSelector(selectUserFilter);
   const onDragEnd = result => {
     if (!result.destination) {
       return;
@@ -72,11 +71,9 @@ const CardsList = () => {
         destinationIndex,
         dataArray,
       });
-      // columnsAndTasks = updateOrdersFromArray(
-      //   columnsAndTasks,
-      //   updatingDataStripped
-      // );
-      dispatch(moveColumn({ updatingDataFull, updatingDataStripped }));
+      dispatch(
+        columnOperations.moveColumn({ updatingDataFull, updatingDataStripped })
+      );
     } else {
       const dataArray = Array.from(columnsAndTasks);
       const { source, destination } = result;
@@ -109,9 +106,6 @@ const CardsList = () => {
           destinationIndex,
           dataArray: destinationColumnItems,
         });
-        // columnsAndTasks.forEach(column => {
-        //   column.items = updateOrdersFromArray(column.items, dataNew);
-        // });
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
         // row moving
@@ -125,10 +119,6 @@ const CardsList = () => {
             destinationIndex,
             dataArray,
           });
-        // column.items = updateOrdersFromArray(
-        //   column.items,
-        //   updatingDataStripped
-        // );
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
@@ -136,18 +126,13 @@ const CardsList = () => {
 
   const isLoading = isColumnLoading || isTasksLoading;
 
+  const onDeleteColumn = id => {
+    dispatch(columnOperations.deleteColumn(id));
+  };
+
   return (
     <>
-      {isModal && (
-        <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp
-            boardId={activeBoardId}
-            columnIndex={columnsAndTasks.length}
-            handleModalClose={toggleModal}
-          />
-        </Modal>
-      )}
-      <CustomScrollBar>
+      <CustomScrollBar height="500px">
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
             <StrictModeDroppable
@@ -183,18 +168,28 @@ const CardsList = () => {
                               </ColumnHeadingText>
 
                               <IconsContainer>
-                                <IconButton type="button" onClick={toggleModal}>
-                                  <SvgIcon
+                                <EditColumnBtn column={column} />
+                                <IconButton>
+                                  {/* <SvgIcon
                                     svgName="icon-pencil"
                                     size={16}
                                     stroke="rgba(255, 255, 255, 0.5)"
+                                  /> */}
+                                </IconButton>
+                                <IconButton
+                                  type="button"
+                                  onClick={() =>
+                                    dispatch(
+                                      columnOperations.deleteColumn(column.id)
+                                    )
+                                  }
+                                >
+                                  <SvgIcon
+                                    svgName="icon-trash"
+                                    size={16}
+                                    stroke="#FFFFFF80"
                                   />
                                 </IconButton>
-                                <SvgIcon
-                                  svgName="icon-trash"
-                                  size={16}
-                                  stroke="#FFFFFF80"
-                                />
                               </IconsContainer>
                             </ColumnHeading>
                             <StrictModeDroppable
@@ -209,6 +204,11 @@ const CardsList = () => {
                                     ref={provided.innerRef}
                                   >
                                     {column.items
+                                      .filter(({ priority }) =>
+                                        priority
+                                          .toLowerCase()
+                                          .includes(userFilter)
+                                      )
                                       .sort((a, b) => a.order - b.order) // Sort items by order
                                       .map((item, index) => (
                                         <Draggable
@@ -248,27 +248,10 @@ const CardsList = () => {
             </StrictModeDroppable>
           </DragDropContext>
           <Column>
-            <button
-              type="button"
-              onClick={toggleModal}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                width: '334px',
-                justifyContent: 'center',
-                padding: '14px 0',
-                borderRadius: '8px',
-              }}
-            >
-              <ButtonPlus
-                stroke="#121212"
-                width={28}
-                height={28}
-                backgroundColor="#ffffff"
-              />
-              Add another column
-            </button>
+            <AddColumnBtn
+              boardId={activeBoardId}
+              columnIndex={columnsAndTasks.length}
+            />
           </Column>
         </ContainerWrapper>
       </CustomScrollBar>

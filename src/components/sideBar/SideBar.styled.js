@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const SideBarWrapper = styled.div`
-  padding: 14px 14px 24px 14px;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,7 +25,7 @@ export const SideBarWrapper = styled.div`
     z-index: 1000;
   }
   @media screen and (min-width: 768px) {
-    padding: 24px;
+    padding: 24px 0;
     width: 260px;
   }
 
@@ -34,7 +34,7 @@ export const SideBarWrapper = styled.div`
     css`
       @media screen and (max-height: ${windowHeight}px) {
         height: ${windowHeight}px;
-        overflow-y: auto;
+        overflow-y: hidden;
       }
     `}
 `;
@@ -57,6 +57,8 @@ export const TitleBoardList = styled.h2`
   font-weight: 400;
   letter-spacing: -0.24px;
 
+  padding: 0 24px;
+
   @media screen and (min-width: 768px) {
     margin-top: 60px;
   }
@@ -69,8 +71,7 @@ export const CreateBoard = styled.button`
   width: 100%;
   border-top: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
   border-bottom: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding: 14px 24px;
   margin-bottom: 40px;
 `;
 

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const SupportBox = styled.button`
   margin-bottom: 24px;
-  padding: 14px;
+  padding: 14px 24px;
   display: block;
   background-color: ${props => props.theme.palette.background.support};
   border-radius: 8px;

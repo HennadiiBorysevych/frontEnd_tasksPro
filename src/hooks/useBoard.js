@@ -28,7 +28,7 @@ const useBoard = (currentBoard, closeModal) => {
       }, 500);
       return;
     }
-    const { id, ...rest } = board;
+    const { id, user, ...rest } = board;
 
     try {
       if (currentBoard) {

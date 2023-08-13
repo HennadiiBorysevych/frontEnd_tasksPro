@@ -6,7 +6,11 @@ export const fetchColumns = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const res = await axios.get(`/api/boards/${boardId}`);
-      return res.data.columns.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
+      return res.data.columns.map(({ _id, orderColumn, ...rest }) => ({
+        id: _id,
+        order: orderColumn,
+        ...rest,
+      }));
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -56,9 +60,10 @@ export const getColumn = createAsyncThunk(
 export const deleteColumn = createAsyncThunk(
   'columns/deleteColumn',
   async (columnId, thunkAPI) => {
+    console.log('🚀 ~ file: columnOperations.js:71 ~ deleteColumn:');
     try {
       const response = await axios.delete(`/api/columns/${columnId}`);
-      return response.data;
+      return columnId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

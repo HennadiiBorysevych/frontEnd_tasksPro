@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -19,6 +19,7 @@ import {
 } from './styles/homePage.styled';
 
 const HomePage = () => {
+  const [firstLoad, setFirstLoad] = useState(true);
   const { activeBoardId, activeBoard, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
@@ -33,20 +34,28 @@ const HomePage = () => {
 
   // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (boards.length > 0 && !activeBoard) {
+    if (firstLoad && boards.length > 0 && !activeBoard) {
       const firstBoard = boards[0];
-
+      console.log(
+        '🚀 ~ file: HomePage.jsx:41 ~ useEffect ~ firstBoard.id:',
+        firstBoard.id
+      );
       if (firstBoard) {
         setActiveBoard(firstBoard.id);
 
         const encodedTitle = encodeURIComponent(firstBoard.title);
         navigate(`${encodedTitle}`);
       }
+      setFirstLoad(false);
     }
-  }, [activeBoard, activeBoardId, boards, navigate, setActiveBoard]);
+  }, [activeBoard, activeBoardId, boards, firstLoad, navigate, setActiveBoard]);
 
   useEffect(() => {
     if (activeBoardId) {
+      console.log(
+        '🚀 ~ file: HomePage.jsx:53 ~ useEffect ~ activeBoardId:',
+        activeBoardId
+      );
       dispatch(columnsOperations.fetchColumns(activeBoardId));
       dispatch(cardOperations.fetchTasks(activeBoardId));
       // dispatch(columnsOperations.fetchColumnsTasks(activeBoardId));
