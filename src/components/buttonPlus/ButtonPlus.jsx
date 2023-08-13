@@ -11,16 +11,19 @@ const ButtonPlus = ({
   stroke,
   size,
   backgroundColor,
+  variant,
   ...rest
 }) => {
+
   return (
     <SpanStyled
       width={width}
       height={height}
       backgroundColor={backgroundColor}
+      variant={variant}
       {...rest}
     >
-      <SvgIcon svgName="icon-plus" stroke={stroke} size={size} />
+      <SvgIcon svgName="icon-plus" variant={variant} size={size} />
     </SpanStyled>
   );
 };

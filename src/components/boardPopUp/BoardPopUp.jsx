@@ -47,8 +47,9 @@ const BoardPopUp = ({ board, onClose }) => {
           style={{ marginTop: '16px' }}
           onClick={handleBoradSubmit}
           hasIcon={false}
+          variant="primary"
         >
-          <ButtonPlus />
+          <ButtonPlus variant="primary" />
           {board ? 'Edit' : 'Create'}
         </PrimaryButton>
       </PopUpLayout>
