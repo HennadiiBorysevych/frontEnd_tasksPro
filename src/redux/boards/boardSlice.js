@@ -58,11 +58,11 @@ const boardsSlice = createSlice({
           icon,
           background,
           isActive,
-        } = action.payload.result;
+        } = action.payload.data;
 
         state.items.unshift({ id, title, icon, background, isActive });
         state.activeBoardIndex = id;
-        console.log(`${action.payload.result.title} added to your boards`);
+        console.log(`${action.payload.data.title} added to your boards`);
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -101,7 +101,7 @@ const boardsSlice = createSlice({
           icon,
           background,
           isActive,
-        } = action.payload.result;
+        } = action.payload.data;
         const index = state.items.findIndex(board => board.id === id);
         if (index !== -1) {
           state.items[index] = {
