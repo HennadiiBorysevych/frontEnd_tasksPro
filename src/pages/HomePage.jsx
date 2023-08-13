@@ -70,7 +70,7 @@ const HomePage = () => {
             <Outlet />
           </>
         ) : (
-          <DefaultWrapper>
+          <DefaultWrapper defaultBoard={!boards}>
             <WelcomeText>
               Before starting your project, it is essential to{' '}
               <CreateBoardLink onClick={toggleModal}>
