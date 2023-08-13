@@ -9,7 +9,7 @@ const PopUpLayout = ({ title, handleClose, children }) => {
   return (
     <Container>
       <CloseBtn onClick={handleClose}>
-        <SvgIcon svgName="icon-x-close" />
+        <SvgIcon svgName="icon-x-close" variant='header'/>
       </CloseBtn>
       <TitlePopUp title={title} />
       {children}

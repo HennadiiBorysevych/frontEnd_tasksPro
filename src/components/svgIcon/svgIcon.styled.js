@@ -5,8 +5,14 @@ export const SvgStyled = styled.svg`
   height: ${props => props.size}px;
   cursor: pointer;
   stroke: ${props => {
-    if (props.variant === 'header') {
-      return `${props.theme.palette.text.primary}CC`;
+    if (props.variant === 'popUp') {
+      return props.isActive
+        ? `${props.theme.palette.text.primary}`
+        : `${props.theme.palette.text.primary}80`;
+    } else if (props.variant === 'header') {
+      return props.isActive
+        ? `${props.theme.palette.text.primary}CC`
+        : props.theme.palette.text.primary;
     } else if (props.variant === 'primary') {
       return props.theme.palette.text.plus;
     } else if (props.variant === 'sidemenu') {
@@ -16,7 +22,7 @@ export const SvgStyled = styled.svg`
     } else if (props.variant === 'support') {
       return props.theme.palette.text.sidemenu;
     }
-     return props.theme.palette.text.sidemenu;
+    return props.theme.palette.text.sidemenu;
   }};
 
   &:hover {

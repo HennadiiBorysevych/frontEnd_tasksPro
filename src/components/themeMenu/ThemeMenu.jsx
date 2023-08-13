@@ -63,7 +63,11 @@ const ThemeMenu = props => {
     <DropdownWrapper ref={dropdownRef}>
       <DropdownButton onClick={toggleDropdown}>
         Theme
-        <SvgIcon svgName="icon-arrow-down" variant='header'></SvgIcon>
+        <SvgIcon
+          svgName="icon-arrow-down"
+          variant="header"
+          isActive="true"
+        ></SvgIcon>
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>

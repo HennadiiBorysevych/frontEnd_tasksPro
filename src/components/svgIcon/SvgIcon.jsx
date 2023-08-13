@@ -10,8 +10,8 @@ const SvgIcon = ({
   variant,
   stroke = 'none',
   fill = 'none',
+  isActive,
 }) => {
- 
   return (
     <SvgStyled
       width={size}
@@ -19,6 +19,7 @@ const SvgIcon = ({
       stroke={stroke}
       fill={fill}
       variant={variant}
+      isActive={isActive}
     >
       <use href={sprite + `#${svgName}`} />
     </SvgStyled>

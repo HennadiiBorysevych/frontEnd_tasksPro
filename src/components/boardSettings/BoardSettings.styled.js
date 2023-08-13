@@ -54,6 +54,9 @@ export const BackgroundImage = styled.div(props => ({
   cursor: 'pointer',
   margin: '2px',
   backgroundImage: `url(${props.bgIndex.regular})`,
+  border: $props => props.isActive
+    ? `1px solid ${props.theme.palette.primary.main}`
+    : 'none',
   '@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)':
     {
       backgroundImage: `url(${props.bgIndex.x2})`,
@@ -64,8 +67,3 @@ export const BackgroundImage = styled.div(props => ({
     },
 }));
 
-
-export const svgIconStyles = {
-  primaryStroke: props => props.theme.palette.text.primary,
-  primary80Stroke: props => `${props.theme.palette.text.primary}80`,
-};
