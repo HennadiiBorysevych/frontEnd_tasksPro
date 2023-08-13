@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SvgIcon } from 'components';
 import { authOperations } from 'redux/auth';
+import { selectTheme } from 'redux/auth/authSelectors';
+
+import { SvgIcon } from 'components';
+
 import {
   DropdownButton,
   DropdownItem,
   DropdownMenu,
   DropdownWrapper,
 } from './ThemeMenu.styled';
-import { selectTheme } from 'redux/auth/authSelectors';
 
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
