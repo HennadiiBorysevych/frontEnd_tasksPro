@@ -1,22 +1,20 @@
-import { NavLink, useLocation } from 'react-router-dom';
-
-import {
-  ErrorBackground,
-  Container,
-  Header,
-  Code,
-  Num,
-  Description,
-  Start,
-  Text,
-  Link,
-} from './styles/errorPage.styled';
-import { useAuth, useBoardContext } from 'hooks';
-
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { NavLink, useLocation } from 'react-router-dom';
+import { useAuth, useBoardContext } from 'hooks';
 import { authSelectors } from 'redux/auth';
+
+import {
+  Code,
+  Container,
+  Description,
+  ErrorBackground,
+  Header,
+  Link,
+  Num,
+  Start,
+  Text,
+} from './styles/errorPage.styled';
 
 const ErrorPage = () => {
   const { isLoggedIn } = useAuth();

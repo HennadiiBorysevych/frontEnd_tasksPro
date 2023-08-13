@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useModal } from 'hooks';
+import cardOperations from 'redux/tasks/cardOperations';
 
-import { Modal, CardPopUp } from 'components';
+import { CardPopUp, Modal } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
 
 import {
@@ -18,8 +20,9 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
+  const dispatch = useDispatch();
   const { isModal, onBackdropClick, toggleModal } = useModal();
-  const { title, description, priority, deadline } = item;
+  const { title, description, priority, deadline, id } = item;
   const currentDate = new Date();
   const deadlineDate = new Date(deadline);
   const isDeadlineToday =
@@ -45,7 +48,6 @@ const CardItem = ({ item }) => {
             <DetailValue>{formattedDeadline}</DetailValue>
           </div>
         </DetailsContainer>
-
         <IconsContainer>
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} stroke="#BEDBB0" />
@@ -53,8 +55,9 @@ const CardItem = ({ item }) => {
           <div onClick={toggleModal}>
             <SvgIcon svgName="icon-pencil" size={16} stroke="#FFFFFF80" />
           </div>
-
-          <SvgIcon svgName="icon-trash" size={16} stroke="#FFFFFF80" />
+          <div onClick={() => dispatch(cardOperations.deleteTask(id))}>
+            <SvgIcon svgName="icon-trash" size={16} stroke="#FFFFFF80" />
+          </div>
         </IconsContainer>
       </Details>
       {isModal && (
@@ -70,5 +73,4 @@ const CardItem = ({ item }) => {
     </CardContainer>
   );
 };
-
 export default CardItem;
