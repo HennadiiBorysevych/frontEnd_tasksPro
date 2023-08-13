@@ -108,37 +108,18 @@ const CardsList = () => {
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
         // row moving
-
         let column = columnsAndTasks.find(col => col.id === columnId);
         const dataArray = Array.from(column.items);
-        console.log(
-          '🚀 ~ file: CardsList.jsx:114 ~ onDragEnd ~ dataArray:',
-          dataArray
-        );
-        const idTask = dataArray[source.index].id;
-        console.log(
-          '🚀 ~ file: CardsList.jsx:116 ~ onDragEnd ~ idTask:',
-          idTask
-        );
+        const idTask = result.draggableId;
         const destinationIndex = destination.index;
-        console.log(
-          '🚀 ~ file: CardsList.jsx:118 ~ onDragEnd ~ destinationIndex:',
-          destinationIndex
-        );
+
         const { updatingDataFull, updatingDataStripped } =
           updateOrdersFromIndex({
             idTask,
             destinationIndex,
             dataArray,
           });
-        console.log(
-          '🚀 ~ file: CardsList.jsx:123 ~ onDragEnd ~ updatingDataStripped:',
-          updatingDataStripped
-        );
-        console.log(
-          '🚀 ~ file: CardsList.jsx:123 ~ onDragEnd ~ updatingDataFull:',
-          updatingDataFull
-        );
+
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
@@ -207,10 +188,12 @@ const CardsList = () => {
                                     ref={provided.innerRef}
                                   >
                                     {column.items
-                                      .filter(({ priority }) =>
-                                        priority
-                                          .toLowerCase()
-                                          .includes(userFilter)
+                                      .filter(
+                                        ({ priority }) =>
+                                          priority
+                                            .toLowerCase()
+                                            .includes(userFilter) ||
+                                          userFilter === 'showAll'
                                       )
                                       .sort((a, b) => a.order - b.order) // Sort items by order
                                       .map((item, index) => (

@@ -1,17 +1,14 @@
 export function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
-  const sourceIndex = dataArray.findIndex(item => item.id === idTask);
-  console.log(
-    '🚀 ~ file: updateOrdersFromIndex.js:3 ~ updateOrdersFromIndex ~ sourceIndex:',
-    sourceIndex
-  );
+  const array = [...dataArray];
+  array.sort((a, b) => a.order - b.order);
+  const sourceIndex = array.findIndex(item => item.id === idTask);
   if (sourceIndex === -1) {
-    return dataArray;
+    return array;
   }
 
-  const updatingDataFull = dataArray.map((item, index) => {
+  const updatingDataFull = array.map((item, index) => {
     if (index === sourceIndex) {
-      return { ...item, order: destinationIndex };
-      // return { ...item, order: destinationIndex + 1 };
+      return { ...item, order: destinationIndex + 1 };
     } else if (index >= destinationIndex && index < sourceIndex) {
       return { ...item, order: index + 2 };
     } else if (index <= destinationIndex && index > sourceIndex) {
@@ -20,15 +17,10 @@ export function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
       return { ...item };
     }
   });
-  console.log(
-    '🚀 ~ file: updateOrdersFromIndex.js:18 ~ updatingDataFull ~ updatingDataFull:',
-    updatingDataFull
-  );
 
-  const updatingDataStripped = dataArray.map(({ id, order }, index) => {
+  const updatingDataStripped = array.map(({ id, order }, index) => {
     if (index === sourceIndex) {
-      return { id, order: destinationIndex };
-      // return { id, order: destinationIndex + 1 };
+      return { id, order: destinationIndex + 1 };
     } else if (index >= destinationIndex && index < sourceIndex) {
       return { id, order: index + 2 };
     } else if (index <= destinationIndex && index > sourceIndex) {
