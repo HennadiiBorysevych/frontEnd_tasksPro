@@ -85,7 +85,7 @@ const columnsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
-          column => column.id === action.payload.id
+          column => column.id === action.payload
         );
         if (index !== -1) {
           state.items[index] = action.payload;

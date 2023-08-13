@@ -1,12 +1,12 @@
-import styled from '@emotion/styled';
-
 import {
-  checkBgImg,
   checkBgColor,
-  checkTxtColor,
-  checkBtnTxtColor,
+  checkBgImg,
   checkBtnBgColor,
+  checkBtnTxtColor,
+  checkTxtColor,
 } from 'helpers/errorPageThemes';
+
+import styled from '@emotion/styled';
 
 export const ErrorBackground = styled.section`
   background-color: ${({ bgColor }) => checkBgColor(bgColor)};

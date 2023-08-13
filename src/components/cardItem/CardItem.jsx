@@ -49,7 +49,6 @@ const CardItem = ({ item }) => {
             <DetailValue>{formattedDeadline}</DetailValue>
           </div>
         </DetailsContainer>
-
         <IconsContainer>
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} stroke="#BEDBB0" />
@@ -74,5 +73,4 @@ const CardItem = ({ item }) => {
     </CardContainer>
   );
 };
-
 export default CardItem;

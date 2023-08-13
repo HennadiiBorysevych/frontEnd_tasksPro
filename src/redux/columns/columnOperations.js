@@ -63,6 +63,8 @@ export const deleteColumn = createAsyncThunk(
     console.log('🚀 ~ file: columnOperations.js:71 ~ deleteColumn:');
     try {
       const response = await axios.delete(`/api/columns/${columnId}`);
+      console.log(response.data);
+      // return response.data;
       return columnId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
