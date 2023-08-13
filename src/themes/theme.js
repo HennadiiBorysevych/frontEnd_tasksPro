@@ -23,6 +23,7 @@ const darkTheme = createTheme({
       support: '#1F1F1F',
       popUp: '#151515',
       profile: '#BEDBB0',
+      sideBarItem: '#1F1F1F',
     },
     text: {
       primary: '#FFFFFF',
@@ -62,6 +63,7 @@ const lightTheme = createTheme({
       support: '#F6F6F7',
       popUp: '#FCFCFC',
       profile: '#BEDBB0',
+      sideBarItem: '#F6F6F7',
     },
     text: {
       primary: '#161616',
@@ -101,6 +103,7 @@ const violetTheme = createTheme({
       support: '#ECEDFD66',
       popUp: '#FCFCFC',
       profile: '#ECEDFD',
+      sideBarItem: '#FFFFFF80',
     },
     text: {
       primary: '#161616',
