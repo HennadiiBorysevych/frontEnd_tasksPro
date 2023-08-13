@@ -46,7 +46,7 @@ export const getTask = createAsyncThunk(
   'tasks/getTask',
   async (taskId, thunkAPI) => {
     try {
-      const response = await axios.get(`/api/tasks/${taskId}`);
+      const response = await axios.get(`/api/cards/${taskId}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -58,8 +58,10 @@ export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (taskId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/api/tasks/${taskId}`);
-      return response.data;
+      const response = await axios.delete(`/api/cards/${taskId}`);
+      console.log('🚀 ~ file: cardOperations.js:63 ~ response:', response);
+      // change after back makes better!
+      return taskId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -67,7 +69,7 @@ export const deleteTask = createAsyncThunk(
 );
 
 export const moveTask = createAsyncThunk(
-  'tasks/moveColumn',
+  'tasks/moveTask',
   async (tasksData, thunkAPI) => {
     try {
       const response = await axios.put(

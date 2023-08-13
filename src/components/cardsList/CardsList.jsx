@@ -17,7 +17,7 @@ import {
   AddColumnBtn,
   CardItem,
   EditColumnBtn,
-  SvgIcon,
+  IconButton,
 } from 'components';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
@@ -29,7 +29,6 @@ import {
   ColumnHeadingText,
   ColumnsContainer,
   ContainerWrapper,
-  IconButton,
   IconsContainer,
   ItemsContainer,
 } from './CardsList.styled';
@@ -109,26 +108,43 @@ const CardsList = () => {
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
         // row moving
+
         let column = columnsAndTasks.find(col => col.id === columnId);
         const dataArray = Array.from(column.items);
+        console.log(
+          '🚀 ~ file: CardsList.jsx:114 ~ onDragEnd ~ dataArray:',
+          dataArray
+        );
         const idTask = dataArray[source.index].id;
+        console.log(
+          '🚀 ~ file: CardsList.jsx:116 ~ onDragEnd ~ idTask:',
+          idTask
+        );
         const destinationIndex = destination.index;
+        console.log(
+          '🚀 ~ file: CardsList.jsx:118 ~ onDragEnd ~ destinationIndex:',
+          destinationIndex
+        );
         const { updatingDataFull, updatingDataStripped } =
           updateOrdersFromIndex({
             idTask,
             destinationIndex,
             dataArray,
           });
+        console.log(
+          '🚀 ~ file: CardsList.jsx:123 ~ onDragEnd ~ updatingDataStripped:',
+          updatingDataStripped
+        );
+        console.log(
+          '🚀 ~ file: CardsList.jsx:123 ~ onDragEnd ~ updatingDataFull:',
+          updatingDataFull
+        );
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
   };
 
   const isLoading = isColumnLoading || isTasksLoading;
-
-  const onDeleteColumn = id => {
-    dispatch(columnOperations.deleteColumn(id));
-  };
 
   return (
     <>
@@ -169,27 +185,14 @@ const CardsList = () => {
 
                               <IconsContainer>
                                 <EditColumnBtn column={column} />
-                                <IconButton>
-                                  {/* <SvgIcon
-                                    svgName="icon-pencil"
-                                    size={16}
-                                    stroke="rgba(255, 255, 255, 0.5)"
-                                  /> */}
-                                </IconButton>
                                 <IconButton
-                                  type="button"
                                   onClick={() =>
                                     dispatch(
                                       columnOperations.deleteColumn(column.id)
                                     )
                                   }
-                                >
-                                  <SvgIcon
-                                    svgName="icon-trash"
-                                    size={16}
-                                    stroke="#FFFFFF80"
-                                  />
-                                </IconButton>
+                                  svgName="icon-trash"
+                                ></IconButton>
                               </IconsContainer>
                             </ColumnHeading>
                             <StrictModeDroppable
