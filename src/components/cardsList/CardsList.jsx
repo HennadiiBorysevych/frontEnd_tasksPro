@@ -1,8 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { ConfirmToast } from 'react-confirm-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
+import { selectTheme } from 'redux/auth/authSelectors';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsOperations, columnsSelectors } from 'redux/columns';
 import columnSelectors from 'redux/columns/columnSelectors';
@@ -53,6 +55,8 @@ const CardsList = () => {
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
   const userFilter = useSelector(selectUserFilter);
+  const selectedTheme = useSelector(selectTheme);
+  const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
   const onDragEnd = result => {
     if (!result.destination) {
       return;
@@ -160,17 +164,23 @@ const CardsList = () => {
                               <ColumnHeadingText>
                                 {column.title}
                               </ColumnHeadingText>
-                              <IconsContainer>
-                                <EditColumnBtn column={column} />
-                                <IconButton
-                                  onClick={() =>
-                                    dispatch(
-                                      columnsOperations.deleteColumn(column.id)
-                                    )
-                                  }
-                                  svgName="icon-trash"
-                                ></IconButton>
-                              </IconsContainer>
+
+                              <ConfirmToast
+                                customFunction={() =>
+                                  dispatch(
+                                    columnsOperations.deleteColumn(column.id)
+                                  )
+                                }
+                                asModal={false}
+                                position={'top-left'}
+                                theme={toastClassName}
+                              >
+                                <IconsContainer>
+                                  <EditColumnBtn column={column} />
+
+                                  <IconButton svgName="icon-trash"></IconButton>
+                                </IconsContainer>
+                              </ConfirmToast>
                             </ColumnHeading>
                             <StrictModeDroppable
                               droppableId={column.id}
