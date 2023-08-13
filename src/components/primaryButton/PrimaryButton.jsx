@@ -12,7 +12,6 @@ const PrimaryButton = ({
   height,
   hasIcon,
   svgName,
-  variant,
   ...rest
 }) => {
   return (
@@ -22,7 +21,7 @@ const PrimaryButton = ({
       svgName={svgName}
       {...rest}
     >
-      {hasIcon && <ButtonPlus svgName={svgName} variant={variant} />}
+      {hasIcon && <ButtonPlus svgName={svgName} />}
       {children}
     </ButtonStyled>
   );

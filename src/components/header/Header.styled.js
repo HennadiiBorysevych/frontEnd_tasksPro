@@ -4,8 +4,8 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 14px 20px;
-  color: ${props => props.theme.palette.text.primary};
-  background-color: ${props => props.theme.palette.background.header};
+  color: #ffffff;
+  background-color: #161616;
 
   @media screen and (min-width: 768px) {
     padding: 18px 32px;

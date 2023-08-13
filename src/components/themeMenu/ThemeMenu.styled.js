@@ -5,6 +5,7 @@ export const DropdownWrapper = styled.div`
 `;
 
 export const DropdownButton = styled.button`
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.28px;
@@ -24,18 +25,18 @@ export const DropdownMenu = styled.ul`
   flex-direction: column;
   gap: 4px;
   border-radius: 8px;
-  border: 1px solid ${props => props.theme.palette.primary.border};
-  background: ${props => `${props.theme.palette.background.dropdown}`};
+  border: 1px solid #bedbb0;
+  background: #151515;
   box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
 `;
 
 export const DropdownItem = styled.li`
-  color: ${props => `${props.theme.palette.text.primary}`};
+  color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
   letter-spacing: -0.28px;
 
   &.selected {
-    color: ${props => `${props.theme.palette.hover.inputAndIcon}`};
+    color: #bedbb0;
   }
 
   &:hover {

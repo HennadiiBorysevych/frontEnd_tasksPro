@@ -5,6 +5,7 @@ import { SvgIcon } from 'components';
 import {
   InputStyled,
   InputUnit,
+  PasswordInputWrapper,
   PasswordWrapperIcon,
   TextareaStyled,
 } from './Input.styled';

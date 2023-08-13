@@ -4,7 +4,7 @@ export const SupportBox = styled.button`
   margin-bottom: 24px;
   padding: 14px 24px;
   display: block;
-  background-color: ${props => props.theme.palette.background.support};
+  background-color: #1f1f1f;
   border-radius: 8px;
   text-align: left;
 `;
@@ -23,7 +23,7 @@ export const SupportOffer = styled.p`
 `;
 
 export const AppName = styled.span`
-  color: ${props => props.theme.palette.hover.inputAndIcon};
+  color: #bedbb0;
 `;
 
 export const SupportQuestion = styled.span`

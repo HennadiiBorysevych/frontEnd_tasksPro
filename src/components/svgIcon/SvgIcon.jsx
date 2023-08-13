@@ -2,25 +2,16 @@ import React from 'react';
 import sprite from 'assets/images/sprite.svg';
 import PropTypes from 'prop-types';
 
-import {  SvgStyled } from './svgIcon.styled';
+import { SvgStyled } from './svgIcon.styled';
 
 const SvgIcon = ({
   svgName,
   size = '14px',
-  variant,
-  stroke = 'none',
+  stroke = '#FFFFFF',
   fill = 'none',
-  isActive,
 }) => {
   return (
-    <SvgStyled
-      width={size}
-      height={size}
-      stroke={stroke}
-      fill={fill}
-      variant={variant}
-      isActive={isActive}
-    >
+    <SvgStyled width={size} height={size} stroke={stroke} fill={fill}>
       <use href={sprite + `#${svgName}`} />
     </SvgStyled>
   );

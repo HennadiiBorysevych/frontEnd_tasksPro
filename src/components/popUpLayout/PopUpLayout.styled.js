@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div(props => ({
+export const Container = styled.div({
   position: 'relative',
   padding: '24px',
   width: '100%',
@@ -9,9 +9,9 @@ export const Container = styled.div(props => ({
   flexDirection: 'column',
   alignItems: 'left',
   overflow: 'hidden',
-  backgroundColor: props.theme.palette.background.dropdown,
+  backgroundColor: '#151515',
   borderRadius: '8px',
-}));
+});
 
 export const CloseBtn = styled.button({
   position: 'absolute',

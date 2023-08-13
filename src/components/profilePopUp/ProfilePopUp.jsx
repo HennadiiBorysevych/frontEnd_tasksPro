@@ -63,7 +63,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             <AvatarBg size="68" />
           )}
           <AddButtonWrap>
-            <SvgIcon svgName="icon-plus" variant='header' />
+            <SvgIcon svgName="icon-plus" stroke="#000" />
           </AddButtonWrap>
         </AvatarWrap>
         <form style={formStyle} onSubmit={handleModalSubmit}>

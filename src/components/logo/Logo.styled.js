@@ -22,7 +22,7 @@ export const Welcome = styled.h1`
 `;
 
 export const Bord = styled.h1`
-  color: ${props => `${props.theme.palette.text.sidemenu}`};
+  color: #fff;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.64px;

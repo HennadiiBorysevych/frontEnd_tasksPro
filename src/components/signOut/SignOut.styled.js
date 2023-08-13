@@ -12,5 +12,4 @@ export const TextSignOut = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.25;
-  color: ${props => props.theme.palette.text.sidemenu};
 `;

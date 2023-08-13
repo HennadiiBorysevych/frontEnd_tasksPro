@@ -1,39 +1,47 @@
+import { css } from '@emotion/react';
+
 import styled from '@emotion/styled';
 
-export const BoardListItem = styled.li(props => ({
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  backgroundColor: props.isActive
-    ? props.theme.palette.background.sideBarItem
-    : props.theme.palette.background.sidemenu + '80',
-  padding: '0 24px',
-  marginTop: props.isActive ? '4px' : '0',
+export const BoardListItem = styled.li`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #121212;
+  padding: 0 24px;
 
-  ...(props.isActive && {
-    '&::after': {
-      content: "''",
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      height: '100%',
-      width: '4px',
-      backgroundColor: props.theme.palette.primary.iconLog,
-      borderRadius: '4px 0px 0px 4px',
-    },
-  }),
-}));
+  & + & {
+    margin-top: 4px;
+  }
 
-export const BoardName = styled.h2(props => ({
-  fontSize: '14px',
-  fontWeight: 500,
-  lineHeight: 1.25,
-  letterSpacing: '-0.28px',
-  color: props.isActive
-    ? props.theme.palette.text.primary
-    : props.theme.palette.text.primary + '80',
-}));
+  ${props =>
+    props.isActive &&
+    css`
+      background-color: #1f1f1f;
+    `}
+
+  &::after {
+    ${props =>
+      props.isActive &&
+      css`
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 4px;
+        background-color: #bedbb0;
+        border-radius: 4px 0px 0px 4px;
+      `}
+  }
+`;
+
+export const BoardName = styled.h2`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.28px;
+`;
 
 export const BoardIdentificationItem = styled.button`
   display: flex;

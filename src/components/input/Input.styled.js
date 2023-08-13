@@ -8,7 +8,7 @@ width: calc(100%);
   padding: 14px 18px;
   
   border-radius: 8px;
- 
+  border: 1px solid #bedbb0;
   box-shadow: 0px 4px 16px 0px rgba(22, 22, 22, 0.08);
   opacity: 0.4;
 
@@ -17,9 +17,10 @@ width: calc(100%);
 
   font-size: 14px;
   letter-spacing: -0.28px;
-  
+  color: #ffffff;
 
   &::placeholder {
+    color: #fff;
     font-size: 14px;
     letter-spacing: -0.28px;
   }
@@ -31,12 +32,8 @@ width: calc(100%);
 
 export const InputStyled = styled.input`
   ${CommonInputStyles};
-  background: ${props => props.theme.palette.background.input};
-  border: 1px solid ${props => props.theme.palette.hover.inputAndIcon};
-  color: ${props => props.theme.palette.text.primary};
-  &::placeholder {
-    color: ${props => props.theme.palette.text.primary};
-  }
+  background: ${props =>
+    props.background ? `${props.background}` : '#1f1f1f'};
 `;
 
 export const TextareaStyled = styled.textarea`
@@ -44,13 +41,8 @@ export const TextareaStyled = styled.textarea`
   resize: none;
   overflow: auto;
   height: ${props => (props.height ? `${props.height}px` : '154px')};
-  background: ${props => props.theme.palette.background.input};
-  border: 1px solid ${props => props.theme.palette.hover.inputAndIcon};
-  color: ${props => props.theme.palette.text.primary};
-
-  &::placeholder {
-    color: ${props => props.theme.palette.text.primary};
-  }
+  background: ${props =>
+    props.background ? `${props.background}` : '#1f1f1f'};
 `;
 
 export const InputUnit = styled.div`

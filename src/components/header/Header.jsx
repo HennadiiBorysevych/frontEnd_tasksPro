@@ -9,7 +9,7 @@ const Header = ({ isOpenSideBar }) => {
   return (
     <styles.HeaderBox>
       <styles.SideBarButton type="button" onClick={isOpenSideBar}>
-        <SvgIcon svgName="icon-menu" size={28} variant='header' />
+        <SvgIcon svgName="icon-menu" size={28} stroke="#ffffff" />
       </styles.SideBarButton>
       <styles.UserSettings>
         <ThemeMenu />

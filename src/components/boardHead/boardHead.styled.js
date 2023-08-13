@@ -5,10 +5,7 @@ export const Header = styled.div`
   align-items: center;
   justify-content: ${({ boardName }) =>
     boardName ? 'space-between' : 'flex-end'};
-  color: ${props =>
-    props.active
-      ? props.theme.palette.text.primary
-      : `${props.theme.palette.text.primary}80`};
+  color: #ffffff;
   margin-bottom: 39px;
   width: 100%;
 

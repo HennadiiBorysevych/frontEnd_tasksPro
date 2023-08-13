@@ -16,11 +16,11 @@ export const Avatar = styled.div(
 );
 
 export const AvatarBg = styled.div(
-  props => ({
+  {
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: props.theme.palette.background.bord,
+    backgroundColor: '#1F1F1F',
     '::before': {
       position: 'absolute',
       zIndex: '2',
@@ -29,7 +29,7 @@ export const AvatarBg = styled.div(
       transform: 'translate( -50%, 0)',
       content: '""',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: '#151515',
     },
     '::after': {
       position: 'absolute',
@@ -39,9 +39,9 @@ export const AvatarBg = styled.div(
       transform: 'translate( -50%, 54%)',
       content: '""',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: '#151515',
     },
-  }),
+  },
   props => ({
     '::before': {
       width: `${Number.parseInt(props.size) * 0.338}px`,

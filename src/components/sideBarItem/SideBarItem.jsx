@@ -44,19 +44,30 @@ const SideBarItem = ({
           <SvgIcon
             svgName={`${iconName}`}
             size={18}
-            isActive={active}
-            variant="popUp"
+            stroke={active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'}
           />
-          <BoardName isActive={active}>{title}</BoardName>
+          <BoardName
+            style={{ color: active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)' }}
+          >
+            {title}
+          </BoardName>
         </BoardIdentificationItem>
         {active && (
           <BoardItemControl>
             <button aria-label="Edit board" onClick={toggleWindows}>
-              <SvgIcon svgName="icon-pencil" size={16} variant="support" />
+              <SvgIcon
+                svgName="icon-pencil"
+                size={16}
+                stroke="rgba(255,255,255,0.5)"
+              />
             </button>
 
             <button aria-label="Delete board" onClick={onDeleteClick}>
-              <SvgIcon svgName="icon-trash" size={16} variant="support" />
+              <SvgIcon
+                svgName="icon-trash"
+                size={16}
+                stroke="rgba(255,255,255,0.5)"
+              />
             </button>
           </BoardItemControl>
         )}

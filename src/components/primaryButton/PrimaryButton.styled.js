@@ -11,8 +11,8 @@ export const ButtonStyled = styled.button`
   border-radius: 8px;
   cursor: pointer;
 
-  background-color: ${props => props.theme.palette.background.primaryButton};
-  color: ${props => props.theme.palette.text.primary};
+  background-color: #bedbb0;
+  color: #161616;
 
   font-size: 14px;
   font-weight: 500;
@@ -20,6 +20,6 @@ export const ButtonStyled = styled.button`
   text-align: center;
 
   &:hover {
-    background-color: ${props => props.theme.palette.hover.primaryButton};
+    background-color: #9dc888;
   }
 `;

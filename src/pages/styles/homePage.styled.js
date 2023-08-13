@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 
 export const BoardWrap = styled.div`
   padding: 14px 20px 60px;
-  background-color: ${props => `${props.theme.palette.background.bord}`};
+  background-color: #1f1f1f;
   background-repeat: no-repeat;
   background-image: url(${props => props.bg});
   background-size: cover;
-  color: ${props => `${props.theme.palette.text.primary}B2`};
+  color: #ffffff;
   min-height: calc(100vh - 60px);
 
   @media screen and (min-width: 768px) {
@@ -35,12 +35,12 @@ export const WelcomeText = styled.p`
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: -0.24px;
-  color: ${props => `${props.theme.palette.text.primary}B2`};
+  color: rgba(255, 255, 255, 0.5);
   text-align: center;
 `;
 
 export const CreateBoardLink = styled.a`
   text-decoration: none;
   cursor: pointer;
-  color: ${props => `${props.theme.palette.hover.inputAndIcon}`};
+  color: var(--highPriorityColor);
 `;

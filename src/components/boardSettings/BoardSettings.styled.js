@@ -14,7 +14,7 @@ export const RadioField = styled.input`
 
   &:hover ~ .background-label,
   &:checked ~ .background-label {
-    outline: 1px solid ${props => props.theme.palette.hover.inputAndIcon};
+    outline: 1px solid #bedbb0;
   }
 
   &:hover ~ .icon-label,
@@ -41,7 +41,7 @@ export const BoardText = styled.p`
   line-height: 21px;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
-  color: ${props => props.theme.palette.text.primary};
+  color: #ffffff;
 `;
 
 export const BackgroundImage = styled.div(props => ({
@@ -54,9 +54,6 @@ export const BackgroundImage = styled.div(props => ({
   cursor: 'pointer',
   margin: '2px',
   backgroundImage: `url(${props.bgIndex.regular})`,
-  border: $props => props.isActive
-    ? `1px solid ${props.theme.palette.primary.main}`
-    : 'none',
   '@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)':
     {
       backgroundImage: `url(${props.bgIndex.x2})`,
@@ -66,4 +63,3 @@ export const BackgroundImage = styled.div(props => ({
       backgroundImage: `url(${props.bgIndex.x3})`,
     },
 }));
-

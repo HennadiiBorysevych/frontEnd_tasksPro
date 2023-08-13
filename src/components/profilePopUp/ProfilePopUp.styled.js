@@ -28,7 +28,7 @@ export const AvatarWrap = styled.div(
   })
 );
 
-export const AddButtonWrap = styled.div(props => ({
+export const AddButtonWrap = styled.div({
   position: 'absolute',
   zIndex: '3',
   bottom: '0%',
@@ -40,9 +40,8 @@ export const AddButtonWrap = styled.div(props => ({
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '6px',
-  backgroundColor: props.theme.palette.background.profile,
-}));
-
+  backgroundColor: '#BEDBB0',
+});
 export const AvatarInput = styled.input({
   position: 'absolute',
   zIndex: '4',
@@ -59,17 +58,20 @@ export const Input = styled.input({
   width: '100%',
   fontSize: '14px',
   borderRadius: '8px',
+  border: '1px solid rgba(	190, 219, 176, .4)',
+  backgroundColor: 'inherit',
+  ':focus': {
+    outline: '1px solid rgba(	190, 219, 176,1)',
+  },
 });
-
 export const AvatarBg = styled.div(
-  props => ({
+  {
     position: 'relative',
     width: '100%',
     height: '100%',
     borderRadius: '8px',
     overflow: 'hidden',
-    backgroundColor: props.theme.palette.background.bord,
-
+    backgroundColor: '#1F1F1F',
     '::before': {
       position: 'absolute',
       zIndex: '2',
@@ -78,7 +80,7 @@ export const AvatarBg = styled.div(
       transform: 'translate( -50%, 0)',
       content: '""',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: '#151515',
     },
     '::after': {
       position: 'absolute',
@@ -88,9 +90,9 @@ export const AvatarBg = styled.div(
       transform: 'translate( -50%, 54%)',
       content: '""',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: '#151515',
     },
-  }),
+  },
   props => ({
     '::before': {
       width: `${Number.parseInt(props.size) * 0.338}px`,
