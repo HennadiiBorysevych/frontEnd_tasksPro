@@ -1,12 +1,17 @@
 import styled from '@emotion/styled';
 
 export const SupportBox = styled.button`
-  margin-bottom: 24px;
-  padding: 14px 24px;
+  padding: 14px;
   display: block;
   background-color: ${props => props.theme.palette.background.support};
   border-radius: 8px;
   text-align: left;
+  margin: 0 14px 24px;
+
+  @media screen and (min-width: 768px) {
+    padding: 20px;
+    margin: 0 24px 24px;
+  }
 `;
 
 export const SupportPlate = styled.img`

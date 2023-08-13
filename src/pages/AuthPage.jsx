@@ -1,58 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 
 import { AuthForm } from 'components';
 
 import { Background, Container } from './styles/commonStyles';
 
-import { AuthContainer } from './styles/authPage.styled';
-import styled from '@emotion/styled';
-
-const StyledTabs = styled(Tabs)({
-  '& .MuiTabs-indicator': {
-    backgroundColor: 'transparent',
-  },
-  '& .MuiTabs-flexContainer': {
-    display: 'flex',
-    gap: '14px',
-    border: 'none',
-    paddingBottom: '40px',
-  },
-});
-
-const StyledTab = styled(props => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: 'none',
-    borderRadius: 'none',
-    padding: '0px',
-    margin: '0px',
-
-    minWidth: '0px',
-    minHeight: '0px',
-
-    color: 'gray',
-    fontFamily: ['Poppins', 'sans-serif'],
-    fontSize: '18px',
-    fontWeight: '500',
-    fontHeight: '27px',
-
-    '&:hover': {
-      color: '#fff',
-      opacity: 1,
-    },
-    '&.Mui-selected': {
-      color: 'white',
-    },
-  })
-);
+import { AuthContainer, StyledTab, StyledTabs } from './styles/authPage.styled';
 
 const AuthPage = e => {
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const { id } = useParams();
   const history = useNavigate();
   const [value, setValue] = useState(id === 'register' ? 0 : 1);
   const [resetForm, setResetForm] = useState(0);
+
+  const updateWindowHeight = () => {
+    setWindowHeight(window.innerHeight);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', updateWindowHeight);
+
+    return () => {
+      window.removeEventListener('resize', updateWindowHeight);
+    };
+  }, []);
 
   const tabToIdx = {
     1: 'register',
@@ -67,7 +39,7 @@ const AuthPage = e => {
 
   return (
     <Background>
-      <Container>
+      <Container windowHeight={windowHeight}>
         <AuthContainer>
           <StyledTabs value={value} onChange={handleChange}>
             <StyledTab label="Registration" />
