@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import { selectTheme } from 'redux/auth/authSelectors';
 import { persistor, store } from 'redux/store';
-import selectTheme from 'redux/theme/themeSelectors';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import App from 'components/App';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import sprite from 'assets/images/sprite.svg';
 import PropTypes from 'prop-types';
-import selectTheme from 'redux/theme/themeSelectors';
+import { selectTheme } from 'redux/auth/authSelectors';
 
 import { Bord, LogoWrapper, Welcome } from './Logo.styled';
 
