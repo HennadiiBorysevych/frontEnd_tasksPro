@@ -20,14 +20,4 @@ export const RegisterLink = styled.li`
   border-radius: 8px;
   color: #ffffff;
   margin-bottom: 14px;
-
-  @media screen and (min-width: 375px) {
-    padding: 14px 126px;
-    width: max-content;
-    margin: 0px auto 14px auto;
-  }
-
-  @media screen and (min-width: 768px) {
-    padding: 14px 131px;
-  }
 `;

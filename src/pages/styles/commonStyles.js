@@ -12,13 +12,7 @@ export const Background = styled.section`
 
 export const Container = styled.div`
   padding: 0 20px;
-  width: 100%;
-
-  @media screen and (min-width: 375px) {
-    width: 375px;
-  }
-
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1439px) {
     width: 473px;
   }
 `;
