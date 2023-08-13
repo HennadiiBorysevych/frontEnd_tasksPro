@@ -6,11 +6,11 @@ const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
 
   const handleColumnSubmit = values => {
     if (currentColumn) {
-      const { id, items, ...rest } = currentColumn;
+      const { id, order, columnOwner } = currentColumn;
       dispatch(
         columnsOperations.updateColumn({
           columnId: id,
-          updatedData: { ...rest, title: values.title },
+          updatedData: { title: values.title, orderColumn: order, columnOwner },
         })
       );
     } else {
