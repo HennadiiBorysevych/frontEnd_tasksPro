@@ -57,10 +57,11 @@ export const TitleBoardList = styled.h2`
   font-weight: 400;
   letter-spacing: -0.24px;
 
-  padding: 0 24px;
+  padding: 0 14px;
 
   @media screen and (min-width: 768px) {
     margin-top: 60px;
+    padding: 0 24px;
   }
 `;
 
@@ -71,8 +72,12 @@ export const CreateBoard = styled.button`
   width: 100%;
   border-top: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
   border-bottom: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
-  padding: 14px 24px;
+  padding: 14px;
   margin-bottom: 40px;
+
+  @media screen and (min-width: 768px) {
+    padding: 14px 24px;
+  }
 `;
 
 export const TitleButton = styled.p`

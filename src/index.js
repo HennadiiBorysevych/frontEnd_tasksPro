@@ -14,6 +14,8 @@ import './GlobalStyles.js';
 
 import { darkTheme, lightTheme, violetTheme } from './themes/theme';
 
+import './index.css';
+
 const ThemedApp = () => {
   const selectedTheme = useSelector(selectTheme);
 

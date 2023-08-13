@@ -7,12 +7,18 @@ export const LogoWrapper = styled.div`
     variant === 'welcome' ? 'center' : 'flex-start'};
   gap: ${({ variant }) => (variant === 'welcome' ? '14px' : '8px')};
   margin-top: ${({ variant }) => (variant === 'welcome' ? '14px' : '0')};
+  padding: ${({ variant }) => (variant === 'welcome' ? '0' : ' 0 14px')};
+
+  @media (min-width: 768px) {
+    padding: ${({ variant }) => (variant === 'welcome' ? '0' : ' 0 24px')};
+  }
 `;
 
 export const Welcome = styled.h1`
   color: #161616;
   font-size: 28px;
   font-weight: 600;
+  line-height: 1.25;
   letter-spacing: -1.12px;
 
   @media (min-width: 768px) {

@@ -1,26 +1,56 @@
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+
 import styled from '@emotion/styled';
 
+export const StyledTabs = styled(Tabs)({
+  '& .MuiTabs-indicator': {
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-flexContainer': {
+    display: 'flex',
+    gap: '14px',
+    border: 'none',
+    paddingBottom: '40px',
+  },
+});
+
+export const StyledTab = styled(props => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    textTransform: 'none',
+    borderRadius: 'none',
+    padding: '0px',
+    margin: '0px',
+
+    minWidth: '0px',
+    minHeight: '0px',
+
+    color: 'gray',
+    fontFamily: 'inherit',
+    fontSize: '18px',
+    fontWeight: '500',
+    fontHeight: '27px',
+
+    '&:hover': {
+      color: '#fff',
+      opacity: 1,
+    },
+    '&.Mui-selected': {
+      color: 'white',
+    },
+  })
+);
+
 export const AuthContainer = styled.div`
-  position: absolute;
-  min-width: 275px;
-  margin: 0 auto;
+  width: 100%;
   padding: 24px;
 
   background-color: var(--bgColorAuth);
   border-radius: 8px;
 
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  @media screen and (min-width: 375px) and (max-width: 767px) {
-    width: 335px;
-    padding: 24px;
-  }
-
   @media screen and (min-width: 768px) {
-    width: 395px;
     padding: 40px;
+    width: 424px;
   }
 `;
 
