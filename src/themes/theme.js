@@ -24,6 +24,7 @@ const darkTheme = createTheme({
       popUp: '#151515',
       profile: '#BEDBB0',
       sideBarItem: '#1F1F1F',
+      cardItem: '#121212',
     },
     text: {
       primary: '#FFFFFF',
@@ -64,6 +65,7 @@ const lightTheme = createTheme({
       popUp: '#FCFCFC',
       profile: '#BEDBB0',
       sideBarItem: '#F6F6F7',
+      cardItem: '#FFFFFF',
     },
     text: {
       primary: '#161616',
@@ -104,6 +106,7 @@ const violetTheme = createTheme({
       popUp: '#FCFCFC',
       profile: '#ECEDFD',
       sideBarItem: '#FFFFFF80',
+      cardItem: '#FFFFFF',
     },
     text: {
       primary: '#161616',

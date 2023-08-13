@@ -51,12 +51,21 @@ const CardItem = ({ item }) => {
         </DetailsContainer>
         <IconsContainer>
           {isDeadlineToday && (
-            <SvgIcon svgName="icon-bell" size={16} stroke="#BEDBB0" />
+            <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
           )}
-          <IconButton onClick={toggleModal} svgName="icon-pencil" />
           <IconButton
-            onClick={() => dispatch(cardOperations.deleteTask(id))}
+            svgName="icon-pencil"
+            size={16}
+            variant="popUp"
+            isActive="false"
+            onClick={toggleModal}
+          />
+          <IconButton
             svgName="icon-trash"
+            size={16}
+            variant="popUp"
+            isActive="false"
+            onClick={() => dispatch(cardOperations.deleteTask(id))}
           />
         </IconsContainer>
       </Details>

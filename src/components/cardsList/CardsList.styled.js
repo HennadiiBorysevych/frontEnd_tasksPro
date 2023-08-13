@@ -32,7 +32,7 @@ export const ColumnHeading = styled.div`
   align-items: center;
   height: 56px;
   padding: 0 20px;
-  background-color: #121212;
+  background-color: ${props => props.theme.palette.background.cardItem};
   border-radius: 8px;
   cursor: pointer;
 `;

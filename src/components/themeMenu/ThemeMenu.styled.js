@@ -18,6 +18,7 @@ export const DropdownMenu = styled.ul`
   position: absolute;
   top: 100%;
   left: 0;
+  z-index: 2;
 
   padding: 18px 44px 18px 18px;
   display: flex;

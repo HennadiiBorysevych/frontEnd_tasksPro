@@ -2,9 +2,6 @@ import styled from '@emotion/styled';
 
 export const BoardWrap = styled.div`
   padding: 14px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: ${props => `${props.theme.palette.background.bord}`};
   background-repeat: no-repeat;
   background-image: url(${props => props.bg});
@@ -24,6 +21,12 @@ export const BoardWrap = styled.div`
 
 export const DefaultWrapper = styled.div`
   width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 
   @media screen and (min-width: 375px) {
     padding: 0 20px;
