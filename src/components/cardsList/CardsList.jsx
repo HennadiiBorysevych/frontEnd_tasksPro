@@ -199,6 +199,11 @@ const CardsList = () => {
                                     ref={provided.innerRef}
                                   >
                                     {column.items
+                                      .filter(({ priority }) =>
+                                        priority
+                                          .toLowerCase()
+                                          .includes(userFilter)
+                                      )
                                       .sort((a, b) => a.order - b.order) // Sort items by order
                                       .map((item, index) => (
                                         <Draggable

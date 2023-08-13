@@ -15,6 +15,10 @@ export function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
       return { ...item };
     }
   });
+  console.log(
+    '🚀 ~ file: updateOrdersFromIndex.js:18 ~ updatingDataFull ~ updatingDataFull:',
+    updatingDataFull
+  );
 
   const updatingDataStripped = dataArray.map(({ id, order }, index) => {
     if (index === sourceIndex) {

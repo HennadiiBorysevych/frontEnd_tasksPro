@@ -32,11 +32,13 @@ const BoardPopUp = ({ board, onClose }) => {
         <Input
           style={{
             marginBottom: '14px',
-            border: titleChecker && '1px solid red',
           }}
           onChange={handleTitle}
           placeholder={board ? board?.title : 'Title'}
         />
+        {titleChecker ? (
+          <span style={{ color: 'white' }}>Title is required</span>
+        ) : null}
         <BoardSettings
           chosenIcon={icon}
           setChosenIcon={setIcon}
@@ -47,8 +49,9 @@ const BoardPopUp = ({ board, onClose }) => {
           style={{ marginTop: '16px' }}
           onClick={handleBoradSubmit}
           hasIcon={false}
+          variant="primary"
         >
-          <ButtonPlus />
+          <ButtonPlus variant="primary" />
           {board ? 'Edit' : 'Create'}
         </PrimaryButton>
       </PopUpLayout>

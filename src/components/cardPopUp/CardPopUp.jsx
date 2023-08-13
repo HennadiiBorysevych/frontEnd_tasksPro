@@ -1,7 +1,13 @@
 import React from 'react';
 import { useCard } from 'hooks';
 
-import { CardsSettings, Input, PopUpLayout, PrimaryButton } from 'components';
+import {
+  ButtonPlus,
+  CardsSettings,
+  Input,
+  PopUpLayout,
+  PrimaryButton,
+} from 'components';
 
 import { Container } from './CardPopUp.styled';
 
@@ -34,9 +40,11 @@ const CardPopUp = ({
           placeholder={card ? card?.title : 'Title'}
           style={{
             marginBottom: '14px',
-            border: titleChecker && '1px solid red',
           }}
         />
+        {titleChecker ? (
+          <span style={{ color: 'white' }}>Title is required</span>
+        ) : null}
         <Input
           name="description"
           onChange={handleInput}
@@ -54,6 +62,7 @@ const CardPopUp = ({
           setDeadline={setDeadline}
         />
         <PrimaryButton hasIcon={false} onClick={handleCardSubmit}>
+          <ButtonPlus />
           {card ? 'Edit' : 'Create'}
         </PrimaryButton>
       </PopUpLayout>

@@ -13,7 +13,7 @@ const BoardHead = () => {
   const activeBoard = useSelector(selectActiveBoard);
   return (
     <>
-      <Header boardName={activeBoard}>
+      <Header boardName={activeBoard} active={decodedTitle === activeBoard}>
         {!!decodedTitle && <BoardTitle>{activeBoard.title}</BoardTitle>}
         <Filters />
       </Header>

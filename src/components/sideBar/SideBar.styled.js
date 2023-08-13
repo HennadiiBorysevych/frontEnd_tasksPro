@@ -9,9 +9,9 @@ export const SideBarWrapper = styled.div`
   justify-content: space-between;
   width: 225px;
   height: 100vh;
-  background-color: #121212;
+  background-color: ${props => `${props.theme.palette.background.sidemenu}`};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  color: #ffffff;
+  color: ${props => `${props.theme.palette.text.sidemenu}`};
 
   @media screen and (max-width: 767px) {
     left: ${({ isOpen }) => (isOpen ? '0' : '-225px')};
@@ -52,10 +52,11 @@ export const Overlay = styled.div`
 export const TitleBoardList = styled.h2`
   margin-top: 70px;
   margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => `${props.theme.palette.text.sidemenu}80`};
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;
+
   padding: 0 24px;
 
   @media screen and (min-width: 768px) {
@@ -68,8 +69,8 @@ export const CreateBoard = styled.button`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
+  border-bottom: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
   padding: 14px 24px;
   margin-bottom: 40px;
 `;

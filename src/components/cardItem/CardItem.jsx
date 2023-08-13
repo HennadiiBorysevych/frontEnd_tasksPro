@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from 'hooks';
-import cardOperations from 'redux/tasks/cardOperations';
+import { cardOperations } from 'redux/tasks';
 
 import { CardPopUp, Modal } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';

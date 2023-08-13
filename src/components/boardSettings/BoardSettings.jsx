@@ -55,7 +55,8 @@ const BoardSettings = ({
                 <IconContainer>
                   <SvgIcon
                     svgName={id}
-                    stroke={id === chosenIcon ? '#ffffff' : '#7f7f7f'}
+                    isActive={id === chosenIcon}
+                    variant="popUp"
                   />
                 </IconContainer>
               </label>
@@ -74,12 +75,7 @@ const BoardSettings = ({
                 />
                 <BackgroundImage
                   bgIndex={bgIndex}
-                  style={{
-                    border:
-                      chosenBackground === bgIndex.title
-                        ? '1px solid #bedbb0'
-                        : 'none',
-                  }}
+                  isActive={chosenBackground === bgIndex.title}
                 />
               </label>
             ))}

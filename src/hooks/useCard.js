@@ -33,7 +33,7 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
       seTitleChecker(true);
       setTimeout(() => {
         seTitleChecker(false);
-      }, 500);
+      }, 2000);
       return;
     }
 
