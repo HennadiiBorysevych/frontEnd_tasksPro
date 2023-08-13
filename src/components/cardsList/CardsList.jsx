@@ -4,8 +4,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
-import { columnsSelectors } from 'redux/columns';
-import columnOperations from 'redux/columns/columnOperations';
+import { columnsOperations, columnsSelectors } from 'redux/columns';
 import columnSelectors from 'redux/columns/columnSelectors';
 import { moveTaskToColumn } from 'redux/tasks/cardOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
@@ -48,7 +47,6 @@ export const StrictModeDroppable = ({ children, ...props }) => {
   }
   return <Droppable {...props}>{children}</Droppable>;
 };
-
 const CardsList = () => {
   const dispatch = useDispatch();
   const activeBoardId = useSelector(selectActiveBoardId);
@@ -60,7 +58,6 @@ const CardsList = () => {
     if (!result.destination) {
       return;
     }
-
     if (result.type === 'column') {
       // whole column moving
       const dataArray = Array.from(columnsAndTasks);
@@ -72,7 +69,7 @@ const CardsList = () => {
         dataArray,
       });
       dispatch(
-        columnOperations.moveColumn({ updatingDataFull, updatingDataStripped })
+        columnsOperations.moveColumn({ updatingDataFull, updatingDataStripped })
       );
     } else {
       const dataArray = Array.from(columnsAndTasks);
@@ -127,9 +124,8 @@ const CardsList = () => {
   const isLoading = isColumnLoading || isTasksLoading;
 
   const onDeleteColumn = id => {
-    dispatch(columnOperations.deleteColumn(id));
+    dispatch(columnsOperations.deleteColumn(id));
   };
-
   return (
     <>
       <CustomScrollBar height="500px">
@@ -166,7 +162,6 @@ const CardsList = () => {
                               <ColumnHeadingText>
                                 {column.title}
                               </ColumnHeadingText>
-
                               <IconsContainer>
                                 <EditColumnBtn column={column} />
                                 <IconButton>
@@ -180,7 +175,7 @@ const CardsList = () => {
                                   type="button"
                                   onClick={() =>
                                     dispatch(
-                                      columnOperations.deleteColumn(column.id)
+                                      columnsOperations.deleteColumn(column.id)
                                     )
                                   }
                                 >
@@ -258,5 +253,4 @@ const CardsList = () => {
     </>
   );
 };
-
 export default CardsList;

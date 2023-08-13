@@ -17,7 +17,6 @@ export { default as EditColumnBtn } from './editColumnBtn/EditColumnBtn';
 export { default as Filters } from './filters/Filters';
 export { default as Header } from './header/Header';
 export { default as Input } from './input/Input';
-export { default as Loader } from './loader/Loader';
 export { default as Logo } from './logo/Logo';
 export { default as Modal } from './modal/Modal';
 export { default as PopUpLayout } from './popUpLayout/PopUpLayout';

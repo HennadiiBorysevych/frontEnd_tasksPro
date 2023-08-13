@@ -59,6 +59,7 @@ export const deleteTask = createAsyncThunk(
   async (taskId, thunkAPI) => {
     try {
       const response = await axios.delete(`/api/tasks/${taskId}`);
+      console.log('operations: card has deleted');
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

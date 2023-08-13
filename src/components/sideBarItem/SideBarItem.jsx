@@ -26,7 +26,7 @@ const SideBarItem = ({
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
   const boards = useSelector(selectAllBoards);
-  console.log(onToggleModalAndSideBar);
+
   const editingBoard = boards.find(board => board.id === activeBoardId);
 
   const toggleWindows = () => {
@@ -75,7 +75,6 @@ SideBarItem.propTypes = {
   title: PropTypes.string.isRequired,
   onHandleActiveBoard: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
-  onToggleModalAndSideBar: PropTypes.func.isRequired,
 };
 
 export default SideBarItem;

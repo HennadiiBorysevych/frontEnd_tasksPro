@@ -1,10 +1,8 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
 import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 
 import { CustomScrollbar } from 'components';
-// import { boardsOperations } from 'redux/boards';
 import {
   BoardPopUp,
   ButtonPlus,

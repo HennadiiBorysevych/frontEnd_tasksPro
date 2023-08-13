@@ -2,11 +2,11 @@ import React from 'react';
 import { useCard } from 'hooks';
 
 import {
+  ButtonPlus,
   CardsSettings,
   Input,
   PopUpLayout,
   PrimaryButton,
-  ButtonPlus,
 } from 'components';
 
 import { Container } from './CardPopUp.styled';

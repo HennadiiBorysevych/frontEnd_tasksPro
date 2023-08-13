@@ -1,9 +1,10 @@
 import React from 'react';
-import { useModal } from 'hooks';
 import { useDispatch } from 'react-redux';
-import { Modal, CardPopUp } from 'components';
+import { useModal } from 'hooks';
+import { cardOperations } from 'redux/tasks';
+
+import { CardPopUp, Modal } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
-import cardOperations from 'redux/tasks/cardOperations';
 
 import {
   CardContainer,
@@ -47,7 +48,6 @@ const CardItem = ({ item }) => {
             <DetailValue>{formattedDeadline}</DetailValue>
           </div>
         </DetailsContainer>
-
         <IconsContainer>
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} stroke="#BEDBB0" />
@@ -73,5 +73,4 @@ const CardItem = ({ item }) => {
     </CardContainer>
   );
 };
-
 export default CardItem;
