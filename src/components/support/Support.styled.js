@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 
 export const SupportBox = styled.button`
   margin-bottom: 24px;
-  padding: 14px;
+  padding: 14px 24px;
   display: block;
-  background-color: #1f1f1f;
+  background-color: ${props => props.theme.palette.background.support};
   border-radius: 8px;
   text-align: left;
 `;
@@ -23,7 +23,7 @@ export const SupportOffer = styled.p`
 `;
 
 export const AppName = styled.span`
-  color: #bedbb0;
+  color: ${props => props.theme.palette.hover.inputAndIcon};
 `;
 
 export const SupportQuestion = styled.span`

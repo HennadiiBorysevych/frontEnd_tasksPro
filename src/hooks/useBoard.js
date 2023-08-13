@@ -20,33 +20,29 @@ const useBoard = (currentBoard, closeModal) => {
 
   const dispatch = useDispatch();
 
-  const handleBoradSubmit = useCallback(async () => {
+  const handleBoradSubmit = () => {
     if (title === '' && !currentBoard) {
       seTitleChecker(true);
       setTimeout(() => {
         seTitleChecker(false);
-      }, 500);
+      }, 2000);
       return;
     }
     const { id, user, ...rest } = board;
 
-    try {
-      if (currentBoard) {
-        dispatch(
-          boardsOperations.updateBoard({
-            boardId: id,
-            updatedData: rest,
-          })
-        );
-      } else {
-        dispatch(boardsOperations.addBoard(rest));
-      }
-
-      closeModal();
-    } catch (error) {
-      console.error('An error occurred while adding or editing a board', error);
+    if (currentBoard) {
+      dispatch(
+        boardsOperations.updateBoard({
+          boardId: id,
+          updatedData: rest,
+        })
+      );
+    } else {
+      dispatch(boardsOperations.addBoard(rest));
     }
-  }, [board, closeModal, currentBoard, dispatch, title]);
+
+    closeModal();
+  };
 
   const handleTitle = useCallback(e => {
     setTitle(e.currentTarget.value);

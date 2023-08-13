@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsSelectors } from 'redux/columns';
-import { moveColumn } from 'redux/columns/columnOperations';
+import columnOperations from 'redux/columns/columnOperations';
 import columnSelectors from 'redux/columns/columnSelectors';
 import { moveTaskToColumn } from 'redux/tasks/cardOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
 import cardSelectors from 'redux/tasks/cardSelectors';
+import { selectUserFilter } from 'redux/userFilterSlice';
 
 import {
   AddCardBtn,
@@ -54,6 +55,7 @@ const CardsList = () => {
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
+  const userFilter = useSelector(selectUserFilter);
   const onDragEnd = result => {
     if (!result.destination) {
       return;
@@ -69,11 +71,9 @@ const CardsList = () => {
         destinationIndex,
         dataArray,
       });
-      // columnsAndTasks = updateOrdersFromArray(
-      //   columnsAndTasks,
-      //   updatingDataStripped
-      // );
-      dispatch(moveColumn({ updatingDataFull, updatingDataStripped }));
+      dispatch(
+        columnOperations.moveColumn({ updatingDataFull, updatingDataStripped })
+      );
     } else {
       const dataArray = Array.from(columnsAndTasks);
       const { source, destination } = result;
@@ -106,9 +106,6 @@ const CardsList = () => {
           destinationIndex,
           dataArray: destinationColumnItems,
         });
-        // columnsAndTasks.forEach(column => {
-        //   column.items = updateOrdersFromArray(column.items, dataNew);
-        // });
         dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
       } else {
         // row moving
@@ -122,16 +119,16 @@ const CardsList = () => {
             destinationIndex,
             dataArray,
           });
-        // column.items = updateOrdersFromArray(
-        //   column.items,
-        //   updatingDataStripped
-        // );
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
   };
 
   const isLoading = isColumnLoading || isTasksLoading;
+
+  const onDeleteColumn = id => {
+    dispatch(columnOperations.deleteColumn(id));
+  };
 
   return (
     <>
@@ -179,11 +176,20 @@ const CardsList = () => {
                                     stroke="rgba(255, 255, 255, 0.5)"
                                   /> */}
                                 </IconButton>
-                                <SvgIcon
-                                  svgName="icon-trash"
-                                  size={16}
-                                  stroke="#FFFFFF80"
-                                />
+                                <IconButton
+                                  type="button"
+                                  onClick={() =>
+                                    dispatch(
+                                      columnOperations.deleteColumn(column.id)
+                                    )
+                                  }
+                                >
+                                  <SvgIcon
+                                    svgName="icon-trash"
+                                    size={16}
+                                    stroke="#FFFFFF80"
+                                  />
+                                </IconButton>
                               </IconsContainer>
                             </ColumnHeading>
                             <StrictModeDroppable
@@ -198,6 +204,11 @@ const CardsList = () => {
                                     ref={provided.innerRef}
                                   >
                                     {column.items
+                                      .filter(({ priority }) =>
+                                        priority
+                                          .toLowerCase()
+                                          .includes(userFilter)
+                                      )
                                       .sort((a, b) => a.order - b.order) // Sort items by order
                                       .map((item, index) => (
                                         <Draggable

@@ -18,7 +18,7 @@ const SignOut = () => {
   return (
     <>
       <ButtonSignOut type="button" onClick={handleSignOut}>
-        <SvgIcon svgName="icon-login" size={32} stroke="#bedbb0" />
+        <SvgIcon svgName="icon-login" size={32} variant="logOut" />
         <TextSignOut>Log out</TextSignOut>
       </ButtonSignOut>
     </>

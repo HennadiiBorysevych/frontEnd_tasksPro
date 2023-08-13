@@ -3,15 +3,15 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const SideBarWrapper = styled.div`
-  padding: 14px 14px 24px 14px;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 225px;
   height: 100vh;
-  background-color: #121212;
+  background-color: ${props => `${props.theme.palette.background.sidemenu}`};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  color: #ffffff;
+  color: ${props => `${props.theme.palette.text.sidemenu}`};
 
   @media screen and (max-width: 767px) {
     left: ${({ isOpen }) => (isOpen ? '0' : '-225px')};
@@ -25,7 +25,7 @@ export const SideBarWrapper = styled.div`
     z-index: 1000;
   }
   @media screen and (min-width: 768px) {
-    padding: 24px;
+    padding: 24px 0;
     width: 260px;
   }
 
@@ -34,7 +34,7 @@ export const SideBarWrapper = styled.div`
     css`
       @media screen and (max-height: ${windowHeight}px) {
         height: ${windowHeight}px;
-        overflow-y: auto;
+        overflow-y: hidden;
       }
     `}
 `;
@@ -52,10 +52,12 @@ export const Overlay = styled.div`
 export const TitleBoardList = styled.h2`
   margin-top: 70px;
   margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => `${props.theme.palette.text.sidemenu}80`};
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;
+
+  padding: 0 24px;
 
   @media screen and (min-width: 768px) {
     margin-top: 60px;
@@ -67,10 +69,9 @@ export const CreateBoard = styled.button`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 14px;
-  padding-bottom: 14px;
+  border-top: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
+  border-bottom: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
+  padding: 14px 24px;
   margin-bottom: 40px;
 `;
 

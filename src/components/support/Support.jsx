@@ -26,7 +26,7 @@ const Support = () => {
           support resources or reach out to our customer support team.
         </SupportOffer>
         <SupportQuestion>
-          <SvgIcon svgName="icon-help-circle" size={20} stroke="#ffffff" />
+          <SvgIcon svgName="icon-help-circle" size={20} variant="support" />
           <TextHelp>Need help?</TextHelp>
         </SupportQuestion>
       </SupportBox>
