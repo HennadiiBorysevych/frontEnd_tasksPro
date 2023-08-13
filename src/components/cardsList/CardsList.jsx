@@ -16,7 +16,7 @@ import {
   AddColumnBtn,
   CardItem,
   EditColumnBtn,
-  SvgIcon,
+  IconButton,
 } from 'components';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
@@ -28,7 +28,6 @@ import {
   ColumnHeadingText,
   ColumnsContainer,
   ContainerWrapper,
-  IconButton,
   IconsContainer,
   ItemsContainer,
 } from './CardsList.styled';
@@ -108,14 +107,16 @@ const CardsList = () => {
         // row moving
         let column = columnsAndTasks.find(col => col.id === columnId);
         const dataArray = Array.from(column.items);
-        const idTask = dataArray[source.index].id;
+        const idTask = result.draggableId;
         const destinationIndex = destination.index;
+
         const { updatingDataFull, updatingDataStripped } =
           updateOrdersFromIndex({
             idTask,
             destinationIndex,
             dataArray,
           });
+
         dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
       }
     }
@@ -123,9 +124,6 @@ const CardsList = () => {
 
   const isLoading = isColumnLoading || isTasksLoading;
 
-  const onDeleteColumn = id => {
-    dispatch(columnsOperations.deleteColumn(id));
-  };
   return (
     <>
       <CustomScrollBar height="500px">
@@ -164,27 +162,14 @@ const CardsList = () => {
                               </ColumnHeadingText>
                               <IconsContainer>
                                 <EditColumnBtn column={column} />
-                                <IconButton>
-                                  {/* <SvgIcon
-                                    svgName="icon-pencil"
-                                    size={16}
-                                    stroke="rgba(255, 255, 255, 0.5)"
-                                  /> */}
-                                </IconButton>
                                 <IconButton
-                                  type="button"
                                   onClick={() =>
                                     dispatch(
                                       columnsOperations.deleteColumn(column.id)
                                     )
                                   }
-                                >
-                                  <SvgIcon
-                                    svgName="icon-trash"
-                                    size={16}
-                                    stroke="#FFFFFF80"
-                                  />
-                                </IconButton>
+                                  svgName="icon-trash"
+                                ></IconButton>
                               </IconsContainer>
                             </ColumnHeading>
                             <StrictModeDroppable
@@ -199,10 +184,12 @@ const CardsList = () => {
                                     ref={provided.innerRef}
                                   >
                                     {column.items
-                                      .filter(({ priority }) =>
-                                        priority
-                                          .toLowerCase()
-                                          .includes(userFilter)
+                                      .filter(
+                                        ({ priority }) =>
+                                          priority
+                                            .toLowerCase()
+                                            .includes(userFilter) ||
+                                          userFilter === 'showAll'
                                       )
                                       .sort((a, b) => a.order - b.order) // Sort items by order
                                       .map((item, index) => (

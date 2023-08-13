@@ -81,12 +81,14 @@ const tasksSlice = createSlice({
         state.error = null;
         const {
           _id: id,
+          orderTask: order,
           createdAt,
           updatedAt,
           ...rest
         } = action.payload.result;
         state.items.push({
           id,
+          order,
           ...rest,
         });
         console.log(`${action.payload.result.title} added to your tasks`);
@@ -95,6 +97,7 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         const deletedCardId = action.payload;
+
         state.items = state.items.filter(item => item.id !== deletedCardId);
         console.log('Filter: Card deleted');
       })

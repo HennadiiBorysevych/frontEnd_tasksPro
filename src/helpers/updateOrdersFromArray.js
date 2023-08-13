@@ -1,11 +1,11 @@
 export function updateOrdersFromArray(sourceArray, newOrdersArray) {
-  const changes = newOrdersArray;
   const idToOrder = {};
-  changes.forEach(change => {
-    idToOrder[change.id] = change.order;
+  newOrdersArray.forEach(item => {
+    idToOrder[item.id] = item.order;
   });
+
   return sourceArray.map(item => {
-    if (idToOrder[item.id]) {
+    if (idToOrder.hasOwnProperty(item.id)) {
       return {
         ...item,
         order: idToOrder[item.id],

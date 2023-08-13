@@ -49,6 +49,7 @@ const columnsSlice = createSlice({
       .addCase(operations.moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        // console.log(action.payload);
         // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
