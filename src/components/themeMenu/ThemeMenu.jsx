@@ -14,12 +14,12 @@ import {
 
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-   const dropdownRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   const themes = ['Dark', 'Light', 'Violet'];
 
   const dispatch = useDispatch();
-const selectedTheme = useSelector(selectTheme);
+  const selectedTheme = useSelector(selectTheme);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -28,6 +28,35 @@ const selectedTheme = useSelector(selectTheme);
   const closeDropdown = () => {
     setIsOpen(false);
   };
+  
+
+  useEffect(() => {
+    const handleWindowClick = event => {
+      setTimeout(() => {
+        if (
+          isOpen &&
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target)
+        ) {
+          closeDropdown();
+        }
+      }, 0);
+    };
+
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        closeDropdown();
+      }
+    };
+
+    window.addEventListener('mousedown', handleWindowClick);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('mousedown', handleWindowClick);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   const handleThemeChange = async theme => {
     setIsOpen(false);
@@ -40,28 +69,6 @@ const selectedTheme = useSelector(selectTheme);
     }
   };
 
-   useEffect(() => {
-     const handleWindowClick = event => {
-       if (isOpen && !dropdownRef.current.contains(event.target)) {
-         closeDropdown();
-       }
-     };
-
-     const handleKeyDown = event => {
-       if (event.key === 'Escape') {
-         closeDropdown();
-       }
-     };
-
-     window.addEventListener('mousedown', handleWindowClick);
-     window.addEventListener('keydown', handleKeyDown);
-
-     return () => {
-       window.removeEventListener('mousedown', handleWindowClick);
-       window.removeEventListener('keydown', handleKeyDown);
-     };
-   }, [isOpen]);
- 
   return (
     <DropdownWrapper>
       <DropdownButton onClick={toggleDropdown}>

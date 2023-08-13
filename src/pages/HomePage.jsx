@@ -70,19 +70,17 @@ const HomePage = () => {
             <Outlet />
           </>
         ) : (
-          <>
-            <DefaultWrapper>
-              <WelcomeText>
-                Before starting your project, it is essential to{' '}
-                <CreateBoardLink onClick={toggleModal}>
-                  create a board
-                </CreateBoardLink>{' '}
-                to visualize and track all the necessary tasks and milestones.
-                This board serves as a powerful tool to organize the workflow
-                and ensure effective collaboration among team members.
-              </WelcomeText>
-            </DefaultWrapper>
-          </>
+          <DefaultWrapper>
+            <WelcomeText>
+              Before starting your project, it is essential to{' '}
+              <CreateBoardLink onClick={toggleModal}>
+                create a board
+              </CreateBoardLink>{' '}
+              to visualize and track all the necessary tasks and milestones.
+              This board serves as a powerful tool to organize the workflow and
+              ensure effective collaboration among team members.
+            </WelcomeText>
+          </DefaultWrapper>
         )}
         {isModal && (
           <Modal onBackdropClick={onBackdropClick}>

@@ -4,7 +4,7 @@ export const ButtonSignOut = styled.button`
   display: flex;
   align-items: center;
   gap: 14px;
-  padding-left: 10px;
+  padding-left: 24px;
   width: 100%;
 `;
 

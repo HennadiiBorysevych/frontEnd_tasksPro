@@ -10,6 +10,7 @@ const cardModel = {
 };
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
+  console.log('🚀 ~ currentCard:', currentCard);
   const initialCard = currentCard
     ? getFormattedCard(currentCard)
     : {
@@ -25,7 +26,7 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [deadline, setDeadline] = useState(initialCard?.deadline);
   const [card, setCard] = useState(initialCard);
   const [titleChecker, seTitleChecker] = useState(false);
-
+  const [descriptionChecker, setDescriptionChecker] = useState(false);
   const dispatch = useDispatch();
 
   const handleCardSubmit = () => {
@@ -36,14 +37,20 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
       }, 2000);
       return;
     }
-
-    const { id, ...rest } = card;
+    if (description === '' && !currentCard) {
+      setDescriptionChecker(true);
+      setTimeout(() => {
+        setDescriptionChecker(false);
+      }, 2000);
+      return;
+    }
+    const { id, createdAt, order, updatedAt, ...rest } = card;
 
     currentCard
       ? dispatch(
           cardOperations.updateTask({
             taskId: id,
-            updatedData: rest,
+            updatedData: { orderTask: order, ...rest },
           })
         )
       : dispatch(cardOperations.addTask(rest));
@@ -84,6 +91,7 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
     setDeadline,
     handleInput,
     handlePriority,
+    descriptionChecker,
     titleChecker,
     handleCardSubmit,
   };

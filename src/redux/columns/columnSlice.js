@@ -49,6 +49,7 @@ const columnsSlice = createSlice({
       .addCase(operations.moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        // console.log(action.payload);
         // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
@@ -60,12 +61,7 @@ const columnsSlice = createSlice({
       .addCase(operations.addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const {
-          _id: id,
-          createdAt,
-          updatedAt,
-          ...rest
-        } = action.payload.result;
+        const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
         state.items.push({ id, ...rest });
         console.log(`${action.payload.name} added to your columns`);
       })
@@ -93,12 +89,7 @@ const columnsSlice = createSlice({
       .addCase(operations.updateColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const {
-          _id: id,
-          createdAt,
-          updatedAt,
-          ...rest
-        } = action.payload.result;
+        const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
         const index = state.items.findIndex(column => column.id === id);
         if (index !== -1) {
           state.items[index] = { id, ...rest };

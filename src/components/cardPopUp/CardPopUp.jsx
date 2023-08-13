@@ -25,6 +25,7 @@ const CardPopUp = ({
     handleInput,
     handlePriority,
     titleChecker,
+    descriptionChecker,
     handleCardSubmit,
   } = useCard(columnId, cardIndex, card, handleModalClose);
 
@@ -54,7 +55,9 @@ const CardPopUp = ({
             marginBottom: '14px',
           }}
         />
-
+        {descriptionChecker ? (
+          <span style={{ color: 'white' }}>Description is required</span>
+        ) : null}
         <CardsSettings
           priority={priority}
           deadline={new Date(deadline)}
