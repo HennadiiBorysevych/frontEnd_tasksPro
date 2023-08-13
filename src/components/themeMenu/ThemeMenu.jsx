@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserTheme } from 'redux/auth/authOperations';
-import selectTheme from 'redux/theme/themeSelectors';
-import { setTheme } from 'redux/theme/themeSlice';
+import { authOperations } from 'redux/auth';
+import { selectTheme } from 'redux/auth/authSelectors';
 
 import { SvgIcon } from 'components';
 
@@ -13,14 +12,14 @@ import {
   DropdownWrapper,
 } from './ThemeMenu.styled';
 
-const ThemeMenu = props => {
+const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  const selectedTheme = useSelector(selectTheme);
-  const dispatch = useDispatch();
+   const dropdownRef = useRef(null);
 
   const themes = ['Dark', 'Light', 'Violet'];
+
+  const dispatch = useDispatch();
+const selectedTheme = useSelector(selectTheme);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -30,55 +29,44 @@ const ThemeMenu = props => {
     setIsOpen(false);
   };
 
-  // const handleThemeChange = async theme => {
-  //   setIsOpen(false);
+  const handleThemeChange = async theme => {
+    setIsOpen(false);
 
-  //   try {
-  //     await dispatch(authOperations.updateUserTheme(theme));
-  //   } catch (error) {
-  //     console.error('Error updating theme:', error);
-  //   }
-
-  //   closeDropdown();
-  // };
-
-  const handleThemeChange = theme => {
-    dispatch(setTheme(theme));
-    dispatch(updateUserTheme(theme));
-    closeDropdown();
+    try {
+      await dispatch(authOperations.updateUserTheme(theme));
+      closeDropdown();
+    } catch (error) {
+      console.error('Error updating theme:', error);
+    }
   };
 
-  useEffect(() => {
-    const handleWindowClick = event => {
-      if (isOpen && !dropdownRef.current.contains(event.target)) {
-        closeDropdown();
-      }
-    };
+   useEffect(() => {
+     const handleWindowClick = event => {
+       if (isOpen && !dropdownRef.current.contains(event.target)) {
+         closeDropdown();
+       }
+     };
 
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') {
-        closeDropdown();
-      }
-    };
+     const handleKeyDown = event => {
+       if (event.key === 'Escape') {
+         closeDropdown();
+       }
+     };
 
-    window.addEventListener('mousedown', handleWindowClick);
-    window.addEventListener('keydown', handleKeyDown);
+     window.addEventListener('mousedown', handleWindowClick);
+     window.addEventListener('keydown', handleKeyDown);
 
-    return () => {
-      window.removeEventListener('mousedown', handleWindowClick);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
-
+     return () => {
+       window.removeEventListener('mousedown', handleWindowClick);
+       window.removeEventListener('keydown', handleKeyDown);
+     };
+   }, [isOpen]);
+ 
   return (
-    <DropdownWrapper ref={dropdownRef}>
+    <DropdownWrapper>
       <DropdownButton onClick={toggleDropdown}>
         Theme
-        <SvgIcon
-          svgName="icon-arrow-down"
-          variant="header"
-          isActive="true"
-        ></SvgIcon>
+        <SvgIcon svgName="icon-arrow-down"></SvgIcon>
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>
