@@ -4,9 +4,9 @@ import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
 import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
-
+import { ConfirmToast } from 'react-confirm-toast';
 import { BoardPopUp, Modal, SvgIcon } from 'components';
-
+import { selectTheme } from 'redux/auth/authSelectors';
 import {
   BoardIdentificationItem,
   BoardItemControl,
@@ -33,6 +33,8 @@ const SideBarItem = ({
     toggleModal();
     onToggleModalAndSideBar();
   };
+  const selectedTheme = useSelector(selectTheme);
+  const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
   return (
     <>
       <BoardListItem isActive={active}>
@@ -55,9 +57,16 @@ const SideBarItem = ({
               <SvgIcon svgName="icon-pencil" size={16} variant="support" />
             </button>
 
-            <button aria-label="Delete board" onClick={onDeleteClick}>
-              <SvgIcon svgName="icon-trash" size={16} variant="support" />
-            </button>
+            <ConfirmToast
+              customFunction={onDeleteClick}
+              asModal={false}
+              position={'top-left'}
+              theme={toastClassName}
+            >
+              <button aria-label="Delete board">
+                <SvgIcon svgName="icon-trash" size={16} variant="support" />
+              </button>
+            </ConfirmToast>
           </BoardItemControl>
         )}
       </BoardListItem>
