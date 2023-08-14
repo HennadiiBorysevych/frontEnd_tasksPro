@@ -36,10 +36,6 @@ const HomePage = () => {
   useEffect(() => {
     if (firstLoad && boards.length > 0 && !activeBoard) {
       const firstBoard = boards[0];
-      console.log(
-        '🚀 ~ file: HomePage.jsx:41 ~ useEffect ~ firstBoard.id:',
-        firstBoard.id
-      );
       if (firstBoard) {
         setActiveBoard(firstBoard.id);
 
@@ -51,15 +47,14 @@ const HomePage = () => {
   }, [activeBoard, activeBoardId, boards, firstLoad, navigate, setActiveBoard]);
 
   useEffect(() => {
-    if (activeBoardId) {
-      console.log(
-        '🚀 ~ file: HomePage.jsx:53 ~ useEffect ~ activeBoardId:',
-        activeBoardId
-      );
-      dispatch(columnsOperations.fetchColumns(activeBoardId));
-      dispatch(cardOperations.fetchTasks(activeBoardId));
-      // dispatch(columnsOperations.fetchColumnsTasks(activeBoardId));
+    async function fetchData() {
+      if (activeBoardId) {
+        await dispatch(columnsOperations.fetchColumns(activeBoardId));
+        await dispatch(cardOperations.fetchTasks(activeBoardId));
+      }
     }
+
+    fetchData();
   }, [dispatch, activeBoardId]);
 
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
-import { useAuth, useBoardContext } from 'hooks';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from 'hooks';
 import { authSelectors } from 'redux/auth';
 
 import {
@@ -21,9 +21,9 @@ const ErrorPage = () => {
   const [userTheme, setUserTheme] = useState('');
   const user = useSelector(authSelectors.selectUser);
 
-  const { activeBoardId, activeBoard } = useBoardContext();
+  // const { activeBoardId, activeBoard } = useBoardContext();
 
-  const loc = useLocation();
+  // const loc = useLocation();
 
   useEffect(() => {
     if (!user.name) {
@@ -31,8 +31,6 @@ const ErrorPage = () => {
       return;
     }
 
-    console.log(activeBoardId, activeBoard);
-    console.log(loc.pathname);
     setUserTheme(user.theme);
   }, []);
 
