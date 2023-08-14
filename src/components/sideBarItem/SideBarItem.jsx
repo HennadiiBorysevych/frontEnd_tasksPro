@@ -1,14 +1,16 @@
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import { useSelector } from 'react-redux';
 import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
+import { selectTheme } from 'redux/auth/authSelectors';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
 import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
 
-// import { ConfirmToast } from 'react-confirm-toast';
 import { BoardPopUp, Modal, SvgIcon } from 'components';
 
-// import { selectTheme } from 'redux/auth/authSelectors';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
 import {
   BoardIdentificationItem,
   BoardItemControl,
@@ -30,13 +32,14 @@ const SideBarItem = ({
   const boards = useSelector(selectAllBoards);
 
   const editingBoard = boards.find(board => board.id === activeBoardId);
-
+  const selectedTheme = useSelector(selectTheme);
   const toggleWindows = () => {
     toggleModal();
     onToggleModalAndSideBar();
   };
-  // const selectedTheme = useSelector(selectTheme);
-  // const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
+
+
+
   return (
     <>
       <BoardListItem isActive={active}>
@@ -58,17 +61,40 @@ const SideBarItem = ({
             <button aria-label="Edit board" onClick={toggleWindows}>
               <SvgIcon svgName="icon-pencil" size={16} variant="support" />
             </button>
+            <button aria-label="Delete board" onClick={() => {
+              confirmAlert({
+                customUI: ({ onClose }) => {
+                  const onDeleteClose = () => {
+                    onDeleteClick(); 
+                    onClose(); 
+                  };
+                  return (
+                    <div
+                      className={`react-confirm ${
+                        selectedTheme === 'Dark'
+                          ? 'react-confirm-alert-dark'
+                          : 'react-confirm-alert-light'
+                      }`}
+                    >
+                      <h1>Confirm Deletion</h1>
+                      <p>Are you sure you want to delete this board?</p>
+                      <div className="confirm-buttons">
+                        <button onClick={onClose} className="green">Cancel</button>
 
-            {/* <ConfirmToast
-              customFunction={onDeleteClick}
-              asModal={false}
-              position={'top-left'}
-              theme={toastClassName}
-            > */}
-            <button aria-label="Delete board" onClick={onDeleteClick}>
+                        <button className="red"
+                          onClick={onDeleteClose}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  );
+                },
+              });
+            }}>
               <SvgIcon svgName="icon-trash" size={16} variant="support" />
             </button>
-            {/* </ConfirmToast> */}
+
           </BoardItemControl>
         )}
       </BoardListItem>
