@@ -10,6 +10,7 @@ import cardSelectors from 'redux/tasks/cardSelectors';
 import { selectUserFilter } from 'redux/userFilterSlice';
 
 import { AddCardBtn, CardItem, EditColumnBtn, IconButton } from 'components';
+import Typography from 'components/typography/Typography';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
@@ -19,7 +20,6 @@ import {
   ButtonWrapper,
   Column,
   ColumnHeading,
-  ColumnHeadingText,
   IconsContainer,
   ItemsContainer,
 } from './CardsColumn.styled';
@@ -41,7 +41,7 @@ function CardsColumn({ provided, column }) {
       ref={provided.innerRef}
     >
       <ColumnHeading isLoading={isLoading} {...provided.dragHandleProps}>
-        <ColumnHeadingText>{column.title}</ColumnHeadingText>
+        <Typography variant="columnTitle">{column.title}</Typography>
 
         <IconsContainer>
           <EditColumnBtn column={column} />

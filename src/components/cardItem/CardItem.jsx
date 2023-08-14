@@ -9,6 +9,7 @@ import cardOperations from 'redux/tasks/cardOperations';
 import { CardPopUp, Modal } from 'components';
 import { IconButton } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
+import Typography from 'components/typography/Typography';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
@@ -19,7 +20,6 @@ import {
   DetailLabel,
   Details,
   DetailsContainer,
-  DetailValue,
   IconsContainer,
   PriorityBlock,
   Title,
@@ -40,20 +40,20 @@ const CardItem = ({ item }) => {
 
   return (
     <CardContainer priority={priority}>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Title variant="tastTitle">{title}</Title>
+      <Description variant="taskDescription">{description}</Description>
       <Details>
         <DetailsContainer>
           <div>
-            <DetailLabel>Priority:</DetailLabel>
+            <DetailLabel variant="subTitle">Priority:</DetailLabel>
             <PriorityBlock>
               <Circle priority={priority} />
-              <DetailValue>{priority}</DetailValue>
+              <Typography variant="subText">{priority}</Typography>
             </PriorityBlock>
           </div>
           <div>
-            <DetailLabel>Deadline:</DetailLabel>
-            <DetailValue>{formattedDeadline}</DetailValue>
+            <DetailLabel variant="subTitle">Deadline:</DetailLabel>
+            <Typography variant="subText">{formattedDeadline}</Typography>
           </div>
         </DetailsContainer>
         <IconsContainer>
@@ -78,9 +78,12 @@ const CardItem = ({ item }) => {
                       <h1>Confirm Deletion</h1>
                       <p>Are you sure you want to delete this task?</p>
                       <div className="confirm-buttons">
-                        <button onClick={onClose} className="green">Cancel</button>
+                        <button onClick={onClose} className="green">
+                          Cancel
+                        </button>
 
-                        <button className="red"
+                        <button
+                          className="red"
                           onClick={() => {
                             onClose();
                             dispatch(cardOperations.deleteTask(id));

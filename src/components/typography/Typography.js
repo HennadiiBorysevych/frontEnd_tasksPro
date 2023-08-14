@@ -5,11 +5,11 @@ import { TypographyVariants } from './TypographyVariants';
 
 import { typographyVariants } from './Typography.styled';
 
-const Typography = ({ variant, children }) => {
+const Typography = ({ variant, children, ...rest }) => {
   const VariantComponent =
     typographyVariants[variant] || typographyVariants[TypographyVariants.p1];
 
-  return <VariantComponent>{children}</VariantComponent>;
+  return <VariantComponent {...rest}>{children}</VariantComponent>;
 };
 
 Typography.propTypes = {
