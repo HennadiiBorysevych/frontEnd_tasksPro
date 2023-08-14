@@ -37,15 +37,13 @@ const SideBarBoardsList = () => {
   };
 
   const handleDeleteBoard = async id => {
-    const confirmDelete = window.confirm(
-      'Ви впевнені, що хочете видалити борд?'
-    );
+
     try {
-      if (confirmDelete) {
+
         await dispatch(deleteBoard(id));
         console.log('Board has deleted');
         await dispatch(fetchBoards());
-      }
+
     } catch (error) {
       console.error(error.message);
     }

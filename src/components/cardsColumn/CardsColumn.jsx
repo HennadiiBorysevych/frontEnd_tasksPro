@@ -1,9 +1,9 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-// import { ConfirmToast } from 'react-confirm-toast';
+import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { StrictModeDroppable } from 'helpers/dnd/strictModeDroppable';
-// import { selectTheme } from 'redux/auth/authSelectors';
+import { selectTheme } from 'redux/auth/authSelectors';
 import { columnsOperations, columnsSelectors } from 'redux/columns';
 import columnSelectors from 'redux/columns/columnSelectors';
 import cardSelectors from 'redux/tasks/cardSelectors';
@@ -13,6 +13,8 @@ import { AddCardBtn, CardItem, EditColumnBtn, IconButton } from 'components';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
 import {
   ButtonWrapper,
   Column,
@@ -29,8 +31,7 @@ function CardsColumn({ provided, column }) {
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
   const userFilter = useSelector(selectUserFilter);
-  // const selectedTheme = useSelector(selectTheme);
-  // const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
+  const selectedTheme = useSelector(selectTheme);
 
   const isLoading = isColumnLoading || isTasksLoading;
   return (
@@ -42,23 +43,46 @@ function CardsColumn({ provided, column }) {
       <ColumnHeading isLoading={isLoading} {...provided.dragHandleProps}>
         <ColumnHeadingText>{column.title}</ColumnHeadingText>
 
-        {/* <ConfirmToast
-          customFunction={() =>
-            dispatch(columnsOperations.deleteColumn(column.id))
-          }
-          asModal={false}
-          position={'top-left'}
-          theme={toastClassName}
-        > */}
         <IconsContainer>
           <EditColumnBtn column={column} />
 
           <IconButton
             svgName="icon-trash"
-            onClick={() => dispatch(columnsOperations.deleteColumn(column.id))}
-          ></IconButton>
+            onClick={() => {
+              confirmAlert({
+                customUI: ({ onClose }) => {
+                  return (
+                    <div
+                      className={`react-confirm ${
+                        selectedTheme === 'Dark'
+                          ? 'react-confirm-alert-dark'
+                          : 'react-confirm-alert-light'
+                      }`}
+                    >
+                      <h1>Confirm Deletion</h1>
+                      <p>Are you sure you want to delete this task?</p>
+                      <div className="confirm-buttons">
+                        <button onClick={onClose} className="green">
+                          Cancel
+                        </button>
+
+                        <button
+                          className="red"
+                          onClick={() => {
+                            onClose();
+                            dispatch(columnsOperations.deleteColumn(column.id));
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  );
+                },
+              });
+            }}
+          />
         </IconsContainer>
-        {/* </ConfirmToast> */}
       </ColumnHeading>
       <StrictModeDroppable
         droppableId={column.id}

@@ -1,15 +1,17 @@
 import React from 'react';
-// import { ConfirmToast } from 'react-confirm-toast';
+import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useModal } from 'hooks';
-// import { selectTheme } from 'redux/auth/authSelectors';
+import { selectTheme } from 'redux/auth/authSelectors';
 import cardOperations from 'redux/tasks/cardOperations';
 
 import { CardPopUp, Modal } from 'components';
 import { IconButton } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
 import {
   CardContainer,
   Circle,
@@ -34,8 +36,8 @@ const CardItem = ({ item }) => {
   const formattedDeadline = `${
     deadlineDate.getMonth() + 1
   }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
-  // const selectedTheme = useSelector(selectTheme);
-  // const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
+  const selectedTheme = useSelector(selectTheme);
+
   return (
     <CardContainer priority={priority}>
       <Title>{title}</Title>
@@ -59,18 +61,40 @@ const CardItem = ({ item }) => {
             <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
           )}
           <IconButton onClick={toggleModal} svgName="icon-pencil" />
-          {/* 
-          <ConfirmToast
-            customFunction={() => dispatch(cardOperations.deleteTask(id))}
-            asModal={false}
-            position={'top-left'}
-            theme={toastClassName}
-          > */}
+
           <IconButton
             svgName="icon-trash"
-            onClick={() => dispatch(cardOperations.deleteTask(id))}
+            onClick={() => {
+              confirmAlert({
+                customUI: ({ onClose }) => {
+                  return (
+                    <div
+                      className={`react-confirm ${
+                        selectedTheme === 'Dark'
+                          ? 'react-confirm-alert-dark'
+                          : 'react-confirm-alert-light'
+                      }`}
+                    >
+                      <h1>Confirm Deletion</h1>
+                      <p>Are you sure you want to delete this task?</p>
+                      <div className="confirm-buttons">
+                        <button onClick={onClose} className="green">Cancel</button>
+
+                        <button className="red"
+                          onClick={() => {
+                            onClose();
+                            dispatch(cardOperations.deleteTask(id));
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  );
+                },
+              });
+            }}
           />
-          {/* </ConfirmToast> */}
         </IconsContainer>
       </Details>
       {isModal && (
