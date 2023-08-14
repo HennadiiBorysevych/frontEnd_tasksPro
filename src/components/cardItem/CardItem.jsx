@@ -1,5 +1,4 @@
 import React from 'react';
-import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useModal } from 'hooks';
@@ -10,8 +9,8 @@ import { CardPopUp, Modal } from 'components';
 import { IconButton } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
 
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
+import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
+
 import {
   CardContainer,
   Circle,
@@ -62,41 +61,11 @@ const CardItem = ({ item }) => {
           )}
           <IconButton onClick={toggleModal} svgName="icon-pencil" />
 
-          <IconButton
-            svgName="icon-trash"
-            onClick={() => {
-              confirmAlert({
-                customUI: ({ onClose }) => {
-                  return (
-                    <div
-                      className={`react-confirm ${
-                        selectedTheme === 'Dark'
-                          ? 'react-confirm-alert-dark'
-                          : 'react-confirm-alert-light'
-                      }`}
-                    >
-                      <h1>Confirm Deletion</h1>
-                      <p>Are you sure you want to delete this task?</p>
-                      <div className="confirm-buttons">
-                        <button onClick={onClose} className="green">
-                          Cancel
-                        </button>
-
-                        <button
-                          className="red"
-                          onClick={() => {
-                            onClose();
-                            dispatch(cardOperations.deleteTask(id));
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  );
-                },
-              });
-            }}
+          <ReactConfirmAlert
+            selectedTheme={selectedTheme}
+            onDeleteAction={() => dispatch(cardOperations.deleteTask(id))}
+            item="task"
+            owner="tasks"
           />
         </IconsContainer>
       </Details>

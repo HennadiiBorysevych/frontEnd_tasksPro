@@ -37,13 +37,10 @@ const SideBarBoardsList = () => {
   };
 
   const handleDeleteBoard = async id => {
-
     try {
-
-        await dispatch(deleteBoard(id));
-        console.log('Board has deleted');
-        await dispatch(fetchBoards());
-
+      await dispatch(deleteBoard(id));
+      console.log('Board has deleted');
+      await dispatch(fetchBoards());
     } catch (error) {
       console.error(error.message);
     }
