@@ -4,7 +4,7 @@ import { OverlayScrollbars } from 'overlayscrollbars';
 import 'overlayscrollbars/overlayscrollbars.css';
 import './CustomScrollBar.css';
 
-const CustomScrollbar = ({ width, height, children }) => {
+const CustomScrollbar = ({ width, maxHeight, children }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -57,7 +57,9 @@ const CustomScrollbar = ({ width, height, children }) => {
       ref={containerRef}
       style={{
         width,
-        height,
+        height: '100%',
+        minHeight: '70px', //Округлённое значение: высота одной доски (61px) плюс два значения марджинов по макету (4*2=8)
+        maxHeight,
 
         // paddingRight: '16px',
 
