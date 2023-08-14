@@ -6,7 +6,7 @@ const IconButton = ({ onClick, svgName }) => {
   return (
     <>
       <ButtonStyled type="button" onClick={onClick}>
-        <SvgIcon svgName={svgName} size={16} stroke="#FFFFFF80" />
+        <SvgIcon svgName={svgName} size={16} variant="popUp"  />
       </ButtonStyled>
     </>
   );

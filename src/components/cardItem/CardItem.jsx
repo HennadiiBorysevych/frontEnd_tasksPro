@@ -31,6 +31,7 @@ const CardItem = ({ item }) => {
   const formattedDeadline = `${
     deadlineDate.getMonth() + 1
   }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
+
   return (
     <CardContainer priority={priority}>
       <Title>{title}</Title>
@@ -53,18 +54,10 @@ const CardItem = ({ item }) => {
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
           )}
-          <IconButton
-            svgName="icon-pencil"
-            size={16}
-            variant="popUp"
-            isActive="false"
-            onClick={toggleModal}
-          />
+          <IconButton svgName="icon-pencil" size={16} onClick={toggleModal} />
           <IconButton
             svgName="icon-trash"
             size={16}
-            variant="popUp"
-            isActive="false"
             onClick={() => dispatch(cardOperations.deleteTask(id))}
           />
         </IconsContainer>

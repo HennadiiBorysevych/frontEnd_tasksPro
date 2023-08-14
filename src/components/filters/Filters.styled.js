@@ -5,7 +5,7 @@ export const FiltersLink = styled.a`
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: '#ffffff';
+  color: ${props => props.theme.palette.text.primary}CC;
   cursor: pointer;
 `;
 
@@ -25,7 +25,7 @@ export const FilterHeader = styled.div`
 `;
 
 export const LabelsTitle = styled.p`
-  color: #fff;
+  color: ${props => props.theme.palette.text.primary};
   font-family: Poppins;
   font-size: 14px;
   font-weight: 500;
@@ -38,14 +38,14 @@ export const LabelsTitle = styled.p`
     display: block;
     margin-bottom: 14px;
     width: 252px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid ${props => props.theme.palette.text.primary}1A;
   }
 `;
 
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => props.theme.palette.text.primary}80;
   font-size: 12px;
   font-family: 'Poppins';
   letter-spacing: -0.24px;
@@ -85,7 +85,7 @@ export const Radio = styled.input`
         case 'high':
           return `background-color: #bedbb0`;
         case 'without':
-          return `background-color: rgba(255, 255, 255, 0.3)`;
+          return `background-color: #1616164D`;
         default:
           return;
       }
@@ -127,7 +127,7 @@ export const Radio = styled.input`
             case 'high':
               return `border-color: #bedbb0`;
             case 'without':
-              return `border-color: rgba(255, 255, 255, 0.3)`;
+              return `border-color: #1616164D`;
             default:
               return;
           }
@@ -138,7 +138,7 @@ export const Radio = styled.input`
 `;
 
 export const ShowAllLabel = styled.label`
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => props.theme.palette.text.primary};
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;

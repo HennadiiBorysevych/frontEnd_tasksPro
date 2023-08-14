@@ -36,6 +36,7 @@ const BoardPopUp = ({ board, onClose }) => {
           onChange={handleTitle}
           placeholder={board ? board?.title : 'Title'}
         />
+
         {titleChecker ? (
           <span style={{ color: 'white' }}>Title is required</span>
         ) : null}

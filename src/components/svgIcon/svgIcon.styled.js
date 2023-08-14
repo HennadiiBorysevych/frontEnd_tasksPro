@@ -23,7 +23,9 @@ export const SvgStyled = styled.svg`
     return props.theme.palette.text.sidemenu;
   } else if (props.variant === 'cardItem') {
     return props.theme.palette.background.primaryButton;
-    }
+  } else if (props.variant === 'buttonCard') {
+    return props.theme.palette.background.cardItem;
+  }
     return props.theme.palette.text.sidemenu;
   }};
 

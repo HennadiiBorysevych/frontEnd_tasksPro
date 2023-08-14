@@ -32,7 +32,7 @@ const Filters = () => {
   return (
     <>
       <FiltersLink onClick={toggleModal}>
-        <SvgIcon svgName="icon-filter" stroke="rgba(255, 255, 255, 0.8" />
+        <SvgIcon svgName="icon-filter" variant="header" isActive="true" />
         Filters
       </FiltersLink>
       {isModal && (

@@ -57,21 +57,6 @@ export const IconsContainer = styled.div`
   gap: 8px;
 `;
 
-export const AddColumnButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-  width: 334px;
-  height: 56px;
-  background-color: #121212;
-  border-radius: 8px;
-  transition: 0.3s opacity ease;
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
 export const ButtonWrapper = styled.div`
   height: 56px;
 `;

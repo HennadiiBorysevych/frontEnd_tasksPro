@@ -1,33 +1,20 @@
 import React from 'react';
 import { useModal } from 'hooks';
 
-import { ButtonPlus, ColumnPopUp, Modal } from 'components';
+import { ColumnPopUp, Modal, SvgIcon } from 'components';
+
+import { ButtonAddColumn, SpanStyled } from './AddColumnBtn.styled';
 
 const AddColumnBtn = ({ boardId, columnIndex }) => {
   const { isModal, onBackdropClick, toggleModal } = useModal();
   return (
     <div>
-      <button
-        type="button"
-        onClick={toggleModal}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          width: '334px',
-          justifyContent: 'center',
-          padding: '14px 0',
-          borderRadius: '8px',
-        }}
-      >
-        <ButtonPlus
-          stroke="#121212"
-          width={28}
-          height={28}
-          backgroundColor="#ffffff"
-        />
+      <ButtonAddColumn type="button" onClick={toggleModal}>
+        <SpanStyled>
+          <SvgIcon svgName="icon-plus" variant='buttonCard' size={14} />
+        </SpanStyled>
         Add another column
-      </button>
+      </ButtonAddColumn>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
           <ColumnPopUp

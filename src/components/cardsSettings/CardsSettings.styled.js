@@ -7,7 +7,7 @@ export const SettingsBlock = styled.div`
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => props.theme.palette.text.primary};
   font-size: 12px;
   font-family: 'Poppins';
   line-height: 1.25;
