@@ -1,4 +1,14 @@
-export const BoardPage = () => {
-  return <></>;
+import React from 'react';
+
+import { BoardHead, CardsList } from 'components';
+
+export const Board = () => {
+  return (
+    <>
+      <BoardHead />
+      <CardsList />
+    </>
+  );
 };
-export default BoardPage;
+
+export default Board;

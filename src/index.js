@@ -1,20 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { persistor, store } from 'redux/store';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { selectTheme } from 'redux/auth/authSelectors';
+import { persistor, store } from 'redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from 'components/App';
 
 import './GlobalStyles.js';
+
+import { darkTheme, lightTheme, violetTheme } from './themes/theme';
+
+import './index.css';
+
+const ThemedApp = () => {
+  const selectedTheme = useSelector(selectTheme);
+
+  const theme = React.useMemo(() => {
+    switch (selectedTheme) {
+      case 'Dark':
+        return darkTheme;
+      case 'Light':
+        return lightTheme;
+      case 'Violet':
+        return violetTheme;
+      default:
+        return darkTheme;
+    }
+  }, [selectedTheme]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  );
+};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename="/frontEnd_tasksPro">
-          <App />
+          <ThemedApp />
         </BrowserRouter>
       </PersistGate>
     </Provider>

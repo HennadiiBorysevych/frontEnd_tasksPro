@@ -1,27 +1,43 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 import {
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from 'redux-persist/es/constants';
+import storage from 'redux-persist/lib/storage';
 
-import { authReducer } from './auth/authSlice';
+import { authReducer } from './auth';
+import { boardsReducer } from './boards';
+import { columnsReducer } from './columns';
+import { cardReducer } from './tasks';
+import userFilterReducer from './userFilterSlice';
 
-const persistConfig = {
-  key: 'token',
+const authPersistConfig = {
+  key: 'auth',
   storage,
   whitelist: ['token'],
 };
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const userFilterPersistConfig = {
+  key: 'userFilter',
+  storage,
+};
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedUserFilterReducer = persistReducer(
+  userFilterPersistConfig,
+  userFilterReducer
+);
 
 export const store = configureStore({
   reducer: {
-    auth: persistedReducer,
+    auth: persistedAuthReducer,
+    boards: boardsReducer,
+    columns: columnsReducer,
+    tasks: cardReducer,
+    userFilter: persistedUserFilterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
