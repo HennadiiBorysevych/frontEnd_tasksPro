@@ -14,3 +14,17 @@ export const BoardList = styled.ul`
     max-height: 100%;
   }
 `;
+
+// export const Scrollbar = styled(CustomScrollbar)`
+//   width: 100%;
+//   overflow: auto;
+//   height: 256px;
+
+//   @media screen and (min-width: 768px) {
+//     height: 380px;
+//   }
+
+//   @media screen and (min-width: 1440px) {
+//     height: 126px;
+//   }
+// `;

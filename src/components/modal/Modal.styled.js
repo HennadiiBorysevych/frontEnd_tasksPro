@@ -19,10 +19,12 @@ export const Backdrop = styled.div(
   })
 );
 export const ModalBox = styled.div({
-  width: '100%',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  width: '335px',
   padding: '20px',
 
-  '@media screen and (min-width: 375)': {
-    width: '335px',
+  '@media (min-width: 768px)': {
+    width: '350px',
   },
 });
