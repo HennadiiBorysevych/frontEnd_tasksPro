@@ -113,7 +113,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
       text-decoration: underline;
       text-decoration-color: black;
       overflow: hidden;
-      text-underline-offset: 5px;
+      text-underline-offset: 7px;
     }
 
     & .react-calendar__year-view .react-calendar__tile,
@@ -254,21 +254,29 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
   return (
     <ThemeProvider theme={{}}>
-      <>
-        <div>
-          <CalendarWrapper onClick={toggleCalendarVisibility}>
-            <TextWithGap>
-              {selectedDate.toDateString() === today.toDateString()
-                ? 'Today, '
-                : ''}{' '}
-              {formatSelectedDate(selectedDate)}
-            </TextWithGap>
-            <DownWithPadding>
-              <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
-            </DownWithPadding>
-          </CalendarWrapper>
+      <div>
+        <CalendarWrapper onClick={toggleCalendarVisibility}>
+          <TextWithGap>
+            {selectedDate.toDateString() === today.toDateString()
+              ? 'Today, '
+              : ''}{' '}
+            {formatSelectedDate(selectedDate)}
+          </TextWithGap>
+          <DownWithPadding>
+            <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
+          </DownWithPadding>
+        </CalendarWrapper>
 
-          {isCalendarVisible && (
+        {isCalendarVisible && (
+          <div
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 1000,
+            }}
+          >
             <CustomCalendar
               value={initialSelectedDate}
               minDate={today}
@@ -301,9 +309,24 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
               onClickDay={handleDayClick}
               tileClassName={tileClassName}
             />
-          )}
-        </div>
-      </>
+          </div>
+        )}
+
+        {isCalendarVisible && (
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              background: 'rgba(0, 0, 0, 0.5)',
+              zIndex: 999,
+            }}
+            onClick={toggleCalendarVisibility}
+          ></div>
+        )}
+      </div>
     </ThemeProvider>
   );
 };
