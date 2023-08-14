@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations } from 'redux/auth';
 import { selectTheme } from 'redux/auth/authSelectors';
@@ -28,6 +28,28 @@ const ThemeMenu = () => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleWindowClick = event => {
+      if (event.target.nodeName !== "LI") {
+        closeDropdown();
+      }
+    };
+
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        closeDropdown();
+      }
+    };
+
+    window.addEventListener('mousedown', handleWindowClick);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('mousedown', handleWindowClick);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
   const handleThemeChange = async theme => {
     setIsOpen(false);
 
@@ -43,7 +65,12 @@ const ThemeMenu = () => {
     <DropdownWrapper>
       <DropdownButton onClick={toggleDropdown}>
         Theme
-        <SvgIcon svgName="icon-arrow-down"></SvgIcon>
+        <SvgIcon
+          svgName="icon-arrow-down"
+          size="16"
+          variant="header"
+          isActive="true"
+        ></SvgIcon>
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>

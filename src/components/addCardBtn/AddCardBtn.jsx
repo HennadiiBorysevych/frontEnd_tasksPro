@@ -11,9 +11,10 @@ const AddCardBtn = ({ columnId, cardIndex }) => {
         hasIcon={true}
         type="button"
         svgName={'icon-plus'}
+        variant="primary"
         onClick={toggleModal}
       >
-        Add another card..
+        Add another card
       </PrimaryButton>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>

@@ -14,7 +14,7 @@ const getPriorityColor = priority => {
 };
 
 export const CardContainer = styled.div`
-  background-color: #121212;
+  background-color: ${props => props.theme.palette.background.cardItem};
   border-radius: 8px;
   padding: 14px 24px;
   min-height: 100px;
@@ -28,7 +28,7 @@ export const CardContainer = styled.div`
     width: 4px;
     height: 100%;
     border-left: 4px solid ${props => getPriorityColor(props.priority)};
-    background-color: #121212;
+    background-color: ${props => props.theme.palette.background.cardItem};
     z-index: 1;
   }
 `;
@@ -39,7 +39,7 @@ export const Title = styled.h4`
   line-height: 1.5;
   letter-spacing: -0.02em;
   margin: 0 0 8px;
-  color: #fff;
+  color: ${props => props.theme.palette.text.primary};
 `;
 
 export const Description = styled.p`
@@ -48,7 +48,7 @@ export const Description = styled.p`
   line-height: 1.33;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
-  color: #ffffff80;
+  color: ${props => props.theme.palette.text.primary + '80'};
 `;
 
 export const Details = styled.div`
@@ -56,7 +56,7 @@ export const Details = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   padding-top: 14px;
-  border-top: 1px solid #ffffff1a;
+  border-top: 1px solid ${props => props.theme.palette.text.primary + '1A'};
 `;
 
 export const DetailLabel = styled.h5`
@@ -64,7 +64,7 @@ export const DetailLabel = styled.h5`
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: #ffffff80;
+  color: ${props => props.theme.palette.text.primary + '80'};
   margin: 0;
   margin-bottom: 4px;
 `;
@@ -74,7 +74,7 @@ export const DetailValue = styled.p`
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: ${props => props.theme.palette.text.primary};
 `;
 
 export const Circle = styled.div`

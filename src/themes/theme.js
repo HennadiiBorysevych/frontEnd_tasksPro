@@ -17,6 +17,7 @@ const darkTheme = createTheme({
       sidemenu: '#121212',
       buttonPlus: '#BEDBB0',
       buttonPlusSecondary: '#1F1F1F',
+      buttonPlusCard: '#FFFFFF',
       primaryButton: '#BEDBB0',
       primaryButtonPlus: '#161616',
       bord: '#1F1F1F',
@@ -24,6 +25,7 @@ const darkTheme = createTheme({
       popUp: '#151515',
       profile: '#BEDBB0',
       sideBarItem: '#1F1F1F',
+      cardItem: '#121212',
     },
     text: {
       primary: '#FFFFFF',
@@ -56,6 +58,7 @@ const lightTheme = createTheme({
       input: '#FCFCFC',
       sidemenu: '#FFFFFF',
       buttonPlusSecondary: '#F6F6F7',
+      buttonPlusCard: '#161616',
       buttonPlus: '#BEDBB0',
       primaryButton: '#BEDBB0',
       primaryButtonPlus: '#161616',
@@ -64,6 +67,7 @@ const lightTheme = createTheme({
       popUp: '#FCFCFC',
       profile: '#BEDBB0',
       sideBarItem: '#F6F6F7',
+      cardItem: '#FFFFFF',
     },
     text: {
       primary: '#161616',
@@ -97,6 +101,7 @@ const violetTheme = createTheme({
       sidemenu: '#5255BC',
       buttonPlus: '#B8BCFD',
       buttonPlusSecondary: '#B8BCFD',
+      buttonPlusCard: '#5255BC',
       primaryButton: '#5255BC',
       primaryButtonPlus: '#FFFFFF',
       bord: '#ECEDFD',
@@ -104,6 +109,7 @@ const violetTheme = createTheme({
       popUp: '#FCFCFC',
       profile: '#ECEDFD',
       sideBarItem: '#FFFFFF80',
+      cardItem: '#FFFFFF',
     },
     text: {
       primary: '#161616',

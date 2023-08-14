@@ -264,11 +264,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
               {formatSelectedDate(selectedDate)}
             </TextWithGap>
             <DownWithPadding>
-              <SvgIcon
-                svgName="icon-arrow-down"
-                stroke={senseColor}
-                size="18"
-              />
+              <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
             </DownWithPadding>
           </CalendarWrapper>
 
@@ -282,12 +278,20 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
               next2Label={null}
               prevLabel={
                 <PrevLabelWithPadding>
-                  <SvgIcon svgName="icon-arrow-left" size="10" />
+                  <SvgIcon
+                    svgName="icon-arrow-left"
+                    size="14"
+                    variant="cardItem"
+                  />
                 </PrevLabelWithPadding>
               }
               nextLabel={
                 <NextLabelWithPadding>
-                  <SvgIcon svgName="icon-arrow-right" size="10" />
+                  <SvgIcon
+                    svgName="icon-arrow-right"
+                    size="14"
+                    variant="cardItem"
+                  />
                 </NextLabelWithPadding>
               }
               showYearDropdown={false}

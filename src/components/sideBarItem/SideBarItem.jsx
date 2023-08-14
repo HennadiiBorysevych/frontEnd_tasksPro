@@ -4,8 +4,10 @@ import { useBoardContext, useModal } from 'hooks';
 import PropTypes from 'prop-types';
 import { selectAllBoards } from 'redux/boards/boardSelectors';
 import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
+
 // import { ConfirmToast } from 'react-confirm-toast';
 import { BoardPopUp, Modal, SvgIcon } from 'components';
+
 // import { selectTheme } from 'redux/auth/authSelectors';
 import {
   BoardIdentificationItem,

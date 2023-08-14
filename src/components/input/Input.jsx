@@ -50,8 +50,7 @@ const Input = ({
             <PasswordWrapperIcon onClick={handleTogglePassword}>
               <SvgIcon
                 svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
-                width="18"
-                height="18"
+                size="18"
                 fill="#ffffff"
               />
             </PasswordWrapperIcon>

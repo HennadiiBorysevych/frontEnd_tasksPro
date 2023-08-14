@@ -2,9 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
 import { useBoardContext } from 'hooks';
-import { selectTheme } from 'redux/auth/authSelectors';
 import {
   deleteBoard,
   fetchBoards,
@@ -14,14 +12,12 @@ import { selectAllBoards } from 'redux/boards/boardSelectors';
 
 import { CustomScrollbar, SideBarItem } from 'components';
 
-import 'react-toastify/dist/ReactToastify.css';
 import { BoardList } from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = () => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const boards = useSelector(selectAllBoards);
-  const selectedTheme = useSelector(selectTheme);
-  const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,11 +37,15 @@ const SideBarBoardsList = () => {
   };
 
   const handleDeleteBoard = async id => {
+    const confirmDelete = window.confirm(
+      'Ви впевнені, що хочете видалити борд?'
+    );
     try {
-      await dispatch(deleteBoard(id));
-      console.log('Board has deleted');
-      await dispatch(fetchBoards());
-      await toast.success('Board has deleted');
+      if (confirmDelete) {
+        await dispatch(deleteBoard(id));
+        console.log('Board has deleted');
+        await dispatch(fetchBoards());
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -65,7 +65,6 @@ const SideBarBoardsList = () => {
           />
         ))}
       </BoardList>
-      <ToastContainer position="top-left" theme={toastClassName} />
     </CustomScrollbar>
   );
 };

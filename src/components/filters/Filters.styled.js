@@ -1,11 +1,19 @@
 import styled from '@emotion/styled';
 
+const hexToRgb = hex => {
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `${r}, ${g}, ${b}`;
+};
+
 export const FiltersLink = styled.a`
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: '#ffffff';
+  color: ${props => props.theme.palette.text.primary}CC;
   cursor: pointer;
 `;
 
@@ -30,7 +38,7 @@ export const Line = styled.div`
     display: block;
     margin-bottom: 14px;
     width: 252px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid ${props => props.theme.palette.text.primary}1A;
   }
 `;
 
@@ -41,7 +49,7 @@ export const FilterHeader = styled.div`
 `;
 
 export const LabelsTitle = styled.p`
-  color: #fff;
+  color: ${props => props.theme.palette.text.primary};
   font-size: 14px;
   font-weight: 500;
   line-height: 1.25;
@@ -49,7 +57,7 @@ export const LabelsTitle = styled.p`
 `;
 
 export const ShowAllLabel = styled.label`
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => props.theme.palette.text.primary}80;
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;
@@ -80,9 +88,8 @@ export const Priority = styled.div`
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => props.theme.palette.text.primary}80;
   font-size: 12px;
-  font-family: 'Poppins';
   letter-spacing: -0.24px;
   gap: 10px;
   cursor: pointer;
@@ -115,7 +122,9 @@ export const Radio = styled.input`
         case 'high':
           return `background-color: #bedbb0`;
         case 'without':
-          return `background-color: rgba(255, 255, 255, 0.3)`;
+          return `background-color: rgba(${hexToRgb(
+            props.theme.palette.text.primary
+          )}, 0.30)`;
         default:
           return;
       }
@@ -157,7 +166,9 @@ export const Radio = styled.input`
             case 'high':
               return `border-color: #bedbb0`;
             case 'without':
-              return `border-color: rgba(255, 255, 255, 0.3)`;
+              return `border-color: rgba(${hexToRgb(
+                props.theme.palette.text.primary
+              )}, 0.30)`;
             default:
               return;
           }
@@ -166,3 +177,5 @@ export const Radio = styled.input`
     }
   }
 `;
+
+export const PopUpLayout = styled.title``;
