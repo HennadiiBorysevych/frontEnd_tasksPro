@@ -5,7 +5,12 @@ const GlobalStyles = () => {
       styles={`
         :root {
           /** WelcomePage */
-          
+          --welcomeBgColor: linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #ffffff 25%,
+            #bedbb0 92.19%
+          );
 
           /** breakpoints */
           --xs: '320px';

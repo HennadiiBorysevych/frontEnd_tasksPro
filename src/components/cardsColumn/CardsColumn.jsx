@@ -90,7 +90,7 @@ function CardsColumn({ provided, column }) {
         isCombineEnabled={true}
       >
         {provided => (
-          <CustomScrollBar>
+          <CustomScrollBar height="600px">
             <ItemsContainer
               {...provided.droppableProps}
               ref={provided.innerRef}

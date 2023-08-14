@@ -37,19 +37,16 @@ const SideBarBoardsList = () => {
   };
 
   const handleDeleteBoard = async id => {
-
     try {
-
-        await dispatch(deleteBoard(id));
-        console.log('Board has deleted');
-        await dispatch(fetchBoards());
-
+      await dispatch(deleteBoard(id));
+      console.log('Board has deleted');
+      await dispatch(fetchBoards());
     } catch (error) {
       console.error(error.message);
     }
   };
   return (
-    <CustomScrollbar width="100%" height="126px" overflow="auto">
+    <CustomScrollbar height="126px" overflow-y="auto">
       <BoardList>
         {boards.map(({ id, icon, title }) => (
           <SideBarItem
