@@ -13,4 +13,10 @@ export const TextSignOut = styled.p`
   font-weight: 500;
   line-height: 1.25;
   color: ${props => props.theme.palette.text.sidemenu};
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    color: ${props => props.theme.palette.primary.iconLog};
+    transform: scale(1.02);
+  }
 `;

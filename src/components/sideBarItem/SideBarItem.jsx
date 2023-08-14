@@ -50,7 +50,7 @@ const SideBarItem = ({
             svgName={`${iconName}`}
             size={18}
             isActive={active}
-            variant="popUp"
+            variant="support"
           />
           <BoardName isActive={active}>{title}</BoardName>
         </BoardIdentificationItem>

@@ -4,17 +4,18 @@ import { useModal } from 'hooks';
 import { authSelectors } from 'redux/auth';
 
 import { Modal, ProfilePopUp, UserAvatar } from 'components';
+import Typography from 'components/typography/Typography';
 
-import { ClickWrap, Container, UserName } from './Profile.styled';
+import { ClickWrap } from './Profile.styled';
 
 const Profile = () => {
   const user = useSelector(authSelectors.selectUser);
   const { isModal, toggleModal, onBackdropClick } = useModal();
 
   return (
-    <Container>
+    <div>
       <ClickWrap onClick={toggleModal}>
-        <UserName>{user?.name ?? 'No User'}</UserName>
+        <Typography variant="columnTitle">{user?.name ?? 'No User'}</Typography>
         <UserAvatar avatar={user?.avatarURL} width="32px" height="32px" />
       </ClickWrap>
       {isModal ? (
@@ -22,7 +23,7 @@ const Profile = () => {
           <ProfilePopUp user={user} handleModalClose={toggleModal} />
         </Modal>
       ) : null}
-    </Container>
+    </div>
   );
 };
 
