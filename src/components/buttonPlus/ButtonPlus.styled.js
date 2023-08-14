@@ -14,7 +14,5 @@ export const SpanStyled = styled.span`
   transition: all 250ms linear;
   cursor: pointer;
 
-  &:hover {
-    transform: scale(1.1);
-  }
+  
 `;

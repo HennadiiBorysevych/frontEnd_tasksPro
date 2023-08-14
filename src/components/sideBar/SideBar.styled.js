@@ -74,6 +74,12 @@ export const CreateBoard = styled.button`
   border-bottom: 1px solid ${props => `${props.theme.palette.text.sidemenu}1A`};
   padding: 14px;
   margin-bottom: 40px;
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
 
   @media screen and (min-width: 768px) {
     padding: 14px 24px;

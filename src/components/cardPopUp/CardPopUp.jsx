@@ -2,7 +2,6 @@ import React from 'react';
 import { useCard } from 'hooks';
 
 import {
-  ButtonPlus,
   CardsSettings,
   Input,
   PopUpLayout,

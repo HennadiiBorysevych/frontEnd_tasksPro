@@ -25,4 +25,5 @@ export const BoardTitle = styled.p`
   font-size: 18px;
   letter-spacing: -0.36px;
   font-weight: 500;
+  text-shadow: #ffffff 1px 0 1px;
 `;

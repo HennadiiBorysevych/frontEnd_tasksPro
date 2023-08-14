@@ -15,10 +15,13 @@ export const ButtonAddColumn = styled.button`
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.28px;
+  transition: box-shadow 0.3s, transform 0.3s;
 
   &:hover {
-    opacity: 0.9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
   }
+
 `;
 
 export const SpanStyled = styled.span`

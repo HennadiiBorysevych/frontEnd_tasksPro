@@ -77,6 +77,7 @@ const BoardSettings = ({
                 <BackgroundImage
                   bgIndex={bgIndex}
                   isActive={chosenBackground === bgIndex.title}
+                  className={chosenBackground === bgIndex.title ? 'active' : ''}
                 />
               </label>
             ))}

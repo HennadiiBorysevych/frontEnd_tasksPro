@@ -7,6 +7,12 @@ export const SupportBox = styled.button`
   border-radius: 8px;
   text-align: left;
   margin: 40px 14px 24px;
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
 
   @media screen and (min-width: 768px) {
     padding: 20px;
