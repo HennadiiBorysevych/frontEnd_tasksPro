@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { ConfirmToast } from 'react-confirm-toast';
+// import { ConfirmToast } from 'react-confirm-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
-import { selectTheme } from 'redux/auth/authSelectors';
+// import { selectTheme } from 'redux/auth/authSelectors';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsOperations, columnsSelectors } from 'redux/columns';
 import columnSelectors from 'redux/columns/columnSelectors';
@@ -55,8 +55,8 @@ const CardsList = () => {
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
   const userFilter = useSelector(selectUserFilter);
-  const selectedTheme = useSelector(selectTheme);
-  const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
+  // const selectedTheme = useSelector(selectTheme);
+  // const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
   const onDragEnd = result => {
     if (!result.destination) {
       return;
@@ -165,7 +165,7 @@ const CardsList = () => {
                                 {column.title}
                               </ColumnHeadingText>
 
-                              <ConfirmToast
+                              {/* <ConfirmToast
                                 customFunction={() =>
                                   dispatch(
                                     columnsOperations.deleteColumn(column.id)
@@ -174,13 +174,20 @@ const CardsList = () => {
                                 asModal={false}
                                 position={'top-left'}
                                 theme={toastClassName}
-                              >
-                                <IconsContainer>
-                                  <EditColumnBtn column={column} />
+                              > */}
+                              <IconsContainer>
+                                <EditColumnBtn column={column} />
 
-                                  <IconButton svgName="icon-trash"></IconButton>
-                                </IconsContainer>
-                              </ConfirmToast>
+                                <IconButton
+                                  svgName="icon-trash"
+                                  onClick={() =>
+                                    dispatch(
+                                      columnsOperations.deleteColumn(column.id)
+                                    )
+                                  }
+                                />
+                              </IconsContainer>
+                              {/* </ConfirmToast> */}
                             </ColumnHeading>
                             <StrictModeDroppable
                               droppableId={column.id}
