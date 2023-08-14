@@ -1,3 +1,5 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const BoardDecor = styled.div`
@@ -41,15 +43,11 @@ export const Svg = styled.svg`
   height: 18px;
 `;
 
-export const BoardText = styled.p`
+export const BoardText = styled(Typography)`
   width: 100%;
   text-align: left;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 21px;
-  letter-spacing: -0.02em;
   margin-bottom: 14px;
-  color: ${props => props.theme.palette.text.primary};
+  line-height: 21px;
 `;
 
 export const BackgroundImage = styled.div(props => ({

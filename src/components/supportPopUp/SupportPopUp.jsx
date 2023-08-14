@@ -15,7 +15,7 @@ const formStyle = {
 
 const SupportPopUp = ({ onClose }) => {
   const { user } = useAuth();
-  const { handleSupportSubmit } = useSupport();
+  const { handleSupportSubmit } = useSupport(onClose);
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: { email: user?.email ?? '', comment: '' },

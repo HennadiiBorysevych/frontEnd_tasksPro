@@ -91,7 +91,7 @@ const CardsList = () => {
 
   return (
     <>
-      <CustomScrollBar height="500px">
+      <CustomScrollBar height="100% - 60px">
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
             <StrictModeDroppable

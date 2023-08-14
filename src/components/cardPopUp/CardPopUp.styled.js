@@ -14,3 +14,8 @@ export const Container = styled.div({
     width: '350px',
   },
 });
+
+
+export const Wrapper = styled.span`
+  color: ${props => props.theme.palette.text.primary};
+`;
