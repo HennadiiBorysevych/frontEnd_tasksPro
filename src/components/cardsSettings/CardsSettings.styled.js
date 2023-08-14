@@ -1,5 +1,13 @@
 import styled from '@emotion/styled';
 
+const hexToRgb = hex => {
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `${r}, ${g}, ${b}`;
+};
+
 export const SettingsBlock = styled.div`
   width: 100%;
   margin-bottom: 40px;
@@ -47,7 +55,9 @@ export const Radio = styled.input`
         case 'High':
           return `background-color: #bedbb0`;
         case 'Without':
-          return `background-color: rgba(255, 255, 255, 0.3)`;
+          return `background-color: rgba(${hexToRgb(
+            props.theme.palette.text.primary
+          )}, 0.30)`;
         default:
           return;
       }
@@ -89,7 +99,9 @@ export const Radio = styled.input`
             case 'High':
               return `border-color: #bedbb0`;
             case 'Without':
-              return `border-color: rgba(255, 255, 255, 0.3)`;
+              return `border-color: rgba(${hexToRgb(
+                props.theme.palette.text.primary
+              )}, 0.30)`;
             default:
               return;
           }

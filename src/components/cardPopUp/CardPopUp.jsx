@@ -64,8 +64,11 @@ const CardPopUp = ({
           setPriority={handlePriority}
           setDeadline={setDeadline}
         />
-        <PrimaryButton hasIcon={false} onClick={handleCardSubmit}>
-          <ButtonPlus />
+        <PrimaryButton
+          hasIcon={true}
+          onClick={handleCardSubmit}
+          variant="primary"
+        >
           {card ? 'Edit' : 'Create'}
         </PrimaryButton>
       </PopUpLayout>

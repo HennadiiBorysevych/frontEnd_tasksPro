@@ -48,7 +48,6 @@ export const FilterHeader = styled.div`
   align-items: center;
 `;
 
-
 export const LabelsTitle = styled.p`
   color: ${props => props.theme.palette.text.primary};
   font-size: 14px;
@@ -58,7 +57,7 @@ export const LabelsTitle = styled.p`
 `;
 
 export const ShowAllLabel = styled.label`
-  color: rgba(255, 255, 255, 0.5);
+  color: ${props => props.theme.palette.text.primary}80;
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;
@@ -178,7 +177,5 @@ export const Radio = styled.input`
     }
   }
 `;
-
-
 
 export const PopUpLayout = styled.title``;
