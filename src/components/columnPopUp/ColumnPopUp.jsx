@@ -2,11 +2,11 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { popUpSchema } from 'validationSchemas';
 
-import { ButtonPlus, Input, PopUpLayout, PrimaryButton } from 'components';
+import { Input, PopUpLayout, PrimaryButton } from 'components';
 
 import useColumn from '../../hooks/useColumn';
 
-import { Container } from './ColumnPopUp.styled';
+import { Container, Wrapper } from './ColumnPopUp.styled';
 
 const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
   const { handleColumnSubmit } = useColumn(
@@ -40,16 +40,16 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
             }}
           />
           {errors.title && touched.title ? (
-            <span style={{ color: 'white' }}>{errors.title}</span>
+            <Wrapper>{errors.title}</Wrapper>
           ) : null}
           <PrimaryButton
-            hasIcon={false}
+            hasIcon={true}
             type="submit"
+            variant='primary'
             style={{
               marginTop: '14px',
             }}
-          >
-            <ButtonPlus />
+          >          
             {column ? 'Edit' : 'Add'}
           </PrimaryButton>
         </form>

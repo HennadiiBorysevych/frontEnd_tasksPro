@@ -5,25 +5,7 @@ const GlobalStyles = () => {
       styles={`
         :root {
           /** WelcomePage */
-          --welcomeBgColor: linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #ffffff 25%,
-            #bedbb0 92.19%
-          );
-
-          /**Register, LogIn */
-          --bgColorAuth: #151515;
-          --inputBgColor: #1f1f1f;
-          --inputBorderColor: rgb(190, 219, 176, 0.5);
-          --inputBorderFocus: #bedbb0;
-          --buttonColor: #161616;
-
-          /** Priority Colors*/
-          --defaultPriorityColor: rgba(255, 255, 255, 0.3)
-          --lowPriorityColor: #8fa1d0;
-          --mediumPriorityColor: #e09cb5;
-          --highPriorityColor: #bedbb0;
+          
 
           /** breakpoints */
           --xs: '320px';

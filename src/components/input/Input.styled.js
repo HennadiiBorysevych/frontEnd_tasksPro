@@ -17,7 +17,7 @@ width: calc(100%);
 
   font-size: 14px;
   letter-spacing: -0.28px;
-  
+  font-family: inherit;
 
   &::placeholder {
     font-size: 14px;
@@ -43,6 +43,7 @@ export const TextareaStyled = styled.textarea`
   ${CommonInputStyles};
   resize: none;
   overflow: auto;
+
   height: ${props => (props.height ? `${props.height}px` : '154px')};
   background: ${props => props.theme.palette.background.input};
   border: 1px solid ${props => props.theme.palette.hover.inputAndIcon};

@@ -13,6 +13,7 @@ const AddColumnBtn = ({ boardId, columnIndex }) => {
         <SpanStyled>
           <SvgIcon svgName="icon-plus" variant='buttonCard' size={14} />
         </SpanStyled>
+        
         Add another column
       </ButtonAddColumn>
       {isModal && (

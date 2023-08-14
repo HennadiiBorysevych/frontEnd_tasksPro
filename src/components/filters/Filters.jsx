@@ -9,6 +9,7 @@ import {
   Container,
   FilterHeader,
   FiltersLink,
+  FilterTitle,
   Label,
   LabelsTitle,
   Line,
@@ -34,7 +35,7 @@ const Filters = () => {
     <>
       <FiltersLink onClick={toggleModal}>
         <SvgIcon svgName="icon-filter" variant="header" isActive="true" />
-        Filters
+        <FilterTitle>Filters</FilterTitle>
       </FiltersLink>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>

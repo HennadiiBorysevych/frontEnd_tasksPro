@@ -62,8 +62,7 @@ export const BackgroundImage = styled.div(props => ({
   cursor: 'pointer',
   margin: '2px',
   backgroundImage: `url(${props.bgIndex.regular})`,
-  border: $props =>
-    props.isActive ? `1px solid ${props.theme.palette.primary.main}` : 'none',
+  border: 'none',
   '@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)':
     {
       backgroundImage: `url(${props.bgIndex.x2})`,
@@ -72,4 +71,10 @@ export const BackgroundImage = styled.div(props => ({
     {
       backgroundImage: `url(${props.bgIndex.x3})`,
     },
+  '&:hover': {
+    transform: 'scale(1.1)',
+  },
+  '&:active, &.active': {
+    border: `1px solid ${props.theme.palette.background.buttonPlus}`,
+  },
 }));

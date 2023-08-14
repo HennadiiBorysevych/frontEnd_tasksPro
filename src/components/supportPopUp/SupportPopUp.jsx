@@ -5,7 +5,7 @@ import { supportSchema } from 'validationSchemas';
 
 import { Input, PopUpLayout, PrimaryButton } from 'components';
 
-import { Container } from './SupportPopUp.styled';
+import { Container, Wrapper } from './SupportPopUp.styled';
 
 const formStyle = {
   display: 'flex',
@@ -36,7 +36,7 @@ const SupportPopUp = ({ onClose }) => {
             value={values.email}
           />
           {errors.email && touched.email ? (
-            <span style={{ color: 'white' }}>{errors.email}</span>
+            <Wrapper>{errors.email}</Wrapper>
           ) : null}
           <Input
             name="comment"
@@ -48,7 +48,7 @@ const SupportPopUp = ({ onClose }) => {
             value={values.comment}
           />
           {errors.comment && touched.comment ? (
-            <span style={{ color: 'white' }}>{errors.comment}</span>
+            <Wrapper>{errors.comment}</Wrapper>
           ) : null}
           <PrimaryButton
             type="submit"
