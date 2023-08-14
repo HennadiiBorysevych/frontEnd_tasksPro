@@ -22,3 +22,14 @@
 .os-theme-custom.os-scrollbar-vertical {
   --os-size: 18px;
 }
+
+.os-theme-custom.os-scrollbar-vertical.os-scrollbar-handle {
+  --os-track-bg: #bedbb0;
+  --os-track-border-active: 0.5 solid #bedbb0;
+}
+
+@media screen and (min-width: 1440px) {
+  .os-theme-custom.os-scrollbar-vertical {
+    --os-height: 126px;
+  }
+}

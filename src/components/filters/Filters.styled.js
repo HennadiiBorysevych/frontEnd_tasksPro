@@ -9,30 +9,22 @@ export const FiltersLink = styled.a`
   cursor: pointer;
 `;
 
-export const SettingsBlock = styled.div`
-  width: 100%;
+export const Container = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 374px) {
+    max-width: 300px;
+  }
+
+  @media (min-width: 375px) {
+    width: 300px;
+  }
 `;
 
-export const Wrapper = styled.div`
-  width: 100%;
-`;
-
-export const FilterHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const Line = styled.div`
   position: relative;
-`;
-
-export const LabelsTitle = styled.p`
-  color: #fff;
-  font-family: Poppins;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.28px;
   margin-bottom: 14px;
-
   &::before {
     content: '';
     display: block;
@@ -40,6 +32,49 @@ export const LabelsTitle = styled.p`
     width: 252px;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+`;
+
+export const FilterHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const LabelsTitle = styled.p`
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.28px;
+`;
+
+export const ShowAllLabel = styled.label`
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  text-decoration-line: underline;
+  cursor: pointer;
+`;
+
+export const ShowAllRadio = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+`;
+
+export const Priority = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export const Label = styled.label`
@@ -53,17 +88,12 @@ export const Label = styled.label`
   cursor: pointer;
 `;
 
-export const Priority = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
 export const Radio = styled.input`
   position: relative;
   visibility: hidden;
   cursor: pointer;
   margin: 0;
+
   &::after {
     visibility: visible;
     top: 0;
@@ -136,30 +166,3 @@ export const Radio = styled.input`
     }
   }
 `;
-
-export const ShowAllLabel = styled.label`
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.24px;
-  text-decoration-line: underline;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-`;
-
-export const ShowAllRadio = styled.input`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-`;
-
-export const PopUpLayout = styled.title``;

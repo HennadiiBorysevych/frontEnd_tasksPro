@@ -6,11 +6,11 @@ export const SupportBox = styled.button`
   background-color: ${props => props.theme.palette.background.support};
   border-radius: 8px;
   text-align: left;
-  margin: 0 14px 24px;
+  margin: 40px 14px 24px;
 
   @media screen and (min-width: 768px) {
     padding: 20px;
-    margin: 0 24px 24px;
+    margin: 40px 24px 24px;
   }
 `;
 

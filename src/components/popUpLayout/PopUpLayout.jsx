@@ -9,7 +9,7 @@ const PopUpLayout = ({ title, handleClose, children }) => {
   return (
     <Container>
       <CloseBtn onClick={handleClose}>
-        <SvgIcon svgName="icon-x-close" variant='header'/>
+        <SvgIcon svgName="icon-x-close" variant="header" />
       </CloseBtn>
       <TitlePopUp title={title} />
       {children}
@@ -21,7 +21,6 @@ PopUpLayout.propTypes = {
   title: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  // children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default PopUpLayout;

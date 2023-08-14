@@ -46,7 +46,6 @@ const BoardPopUp = ({ board, onClose }) => {
           setChosenBackground={setBackground}
         />
         <PrimaryButton
-          style={{ marginTop: '16px' }}
           onClick={handleBoradSubmit}
           hasIcon={false}
           variant="primary"
