@@ -1,3 +1,5 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 const getPriorityColor = priority => {
@@ -33,22 +35,12 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const Title = styled.h4`
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+export const Title = styled(Typography)`
   margin: 0 0 8px;
-  color: ${props => props.theme.palette.text.primary};
 `;
 
-export const Description = styled.p`
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.33;
-  letter-spacing: -0.02em;
+export const Description = styled(Typography)`
   margin-bottom: 14px;
-  color: ${props => props.theme.palette.text.primary + '80'};
 `;
 
 export const Details = styled.div`
@@ -59,22 +51,9 @@ export const Details = styled.div`
   border-top: 1px solid ${props => props.theme.palette.text.primary + '1A'};
 `;
 
-export const DetailLabel = styled.h5`
-  font-size: 8px;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: ${props => props.theme.palette.text.primary + '80'};
+export const DetailLabel = styled(Typography)`
   margin: 0;
   margin-bottom: 4px;
-`;
-
-export const DetailValue = styled.p`
-  font-size: 10px;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: ${props => props.theme.palette.text.primary};
 `;
 
 export const Circle = styled.div`

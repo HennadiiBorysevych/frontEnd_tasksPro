@@ -1,14 +1,9 @@
 import React from 'react';
 import { useCard } from 'hooks';
 
-import {
-  CardsSettings,
-  Input,
-  PopUpLayout,
-  PrimaryButton,
-} from 'components';
+import { CardsSettings, Input, PopUpLayout, PrimaryButton } from 'components';
 
-import { Container } from './CardPopUp.styled';
+import { Container, Wrapper } from './CardPopUp.styled';
 
 const CardPopUp = ({
   columnId,
@@ -42,9 +37,7 @@ const CardPopUp = ({
             marginBottom: '14px',
           }}
         />
-        {titleChecker ? (
-          <span style={{ color: 'white' }}>Title is required</span>
-        ) : null}
+        {titleChecker ? <Wrapper>Title is required</Wrapper> : null}
         <Input
           name="description"
           onChange={handleInput}
@@ -54,9 +47,7 @@ const CardPopUp = ({
             marginBottom: '14px',
           }}
         />
-        {descriptionChecker ? (
-          <span style={{ color: 'white' }}>Description is required</span>
-        ) : null}
+        {descriptionChecker ? <Wrapper>Description is required</Wrapper> : null}
         <CardsSettings
           priority={priority}
           deadline={new Date(deadline)}
