@@ -3,7 +3,7 @@ const GlobalStyles = () => {
   return (
     <Global
       styles={`
-               :root {
+        :root {
           /** WelcomePage */
           --welcomeBgColor: linear-gradient(
             180deg,
@@ -24,7 +24,6 @@ const GlobalStyles = () => {
           --lowPriorityColor: #8fa1d0;
           --mediumPriorityColor: #e09cb5;
           --highPriorityColor: #bedbb0;
-
 
           /** breakpoints */
           --xs: '320px';
