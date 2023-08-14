@@ -17,8 +17,6 @@ const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/api/auth/register', credentials);
-      token.set(data.token);
-
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -45,6 +43,20 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
+const googleAuth = createAsyncThunk(
+  'auth/google',
+  async (tokenAuth, thunkAPI) => {
+    try {
+      token.set(tokenAuth);
+      const { data } = await axios.get('/api/users/current');
+      data.user.token = tokenAuth;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -58,7 +70,6 @@ const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/api/users/current');
-      // console.log('🚀 : data', data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -130,6 +141,7 @@ export const updateUserHelp = createAsyncThunk(
 const operations = {
   register,
   logIn,
+  googleAuth,
   logOut,
   fetchCurrentUser,
   updateUserInfo,

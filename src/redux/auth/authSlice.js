@@ -39,7 +39,6 @@ const authSlice = createSlice({
     builder
       .addCase(authOperations.register.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
         state.isLoggedIn = false;
         handleFulfilled(state);
       })
@@ -66,6 +65,12 @@ const authSlice = createSlice({
 
       .addCase(authOperations.fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        state.isLoggedIn = true;
+        handleFulfilled(state);
+      })
+      .addCase(authOperations.googleAuth.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.user.token;
         state.isLoggedIn = true;
         handleFulfilled(state);
       })

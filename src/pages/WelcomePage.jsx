@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
-
+import GoogleAuth from '../components/googleAuth/GoogleAuth';
 import { Logo } from 'components';
 
 import { Background, Container } from './styles/commonStyles';
@@ -34,6 +34,9 @@ const WelcomePage = () => {
             </li>
             <li>
               <NavLink to="/auth/login">Log In</NavLink>
+            </li>
+            <li>
+              <GoogleAuth />
             </li>
           </ul>
         </WelcomeContainer>
