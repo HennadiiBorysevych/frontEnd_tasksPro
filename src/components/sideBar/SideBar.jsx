@@ -48,7 +48,7 @@ const SideBar = ({
             </TitleButton>
             <ButtonPlus width={40} height={36} variant="sidemenu" size={20} />
           </CreateBoard>
-          {activeBoardId && <SideBarBoardsList />}
+          {activeBoardId && <SideBarBoardsList windowHeight={windowHeight} />}
         </div>
         <div>
           <Support />

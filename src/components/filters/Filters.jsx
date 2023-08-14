@@ -36,7 +36,7 @@ const Filters = () => {
     <>
       <FiltersLink onClick={toggleModal}>
         <FiltersIcon svgName="icon-filter" variant="header" isActive="true" />
-        <FilterTitle>Filters</FilterTitle>
+        <FilterTitle variant="columnTitle">Filters</FilterTitle>
       </FiltersLink>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>

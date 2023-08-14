@@ -38,8 +38,6 @@ const SideBarItem = ({
     onToggleModalAndSideBar();
   };
 
-
-
   return (
     <>
       <BoardListItem isActive={active}>

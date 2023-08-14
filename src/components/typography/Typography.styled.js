@@ -2,7 +2,7 @@ import { TypographyVariants } from './TypographyVariants';
 
 import styled from '@emotion/styled';
 
-const sharedStyles = props => ({
+export const sharedStyles = props => ({
   color: props.theme.palette.text.primary,
 });
 
@@ -18,6 +18,7 @@ export const typographyVariants = {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.28px;
+    line-height: 1.5;
     ${sharedStyles};
   `,
 
@@ -25,6 +26,7 @@ export const typographyVariants = {
     font-size: 14px;
     font-weight: 600;
     letter-spacing: -0.28px;
+    line-height: 1.5;
     ${sharedStyles};
   `,
 
@@ -37,13 +39,14 @@ export const typographyVariants = {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: rgba(255, 255, 255, 0.5);
+    color: ${props => props.theme.palette.text.primary}80;
   `,
 
   [TypographyVariants.subTitle]: styled.p`
     font-size: 8px;
+    line-height: 1.5;
     letter-spacing: -0.16px;
-    color: rgba(255, 255, 255, 0.5);
+    color: ${props => props.theme.palette.text.primary}80;
   `,
 
   [TypographyVariants.subText]: styled.p`
@@ -67,10 +70,10 @@ export const typographyVariants = {
   `,
 
   [TypographyVariants.welcomeText]: styled.p`
-    color: #161616;
     text-align: center;
     font-size: 14px;
     line-height: 1.29;
     letter-spacing: -0.28px;
+    ${sharedStyles};
   `,
 };

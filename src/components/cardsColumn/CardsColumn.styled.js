@@ -40,13 +40,6 @@ export const ColumnsContainer = styled.ul`
   margin-right: 21px;
 `;
 
-export const ColumnHeadingText = styled.h3`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
-`;
-
 export const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
