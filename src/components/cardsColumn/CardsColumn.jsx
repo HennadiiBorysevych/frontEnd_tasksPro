@@ -60,7 +60,7 @@ function CardsColumn({ provided, column }) {
                       }`}
                     >
                       <h1>Confirm Deletion</h1>
-                      <p>Are you sure you want to delete this task?</p>
+                      <p>Are you sure you want to delete this column?</p>
                       <div className="confirm-buttons">
                         <button onClick={onClose} className="green">
                           Cancel
