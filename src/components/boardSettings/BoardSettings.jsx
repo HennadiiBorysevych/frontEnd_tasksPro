@@ -7,6 +7,7 @@ import { backgroundImages } from '../../constants/backgrounds';
 
 import {
   BackgroundImage,
+  BoardDecor,
   BoardText,
   IconContainer,
   RadioField,
@@ -40,9 +41,9 @@ const BoardSettings = ({
       }}
     >
       {({ handleSubmit }) => (
-        <div>
-          <BoardText>Icons</BoardText>
+        <BoardDecor>
           <Row>
+            <BoardText>Icons</BoardText>
             {BOARD_ICONS.map(id => (
               <label key={id} title={id}>
                 <RadioField
@@ -62,8 +63,8 @@ const BoardSettings = ({
               </label>
             ))}
           </Row>
-          <BoardText>Background</BoardText>
           <Row>
+            <BoardText>Background</BoardText>
             {backgroundImages.map(bgIndex => (
               <label key={bgIndex.title} title={bgIndex.title}>
                 <RadioField
@@ -80,7 +81,7 @@ const BoardSettings = ({
               </label>
             ))}
           </Row>
-        </div>
+        </BoardDecor>
       )}
     </Formik>
   );

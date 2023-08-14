@@ -8,7 +8,7 @@ export const SideBarWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 225px;
-  height: 100vh;
+  min-height: 100vh;
   background-color: ${props => `${props.theme.palette.background.sidemenu}`};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   color: ${props => `${props.theme.palette.text.sidemenu}`};
@@ -85,19 +85,4 @@ export const TitleButton = styled.p`
   padding: 0;
   text-align: left;
   line-height: 1.25;
-`;
-
-export const BoardList = styled.ul`
-  position: relative;
-  margin-bottom: 40px;
-  max-height: 256px;
-  overflow-y: auto;
-
-  @media screen and (min-width: 768px) {
-    max-height: 380px;
-  }
-
-  @media screen and (min-width: 1440px) {
-    max-height: 126px;
-  }
 `;

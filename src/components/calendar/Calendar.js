@@ -282,12 +282,12 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
               next2Label={null}
               prevLabel={
                 <PrevLabelWithPadding>
-                  <SvgIcon svgName="icon-arrow-left" size="10" />
+                  <SvgIcon svgName="icon-arrow-left" size="14" />
                 </PrevLabelWithPadding>
               }
               nextLabel={
                 <NextLabelWithPadding>
-                  <SvgIcon svgName="icon-arrow-right" size="10" />
+                  <SvgIcon svgName="icon-arrow-right" size="14" />
                 </NextLabelWithPadding>
               }
               showYearDropdown={false}

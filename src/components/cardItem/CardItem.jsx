@@ -1,6 +1,9 @@
 import React from 'react';
+// import { ConfirmToast } from 'react-confirm-toast';
 import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useModal } from 'hooks';
+// import { selectTheme } from 'redux/auth/authSelectors';
 import cardOperations from 'redux/tasks/cardOperations';
 
 import { CardPopUp, Modal } from 'components';
@@ -31,7 +34,8 @@ const CardItem = ({ item }) => {
   const formattedDeadline = `${
     deadlineDate.getMonth() + 1
   }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
-
+  // const selectedTheme = useSelector(selectTheme);
+  // const toastClassName = selectedTheme === 'Dark' ? 'dark' : 'light';
   return (
     <CardContainer priority={priority}>
       <Title>{title}</Title>
@@ -54,12 +58,19 @@ const CardItem = ({ item }) => {
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
           )}
-          <IconButton svgName="icon-pencil" size={16} onClick={toggleModal} />
+          <IconButton onClick={toggleModal} svgName="icon-pencil" />
+          {/* 
+          <ConfirmToast
+            customFunction={() => dispatch(cardOperations.deleteTask(id))}
+            asModal={false}
+            position={'top-left'}
+            theme={toastClassName}
+          > */}
           <IconButton
             svgName="icon-trash"
-            size={16}
             onClick={() => dispatch(cardOperations.deleteTask(id))}
           />
+          {/* </ConfirmToast> */}
         </IconsContainer>
       </Details>
       {isModal && (

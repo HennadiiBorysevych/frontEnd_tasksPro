@@ -51,7 +51,7 @@ const SideBarBoardsList = () => {
     }
   };
   return (
-    <CustomScrollbar width="100%" height="130px" overflow="auto">
+    <CustomScrollbar width="100%" height="126px" overflow="auto">
       <BoardList>
         {boards.map(({ id, icon, title }) => (
           <SideBarItem
