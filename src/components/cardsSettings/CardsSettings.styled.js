@@ -14,14 +14,15 @@ export const SettingsBlock = styled.div`
 `;
 
 export const Label = styled.label`
-  display: flex;
-  flex-direction: column;
+  display: block;
   color: ${props => props.theme.palette.text.primary};
-  gap: 14px;
   font-size: 12px;
-  font-family: 'Poppins';
   line-height: 1.25;
   letter-spacing: -0.24px;
+
+  & + & {
+    margin-top: 14px;
+  }
 `;
 
 export const Priority = styled.div`

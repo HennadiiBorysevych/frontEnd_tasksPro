@@ -10,6 +10,5 @@ export function checkBgImg(bgImg) {
       break;
   }
 
-  console.log(bgImg);
   return img;
 }
