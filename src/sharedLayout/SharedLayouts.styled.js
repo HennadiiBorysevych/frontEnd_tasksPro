@@ -29,4 +29,7 @@ export const ScreenWrapper = styled.div`
 
 export const MainWrapper = styled.div`
   width: 100%;
+  @media screen and (min-width: 1440px) {
+    width: calc(100% - 260px);
+  }
 `;
