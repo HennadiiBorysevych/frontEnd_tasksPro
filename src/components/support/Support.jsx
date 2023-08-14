@@ -1,6 +1,7 @@
 import React from 'react';
 import image from 'assets/images/welcomeAndPlate/plate.png';
 import { useModal } from 'hooks';
+import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
 
 import { Modal, SupportPopUp, SvgIcon } from 'components';
 
@@ -15,11 +16,16 @@ import {
 
 const Support = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
-  const email = '';
+  const onToggleModalAndSideBar = useToggleModalAndSideBar();
+
+  const toggleWindows = () => {
+    toggleModal();
+    onToggleModalAndSideBar();
+  };
 
   return (
     <>
-      <SupportBox onClick={toggleModal}>
+      <SupportBox onClick={toggleWindows}>
         <SupportPlate src={image} alt="plate" />
         <SupportOffer>
           If you need help with <AppName>TaskPro</AppName>, check out our
@@ -33,7 +39,7 @@ const Support = () => {
 
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <SupportPopUp email={email} onClose={toggleModal} />
+          <SupportPopUp onClose={toggleModal} />
         </Modal>
       )}
     </>

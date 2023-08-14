@@ -2,17 +2,18 @@ import styled from '@emotion/styled';
 
 export const SettingsBlock = styled.div`
   width: 100%;
+  margin-bottom: 40px;
 `;
 
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
+  gap: 14px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
   font-family: 'Poppins';
   line-height: 1.25;
   letter-spacing: -0.24px;
-  margin-bottom: 14px;
 `;
 
 export const Priority = styled.div`

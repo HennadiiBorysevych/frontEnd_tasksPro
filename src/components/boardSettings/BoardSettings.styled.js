@@ -1,10 +1,17 @@
 import styled from '@emotion/styled';
 
+export const BoardDecor = styled.div`
+  margin-bottom: 40px;
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: calc(8 * 32px);
-  margin-bottom: 24px;
+
+  & + & {
+    margin-top: 24px;
+  }
 `;
 
 export const RadioField = styled.input`
@@ -35,6 +42,7 @@ export const Svg = styled.svg`
 `;
 
 export const BoardText = styled.p`
+  width: 100%;
   text-align: left;
   font-size: 14px;
   font-weight: 500;
@@ -54,9 +62,8 @@ export const BackgroundImage = styled.div(props => ({
   cursor: 'pointer',
   margin: '2px',
   backgroundImage: `url(${props.bgIndex.regular})`,
-  border: $props => props.isActive
-    ? `1px solid ${props.theme.palette.primary.main}`
-    : 'none',
+  border: $props =>
+    props.isActive ? `1px solid ${props.theme.palette.primary.main}` : 'none',
   '@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)':
     {
       backgroundImage: `url(${props.bgIndex.x2})`,
@@ -66,4 +73,3 @@ export const BackgroundImage = styled.div(props => ({
       backgroundImage: `url(${props.bgIndex.x3})`,
     },
 }));
-
