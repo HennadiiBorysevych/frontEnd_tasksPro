@@ -11,6 +11,10 @@ export const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  &:hover {
+    color: ${props => props.theme.palette.hover.primaryButton}
+  }
 `;
 
 export const DropdownMenu = styled.ul`

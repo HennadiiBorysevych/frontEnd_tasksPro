@@ -43,7 +43,7 @@ const BoardSettings = ({
       {({ handleSubmit }) => (
         <BoardDecor>
           <Row>
-            <BoardText>Icons</BoardText>
+            <BoardText variant="columnTitle">Icons</BoardText>
             {BOARD_ICONS.map(id => (
               <label key={id} title={id}>
                 <RadioField
@@ -64,7 +64,7 @@ const BoardSettings = ({
             ))}
           </Row>
           <Row>
-            <BoardText>Background</BoardText>
+            <BoardText variant="columnTitle">Background</BoardText>
             {backgroundImages.map(bgIndex => (
               <label key={bgIndex.title} title={bgIndex.title}>
                 <RadioField

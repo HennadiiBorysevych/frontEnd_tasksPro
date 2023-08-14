@@ -1,3 +1,5 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const Header = styled.div`
@@ -5,10 +7,7 @@ export const Header = styled.div`
   align-items: center;
   justify-content: ${({ boardName }) =>
     boardName ? 'space-between' : 'flex-end'};
-  color: ${props =>
-    props.active
-      ? props.theme.palette.text.primary
-      : `${props.theme.palette.text.primary}80`};
+
   margin-bottom: 39px;
   width: 100%;
 
@@ -21,9 +20,6 @@ export const Header = styled.div`
   }
 `;
 
-export const BoardTitle = styled.p`
-  font-size: 18px;
-  letter-spacing: -0.36px;
-  font-weight: 500;
+export const BoardTitle = styled(Typography)`
   text-shadow: #ffffff 1px 0 1px;
 `;

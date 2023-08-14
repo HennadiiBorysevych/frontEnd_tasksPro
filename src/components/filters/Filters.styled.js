@@ -1,5 +1,7 @@
 import { hexToRgb } from 'helpers';
 
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const FiltersLink = styled.a`
@@ -10,7 +12,7 @@ export const FiltersLink = styled.a`
   cursor: pointer;
 `;
 
-export const FilterTitle = styled.p`
+export const FilterTitle = styled(Typography)`
   text-shadow: #ffffff 1px 0 1px;
   color: ${props => props.theme.palette.text.primary}CC;
 
