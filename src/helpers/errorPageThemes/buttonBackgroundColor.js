@@ -5,10 +5,10 @@ export function checkBtnBgColor(btnBgColor) {
     case 'Dark':
       color = '#BEDBB0';
       break;
-    case 'light':
+    case 'Light':
       color = '#BEDBB0';
       break;
-    case 'violet':
+    case 'Violet':
       color = '#9747FF';
       break;
     case 'Void':
