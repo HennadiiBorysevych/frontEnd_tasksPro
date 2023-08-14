@@ -78,9 +78,12 @@ const CardItem = ({ item }) => {
                       <h1>Confirm Deletion</h1>
                       <p>Are you sure you want to delete this task?</p>
                       <div className="confirm-buttons">
-                        <button onClick={onClose} className="green">Cancel</button>
+                        <button onClick={onClose} className="green">
+                          Cancel
+                        </button>
 
-                        <button className="red"
+                        <button
+                          className="red"
                           onClick={() => {
                             onClose();
                             dispatch(cardOperations.deleteTask(id));
