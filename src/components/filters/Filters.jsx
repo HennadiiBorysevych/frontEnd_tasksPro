@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from 'hooks';
 import { selectUserFilter, setUserFilter } from 'redux/userFilterSlice';
 
-import { Modal, PopUpLayout, SvgIcon } from 'components';
+import { Modal, PopUpLayout } from 'components';
 
 import {
   Container,
   FilterHeader,
+  FiltersIcon,
   FiltersLink,
   FilterTitle,
   Label,
@@ -34,7 +35,7 @@ const Filters = () => {
   return (
     <>
       <FiltersLink onClick={toggleModal}>
-        <SvgIcon svgName="icon-filter" variant="header" isActive="true" />
+        <FiltersIcon svgName="icon-filter" variant="header" isActive="true" />
         <FilterTitle>Filters</FilterTitle>
       </FiltersLink>
       {isModal && (

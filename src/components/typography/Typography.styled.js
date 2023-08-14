@@ -1,9 +1,10 @@
-import styled from '@emotion/styled';
 import { TypographyVariants } from './TypographyVariants';
 
-const sharedStyles = {
-  color: '#fff',
-};
+import styled from '@emotion/styled';
+
+const sharedStyles = props => ({
+  color: props.theme.palette.text.primary,
+});
 
 export const typographyVariants = {
   [TypographyVariants.projectTitle]: styled.h2`

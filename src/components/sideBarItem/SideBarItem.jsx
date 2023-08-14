@@ -52,7 +52,7 @@ const SideBarItem = ({
             svgName={`${iconName}`}
             size={18}
             isActive={active}
-            variant="popUp"
+            variant="support"
           />
           <BoardName isActive={active}>{title}</BoardName>
         </BoardIdentificationItem>
@@ -61,40 +61,42 @@ const SideBarItem = ({
             <button aria-label="Edit board" onClick={toggleWindows}>
               <SvgIcon svgName="icon-pencil" size={16} variant="support" />
             </button>
-            <button aria-label="Delete board" onClick={() => {
-              confirmAlert({
-                customUI: ({ onClose }) => {
-                  const onDeleteClose = () => {
-                    onDeleteClick(); 
-                    onClose(); 
-                  };
-                  return (
-                    <div
-                      className={`react-confirm ${
-                        selectedTheme === 'Dark'
-                          ? 'react-confirm-alert-dark'
-                          : 'react-confirm-alert-light'
-                      }`}
-                    >
-                      <h1>Confirm Deletion</h1>
-                      <p>Are you sure you want to delete this board?</p>
-                      <div className="confirm-buttons">
-                        <button onClick={onClose} className="green">Cancel</button>
+            <button
+              aria-label="Delete board"
+              onClick={() => {
+                confirmAlert({
+                  customUI: ({ onClose }) => {
+                    const onDeleteClose = () => {
+                      onDeleteClick();
+                      onClose();
+                    };
+                    return (
+                      <div
+                        className={`react-confirm ${
+                          selectedTheme === 'Dark'
+                            ? 'react-confirm-alert-dark'
+                            : 'react-confirm-alert-light'
+                        }`}
+                      >
+                        <h1>Confirm Deletion</h1>
+                        <p>Are you sure you want to delete this board?</p>
+                        <div className="confirm-buttons">
+                          <button onClick={onClose} className="green">
+                            Cancel
+                          </button>
 
-                        <button className="red"
-                          onClick={onDeleteClose}
-                        >
-                          Delete
-                        </button>
+                          <button className="red" onClick={onDeleteClose}>
+                            Delete
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                },
-              });
-            }}>
+                    );
+                  },
+                });
+              }}
+            >
               <SvgIcon svgName="icon-trash" size={16} variant="support" />
             </button>
-
           </BoardItemControl>
         )}
       </BoardListItem>

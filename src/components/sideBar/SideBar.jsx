@@ -34,7 +34,7 @@ const SideBar = ({
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
         <div>
           <Logo variant="bord" />
-          <TitleBoardList>My boards</TitleBoardList>
+          <TitleBoardList variant="taskDescription">My boards</TitleBoardList>
           <CreateBoard
             type="button"
             onClick={() => {

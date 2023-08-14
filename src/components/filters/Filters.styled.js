@@ -1,5 +1,7 @@
 import { hexToRgb } from 'helpers';
 
+import SvgIcon from 'components/svgIcon/SvgIcon';
+
 import styled from '@emotion/styled';
 
 export const FiltersLink = styled.a`
@@ -10,8 +12,12 @@ export const FiltersLink = styled.a`
   cursor: pointer;
 `;
 
+export const FiltersIcon = styled(SvgIcon)`
+  filter: drop-shadow(1px 0 1px #ffffff);
+`;
+
 export const FilterTitle = styled.p`
-  text-shadow: #ffffff 1px 0 1px;
+  text-shadow: 1px 0 1px #ffffff;
   color: ${props => props.theme.palette.text.primary}CC;
 
   &:hover {

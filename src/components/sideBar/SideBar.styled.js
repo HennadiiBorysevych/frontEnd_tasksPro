@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const SideBarWrapper = styled.div`
@@ -49,14 +51,10 @@ export const Overlay = styled.div`
   z-index: 999;
 `;
 
-export const TitleBoardList = styled.h2`
+export const TitleBoardList = styled(Typography)`
   margin-top: 70px;
   margin-bottom: 8px;
   color: ${props => `${props.theme.palette.text.sidemenu}80`};
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.24px;
-
   padding: 0 14px;
 
   @media screen and (min-width: 768px) {
