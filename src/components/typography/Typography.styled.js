@@ -66,6 +66,7 @@ export const typographyVariants = {
     font-size: 12px;
     font-weight: 500;
     letter-spacing: -0.24px;
+    line-height: 1.3;
     ${sharedStyles};
   `,
 

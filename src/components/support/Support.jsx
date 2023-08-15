@@ -4,6 +4,7 @@ import { useModal } from 'hooks';
 import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
 
 import { Modal, SupportPopUp, SvgIcon } from 'components';
+import Typography from 'components/typography/Typography';
 
 import {
   AppName,
@@ -11,7 +12,6 @@ import {
   SupportOffer,
   SupportPlate,
   SupportQuestion,
-  TextHelp,
 } from './Support.styled';
 
 const Support = () => {
@@ -27,13 +27,13 @@ const Support = () => {
     <>
       <SupportBox onClick={toggleWindows}>
         <SupportPlate src={image} alt="plate" />
-        <SupportOffer>
+        <SupportOffer variant="taskDescription">
           If you need help with <AppName>TaskPro</AppName>, check out our
           support resources or reach out to our customer support team.
         </SupportOffer>
         <SupportQuestion>
           <SvgIcon svgName="icon-help-circle" size={20} variant="support" />
-          <TextHelp>Need help?</TextHelp>
+          <Typography>Need help?</Typography>
         </SupportQuestion>
       </SupportBox>
 

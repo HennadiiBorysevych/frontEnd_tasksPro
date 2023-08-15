@@ -1,3 +1,5 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const ButtonSignOut = styled.button`
@@ -8,9 +10,7 @@ export const ButtonSignOut = styled.button`
   width: 100%;
 `;
 
-export const TextSignOut = styled.p`
-  font-size: 14px;
-  font-weight: 500;
+export const TextSignOut = styled(Typography)`
   line-height: 1.25;
   color: ${props => props.theme.palette.text.sidemenu};
   transition: box-shadow 0.3s, transform 0.3s;

@@ -1,7 +1,8 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
-export const Title = styled.h4(props => ({
+export const Title = styled(Typography)(props => ({
   margin: ' 0 0 24px 0',
-  fontSize: '18px',
   color: props.theme.palette.text.primary,
 }));

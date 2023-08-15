@@ -1,3 +1,5 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const SupportBox = styled.button`
@@ -25,11 +27,8 @@ export const SupportPlate = styled.img`
   margin-bottom: 14px;
 `;
 
-export const SupportOffer = styled.p`
+export const SupportOffer = styled(Typography)`
   margin-bottom: 18px;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
   letter-spacing: -0.24px;
 
   @media screen and (min-width: 768px) {
@@ -48,9 +47,3 @@ export const SupportQuestion = styled.span`
   gap: 8px;
 `;
 
-export const TextHelp = styled.p`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.24px;
-`;

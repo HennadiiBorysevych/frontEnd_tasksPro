@@ -51,7 +51,9 @@ const SideBarItem = ({
             isActive={active}
             variant="support"
           />
-          <BoardName isActive={active}>{title}</BoardName>
+          <BoardName variant="columnTitle" isActive={active}>
+            {title}
+          </BoardName>
         </BoardIdentificationItem>
         {active && (
           <BoardItemControl>

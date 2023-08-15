@@ -1,3 +1,5 @@
+import Typography from 'components/typography/Typography';
+
 import styled from '@emotion/styled';
 
 export const BoardListItem = styled.li(props => ({
@@ -28,14 +30,15 @@ export const BoardListItem = styled.li(props => ({
   }),
 }));
 
-export const BoardName = styled.h2(props => ({
-  fontSize: '14px',
-  fontWeight: 500,
+export const BoardName = styled(Typography)(props => ({
   lineHeight: 1.25,
-  letterSpacing: '-0.28px',
   color: props.isActive
     ? props.theme.palette.text.sidemenu
     : props.theme.palette.text.sidemenu + '80',
+
+  '&:hover': {
+    color: props.theme.palette.hover.primaryButton,
+  },
 }));
 
 export const BoardIdentificationItem = styled.button`
