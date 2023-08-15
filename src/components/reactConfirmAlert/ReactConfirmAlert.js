@@ -11,7 +11,6 @@ import './ReactConfirmAlert.styled.css';
 
 const ReactConfirmAlert = ({
   selectedTheme,
-  onDeleteClick,
   onDeleteAction,
   item,
   owner,
@@ -90,7 +89,7 @@ const ReactConfirmAlert = ({
           svgName="icon-trash"
           size={16}
           variant="popUp"
-          isActive="false"
+          isActive={false}
         />
       )}
     </button>

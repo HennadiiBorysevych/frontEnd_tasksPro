@@ -91,15 +91,12 @@ const tasksSlice = createSlice({
           order,
           ...rest,
         });
-        console.log(`${action.payload.data.title} added to your tasks`);
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const deletedCardId = action.payload;
-
         state.items = state.items.filter(item => item.id !== deletedCardId);
-        console.log('Filter: Card deleted');
       })
       .addCase(getTask.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -121,7 +118,6 @@ const tasksSlice = createSlice({
             id,
             ...rest,
           };
-          console.log('Task updated');
         }
       })
       .addCase(logOut.fulfilled, state => {

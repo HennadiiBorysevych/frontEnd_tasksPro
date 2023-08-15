@@ -124,20 +124,6 @@ export const updateUserHelp = createAsyncThunk(
   }
 );
 
-// export const updateUserAvatar = createAsyncThunk(
-//   'auth/updateUserAvatar',
-//   async (updatedUser, thunkAPI) => {
-//     const formData = new FormData();
-//     formData.append('newAvatar', updatedUser.avatarFile);
-//     try {
-//       const response = await axios.patch('/api/users/avatar', formData);
-//       return response.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 const operations = {
   register,
   logIn,

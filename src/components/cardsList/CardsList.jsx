@@ -1,97 +1,46 @@
 import React from 'react';
 import { DragDropContext, Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateOrdersFromIndex } from 'helpers';
+import { processDndResult } from 'helpers/dnd/processDndResult';
 import { StrictModeDroppable } from 'helpers/dnd/strictModeDroppable';
+import { useModal } from 'hooks';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
-import { columnsOperations, columnsSelectors } from 'redux/columns';
-import { moveTaskToColumn } from 'redux/tasks/cardOperations';
-import { moveTask } from 'redux/tasks/cardOperations';
+import { columnsSelectors } from 'redux/columns';
 
-import { AddColumnBtn } from 'components';
+import { ColumnPopUp, Modal, SvgIcon } from 'components';
 
 import CardsColumn from '../cardsColumn/CardsColumn';
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
-import { Column, ColumnsContainer, ContainerWrapper } from './CardsList.styled';
+import {
+  ButtonAddColumn,
+  ColumnsContainer,
+  ContainerWrapper,
+  SpanStyled,
+} from './CardsList.styled';
 
 const CardsList = () => {
+  const { isModal, onBackdropClick, toggleModal } = useModal();
   const dispatch = useDispatch();
   const activeBoardId = useSelector(selectActiveBoardId);
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
 
+  const scrollbarStyles = {
+    '.os-scrollbar-handle': {
+      backgroundColor: '#bedbd0',
+    },
+  };
   const onDragEnd = result => {
-    if (!result.destination) {
-      return;
-    }
-    if (result.type === 'column') {
-      // whole column moving
-      const dataArray = Array.from(columnsAndTasks);
-      const idTask = result.draggableId;
-      const destinationIndex = result.destination.index;
-      const { updatingDataFull, updatingDataStripped } = updateOrdersFromIndex({
-        idTask,
-        destinationIndex,
-        dataArray,
-      });
-      dispatch(
-        columnsOperations.moveColumn({ updatingDataFull, updatingDataStripped })
-      );
-    } else {
-      const dataArray = Array.from(columnsAndTasks);
-      const { source, destination } = result;
-      const columnId = source.droppableId;
-      const idColumnNew = destination.droppableId;
-      const isSameColumn = columnId === idColumnNew;
-
-      if (!isSameColumn) {
-        // task to another column moving
-        const idTask = result.draggableId;
-        const destinationIndex = result.destination.index;
-        const sourceColumnItems = dataArray.find(
-          col => col.id === columnId
-        ).items;
-        const indexToMove = sourceColumnItems.findIndex(
-          item => item.id === idTask
-        );
-        const taskToMove = sourceColumnItems.splice(indexToMove, 1)[0];
-        const destinationColumnItems = dataArray.find(
-          col => col.id === idColumnNew
-        ).items;
-        destinationColumnItems.push(taskToMove);
-        const dataOld = sourceColumnItems.map(({ id, order }) => ({
-          id,
-          order,
-        }));
-
-        const { updatingDataStripped: dataNew } = updateOrdersFromIndex({
-          idTask,
-          destinationIndex,
-          dataArray: destinationColumnItems,
-        });
-        dispatch(moveTaskToColumn({ idTask, idColumnNew, dataOld, dataNew }));
-      } else {
-        // row moving
-        let column = columnsAndTasks.find(col => col.id === columnId);
-        const dataArray = Array.from(column.items);
-        const idTask = result.draggableId;
-        const destinationIndex = destination.index;
-
-        const { updatingDataFull, updatingDataStripped } =
-          updateOrdersFromIndex({
-            idTask,
-            destinationIndex,
-            dataArray,
-          });
-
-        dispatch(moveTask({ updatingDataFull, updatingDataStripped }));
-      }
+    const resultProcessed = processDndResult(result, columnsAndTasks);
+    if (resultProcessed) {
+      const { process, arg } = resultProcessed;
+      dispatch(process(arg));
     }
   };
 
   return (
     <>
-      <CustomScrollBar height="100% - 60px">
+      <CustomScrollBar height="100% - 68px" scrollbarStyles={scrollbarStyles}>
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
             <StrictModeDroppable
@@ -122,14 +71,25 @@ const CardsList = () => {
               )}
             </StrictModeDroppable>
           </DragDropContext>
-          <Column>
-            <AddColumnBtn
-              boardId={activeBoardId}
-              columnIndex={columnsAndTasks.length}
-            />
-          </Column>
+          <div>
+            <ButtonAddColumn type="button" onClick={toggleModal}>
+              <SpanStyled>
+                <SvgIcon svgName="icon-plus" variant="buttonCard" size={14} />
+              </SpanStyled>
+              Add another column
+            </ButtonAddColumn>
+          </div>
         </ContainerWrapper>
       </CustomScrollBar>
+      {isModal && (
+        <Modal onBackdropClick={onBackdropClick}>
+          <ColumnPopUp
+            boardId={activeBoardId}
+            columnIndex={columnsAndTasks.length}
+            handleModalClose={toggleModal}
+          />
+        </Modal>
+      )}
     </>
   );
 };

@@ -22,7 +22,6 @@ export const addColumn = createAsyncThunk(
   async (name, thunkAPI) => {
     try {
       const response = await axios.post('/api/columns', name);
-      // console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -60,12 +59,9 @@ export const getColumn = createAsyncThunk(
 export const deleteColumn = createAsyncThunk(
   'columns/deleteColumn',
   async (columnId, thunkAPI) => {
-    console.log('🚀 ~ file: columnOperations.js:71 ~ deleteColumn:');
     try {
       const response = await axios.delete(`/api/columns/${columnId}`);
-      console.log(response.data);
-      // return response.data;
-      return columnId;
+      return response.data?.data?._id;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -93,6 +89,5 @@ const operations = {
   updateColumn,
   deleteColumn,
   moveColumn,
-  // moveTaskToColumn,
 };
 export default operations;

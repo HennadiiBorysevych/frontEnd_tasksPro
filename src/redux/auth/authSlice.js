@@ -14,7 +14,6 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.isFetchingCurrentUser = false;
   state.error = action.payload;
-  // console.error(action.payload);
 };
 
 const initialState = {
@@ -90,14 +89,11 @@ const authSlice = createSlice({
       })
       .addCase(authOperations.updateUserTheme.pending, handlePending)
       .addCase(authOperations.updateUserTheme.rejected, handleRejected)
-
+      .addCase(authOperations.updateUserHelp.rejected, handleRejected)
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.message;
         handleFulfilled(state);
       });
-    // .addCase(authOperations.updateUserAvatar.fulfilled, (state, action) => {
-    //   state.user.avatarURL = action.payload.avatar;
-    // });
   },
 });
 

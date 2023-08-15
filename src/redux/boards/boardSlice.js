@@ -62,24 +62,15 @@ const boardsSlice = createSlice({
 
         state.items.unshift({ id, title, icon, background, isActive });
         state.activeBoardIndex = id;
-        console.log(`${action.payload.data.title} added to your boards`);
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const deletedBoardId = action.payload;
         state.items = state.items.filter(item => item.id !== deletedBoardId);
-        console.log('Filter: Board deleted');
         if (state.activeBoardIndex === deletedBoardId) {
           state.activeBoardIndex = null;
         }
-        // const index = state.items.findIndex(
-        //   board => board.id === action.payload.id
-        // );
-        // if (index !== -1) {
-        //   state.items.splice(index, 1);
-        //   console.log('Board deleted');
-        // }
       })
       .addCase(getBoard.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -111,7 +102,6 @@ const boardsSlice = createSlice({
             background,
             isActive,
           };
-          console.log('Board updated');
         }
       });
   },

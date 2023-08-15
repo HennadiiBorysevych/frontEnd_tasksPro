@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const BoardWrap = styled.div`
-  padding: 14px 20px;
+  padding: 14px 20px 24px;
   background-color: ${props => `${props.theme.palette.background.bord}`};
   background-repeat: no-repeat;
   background-image: url(${props => props.bg});
@@ -15,13 +15,13 @@ export const BoardWrap = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    padding: 10px 24px 36px;
+    padding: 10px 24px 8px;
   }
 `;
 
 export const DefaultWrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 98px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,6 +36,13 @@ export const DefaultWrapper = styled.div`
   @media screen and (min-width: 768px) {
     padding: 0;
     width: 486px;
+    height: calc(100vh - 126px);
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 0;
+    width: 486px;
+    height: calc(100vh - 86px);
   }
 `;
 

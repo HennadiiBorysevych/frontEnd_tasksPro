@@ -21,10 +21,6 @@ const ErrorPage = () => {
   const [userTheme, setUserTheme] = useState('');
   const user = useSelector(authSelectors.selectUser);
 
-  // const { activeBoardId, activeBoard } = useBoardContext();
-
-  // const loc = useLocation();
-
   useEffect(() => {
     if (!user.name) {
       setUserTheme('Void');

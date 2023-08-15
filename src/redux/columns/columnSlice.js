@@ -28,14 +28,12 @@ const columnsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(operations.fetchColumns.pending, handlePending)
-      // .addCase(operations.moveTaskToColumn.pending, handlePending)
       .addCase(operations.moveColumn.pending, handlePending)
       .addCase(operations.addColumn.pending, handlePending)
       .addCase(operations.deleteColumn.pending, handlePending)
       .addCase(operations.getColumn.pending, handlePending)
       .addCase(operations.updateColumn.pending, handlePending)
       .addCase(operations.fetchColumns.rejected, handleRejected)
-      // .addCase(operations.moveTaskToColumn.rejected, handleRejected)
       .addCase(operations.moveColumn.rejected, handleRejected)
       .addCase(operations.addColumn.rejected, handleRejected)
       .addCase(operations.deleteColumn.rejected, handleRejected)
@@ -49,21 +47,13 @@ const columnsSlice = createSlice({
       .addCase(operations.moveColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        // console.log(action.payload);
-        // replace "order" field for items (by id) that present in payload array
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
-      // .addCase(operations.moveTaskToColumn.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.error = null;
-      //   // state.items = action.payload;
-      // })
       .addCase(operations.addColumn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
         state.items.push({ id, ...rest });
-        console.log(`${action.payload.name} added to your columns`);
       })
       .addCase(operations.deleteColumn.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -73,7 +63,6 @@ const columnsSlice = createSlice({
         );
         if (index !== -1) {
           state.items.splice(index, 1);
-          console.log('Column deleted');
         }
       })
       .addCase(operations.getColumn.fulfilled, (state, action) => {
@@ -93,7 +82,6 @@ const columnsSlice = createSlice({
         const index = state.items.findIndex(column => column.id === id);
         if (index !== -1) {
           state.items[index] = { id, ...rest };
-          console.log('Column updated');
         }
       })
       .addCase(logOut.fulfilled, state => {

@@ -20,7 +20,9 @@ export const SvgStyled = styled.svg`
     } else if (props.variant === 'logOut') {
       return props.theme.palette.primary.iconLog;
     } else if (props.variant === 'support') {
-      return props.theme.palette.text.sidemenu
+      return props.isActive
+        ? `${props.theme.palette.text.sidemenu}`
+        : `${props.theme.palette.text.sidemenu}80`;
     } else if (props.variant === 'cardItem') {
       return props.theme.palette.background.primaryButton;
     } else if (props.variant === 'buttonCard') {

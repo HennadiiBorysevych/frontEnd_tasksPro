@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import { useSelector } from 'react-redux';
-// import 'react-calendar/dist/Calendar.css';
 import { ThemeProvider } from '@emotion/react';
 import { selectTheme } from 'redux/auth/authSelectors';
 
@@ -27,6 +26,13 @@ const backColorValues = {
   Violet: '#FFF',
   default: '#1f1f1f',
 };
+const activeColorValues = {
+  Dark: '#1F1F1F',
+  Light: '#161616',
+  Violet: '#FCFCFC',
+  default: '#1F1F1F',
+};
+
 const weekColorValues = {
   Dark: 'rgba(255, 255, 255, 0.5)',
   Light: 'rgba(22, 22, 22, 0.50)',
@@ -56,6 +62,8 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
   const weekColor = weekColorValues[selectedTheme] || weekColorValues.default;
   const disColor = disColorValues[selectedTheme] || disColorValues.default;
   const hovColor = hovColorValues[selectedTheme] || hovColorValues.default;
+  const activeColor =
+    activeColorValues[selectedTheme] || activeColorValues.default;
 
   const CustomCalendar = styled(Calendar)`
     background-color: ${backColor};
@@ -100,8 +108,6 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
     & .react-calendar__month-view__weekdays {
       color: ${weekColor};
       font-family: 'Poppins', Arial, sans-serif;
-      /* margin-left: -5px;
-      padding-right: 10px; */
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -156,6 +162,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
     .react-calendar__tile--active {
       background-color: ${senseColor};
       border-radius: 50%;
+      color: ${activeColor};
     }
 
     .react-calendar__navigation {
@@ -271,7 +278,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
           <div
             style={{
               position: 'fixed',
-              top: '50%',
+              top: '65%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
               zIndex: 1000,

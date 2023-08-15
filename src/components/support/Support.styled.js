@@ -31,6 +31,11 @@ export const SupportOffer = styled.p`
   font-weight: 400;
   line-height: 16px;
   letter-spacing: -0.24px;
+
+  @media screen and (min-width: 768px) {
+    line-height: 1.43;
+    font-size: 14px;
+  }
 `;
 
 export const AppName = styled.span`

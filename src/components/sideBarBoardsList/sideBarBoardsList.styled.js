@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const BoardList = styled.ul`
   position: relative;
   margin-bottom: 40px;
+  height: 100%;
   max-height: 256px;
   overflow-y: auto;
 
