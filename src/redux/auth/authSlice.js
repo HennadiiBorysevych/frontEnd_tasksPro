@@ -94,9 +94,6 @@ const authSlice = createSlice({
         state.user.help = action.payload.message;
         handleFulfilled(state);
       });
-    // .addCase(authOperations.updateUserAvatar.fulfilled, (state, action) => {
-    //   state.user.avatarURL = action.payload.avatar;
-    // });
   },
 });
 

@@ -73,12 +73,7 @@ const CardItem = ({ item }) => {
       </Details>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <CardPopUp
-            card={item}
-            // columnId={columnId}
-            // cardIndex={cardIndex}
-            handleModalClose={toggleModal}
-          />
+          <CardPopUp card={item} handleModalClose={toggleModal} />
         </Modal>
       )}
     </CardContainer>

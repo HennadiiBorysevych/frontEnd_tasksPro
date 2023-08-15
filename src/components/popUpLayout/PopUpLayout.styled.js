@@ -12,7 +12,5 @@ export const CloseBtn = styled.button({
   position: 'absolute',
   top: '14px',
   right: '14px',
-  // width: '18px',
-  // height: '18px',
   cursor: 'pointer',
 });

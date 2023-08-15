@@ -12,11 +12,6 @@
   }
 }
 
-.os-scrollbar-handle {
-  --os-track-bg: ;
-  /* background-color: $ {props => ${props.theme.palette.background.scroll}} !important; */
-}
-
 .os-scrollbar-horizontal .os-scrollbar-track {
   padding: 6px;
 }

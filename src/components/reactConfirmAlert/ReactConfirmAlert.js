@@ -11,7 +11,6 @@ import './ReactConfirmAlert.styled.css';
 
 const ReactConfirmAlert = ({
   selectedTheme,
-  onDeleteClick,
   onDeleteAction,
   item,
   owner,

@@ -9,7 +9,6 @@ export const BoardListItem = styled.li(props => ({
     ? props.theme.palette.background.sideBarItem
     : props.theme.palette.background.sidemenu + '80',
   padding: '0 24px',
-  // marginTop: props.isActive ? '4px' : '0',
   '& + &': {
     marginTop: '4px',
   },

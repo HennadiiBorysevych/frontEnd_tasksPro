@@ -31,7 +31,7 @@ function CardsColumn({ provided, column }) {
   const userFilter = useSelector(selectUserFilter);
   const selectedTheme = useSelector(selectTheme);
 
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight); //Из-за того, что windowHeight нельзя прокинуть пропсом из sharedLayout, приходится вызывать топорно вручную
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   const isLoading = isColumnLoading || isTasksLoading;
 
@@ -47,7 +47,7 @@ function CardsColumn({ provided, column }) {
     };
   }, []);
 
-  const wdth = window.innerWidth; // КОСТЫЛЬ
+  const wdth = window.innerWidth;
   let magicBullet = 0;
   let viewPortTop; // динамическое значение верхней границы экрана в пикселях.
   let viewPortBottom; // динамическое значение высоты до нижней границы экрана
@@ -67,14 +67,11 @@ function CardsColumn({ provided, column }) {
     viewPortBottom = 116; //Сумма значений: 12 - высота горизонтального скрола; 8 и 16 - марджины
     magicBullet = 307;
     // viewPortBottom = 8 + 12 + 16; //Сумма значений: 12 - высота горизонтального скрола; 8 и 16 - марджины
-  } //ОДИН ОГРОМНЫЙ КОСТЫЛЬ ДЛЯ ПРОВЕРКИ БРЕЙКПОИНТА И УСТАНОВКИ ЗНАЧЕНИЙ viewPortTop и viewPortBottom
+  }
 
   // const boardListHeight = windowHeight - (viewPortTop + viewPortBottom); //Итоговое динамическое значение max-height для списка досок
   const boardListHeight = windowHeight - magicBullet;
-  console.log(
-    '🚀 ~ file: CardsColumn.jsx:69 ~ CardsColumn ~ boardListHeight:',
-    boardListHeight
-  );
+
   // Высота списка досок теперь будет всегда подстраиваться под максимальную высоту экрана
 
   return (
