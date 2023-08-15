@@ -5,8 +5,8 @@ export const Column = styled.li`
   flex-direction: column;
   gap: 14px;
   width: 335px;
-  /* width: 100%; */
-  /* margin: 0 auto; */
+  /* width: 100%;
+  margin: 0 auto; */
   filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
   transition: filter 0.4s ease-in-out;
 
