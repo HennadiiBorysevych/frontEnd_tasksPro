@@ -31,48 +31,36 @@ function CardsColumn({ provided, column }) {
   const userFilter = useSelector(selectUserFilter);
   const selectedTheme = useSelector(selectTheme);
 
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [boardListHeight, setBoardListHeight] = useState(() => {
+    return window.innerHeight - elementsTotalSize(window.innerWidth);
+  });
 
-  const isLoading = isColumnLoading || isTasksLoading;
-
-  const updateWindowHeight = () => {
-    setWindowHeight(window.innerHeight);
-  };
+  function elementsTotalSize(width) {
+    if (width <= 767) {
+      //mobile
+      return 343;
+    } else if (width >= 768 && width <= 1439) {
+      // tablet
+      return 380;
+    } else {
+      // desktop
+      return 282;
+    }
+  }
 
   useEffect(() => {
+    const updateWindowHeight = () => {
+      setBoardListHeight(
+        window.innerHeight - elementsTotalSize(window.innerWidth)
+      );
+    };
     window.addEventListener('resize', updateWindowHeight);
-
     return () => {
       window.removeEventListener('resize', updateWindowHeight);
     };
   }, []);
 
-  const wdth = window.innerWidth;
-  let magicBullet = 0;
-  let viewPortTop; // динамическое значение верхней границы экрана в пикселях.
-  let viewPortBottom; // динамическое значение высоты до нижней границы экрана
-  if (wdth <= 767) {
-    //Проверка на мобилковость экрана
-    viewPortTop = 204; //Фиксированное значение до верхней границы при мобильном брейкпоинте
-    viewPortBottom = 24 + 12 + 24; //Сумма значений: 12 - высота горизонтального скрола; 24 и 24 - марджины
-  } else if (wdth >= 768 && wdth <= 1439) {
-    //Проверка на планшетность экрана
-    viewPortTop = 218; //Фиксированное значение до верхней границы при планшетном брейкпоинте
-    viewPortBottom = 32 + 12 + 52; //Сумма значений: 12 - высота горизонтального скрола; 32 и 52 - марджины
-    magicBullet = 364;
-  } else {
-    //Десктопный экран
-    viewPortTop = 194; //Фиксированное значение до верхней границы при десктопном брейкпоинте
-    // viewPortTop = 186; //Фиксированное значение до верхней границы при десктопном брейкпоинте
-    viewPortBottom = 116; //Сумма значений: 12 - высота горизонтального скрола; 8 и 16 - марджины
-    magicBullet = 307;
-    // viewPortBottom = 8 + 12 + 16; //Сумма значений: 12 - высота горизонтального скрола; 8 и 16 - марджины
-  }
-
-  // const boardListHeight = windowHeight - (viewPortTop + viewPortBottom); //Итоговое динамическое значение max-height для списка досок
-  const boardListHeight = windowHeight - magicBullet;
-
-  // Высота списка досок теперь будет всегда подстраиваться под максимальную высоту экрана
+  const isLoading = isColumnLoading || isTasksLoading;
 
   return (
     <>
