@@ -22,7 +22,6 @@ export const ModalBox = styled.div({
   marginLeft: 'auto',
   marginRight: 'auto',
   width: '335px',
-  padding: '20px',
 
   '@media (min-width: 768px)': {
     width: '350px',

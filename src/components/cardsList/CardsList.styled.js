@@ -3,60 +3,59 @@ import styled from '@emotion/styled';
 export const ContainerWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  padding-right: 18px;
-  padding-bottom: 13px;
+  padding-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    padding-bottom: 52px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding-bottom: 16px;
+  }
 `;
 
 export const ColumnsContainer = styled.ul`
   display: flex;
   flex-wrap: nowrap;
-  gap: 21px;
+  gap: 28px;
   margin-right: 21px;
-`;
 
-export const Column = styled.li`
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 335px;
-  filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
-  transition: filter 0.4s ease-in-out;
-  @media (max-width: 390px) {
-    width: calc(100vw - 65px);
+  @media screen and (min-width: 768px) {
+    gap: 34px;
   }
 `;
 
-export const ColumnHeading = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 56px;
-  padding: 0 20px;
+export const ButtonAddColumn = styled.button`
   background-color: ${props => props.theme.palette.background.cardItem};
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 334px;
+  justify-content: center;
+  padding: 14px 0;
   border-radius: 8px;
   cursor: pointer;
-`;
 
-export const ColumnHeadingText = styled.h3`
-  font-weight: 500;
+  color: ${props => props.theme.palette.text.primary};
   font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
 `;
 
-export const ItemsContainer = styled.div`
+export const SpanStyled = styled.span`
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-height: 100px;
-`;
-
-export const IconsContainer = styled.div`
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-`;
-
-export const ButtonWrapper = styled.div`
-  height: 56px;
+  background-color: ${props => props.theme.palette.background.buttonPlusCard};
+  color: ${props => props.theme.palette.background.cardItem};
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  border-radius: 8px;
 `;

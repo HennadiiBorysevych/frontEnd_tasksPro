@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const BoardWrap = styled.div`
-  padding: 14px 20px;
+  padding: 14px 20px 24px;
   background-color: ${props => `${props.theme.palette.background.bord}`};
   background-repeat: no-repeat;
   background-image: url(${props => props.bg});

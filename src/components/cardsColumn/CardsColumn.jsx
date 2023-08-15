@@ -3,13 +3,14 @@ import { Draggable } from 'react-beautiful-dnd';
 import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { StrictModeDroppable } from 'helpers/dnd/strictModeDroppable';
+import { useModal } from 'hooks';
 import { selectTheme } from 'redux/auth/authSelectors';
 import { columnsOperations, columnsSelectors } from 'redux/columns';
 import columnSelectors from 'redux/columns/columnSelectors';
 import cardSelectors from 'redux/tasks/cardSelectors';
 import { selectUserFilter } from 'redux/userFilterSlice';
 
-import { AddCardBtn, CardItem, EditColumnBtn, IconButton } from 'components';
+import { AddCardBtn, CardItem, ColumnPopUp, Modal, SvgIcon } from 'components';
 import Typography from 'components/typography/Typography';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
@@ -17,7 +18,6 @@ import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
 import {
-  ButtonWrapper,
   Column,
   ColumnHeading,
   IconsContainer,
@@ -26,7 +26,7 @@ import {
 
 function CardsColumn({ provided, column }) {
   const dispatch = useDispatch();
-
+  const { isModal, onBackdropClick, toggleModal } = useModal();
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
   const isColumnLoading = useSelector(columnSelectors.selectLoading);
   const isTasksLoading = useSelector(cardSelectors.selectLoading);
@@ -71,95 +71,109 @@ function CardsColumn({ provided, column }) {
   // Высота списка досок теперь будет всегда подстраиваться под максимальную высоту экрана
 
   return (
-    <Column
-      isLoading={isLoading}
-      {...provided.draggableProps}
-      ref={provided.innerRef}
-    >
-      <ColumnHeading isLoading={isLoading} {...provided.dragHandleProps}>
-        <Typography variant="columnTitle">{column.title}</Typography>
-
-        <IconsContainer>
-          <EditColumnBtn column={column} />
-
-          <IconButton
-            svgName="icon-trash"
-            onClick={() => {
-              confirmAlert({
-                customUI: ({ onClose }) => {
-                  return (
-                    <div
-                      className={`react-confirm ${
-                        selectedTheme === 'Dark'
-                          ? 'react-confirm-alert-dark'
-                          : 'react-confirm-alert-light'
-                      }`}
-                    >
-                      <h1>Confirm Deletion</h1>
-                      <p>Are you sure you want to delete this column?</p>
-                      <div className="confirm-buttons">
-                        <button onClick={onClose} className="green">
-                          Cancel
-                        </button>
-
-                        <button
-                          className="red"
-                          onClick={() => {
-                            onClose();
-                            dispatch(columnsOperations.deleteColumn(column.id));
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  );
-                },
-              });
-            }}
-          />
-        </IconsContainer>
-      </ColumnHeading>
-      <StrictModeDroppable
-        droppableId={column.id}
-        type="item"
-        isCombineEnabled={true}
+    <>
+      <Column
+        isLoading={isLoading}
+        {...provided.draggableProps}
+        ref={provided.innerRef}
       >
-        {provided => (
-          <CustomScrollBar maxHeight={boardListHeight}>
-            <ItemsContainer
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {column.items
-                .filter(
-                  ({ priority }) =>
-                    priority.toLowerCase().includes(userFilter) ||
-                    userFilter === 'showAll'
-                )
-                .sort((a, b) => a.order - b.order) // Sort items by order
-                .map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {provided => (
+        <ColumnHeading isLoading={isLoading} {...provided.dragHandleProps}>
+          <Typography variant="columnTitle">{column.title}</Typography>
+
+          <IconsContainer>
+            <button type="button" onClick={toggleModal}>
+              <SvgIcon svgName="icon-pencil" size={16} />
+            </button>
+
+            <button
+              svgName="icon-trash"
+              onClick={() => {
+                confirmAlert({
+                  customUI: ({ onClose }) => {
+                    return (
                       <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+                        className={`react-confirm ${
+                          selectedTheme === 'Dark'
+                            ? 'react-confirm-alert-dark'
+                            : 'react-confirm-alert-light'
+                        }`}
                       >
-                        <CardItem item={{ ...item }} />
+                        <SvgIcon svgName="icon-trash" size={16} />
+                        <h1>Confirm Deletion</h1>
+                        <p>Are you sure you want to delete this column?</p>
+                        <div className="confirm-buttons">
+                          <button onClick={onClose} className="green">
+                            Cancel
+                          </button>
+
+                          <button
+                            className="red"
+                            onClick={() => {
+                              onClose();
+                              dispatch(
+                                columnsOperations.deleteColumn(column.id)
+                              );
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </div>
-                    )}
-                  </Draggable>
-                ))}
-              {provided.placeholder}
-            </ItemsContainer>
-          </CustomScrollBar>
-        )}
-      </StrictModeDroppable>
-      <ButtonWrapper>
+                    );
+                  },
+                });
+              }}
+            />
+          </IconsContainer>
+        </ColumnHeading>
+        <StrictModeDroppable
+          droppableId={column.id}
+          type="item"
+          isCombineEnabled={true}
+        >
+          {provided => (
+            <CustomScrollBar maxHeight={boardListHeight}>
+              <ItemsContainer
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {column.items
+                  .filter(
+                    ({ priority }) =>
+                      priority.toLowerCase().includes(userFilter) ||
+                      userFilter === 'showAll'
+                  )
+                  .sort((a, b) => a.order - b.order) // Sort items by order
+                  .map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {provided => (
+                        <div
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <CardItem item={{ ...item }} />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                {provided.placeholder}
+              </ItemsContainer>
+            </CustomScrollBar>
+          )}
+        </StrictModeDroppable>
         <AddCardBtn columnId={column.id} cardIndex={columnsAndTasks.length} />
-      </ButtonWrapper>
-    </Column>
+      </Column>
+      {isModal && (
+        <Modal onBackdropClick={onBackdropClick}>
+          <ColumnPopUp column={column} handleModalClose={toggleModal} />
+        </Modal>
+      )}
+    </>
   );
 }
 

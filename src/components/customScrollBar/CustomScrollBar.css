@@ -1,20 +1,3 @@
-/* .os-scrollbar-vertical {
-  background-color: #212121;
-}
-.os-scrollbar-vertical::before {
-  content: '';
-  background-color: blue;
-  width: 3px;
-  height: 100%;
-}
-.os-scrollbar--os-padding-axis {
-  background-color: red;
-}
-
-.--os-track-bg {
-  background-color: red;
-} */
-
 .os-theme-custom.os-scrollbar-horizontal {
   --os-size: 12px;
 }
@@ -23,13 +6,16 @@
   --os-size: 18px;
 }
 
-.os-theme-custom.os-scrollbar-vertical.os-scrollbar-handle {
-  --os-track-bg: #bedbb0;
-  --os-track-border-active: 0.5 solid #bedbb0;
-}
-
 @media screen and (min-width: 1440px) {
   .os-theme-custom.os-scrollbar-vertical {
     --os-height: 126px;
   }
+}
+
+.os-scrollbar-handle {
+  background-color: #b8bcfd !important;
+}
+
+.os-scrollbar-horizontal .os-scrollbar-track {
+  padding: 6px;
 }

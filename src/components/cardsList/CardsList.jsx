@@ -3,19 +3,26 @@ import { DragDropContext, Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrdersFromIndex } from 'helpers';
 import { StrictModeDroppable } from 'helpers/dnd/strictModeDroppable';
+import { useModal } from 'hooks';
 import { selectActiveBoardId } from 'redux/boards/boardSelectors';
 import { columnsOperations, columnsSelectors } from 'redux/columns';
 import { moveTaskToColumn } from 'redux/tasks/cardOperations';
 import { moveTask } from 'redux/tasks/cardOperations';
 
-import { AddColumnBtn } from 'components';
+import { ColumnPopUp, Modal, SvgIcon } from 'components';
 
 import CardsColumn from '../cardsColumn/CardsColumn';
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 
-import { Column, ColumnsContainer, ContainerWrapper } from './CardsList.styled';
+import {
+  ButtonAddColumn,
+  ColumnsContainer,
+  ContainerWrapper,
+  SpanStyled,
+} from './CardsList.styled';
 
 const CardsList = () => {
+  const { isModal, onBackdropClick, toggleModal } = useModal();
   const dispatch = useDispatch();
   const activeBoardId = useSelector(selectActiveBoardId);
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
@@ -122,14 +129,25 @@ const CardsList = () => {
               )}
             </StrictModeDroppable>
           </DragDropContext>
-          <Column>
-            <AddColumnBtn
-              boardId={activeBoardId}
-              columnIndex={columnsAndTasks.length}
-            />
-          </Column>
+          <div>
+            <ButtonAddColumn type="button" onClick={toggleModal}>
+              <SpanStyled>
+                <SvgIcon svgName="icon-plus" variant="buttonCard" size={14} />
+              </SpanStyled>
+              Add another column
+            </ButtonAddColumn>
+          </div>
         </ContainerWrapper>
       </CustomScrollBar>
+      {isModal && (
+        <Modal onBackdropClick={onBackdropClick}>
+          <ColumnPopUp
+            boardId={activeBoardId}
+            columnIndex={columnsAndTasks.length}
+            handleModalClose={toggleModal}
+          />
+        </Modal>
+      )}
     </>
   );
 };
