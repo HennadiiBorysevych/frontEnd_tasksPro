@@ -26,7 +26,7 @@ const Support = () => {
   return (
     <>
       <SupportBox onClick={toggleWindows}>
-        <SupportPlate src={image} alt="plate" />
+        <SupportPlate src={image} alt="plate" width={54} height={78} />
         <SupportOffer>
           If you need help with <AppName>TaskPro</AppName>, check out our
           support resources or reach out to our customer support team.
