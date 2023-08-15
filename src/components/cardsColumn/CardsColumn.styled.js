@@ -25,7 +25,7 @@ export const ColumnHeading = styled.div`
   cursor: pointer;
 `;
 
-export const ItemsContainer = styled.div`
+export const ItemsContainer = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
