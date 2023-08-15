@@ -1,11 +1,28 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { OverlayScrollbars } from 'overlayscrollbars';
+import { selectTheme } from 'redux/auth/authSelectors';
 
 import 'overlayscrollbars/overlayscrollbars.css';
 import './CustomScrollBar.css';
 
 const CustomScrollbar = ({ width, maxHeight, children }) => {
   const containerRef = useRef(null);
+
+  const theme = useSelector(selectTheme);
+
+  const getScrollbarColor = theme => {
+    switch (theme) {
+      case 'Dark':
+        return '#FFFFFF1А';
+      case 'Light':
+        return '#E8E8E8';
+      case 'Violet':
+        return '#B8BCFD';
+      default:
+        return '#FFFFFF';
+    }
+  };
 
   useEffect(() => {
     const containerElement = containerRef.current;
@@ -36,13 +53,28 @@ const CustomScrollbar = ({ width, maxHeight, children }) => {
         },
       },
     });
+    const scrollbarHorizontal = containerElement.querySelector(
+      '.os-scrollbar-horizontal .os-scrollbar-handle'
+    );
+    const scrollbarVertical = containerElement.querySelector(
+      '.os-scrollbar-vertical .os-scrollbar-handle'
+    );
+
+    if (scrollbarHorizontal) {
+      scrollbarHorizontal.style.background = getScrollbarColor(theme);
+    }
+
+    if (scrollbarVertical) {
+      scrollbarVertical.style.background = getScrollbarColor(theme);
+    }
+
     // Clean up the OverlayScrollbars instance when the component unmounts
     return () => {
       if (containerElement && containerElement.overlayScrollbars) {
         containerElement.overlayScrollbars().destroy();
       }
     };
-  }, []);
+  }, [theme]);
 
   return (
     <div

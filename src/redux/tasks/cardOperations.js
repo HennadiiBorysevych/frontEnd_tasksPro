@@ -59,9 +59,7 @@ export const deleteTask = createAsyncThunk(
   async (taskId, thunkAPI) => {
     try {
       const response = await axios.delete(`/api/cards/${taskId}`);
-      console.log('🚀 ~ file: cardOperations.js:63 ~ response:', response);
-      // change after back makes better!
-      return taskId;
+      return response.data?.data?._id;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
