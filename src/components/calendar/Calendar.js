@@ -27,6 +27,13 @@ const backColorValues = {
   Violet: '#FFF',
   default: '#1f1f1f',
 };
+const activeColorValues = {
+  Dark: '#1F1F1F',
+  Light: '#161616',
+  Violet: '#FCFCFC',
+  default: '#1F1F1F',
+};
+
 const weekColorValues = {
   Dark: 'rgba(255, 255, 255, 0.5)',
   Light: 'rgba(22, 22, 22, 0.50)',
@@ -56,7 +63,8 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
   const weekColor = weekColorValues[selectedTheme] || weekColorValues.default;
   const disColor = disColorValues[selectedTheme] || disColorValues.default;
   const hovColor = hovColorValues[selectedTheme] || hovColorValues.default;
-
+  const activeColor = activeColorValues[selectedTheme] || activeColorValues.default;
+  
   const CustomCalendar = styled(Calendar)`
     background-color: ${backColor};
     padding: 18px;
@@ -156,8 +164,9 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
     .react-calendar__tile--active {
       background-color: ${senseColor};
       border-radius: 50%;
+      color: ${activeColor};
     }
-
+    
     .react-calendar__navigation {
       display: flex;
       justify-content: space-between;

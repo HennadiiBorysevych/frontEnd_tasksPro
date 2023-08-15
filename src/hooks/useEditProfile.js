@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { authOperations } from 'redux/auth';
+import { selectTheme } from 'redux/auth/authSelectors';
 
 const useEditProfile = user => {
   const [userAvatar, setUserAvatar] = useState(user?.avatarURL ?? '');
@@ -13,7 +16,18 @@ const useEditProfile = user => {
     avatarFile ? setIsAvatarLoad(true) : setIsAvatarLoad(false);
   }, [avatarFile]);
 
-  const handleChangeProfile = values => {
+  const selectedTheme = useSelector(selectTheme);
+  const toastTheme = selectedTheme === 'Dark' ? 'dark' : 'light';
+  const toastConfig = {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: toastTheme,
+  };
+  const handleChangeProfile = async values => {
     let formatedValues = {};
     for (const key in values) {
       if (values[key] !== '')
@@ -25,8 +39,11 @@ const useEditProfile = user => {
       user: Object.keys(formatedValues).length ? formatedValues : null,
     };
 
-    console.log(newUser);
-    dispatch(authOperations.updateUserInfo(newUser));
+    const response = await dispatch(authOperations.updateUserInfo(newUser));
+
+    if (response.payload && response.payload.message === "Update success") {
+      toast.success(`User data successfully updated`, toastConfig);
+    }
   };
 
   const handleUserAvatar = e => {

@@ -14,7 +14,6 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.isFetchingCurrentUser = false;
   state.error = action.payload;
-  // console.error(action.payload);
 };
 
 const initialState = {
