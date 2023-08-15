@@ -32,7 +32,7 @@ const ErrorPage = () => {
     }
 
     setUserTheme(user.theme);
-  }, []);
+  }, [user.name, user.theme]);
 
   const errDis = {
     start: isLoggedIn ? 'Well...yeah. Not gonna happened, sorry.' : null,

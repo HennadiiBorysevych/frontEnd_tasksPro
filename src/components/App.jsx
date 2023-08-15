@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { useAuth } from 'hooks';
 import { BoardProvider } from 'hooks';
 import PrivatePage from 'routes/PrivatePage';
@@ -9,6 +10,8 @@ import GlobalStyles from '../GlobalStyles';
 
 import SkeletonLoader from './skeleton/SkeletonLoader';
 import Layout from './Layout';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
@@ -26,7 +29,6 @@ const App = () => {
   return (
     <BoardProvider>
       <GlobalStyles />
-
       <Suspense>
         {isFetchingCurrent ? (
           <SkeletonLoader page="/home/" />
@@ -61,6 +63,7 @@ const App = () => {
           </Routes>
         )}
       </Suspense>
+      <ToastContainer toastConfig />
     </BoardProvider>
   );
 };

@@ -34,8 +34,8 @@ export const BoardName = styled.h2(props => ({
   lineHeight: 1.25,
   letterSpacing: '-0.28px',
   color: props.isActive
-    ? props.theme.palette.text.primary
-    : props.theme.palette.text.primary + '80',
+    ? props.theme.palette.text.sidemenu
+    : props.theme.palette.text.sidemenu + '80',
 }));
 
 export const BoardIdentificationItem = styled.button`

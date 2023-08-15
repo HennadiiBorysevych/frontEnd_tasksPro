@@ -13,8 +13,8 @@ export function checkBtnBgColor(btnBgColor) {
       break;
     case 'Void':
       color = '#161616';
-    default:
       break;
+    default:
   }
   return color;
 }

@@ -39,7 +39,6 @@ const authSlice = createSlice({
     builder
       .addCase(authOperations.register.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
         state.isLoggedIn = false;
         handleFulfilled(state);
       })
@@ -69,6 +68,12 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         handleFulfilled(state);
       })
+      .addCase(authOperations.googleAuth.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.user.token;
+        state.isLoggedIn = true;
+        handleFulfilled(state);
+      })
       .addCase(authOperations.fetchCurrentUser.pending, handlePending)
       .addCase(authOperations.fetchCurrentUser.rejected, handleRejected)
 
@@ -85,7 +90,7 @@ const authSlice = createSlice({
       })
       .addCase(authOperations.updateUserTheme.pending, handlePending)
       .addCase(authOperations.updateUserTheme.rejected, handleRejected)
-
+      .addCase(authOperations.updateUserHelp.rejected, handleRejected)
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.message;
         handleFulfilled(state);

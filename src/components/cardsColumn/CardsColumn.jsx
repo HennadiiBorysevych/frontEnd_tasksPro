@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { StrictModeDroppable } from 'helpers/dnd/strictModeDroppable';
 import { useModal } from 'hooks';
@@ -14,9 +13,8 @@ import { AddCardBtn, CardItem, ColumnPopUp, Modal, SvgIcon } from 'components';
 import Typography from 'components/typography/Typography';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
+import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
 
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import '../reactConfirmAlert/ReactConfirmAlert.styled.css';
 import {
   Column,
   ColumnHeading,
@@ -85,44 +83,14 @@ function CardsColumn({ provided, column }) {
               <SvgIcon svgName="icon-pencil" size={16} />
             </button>
 
-            <button
-              svgName="icon-trash"
-              onClick={() => {
-                confirmAlert({
-                  customUI: ({ onClose }) => {
-                    return (
-                      <div
-                        className={`react-confirm ${
-                          selectedTheme === 'Dark'
-                            ? 'react-confirm-alert-dark'
-                            : 'react-confirm-alert-light'
-                        }`}
-                      >
-                        <SvgIcon svgName="icon-trash" size={16} />
-                        <h1>Confirm Deletion</h1>
-                        <p>Are you sure you want to delete this column?</p>
-                        <div className="confirm-buttons">
-                          <button onClick={onClose} className="green">
-                            Cancel
-                          </button>
-
-                          <button
-                            className="red"
-                            onClick={() => {
-                              onClose();
-                              dispatch(
-                                columnsOperations.deleteColumn(column.id)
-                              );
-                            }}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  },
-                });
-              }}
+            <ReactConfirmAlert
+              selectedTheme={selectedTheme}
+              onDeleteAction={() =>
+                dispatch(columnsOperations.deleteColumn(column.id))
+              }
+              item="column and all content in it"
+              owner="columns"
+              ownerId={column.id}
             />
           </IconsContainer>
         </ColumnHeading>

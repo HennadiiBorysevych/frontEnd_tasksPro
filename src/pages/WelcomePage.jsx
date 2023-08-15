@@ -3,6 +3,8 @@ import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
 
 import { Logo } from 'components';
 
+import GoogleAuth from '../components/googleAuth/GoogleAuth';
+
 import { Background, Container } from './styles/commonStyles';
 
 import {
@@ -34,6 +36,9 @@ const WelcomePage = () => {
             </li>
             <li>
               <NavLink to="/auth/login">Log In</NavLink>
+            </li>
+            <li>
+              <GoogleAuth />
             </li>
           </ul>
         </WelcomeContainer>
