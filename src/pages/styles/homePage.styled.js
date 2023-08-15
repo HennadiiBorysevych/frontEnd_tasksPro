@@ -15,7 +15,7 @@ export const BoardWrap = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    padding: 10px 24px 36px;
+    padding: 10px 24px 8px;
   }
 `;
 

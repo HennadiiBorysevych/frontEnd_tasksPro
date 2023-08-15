@@ -80,7 +80,12 @@ function CardsColumn({ provided, column }) {
 
           <IconsContainer>
             <button type="button" onClick={toggleModal}>
-              <SvgIcon svgName="icon-pencil" size={16} />
+              <SvgIcon
+                svgName="icon-pencil"
+                size={16}
+                variant="popUp"
+                isActive={false}
+              />
             </button>
 
             <ReactConfirmAlert

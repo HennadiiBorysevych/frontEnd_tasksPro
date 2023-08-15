@@ -26,6 +26,7 @@ const darkTheme = createTheme({
       profile: '#BEDBB0',
       sideBarItem: '#1F1F1F',
       cardItem: '#121212',
+      scroll: '#FFFFFF1A',
     },
     text: {
       primary: '#FFFFFF',
@@ -68,6 +69,7 @@ const lightTheme = createTheme({
       profile: '#BEDBB0',
       sideBarItem: '#F6F6F7',
       cardItem: '#FFFFFF',
+      scroll: 'e8e8e8',
     },
     text: {
       primary: '#161616',
@@ -110,6 +112,7 @@ const violetTheme = createTheme({
       profile: '#ECEDFD',
       sideBarItem: '#FFFFFF80',
       cardItem: '#FFFFFF',
+      scroll: '#B8BCFD',
     },
     text: {
       primary: '#161616',

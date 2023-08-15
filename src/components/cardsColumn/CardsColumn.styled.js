@@ -5,8 +5,14 @@ export const Column = styled.li`
   flex-direction: column;
   gap: 14px;
   width: 335px;
+  /* width: 100%; */
+  /* margin: 0 auto; */
   filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
   transition: filter 0.4s ease-in-out;
+
+  @media screen and (min-width: 375px) {
+    width: 335px;
+  }
 `;
 
 export const ColumnHeading = styled.div`
@@ -23,6 +29,7 @@ export const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 100px;
 `;
 
 export const IconsContainer = styled.div`

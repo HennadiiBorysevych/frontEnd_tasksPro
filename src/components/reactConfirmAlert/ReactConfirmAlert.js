@@ -90,7 +90,7 @@ const ReactConfirmAlert = ({
           svgName="icon-trash"
           size={16}
           variant="popUp"
-          isActive="false"
+          isActive={false}
         />
       )}
     </button>
