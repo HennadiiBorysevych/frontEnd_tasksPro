@@ -97,9 +97,7 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         const deletedCardId = action.payload;
-
         state.items = state.items.filter(item => item.id !== deletedCardId);
-        console.log('Filter: Card deleted');
       })
       .addCase(getTask.fulfilled, (state, action) => {
         state.isLoading = false;
