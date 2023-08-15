@@ -29,7 +29,6 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('fetch');
     dispatch(boardsOperations.fetchBoards());
   }, [dispatch]);
 

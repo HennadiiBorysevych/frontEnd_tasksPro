@@ -10,7 +10,6 @@ const cardModel = {
 };
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
-  console.log('🚀 ~ currentCard:', currentCard);
   const initialCard = currentCard
     ? getFormattedCard(currentCard)
     : {

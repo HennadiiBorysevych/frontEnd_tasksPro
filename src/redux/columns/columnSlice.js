@@ -54,7 +54,6 @@ const columnsSlice = createSlice({
         state.error = null;
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
         state.items.push({ id, ...rest });
-        console.log(`${action.payload.name} added to your columns`);
       })
       .addCase(operations.deleteColumn.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -64,7 +63,6 @@ const columnsSlice = createSlice({
         );
         if (index !== -1) {
           state.items.splice(index, 1);
-          console.log('Column deleted');
         }
       })
       .addCase(operations.getColumn.fulfilled, (state, action) => {
@@ -84,7 +82,6 @@ const columnsSlice = createSlice({
         const index = state.items.findIndex(column => column.id === id);
         if (index !== -1) {
           state.items[index] = { id, ...rest };
-          console.log('Column updated');
         }
       })
       .addCase(logOut.fulfilled, state => {

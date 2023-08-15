@@ -45,11 +45,6 @@ const CustomScrollbar = ({ width, maxHeight, children }) => {
             scrollbar.style.height = '18px';
             scrollbar.style.background = 'green';
           }
-          // props.theme.palette.text.sidemenu
-          // if (scrollbarVertical) {
-          //   scrollbarVertical.style.background =
-          //     props.theme.palette.text.sidemenu;
-          // }
         },
       },
     });
@@ -84,7 +79,6 @@ const CustomScrollbar = ({ width, maxHeight, children }) => {
         height: '100%',
         minHeight: '70px', //Округлённое значение: высота одной доски (61px) плюс два значения марджинов по макету (4*2=8)
         maxHeight,
-
         overflow: 'hidden',
       }}
     >

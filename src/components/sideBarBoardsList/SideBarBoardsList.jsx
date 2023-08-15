@@ -39,8 +39,6 @@ const SideBarBoardsList = ({ windowHeight }) => {
   const handleDeleteBoard = async id => {
     try {
       await dispatch(deleteBoard(id));
-      console.log('Board has deleted');
-
       await dispatch(fetchBoards());
 
       const firstBoard = boards[0];

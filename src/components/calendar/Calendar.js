@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import { useSelector } from 'react-redux';
-// import 'react-calendar/dist/Calendar.css';
 import { ThemeProvider } from '@emotion/react';
 import { selectTheme } from 'redux/auth/authSelectors';
 
@@ -63,8 +62,9 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
   const weekColor = weekColorValues[selectedTheme] || weekColorValues.default;
   const disColor = disColorValues[selectedTheme] || disColorValues.default;
   const hovColor = hovColorValues[selectedTheme] || hovColorValues.default;
-  const activeColor = activeColorValues[selectedTheme] || activeColorValues.default;
-  
+  const activeColor =
+    activeColorValues[selectedTheme] || activeColorValues.default;
+
   const CustomCalendar = styled(Calendar)`
     background-color: ${backColor};
     padding: 18px;
@@ -108,8 +108,6 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
     & .react-calendar__month-view__weekdays {
       color: ${weekColor};
       font-family: 'Poppins', Arial, sans-serif;
-      /* margin-left: -5px;
-      padding-right: 10px; */
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -166,7 +164,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
       border-radius: 50%;
       color: ${activeColor};
     }
-    
+
     .react-calendar__navigation {
       display: flex;
       justify-content: space-between;
