@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { useAuth } from 'hooks';
 import { authSchema } from 'validationSchemas';
@@ -41,15 +42,41 @@ const AuthForm = ({ value, chgForm }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chgForm]);
 
-  const onHandleSubmit = async ({ name, email, password }, { resetForm }) => {
-    if (value === 0) {
-      await signUp({ name, email, password });
-      await signIn({ email, password });
-    } else {
-      await signIn({ email, password });
-    }
+  const toastConfig = {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: 'dark',
+  };
 
-    resetForm();
+  const onHandleSubmit = async ({ name, email, password }, { resetForm }) => {
+    try {
+      if (value === 0) {
+        const data = await signUp({ name, email, password });
+
+        if (data.payload === 'Request failed with status code 409') {
+          toast.error('User with this email already exists', toastConfig);
+          return;
+        }
+
+        await signIn({ email, password });
+      } else {
+        await signIn({ email, password });
+      }
+
+      resetForm();
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        console.error('User already exists:', error.message);
+        // Handle the 409 error (user already exists) here
+      } else {
+        console.error('An error occurred:', error.message);
+        // Handle other errors here
+      }
+    }
   };
 
   const formDistributor = {
