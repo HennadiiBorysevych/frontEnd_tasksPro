@@ -19,7 +19,6 @@ export const CardContainer = styled.div`
   background-color: ${props => props.theme.palette.background.cardItem};
   border-radius: 8px;
   padding: 14px 24px;
-  min-height: 100px;
   position: relative;
   overflow: hidden;
   ::after {
@@ -51,9 +50,21 @@ export const Details = styled.div`
   border-top: 1px solid ${props => props.theme.palette.text.primary + '1A'};
 `;
 
+export const DetailsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;
+
 export const DetailLabel = styled(Typography)`
   margin: 0;
   margin-bottom: 4px;
+`;
+
+export const PriorityBlock = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;
 
 export const Circle = styled.div`
@@ -63,20 +74,8 @@ export const Circle = styled.div`
   background-color: ${props => getPriorityColor(props.priority)};
 `;
 
-export const PriorityBlock = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`;
-
 export const IconsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-`;
-
-export const DetailsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 14px;
 `;

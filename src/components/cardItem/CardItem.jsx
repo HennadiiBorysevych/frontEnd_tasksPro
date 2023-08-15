@@ -6,7 +6,6 @@ import { selectTheme } from 'redux/auth/authSelectors';
 import cardOperations from 'redux/tasks/cardOperations';
 
 import { CardPopUp, Modal } from 'components';
-import { IconButton } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
 import Typography from 'components/typography/Typography';
 
@@ -59,8 +58,9 @@ const CardItem = ({ item }) => {
           {isDeadlineToday && (
             <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
           )}
-          <IconButton onClick={toggleModal} svgName="icon-pencil" />
-
+          <button onClick={toggleModal}>
+            <SvgIcon svgName="icon-pencil" size={16} variant="popUp" />
+          </button>
           <ReactConfirmAlert
             selectedTheme={selectedTheme}
             onDeleteAction={() => dispatch(cardOperations.deleteTask(id))}
