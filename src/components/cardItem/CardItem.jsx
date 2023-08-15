@@ -56,7 +56,9 @@ const CardItem = ({ item }) => {
         </DetailsContainer>
         <IconsContainer>
           {isDeadlineToday && (
-            <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
+            <div>
+              <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
+            </div>
           )}
           <button onClick={toggleModal}>
             <SvgIcon svgName="icon-pencil" size={16} variant="popUp" />

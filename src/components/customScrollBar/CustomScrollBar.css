@@ -13,7 +13,8 @@
 }
 
 .os-scrollbar-handle {
-  background-color: #b8bcfd !important;
+  --os-track-bg: ;
+  /* background-color: $ {props => ${props.theme.palette.background.scroll}} !important; */
 }
 
 .os-scrollbar-horizontal .os-scrollbar-track {

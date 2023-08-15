@@ -21,6 +21,7 @@ export const CardContainer = styled.div`
   padding: 14px 24px;
   position: relative;
   overflow: hidden;
+  width: 100%;
   ::after {
     content: ' ';
     position: absolute;
@@ -76,6 +77,6 @@ export const Circle = styled.div`
 
 export const IconsContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
 `;

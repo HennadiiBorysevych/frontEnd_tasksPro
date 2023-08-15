@@ -29,12 +29,13 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('fetch');
     dispatch(boardsOperations.fetchBoards());
   }, [dispatch]);
 
   // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (firstLoad && boards.length > 0 && !activeBoard) {
+    if (firstLoad && boards.length > 0) {
       const firstBoard = boards[0];
       if (firstBoard) {
         setActiveBoard(firstBoard.id);

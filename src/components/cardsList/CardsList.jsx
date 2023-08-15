@@ -25,6 +25,11 @@ const CardsList = () => {
   const activeBoardId = useSelector(selectActiveBoardId);
   const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
 
+  const scrollbarStyles = {
+    '.os-scrollbar-handle': {
+      backgroundColor: '#bedbd0',
+    },
+  };
   const onDragEnd = result => {
     const resultProcessed = processDndResult(result, columnsAndTasks);
     if (resultProcessed) {
@@ -35,7 +40,7 @@ const CardsList = () => {
 
   return (
     <>
-      <CustomScrollBar height="100% - 60px">
+      <CustomScrollBar height="100% - 68px" scrollbarStyles={scrollbarStyles}>
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
             <StrictModeDroppable
