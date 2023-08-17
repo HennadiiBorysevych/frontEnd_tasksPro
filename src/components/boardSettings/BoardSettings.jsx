@@ -1,9 +1,8 @@
 import React from 'react';
+import { backgroundImages } from 'constants/backgrounds';
 import { Formik } from 'formik';
 
 import { SvgIcon } from 'components';
-
-import { backgroundImages } from '../../constants/backgrounds';
 
 import {
   BackgroundImage,

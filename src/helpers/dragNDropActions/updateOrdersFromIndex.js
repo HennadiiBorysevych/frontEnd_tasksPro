@@ -1,4 +1,4 @@
-export function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
+function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
   const updatedArray = [...dataArray];
   updatedArray.sort((a, b) => a.order - b.order);
 
@@ -36,3 +36,5 @@ export function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
 
   return { updatingDataFull, updatingDataStripped };
 }
+
+export default updateOrdersFromIndex;

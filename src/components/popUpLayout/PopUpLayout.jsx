@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SvgIcon, TitlePopUp } from 'components';
+import { PopUpTitle, SvgIcon } from 'components';
 
 import { CloseBtn, Container } from './PopUpLayout.styled';
 
@@ -9,9 +9,9 @@ const PopUpLayout = ({ title, handleClose, children }) => {
   return (
     <Container>
       <CloseBtn onClick={handleClose}>
-        <SvgIcon svgName="icon-x-close" variant="header" size='18'/>
+        <SvgIcon svgName="icon-x-close" variant="header" size="18" />
       </CloseBtn>
-      <TitlePopUp title={title} />
+      <PopUpTitle title={title} />
       {children}
     </Container>
   );

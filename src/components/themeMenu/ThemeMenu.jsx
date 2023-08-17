@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { authOperations } from 'redux/auth';
-import { selectTheme } from 'redux/auth/authSelectors';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useAuth } from 'hooks';
 
 import { SvgIcon } from 'components';
 
@@ -15,14 +13,13 @@ import {
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { theme, changeTheme } = useAuth();
+
   const themes = ['Dark', 'Light', 'Violet'];
 
-  const dispatch = useDispatch();
-  const selectedTheme = useSelector(selectTheme);
-
-  const toggleDropdown = () => {
+  const toggleDropdown = useCallback(() => {
     setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   const closeDropdown = () => {
     setIsOpen(false);
@@ -30,7 +27,7 @@ const ThemeMenu = () => {
 
   useEffect(() => {
     const handleWindowClick = event => {
-      if (event.target.nodeName !== "LI") {
+      if (event.target === event.currentTarget) {
         closeDropdown();
       }
     };
@@ -50,12 +47,12 @@ const ThemeMenu = () => {
     };
   }, [isOpen]);
 
-  const handleThemeChange = async theme => {
+  const handleThemeChange = async newTheme => {
     setIsOpen(false);
 
     try {
-      await dispatch(authOperations.updateUserTheme(theme));
-      closeDropdown();
+      await changeTheme(newTheme);
+      toggleDropdown();
     } catch (error) {
       console.error('Error updating theme:', error);
     }
@@ -74,13 +71,13 @@ const ThemeMenu = () => {
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>
-          {themes.map(theme => (
+          {themes.map(newTheme => (
             <DropdownItem
-              key={theme}
-              onClick={() => handleThemeChange(theme)}
-              className={selectedTheme === theme ? 'selected' : ''}
+              key={newTheme}
+              onClick={() => handleThemeChange(newTheme)}
+              className={theme === newTheme ? 'selected' : ''}
             >
-              {theme}
+              {newTheme}
             </DropdownItem>
           ))}
         </DropdownMenu>

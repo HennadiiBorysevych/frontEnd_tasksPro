@@ -1,15 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useAuth } from 'hooks';
 import { OverlayScrollbars } from 'overlayscrollbars';
-import { selectTheme } from 'redux/auth/authSelectors';
 
 import 'overlayscrollbars/overlayscrollbars.css';
 import './CustomScrollBar.css';
 
 const CustomScrollbar = ({ width, maxHeight, children }) => {
   const containerRef = useRef(null);
-
-  const theme = useSelector(selectTheme);
+  const { theme } = useAuth();
 
   const getScrollbarColor = theme => {
     switch (theme) {

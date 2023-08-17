@@ -20,11 +20,23 @@ const Board = lazy(() => import('../pages/Board'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 
 const App = () => {
-  const { isLoggedIn, isFetchingCurrent, fetchUser } = useAuth();
+  const { isLoggedIn, isFetchingCurrent, theme, fetchUser } = useAuth();
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
+
+  const toastTheme = theme === 'Dark' ? 'dark' : 'light';
+
+  const toastConfig = {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: toastTheme,
+  };
 
   return (
     <BoardProvider>
@@ -63,7 +75,7 @@ const App = () => {
           </Routes>
         )}
       </Suspense>
-      <ToastContainer toastConfig />
+      <ToastContainer toastConfig={toastConfig} />
     </BoardProvider>
   );
 };

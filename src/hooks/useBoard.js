@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { boardsOperations } from 'redux/boards';
+import { encodedTitleInUrl } from 'helpers';
+
+import useBoards from './useBoards';
 
 const boardModel = {
   title: '',
@@ -10,6 +11,8 @@ const boardModel = {
 };
 
 const useBoard = (currentBoard, closeModal) => {
+  const { addNewBoard, updateExistingBoard } = useBoards();
+
   const initialBoard = currentBoard ? currentBoard : boardModel;
 
   const [title, setTitle] = useState(initialBoard?.title);
@@ -17,8 +20,6 @@ const useBoard = (currentBoard, closeModal) => {
   const [background, setBackground] = useState(initialBoard?.background);
   const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
-
-  const dispatch = useDispatch();
 
   const handleBoradSubmit = () => {
     if (title === '' && !currentBoard) {
@@ -31,14 +32,14 @@ const useBoard = (currentBoard, closeModal) => {
     const { id, user, ...rest } = board;
 
     if (currentBoard) {
-      dispatch(
-        boardsOperations.updateBoard({
-          boardId: id,
-          updatedData: rest,
-        })
-      );
+      updateExistingBoard({
+        boardId: id,
+        updatedData: rest,
+      });
+      encodedTitleInUrl(title);
     } else {
-      dispatch(boardsOperations.addBoard(rest));
+      addNewBoard(rest);
+      encodedTitleInUrl(title);
     }
 
     closeModal();

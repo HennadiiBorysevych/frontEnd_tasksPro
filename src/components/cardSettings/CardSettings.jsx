@@ -2,7 +2,7 @@ import React from 'react';
 
 import Calend from '../calendar/Calendar';
 
-import { Label, Priority, Radio, SettingsBlock } from './CardsSettings.styled';
+import { Label, Priority, Radio, SettingsBlock } from './CardSettings.styled';
 
 const CardsSettings = ({ priority, deadline, setPriority, setDeadline }) => {
   function changeValue(event) {

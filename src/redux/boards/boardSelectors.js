@@ -19,5 +19,8 @@ const boardSelectors = {
   selectLoading,
   selectAllBoards,
   selectOneBoard,
+  selectBoardIndex,
+  selectActiveBoard,
+  selectActiveBoardId,
 };
 export default boardSelectors;

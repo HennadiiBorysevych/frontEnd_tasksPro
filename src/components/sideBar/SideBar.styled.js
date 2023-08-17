@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { media } from 'helpers';
 
 import Typography from 'components/typography/Typography';
 
@@ -19,16 +20,16 @@ export const SideBarWrapper = styled.div`
     left: ${({ isOpen }) => (isOpen ? '0' : '-225px')};
   }
 
+  ${media.MEDIUM`
+padding: 24px 0;
+  width: 260px;`}
+
   @media screen and (max-width: 1439px) {
     position: fixed;
     top: 0;
     left: ${({ isOpen }) => (isOpen ? '0' : '-260px')};
     transition: left 0.3s ease-in-out;
     z-index: 1000;
-  }
-  @media screen and (min-width: 768px) {
-    padding: 24px 0;
-    width: 260px;
   }
 
   ${({ isOpen, windowHeight }) =>
@@ -57,10 +58,10 @@ export const TitleBoardList = styled(Typography)`
   color: ${props => `${props.theme.palette.text.sidemenu}80`};
   padding: 0 14px;
 
-  @media screen and (min-width: 768px) {
-    margin-top: 60px;
-    padding: 0 24px;
-  }
+  ${media.MEDIUM`
+  margin-top: 60px;
+  padding: 0 24px;
+  `}
 `;
 
 export const CreateBoard = styled.button`
@@ -79,9 +80,9 @@ export const CreateBoard = styled.button`
     transform: scale(1.02);
   }
 
-  @media screen and (min-width: 768px) {
-    padding: 14px 24px;
-  }
+  ${media.MEDIUM`
+  padding: 14px 24px;
+  `}
 `;
 
 export const TitleButton = styled.p`

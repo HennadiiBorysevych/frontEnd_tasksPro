@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCard } from 'hooks';
 
-import { CardsSettings, Input, PopUpLayout, PrimaryButton } from 'components';
+import { CardSettings, Input, PopUpLayout, PrimaryButton } from 'components';
 
 import { Container, Wrapper } from './CardPopUp.styled';
 
@@ -48,7 +48,7 @@ const CardPopUp = ({
           }}
         />
         {descriptionChecker ? <Wrapper>Description is required</Wrapper> : null}
-        <CardsSettings
+        <CardSettings
           priority={priority}
           deadline={new Date(deadline)}
           setPriority={handlePriority}

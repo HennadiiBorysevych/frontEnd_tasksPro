@@ -1,31 +1,18 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { selectTheme } from 'redux/auth/authSelectors';
 
-import { authOperations } from '../redux/auth';
+import useAuth from './useAuth';
 
 const useSupport = onClose => {
-  const dispatch = useDispatch();
-  const selectedTheme = useSelector(selectTheme);
-  const toastTheme = selectedTheme === 'Dark' ? 'dark' : 'light';
-  const toastConfig = {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: toastTheme,
-  };
+  const { sendToSupport } = useAuth();
+
   const handleSupportSubmit = async values => {
     try {
-      const response = await dispatch(authOperations.updateUserHelp(values));
+      const response = await sendToSupport(values);
 
       if (response.payload && response.payload.code === 200) {
-        toast.success('Email successfully sent', toastConfig);
+        toast.success('Email successfully sent');
       } else {
-        console.error('Email sending failed');
+        console.error('Email sending failed. Try again later');
       }
     } catch (error) {
       console.error('An error occurred:', error.message);

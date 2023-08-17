@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const LogoWrapper = styled.div`
@@ -21,13 +23,12 @@ export const Welcome = styled.h1`
   line-height: 1.25;
   letter-spacing: -1.12px;
 
-  @media (min-width: 768px) {
-    font-size: 40px;
-    letter-spacing: -1.6px;
-  }
+  ${media.MEDIUM`
+  font-size: 40px;
+    letter-spacing: -1.6px;`}
 `;
 
-export const Bord = styled.h1`
+export const Board = styled.h1`
   color: ${props => `${props.theme.palette.text.sidemenu}`};
   font-size: 16px;
   font-weight: 600;

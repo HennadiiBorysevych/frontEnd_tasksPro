@@ -1,4 +1,4 @@
-export const getPriorityStyles = priority => {
+const getPriorityStyles = priority => {
   let color = '';
   let labelText = '';
 
@@ -24,3 +24,5 @@ export const getPriorityStyles = priority => {
   }
   return { color, labelText };
 };
+
+export default getPriorityStyles;

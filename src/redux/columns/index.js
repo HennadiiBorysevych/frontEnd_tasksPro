@@ -1,3 +1,3 @@
-export { default as columnsOperations } from './columnOperations';
-export { default as columnsSelectors } from './columnSelectors';
-export { default as columnsReducer } from './columnSlice';
+export { default as columnOperations } from './columnOperations';
+export { default as columnSelectors } from './columnSelectors';
+export { default as columnReducer } from './columnSlice';

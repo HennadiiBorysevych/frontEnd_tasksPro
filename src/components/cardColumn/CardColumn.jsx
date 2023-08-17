@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { useDispatch, useSelector } from 'react-redux';
-import { StrictModeDroppable } from 'helpers/dnd/strictModeDroppable';
-import { useModal } from 'hooks';
-import { selectTheme } from 'redux/auth/authSelectors';
-import { columnsOperations, columnsSelectors } from 'redux/columns';
-import columnSelectors from 'redux/columns/columnSelectors';
-import cardSelectors from 'redux/tasks/cardSelectors';
+import { useSelector } from 'react-redux';
+import { StrictModeDroppable } from 'helpers';
+import { useAuth, useCards, useColumns, useModal } from 'hooks';
 import { selectUserFilter } from 'redux/userFilterSlice';
 
 import { AddCardBtn, CardItem, ColumnPopUp, Modal, SvgIcon } from 'components';
-import Typography from 'components/typography/Typography';
 
 import CustomScrollBar from '../customScrollBar/CustomScrollBar';
 import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
+import Typography from '../typography/Typography';
 
 import {
   Column,
   ColumnHeading,
   IconsContainer,
   ItemsContainer,
-} from './CardsColumn.styled';
+} from './CardColumn.styled';
 
 function CardsColumn({ provided, column }) {
-  const dispatch = useDispatch();
+  const { theme } = useAuth();
+  const { columnLoading, columnsAndTasks, removeColumn } = useColumns();
+  const { cardLoading } = useCards();
   const { isModal, onBackdropClick, toggleModal } = useModal();
-  const columnsAndTasks = useSelector(columnsSelectors.selectColumnsAndTasks);
-  const isColumnLoading = useSelector(columnSelectors.selectLoading);
-  const isTasksLoading = useSelector(cardSelectors.selectLoading);
   const userFilter = useSelector(selectUserFilter);
-  const selectedTheme = useSelector(selectTheme);
 
   const [boardListHeight, setBoardListHeight] = useState(() => {
     return window.innerHeight - elementsTotalSize(window.innerWidth);
@@ -60,7 +54,7 @@ function CardsColumn({ provided, column }) {
     };
   }, []);
 
-  const isLoading = isColumnLoading || isTasksLoading;
+  const isLoading = columnLoading || cardLoading;
 
   return (
     <>
@@ -83,10 +77,8 @@ function CardsColumn({ provided, column }) {
             </button>
 
             <ReactConfirmAlert
-              selectedTheme={selectedTheme}
-              onDeleteAction={() =>
-                dispatch(columnsOperations.deleteColumn(column.id))
-              }
+              selectedTheme={theme}
+              onDeleteAction={() => removeColumn(column.id)}
               item="column and all content in it"
               owner="columns"
               ownerId={column.id}

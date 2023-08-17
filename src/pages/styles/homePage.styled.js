@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const BoardWrap = styled.div`
@@ -9,14 +11,14 @@ export const BoardWrap = styled.div`
   color: ${props => `${props.theme.palette.text.primary}B2`};
   min-height: calc(100vh - 60px);
 
-  @media screen and (min-width: 768px) {
-    padding: 26px 32px;
-    min-height: calc(100vh - 68px);
-  }
+  ${media.MEDIUM`
+  padding: 26px 32px;
+  min-height: calc(100vh - 68px);
+  `}
 
-  @media screen and (min-width: 1440px) {
-    padding: 10px 24px 8px;
-  }
+  ${media.LARGE`
+  padding: 10px 24px 8px;
+  `}
 `;
 
 export const DefaultWrapper = styled.div`
@@ -28,22 +30,22 @@ export const DefaultWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  @media screen and (min-width: 375px) {
-    padding: 0 20px;
-    width: 375px;
-  }
+  ${media.SMALL`
+  padding: 0 20px;
+  width: 375px;
+  `}
 
-  @media screen and (min-width: 768px) {
-    padding: 0;
-    width: 486px;
-    height: calc(100vh - 126px);
-  }
+  ${media.MEDIUM`
+  padding: 0;
+  width: 486px;
+  height: calc(100vh - 126px);
+  `}
 
-  @media screen and (min-width: 1440px) {
-    padding: 0;
-    width: 486px;
-    height: calc(100vh - 86px);
-  }
+  ${media.LARGE`
+  padding: 0;
+  width: 486px;
+  height: calc(100vh - 86px);
+  `}
 `;
 
 export const WelcomeText = styled.p`

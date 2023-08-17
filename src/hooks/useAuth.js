@@ -6,6 +6,7 @@ const useAuth = () => {
   const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn);
   const user = useSelector(authSelectors.selectUser);
   const isFetchingCurrent = useSelector(authSelectors.selectIsFetchingCurrent);
+  const theme = useSelector(authSelectors.selectTheme);
 
   const dispatch = useDispatch();
 
@@ -22,14 +23,30 @@ const useAuth = () => {
 
   const signOut = () => dispatch(authOperations.logOut());
 
+  const googleAuth = token => dispatch(authOperations.googleAuth(token));
+
+  const updateProfileData = updatedProfile =>
+    dispatch(authOperations.updateUserInfo(updatedProfile));
+
+  const changeTheme = newTheme =>
+    dispatch(authOperations.updateUserTheme(newTheme));
+
+  const sendToSupport = helpRequest =>
+    dispatch(authOperations.updateUserHelp(helpRequest));
+
   return {
     isLoggedIn,
     user,
     isFetchingCurrent,
+    theme,
     fetchUser,
     signUp,
     signIn,
     signOut,
+    googleAuth,
+    updateProfileData,
+    changeTheme,
+    sendToSupport,
   };
 };
 
