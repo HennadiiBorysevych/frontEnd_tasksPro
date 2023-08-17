@@ -1,31 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchBoards = createAsyncThunk(
-  'boards/fetchAll',
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get('/api/boards');
-      return res.data?.data.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+const fetchBoards = createAsyncThunk('boards/fetchAll', async (_, thunkAPI) => {
+  try {
+    const res = await axios.get('/api/boards');
+    return res.data?.data.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
-);
+});
 
-export const addBoard = createAsyncThunk(
-  'boards/addBoard',
-  async (name, thunkAPI) => {
-    try {
-      const response = await axios.post('/api/boards', name);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
+const addBoard = createAsyncThunk('boards/addBoard', async (name, thunkAPI) => {
+  try {
+    const response = await axios.post('/api/boards', name);
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
-export const updateBoard = createAsyncThunk(
+const updateBoard = createAsyncThunk(
   'boards/updateBoard',
   async ({ boardId, updatedData }, thunkAPI) => {
     try {
@@ -37,7 +31,7 @@ export const updateBoard = createAsyncThunk(
   }
 );
 
-export const getBoard = createAsyncThunk(
+const getBoard = createAsyncThunk(
   'boards/getBoard',
   async (boardId, thunkAPI) => {
     try {
@@ -51,7 +45,7 @@ export const getBoard = createAsyncThunk(
   }
 );
 
-export const deleteBoard = createAsyncThunk(
+const deleteBoard = createAsyncThunk(
   'boards/deleteBoard',
   async (boardId, thunkAPI) => {
     try {
@@ -85,7 +79,7 @@ const fetchColumnsTasks = createAsyncThunk(
   }
 );
 
-const operations = {
+const boardOperations = {
   fetchBoards,
   addBoard,
   updateBoard,
@@ -93,4 +87,4 @@ const operations = {
   deleteBoard,
   fetchColumnsTasks,
 };
-export default operations;
+export default boardOperations;

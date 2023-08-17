@@ -1,9 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { useModal } from 'hooks';
-import { selectTheme } from 'redux/auth/authSelectors';
-import cardOperations from 'redux/tasks/cardOperations';
+import React, { useMemo } from 'react';
+import { useAuth, useCards, useModal } from 'hooks';
 
 import { CardPopUp, Modal } from 'components';
 import SvgIcon from 'components/svgIcon/SvgIcon';
@@ -24,17 +20,23 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
-  const dispatch = useDispatch();
+  const { theme } = useAuth();
+  const { removeCard } = useCards();
   const { isModal, onBackdropClick, toggleModal } = useModal();
+
   const { title, description, priority, deadline, id } = item;
-  const currentDate = new Date();
-  const deadlineDate = new Date(deadline);
-  const isDeadlineToday =
-    deadlineDate.toDateString() === currentDate.toDateString();
-  const formattedDeadline = `${
-    deadlineDate.getMonth() + 1
-  }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
-  const selectedTheme = useSelector(selectTheme);
+
+  const [formattedDeadline, isDeadlineToday] = useMemo(() => {
+    const deadlineDate = new Date(deadline);
+    const formatted = `${
+      deadlineDate.getMonth() + 1
+    }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
+    const currentDate = new Date();
+    const isDeadline =
+      deadlineDate.toDateString() === currentDate.toDateString();
+
+    return [formatted, isDeadline];
+  }, [deadline]);
 
   return (
     <CardContainer priority={priority}>
@@ -64,8 +66,8 @@ const CardItem = ({ item }) => {
             <SvgIcon svgName="icon-pencil" size={16} variant="popUp" />
           </button>
           <ReactConfirmAlert
-            selectedTheme={selectedTheme}
-            onDeleteAction={() => dispatch(cardOperations.deleteTask(id))}
+            selectedTheme={theme}
+            onDeleteAction={() => removeCard(id)}
             item="task"
             owner="tasks"
           />

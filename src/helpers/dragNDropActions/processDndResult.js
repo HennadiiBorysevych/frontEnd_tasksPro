@@ -1,8 +1,9 @@
-import { updateOrdersFromIndex } from 'helpers';
-import { columnsOperations } from 'redux/columns';
+import { columnOperations } from 'redux/columns';
 import { cardOperations } from 'redux/tasks';
 
-export function processDndResult(result, columnsAndTasks) {
+import updateOrdersFromIndex from './updateOrdersFromIndex';
+
+function processDndResult(result, columnsAndTasks) {
   if (!result || !result.destination) {
     return null;
   }
@@ -16,7 +17,7 @@ export function processDndResult(result, columnsAndTasks) {
       dataArray: columnsAndTasks,
     });
     return {
-      process: columnsOperations.moveColumn,
+      process: columnOperations.moveColumn,
       arg: { updatingDataFull, updatingDataStripped },
     };
   } else {
@@ -66,3 +67,5 @@ export function processDndResult(result, columnsAndTasks) {
     }
   }
 }
+
+export default processDndResult;

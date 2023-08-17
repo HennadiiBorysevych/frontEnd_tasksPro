@@ -1,13 +1,13 @@
 import { selectAllTasks } from 'redux/tasks/cardSelectors';
 import { createSelector } from 'reselect';
 
-export const selectLoading = state => state.columns.isLoading;
-export const selectAllColumns = state => state.columns.items;
-export const selectOneColumn = (state, columnId) => {
+const selectLoading = state => state.columns.isLoading;
+const selectAllColumns = state => state.columns.items;
+const selectOneColumn = (state, columnId) => {
   return state.columns.items.find(column => column.id === columnId);
 };
 
-export const selectColumnsAndTasks = createSelector(
+const selectColumnsAndTasks = createSelector(
   [selectAllColumns, selectAllTasks],
   (columns, tasks) => {
     return columns.map(column => {
@@ -23,6 +23,7 @@ export const selectColumnsAndTasks = createSelector(
 const columnsSelectors = {
   selectLoading,
   selectAllColumns,
+  selectOneColumn,
   selectColumnsAndTasks,
 };
 export default columnsSelectors;

@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-export const fetchTasks = createAsyncThunk(
+const fetchTasks = createAsyncThunk(
   'tasks/fetchAll',
   async (boardId, thunkAPI) => {
     try {
@@ -17,20 +16,23 @@ export const fetchTasks = createAsyncThunk(
     }
   }
 );
-
-export const addTask = createAsyncThunk(
-  'tasks/addTask',
-  async (name, thunkAPI) => {
-    try {
-      const response = await axios.post('/api/cards', name);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
+const getTask = createAsyncThunk('tasks/getTask', async (taskId, thunkAPI) => {
+  try {
+    const response = await axios.get(`/api/cards/${taskId}`);
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
   }
-);
-
-export const updateTask = createAsyncThunk(
+});
+const addTask = createAsyncThunk('tasks/addTask', async (name, thunkAPI) => {
+  try {
+    const response = await axios.post('/api/cards', name);
+    return response.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
+  }
+});
+const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ taskId, updatedData }, thunkAPI) => {
     try {
@@ -41,20 +43,7 @@ export const updateTask = createAsyncThunk(
     }
   }
 );
-
-export const getTask = createAsyncThunk(
-  'tasks/getTask',
-  async (taskId, thunkAPI) => {
-    try {
-      const response = await axios.get(`/api/cards/${taskId}`);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-export const deleteTask = createAsyncThunk(
+const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (taskId, thunkAPI) => {
     try {
@@ -65,8 +54,7 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
-
-export const moveTask = createAsyncThunk(
+const moveTask = createAsyncThunk(
   'tasks/moveTask',
   async (tasksData, thunkAPI) => {
     try {
@@ -80,8 +68,7 @@ export const moveTask = createAsyncThunk(
     }
   }
 );
-
-export const moveTaskToColumn = createAsyncThunk(
+const moveTaskToColumn = createAsyncThunk(
   'tasks/moveTaskToColumn',
   async (data, thunkAPI) => {
     try {
@@ -97,7 +84,7 @@ export const moveTaskToColumn = createAsyncThunk(
   }
 );
 
-const operations = {
+const cardOperations = {
   fetchTasks,
   addTask,
   updateTask,
@@ -106,4 +93,4 @@ const operations = {
   moveTask,
   moveTaskToColumn,
 };
-export default operations;
+export default cardOperations;

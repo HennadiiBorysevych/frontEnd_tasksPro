@@ -34,7 +34,7 @@ const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   }
 });
 
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/api/auth/logout');
     token.unset();
@@ -77,7 +77,7 @@ const fetchCurrentUser = createAsyncThunk(
   }
 );
 
-export const updateUserInfo = createAsyncThunk(
+const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
     const formData = new FormData();
@@ -98,7 +98,7 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
-export const updateUserTheme = createAsyncThunk(
+const updateUserTheme = createAsyncThunk(
   'auth/updateUserTheme',
   async (updatedTheme, thunkAPI) => {
     try {
@@ -112,7 +112,7 @@ export const updateUserTheme = createAsyncThunk(
   }
 );
 
-export const updateUserHelp = createAsyncThunk(
+const updateUserHelp = createAsyncThunk(
   'auth/updateUserHelp',
   async (helpRequest, thunkAPI) => {
     try {
@@ -124,7 +124,7 @@ export const updateUserHelp = createAsyncThunk(
   }
 );
 
-const operations = {
+const authOperations = {
   register,
   logIn,
   googleAuth,
@@ -134,4 +134,4 @@ const operations = {
   updateUserTheme,
   updateUserHelp,
 };
-export default operations;
+export default authOperations;

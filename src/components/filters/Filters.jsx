@@ -21,11 +21,11 @@ import {
 } from './Filters.styled';
 
 const Filters = () => {
-  const dispatch = useDispatch();
+  const { isModal, toggleModal, onBackdropClick } = useModal();
 
   const userFilter = useSelector(selectUserFilter);
 
-  const { isModal, toggleModal, onBackdropClick } = useModal();
+  const dispatch = useDispatch();
 
   function changeValue(event) {
     const newValue = event.target.value;

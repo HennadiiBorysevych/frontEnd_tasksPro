@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from 'hooks';
-import { authSelectors } from 'redux/auth';
 
 import {
   Code,
@@ -17,9 +15,8 @@ import {
 } from './styles/errorPage.styled';
 
 const ErrorPage = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const [userTheme, setUserTheme] = useState('');
-  const user = useSelector(authSelectors.selectUser);
 
   useEffect(() => {
     if (!user.name) {

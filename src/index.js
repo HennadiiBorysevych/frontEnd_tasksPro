@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import { selectTheme } from 'redux/auth/authSelectors';
+import useAuth from 'hooks/useAuth.js';
 import { persistor, store } from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -17,10 +16,10 @@ import { darkTheme, lightTheme, violetTheme } from './themes/theme';
 import './index.css';
 
 const ThemedApp = () => {
-  const selectedTheme = useSelector(selectTheme);
+  const { theme } = useAuth();
 
-  const theme = React.useMemo(() => {
-    switch (selectedTheme) {
+  const themeChoice = React.useMemo(() => {
+    switch (theme) {
       case 'Dark':
         return darkTheme;
       case 'Light':
@@ -30,10 +29,10 @@ const ThemedApp = () => {
       default:
         return darkTheme;
     }
-  }, [selectedTheme]);
+  }, [theme]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeChoice}>
       <App />
     </ThemeProvider>
   );

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { cardOperations } from 'redux/tasks';
+
+import useCards from './useCards';
 
 const cardModel = {
   title: '',
@@ -10,6 +10,7 @@ const cardModel = {
 };
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
+  const { addNewCard, updateExistingCard } = useCards();
   const initialCard = currentCard
     ? getFormattedCard(currentCard)
     : {
@@ -26,7 +27,6 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [card, setCard] = useState(initialCard);
   const [titleChecker, seTitleChecker] = useState(false);
   const [descriptionChecker, setDescriptionChecker] = useState(false);
-  const dispatch = useDispatch();
 
   const handleCardSubmit = () => {
     if (title === '' && !currentCard) {
@@ -46,13 +46,11 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
     const { id, createdAt, order, updatedAt, ...rest } = card;
 
     currentCard
-      ? dispatch(
-          cardOperations.updateTask({
-            taskId: id,
-            updatedData: { orderTask: order, ...rest },
-          })
-        )
-      : dispatch(cardOperations.addTask(rest));
+      ? updateExistingCard({
+          taskId: id,
+          updatedData: { orderTask: order, ...rest },
+        })
+      : addNewCard(rest);
 
     closeModal();
   };

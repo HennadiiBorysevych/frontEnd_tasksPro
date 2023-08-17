@@ -42,23 +42,13 @@ const AuthForm = ({ value, chgForm }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chgForm]);
 
-  const toastConfig = {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: 'dark',
-  };
-
   const onHandleSubmit = async ({ name, email, password }, { resetForm }) => {
     try {
       if (value === 0) {
         const data = await signUp({ name, email, password });
 
         if (data.payload === 'Request failed with status code 409') {
-          toast.error('User with this email already exists', toastConfig);
+          toast.error('User with this email already exists');
           return;
         }
 

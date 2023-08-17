@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 // WELCOME PAGE
@@ -10,6 +12,7 @@ export const Background = styled.section`
   justify-content: center;
   min-height: 100vh;
 `;
+
 export const BackgroundLogin = styled.section`
   position: relative;
   background-image: var(--welcomeBgColor);
@@ -19,6 +22,7 @@ export const BackgroundLogin = styled.section`
   justify-content: center;
   min-height: 100vh;
 `;
+
 export const BackgroundHome = styled.section`
   height: 60px;
   width: 100%;
@@ -32,6 +36,7 @@ export const Tabs = styled.div`
   justify-content: flex-start;
   align-items: start;
 `;
+
 export const Header = styled.header`
   display: flex;
   width: 100%;
@@ -41,40 +46,47 @@ export const Header = styled.header`
   align-items: start;
   padding: 20px;
 `;
+
 export const SideBar = styled.aside`
   background-color: #161616;
   height: 100vh;
   width: 260px;
   position: absolute;
 `;
+
 export const Logo = styled.div`
   width: 30px;
   height: 120px;
-  @media (min-width: 1440px) {
-    width: 115px;
+
+  ${media.LARGE`
+  width: 115px;
     height: 34px;
-  }
+  `}
 `;
 
 export const Theme = styled.div`
   width: 65px;
   height: 68px;
-  @media (min-width: 1440px) {
-    width: 115px;
+
+  ${media.LARGE`
+  width: 115px;
     height: 68px;
-  }
+  `}
 `;
+
 export const UserPic = styled.div`
   width: 32px;
   height: 32px;
 `;
+
 export const UserName = styled.div`
   width: 65px;
   height: 68px;
-  @media (min-width: 1440px) {
-    width: 115px;
+
+  ${media.LARGE`
+  width: 115px;
     height: 68px;
-  }
+  `}
 `;
 
 export const BoardBody = styled.div`
@@ -86,26 +98,35 @@ export const ProjectName = styled.div`
   width: 80%;
   height: 21px;
 
-  @media (min-width: 778px) {
+  ${media.MEDIUM`
+  width: 90%;
+    height: 40px;
+  `}/* @media (min-width: 778px) {
     width: 90%;
     height: 40px;
-  }
+  } */
 `;
 export const Filters = styled.div`
   width: 40px;
   height: 2px;
-  @media (min-width: 778px) {
+
+  ${media.MEDIUM`
+  width: 60px;
+    height: 30px;
+  `}/* @media (min-width: 778px) {
     width: 60px;
     height: 30px;
-  }
+  } */
 `;
 export const Button = styled.div`
   margin-top: 30px;
   width: 80%;
 
-  @media (min-width: 778px) {
+  ${media.MEDIUM`
+  width: 80%;
+  `}/* @media (min-width: 778px) {
     width: 80%;
-  }
+  } */
 `;
 export const ListWrapper = styled.div`
   display: flex;

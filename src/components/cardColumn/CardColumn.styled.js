@@ -1,20 +1,19 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const Column = styled.li`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: 335px;
   filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
   transition: filter 0.4s ease-in-out;
 
-  @media screen and (max-width: 374px) {
-    width: calc(100vw - 40px);
-  }
+  ${media.maxPRESMALL`
+  width: calc(100vw - 40px);`}
 
-  @media screen and (min-width: 375px) {
-    width: 335px;
-  }
+  ${media.SMALL`
+  width: 335px;`}
 `;
 
 export const ColumnHeading = styled.div`

@@ -1,21 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { backgroundImage } from 'helpers';
 
-import { backgroundImage } from '../helpers';
-import {
-  selectAllBoards,
-  selectBoardIndex,
-} from '../redux/boards/boardSelectors';
+import useBoards from './useBoards';
 
 const useBackground = () => {
   const [bgPic, setBgPic] = useState('');
-
-  const indexBoard = useSelector(selectBoardIndex);
-  const boardBackground = useSelector(selectAllBoards);
+  const { allBoards, boardIndex } = useBoards();
 
   const handleResize = useCallback(() => {
-    const boardBG = boardBackground.find(board => {
-      return board.id === indexBoard;
+    const boardBG = allBoards.find(board => {
+      return board.id === boardIndex;
     })?.background;
     if (boardBG === 'default' || boardBG === undefined || boardBG === 'empty') {
       setBgPic('#1f1f1f');
@@ -23,7 +17,7 @@ const useBackground = () => {
       const imageUrl = backgroundImage(boardBG);
       setBgPic(imageUrl);
     }
-  }, [boardBackground, indexBoard]);
+  }, [allBoards, boardIndex]);
 
   useEffect(() => {
     handleResize();

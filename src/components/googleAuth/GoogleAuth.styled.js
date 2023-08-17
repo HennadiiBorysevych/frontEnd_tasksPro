@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const GoogleLink = styled.a`
@@ -12,9 +14,8 @@ export const GoogleLink = styled.a`
   color: #000;
   margin-top: 20px;
 
-  @media screen and (min-width: 768px) {
-    width: 344px;
+  ${media.MEDIUM`
+  width: 344px;
     margin-left: auto;
-    margin-right: auto;
-  }
+    margin-right: auto;`}
 `;

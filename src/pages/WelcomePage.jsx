@@ -1,9 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
 
-import { Logo } from 'components';
-
-import GoogleAuth from '../components/googleAuth/GoogleAuth';
+import { GoogleAuth, Logo } from 'components';
 
 import { Background, Container } from './styles/commonStyles';
 

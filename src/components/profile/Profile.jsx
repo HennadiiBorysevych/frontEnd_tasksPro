@@ -1,7 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useModal } from 'hooks';
-import { authSelectors } from 'redux/auth';
+import { useAuth, useModal } from 'hooks';
 
 import { Modal, ProfilePopUp, UserAvatar } from 'components';
 import Typography from 'components/typography/Typography';
@@ -9,7 +7,7 @@ import Typography from 'components/typography/Typography';
 import { ClickWrap } from './Profile.styled';
 
 const Profile = () => {
-  const user = useSelector(authSelectors.selectUser);
+  const { user } = useAuth();
   const { isModal, toggleModal, onBackdropClick } = useModal();
 
   return (

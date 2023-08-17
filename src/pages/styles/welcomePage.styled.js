@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { media } from 'helpers';
 
 import styled from '@emotion/styled';
 
@@ -6,20 +7,20 @@ export const WelcomeContainer = styled.div`
   width: 100%;
   text-align: center;
 
-  @media screen and (min-width: 768px) {
-    width: 473px;
-  }
+  ${media.MEDIUM`
+  width: 473px;
+  `}
 `;
 
 export const UserImage = styled.img`
   margin-bottom: 14px;
   margin: 0 auto;
 
-  @media screen and (min-width: 768px) {
-    width: 162px;
+  ${media.MEDIUM`
+  width: 162px;
     height: 162px;
     margin-bottom: 24px;
-  }
+  `}
 `;
 
 export const WelcomeText = styled.p`
@@ -41,9 +42,9 @@ export const RegisterLink = styled(NavLink)`
   color: #ffffff;
   margin-bottom: 14px;
 
-  @media screen and (min-width: 768px) {
-    width: 344px;
+  ${media.MEDIUM`
+  width: 344px;
     margin-left: auto;
     margin-right: auto;
-  }
+  `}
 `;

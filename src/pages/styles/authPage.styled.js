@@ -1,5 +1,6 @@
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import { media } from 'helpers';
 
 import styled from '@emotion/styled';
 
@@ -48,10 +49,10 @@ export const AuthContainer = styled.div`
   background-color: var(--bgColorAuth);
   border-radius: 8px;
 
-  @media screen and (min-width: 768px) {
-    padding: 40px;
-    width: 424px;
-  }
+  ${media.MEDIUM`
+  padding: 40px;
+  width: 424px;
+  `}
 `;
 
 export const TabsContainer = styled.div`

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@emotion/react';
-import { selectTheme } from 'redux/auth/authSelectors';
+import { useAuth } from 'hooks';
 
 import { SvgIcon } from 'components';
 
@@ -53,17 +52,15 @@ const hovColorValues = {
 };
 
 const Calend = ({ selectedDate, setSelectedDate }) => {
-  const selectedTheme = useSelector(selectTheme);
+  const { theme } = useAuth();
 
-  const senseColor =
-    senseColorValues[selectedTheme] || senseColorValues.default;
-  const color = colorValues[selectedTheme] || colorValues.default;
-  const backColor = backColorValues[selectedTheme] || backColorValues.default;
-  const weekColor = weekColorValues[selectedTheme] || weekColorValues.default;
-  const disColor = disColorValues[selectedTheme] || disColorValues.default;
-  const hovColor = hovColorValues[selectedTheme] || hovColorValues.default;
-  const activeColor =
-    activeColorValues[selectedTheme] || activeColorValues.default;
+  const senseColor = senseColorValues[theme] || senseColorValues.default;
+  const color = colorValues[theme] || colorValues.default;
+  const backColor = backColorValues[theme] || backColorValues.default;
+  const weekColor = weekColorValues[theme] || weekColorValues.default;
+  const disColor = disColorValues[theme] || disColorValues.default;
+  const hovColor = hovColorValues[theme] || hovColorValues.default;
+  const activeColor = activeColorValues[theme] || activeColorValues.default;
 
   const CustomCalendar = styled(Calendar)`
     background-color: ${backColor};

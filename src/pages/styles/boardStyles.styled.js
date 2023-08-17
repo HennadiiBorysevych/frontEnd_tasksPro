@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const ContainerWrapper = styled.div`
@@ -5,13 +7,12 @@ export const ContainerWrapper = styled.div`
   flex-wrap: nowrap;
   padding-bottom: 24px;
 
-  @media screen and (min-width: 768px) {
-    padding-bottom: 52px;
-  }
+  ${media.MEDIUM`
+  padding-bottom: 52px;`}
 
-  @media screen and (min-width: 1440px) {
-    padding-bottom: 16px;
-  }
+  ${media.LARGE`
+  padding-bottom: 16px;
+    `}
 `;
 
 export const ColumnsContainer = styled.ul`
@@ -20,9 +21,8 @@ export const ColumnsContainer = styled.ul`
   gap: 28px;
   margin-right: 21px;
 
-  @media screen and (min-width: 768px) {
-    gap: 34px;
-  }
+  ${media.MEDIUM`
+  gap: 34px;`}
 `;
 
 export const ButtonAddColumn = styled.button`
