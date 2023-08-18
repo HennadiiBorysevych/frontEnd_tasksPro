@@ -49,7 +49,7 @@ const ThemeMenu = () => {
 
   const handleThemeChange = async newTheme => {
     setIsOpen(false);
-
+    localStorage.setItem('theme', newTheme);
     try {
       await changeTheme(newTheme);
       toggleDropdown();

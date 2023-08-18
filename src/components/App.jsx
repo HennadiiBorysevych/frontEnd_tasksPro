@@ -42,7 +42,7 @@ const App = () => {
     <BoardProvider>
       <GlobalStyles />
       <Suspense>
-        {isFetchingCurrent ? (
+        {true ? (
           <SkeletonLoader page="/home/" />
         ) : (
           <Routes>
