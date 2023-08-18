@@ -1,25 +1,34 @@
 import React from 'react';
 import { encodedTitleInUrl } from 'helpers';
 import { useBoardContext, useBoards } from 'hooks';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CustomScrollbar, SideBarItem } from 'components';
+import { setUserFilter } from 'redux/userFilterSlice';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = ({ windowHeight }) => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const { allBoards, getAllBoards, getOneBoard, removeBoard } = useBoards();
+  const dispatch = useDispatch();
 
   const handleActiveBoard = async boardId => {
     try {
-      await getOneBoard(boardId);
+      getOneBoard(boardId);
       await setActiveBoard(boardId);
+
       const activatedBoard = await allBoards.find(
         board => board.id === boardId
       );
       const { title } = activatedBoard;
+
       if (title) {
         encodedTitleInUrl(title);
+      }
+      const filterBoard = localStorage.getItem(boardId);
+      if (filterBoard) {
+        dispatch(setUserFilter(filterBoard));
       }
     } catch (error) {
       console.error('Error getting board data', error);
@@ -28,8 +37,9 @@ const SideBarBoardsList = ({ windowHeight }) => {
 
   const handleDeleteBoard = async id => {
     try {
-      await removeBoard(id);
-      await getAllBoards();
+      localStorage.removeItem(id);
+      removeBoard(id);
+      getAllBoards();
 
       const firstBoard = allBoards[0];
       if (firstBoard) {

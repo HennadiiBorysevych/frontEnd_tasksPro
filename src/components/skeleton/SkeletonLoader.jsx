@@ -142,7 +142,7 @@ const SkeletonLoader = ({ page }) => {
                   style={{
                     display: 'flex',
                     gap: '30px',
-                    marginTop: 6,
+                    marginTop: 7,
                     justifyContent: 'space-between',
                   }}
                 >
