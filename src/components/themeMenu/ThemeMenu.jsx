@@ -1,5 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useAuth } from 'hooks';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { authOperations } from 'redux/auth';
+import { selectTheme } from 'redux/auth/authSelectors';
 
 import { SvgIcon } from 'components';
 
@@ -13,13 +15,14 @@ import {
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { theme, changeTheme } = useAuth();
-
   const themes = ['Dark', 'Light', 'Violet'];
 
-  const toggleDropdown = useCallback(() => {
+  const dispatch = useDispatch();
+  const selectedTheme = useSelector(selectTheme);
+
+  const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  }, [isOpen]);
+  };
 
   const closeDropdown = () => {
     setIsOpen(false);
@@ -27,7 +30,7 @@ const ThemeMenu = () => {
 
   useEffect(() => {
     const handleWindowClick = event => {
-      if (event.target === event.currentTarget) {
+      if (event.target.nodeName !== 'LI') {
         closeDropdown();
       }
     };
@@ -47,12 +50,12 @@ const ThemeMenu = () => {
     };
   }, [isOpen]);
 
-  const handleThemeChange = async newTheme => {
+  const handleThemeChange = async theme => {
     setIsOpen(false);
-    localStorage.setItem('theme', newTheme);
+    // localStorage.setItem('theme', newTheme);
     try {
-      await changeTheme(newTheme);
-      toggleDropdown();
+      await dispatch(authOperations.updateUserTheme(theme));
+      closeDropdown();
     } catch (error) {
       console.error('Error updating theme:', error);
     }
@@ -71,13 +74,13 @@ const ThemeMenu = () => {
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>
-          {themes.map(newTheme => (
+          {themes.map(theme => (
             <DropdownItem
-              key={newTheme}
-              onClick={() => handleThemeChange(newTheme)}
-              className={theme === newTheme ? 'selected' : ''}
+              key={theme}
+              onClick={() => handleThemeChange(theme)}
+              className={selectedTheme === theme ? 'selected' : ''}
             >
-              {newTheme}
+              {theme}
             </DropdownItem>
           ))}
         </DropdownMenu>

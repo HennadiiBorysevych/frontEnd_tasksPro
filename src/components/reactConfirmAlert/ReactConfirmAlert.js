@@ -72,7 +72,7 @@ const ReactConfirmAlert = ({
         svgName="icon-trash"
         size={16}
         variant={owner === 'sidebar' ? 'support' : 'popUp'}
-        isActive={owner !== 'sidebar'}
+        isActive={false}
       />
     </button>
   );

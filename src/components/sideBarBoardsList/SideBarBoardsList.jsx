@@ -1,5 +1,5 @@
 import React from 'react';
-import { encodedTitleInUrl } from 'helpers';
+import { clearEncodedTitleInUrl, encodedTitleInUrl } from 'helpers';
 import { useBoardContext, useBoards } from 'hooks';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -39,13 +39,18 @@ const SideBarBoardsList = ({ windowHeight }) => {
     try {
       localStorage.removeItem(id);
       removeBoard(id);
-      getAllBoards();
 
-      const firstBoard = allBoards[0];
-      if (firstBoard) {
-        setActiveBoard(firstBoard.id);
-        const encodedTitle = encodeURIComponent(firstBoard.title);
-        window.history.pushState(null, null, `${encodedTitle}`);
+      if (allBoards.length === 0) {
+        clearEncodedTitleInUrl();
+      } else {
+        getAllBoards();
+
+        const firstBoard = allBoards[0];
+        if (firstBoard) {
+          setActiveBoard(firstBoard.id);
+          const { title } = firstBoard;
+          encodedTitleInUrl(title);
+        }
       }
     } catch (error) {
       console.error(error.message);

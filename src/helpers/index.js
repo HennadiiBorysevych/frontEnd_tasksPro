@@ -1,4 +1,5 @@
 export { default as backgroundImage } from './backgroundImage';
+export { default as clearEncodedTitleInUrl } from './clearEncodedTitleInUrl';
 export {
   processDndResult,
   StrictModeDroppable,
