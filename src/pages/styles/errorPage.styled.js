@@ -8,11 +8,12 @@ import {
 } from 'helpers/errorPageThemes';
 
 import styled from '@emotion/styled';
+import { useAuth } from 'hooks';
 
 export const ErrorBackground = styled.section`
-  background-color: ${({ bgColor }) => checkBgColor(bgColor)};
+  background-color: ${props => `${props.theme.palette.background.bord}`};
   background-image: var(${({ bgImg }) => checkBgImg(bgImg)});
-  color: ${({ txtColor }) => checkTxtColor(txtColor)};
+  color: ${props => `${props.theme.palette.text.primary}`};
 
   text-align: center;
   display: flex;
@@ -113,12 +114,17 @@ export const Text = styled.p`
 export const Link = styled.li`
   padding: 14px 0;
   width: 100%;
-  background-color: ${({ btnBgColor }) => checkBtnBgColor(btnBgColor)};
+  background-color: ${props =>
+    `${props.theme.palette.background.primaryButton}`};
   border-radius: 8px;
-  color: ${({ btnColor }) => checkBtnTxtColor(btnColor)};
+  color: ${props => `${props.theme.palette.text.secondary}`};
   margin-bottom: 14px;
 
   list-style: none;
+
+  &:hover {
+    background-color: ${props => `${props.theme.palette.hover.primaryButton}`};
+  }
 `;
 
 export const InviteText = styled.span`
