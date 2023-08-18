@@ -1,5 +1,5 @@
 import React from 'react';
-import { encodedTitleInUrl } from 'helpers';
+import { clearEncodedTitleInUrl, encodedTitleInUrl } from 'helpers';
 import { useBoardContext, useBoards } from 'hooks';
 
 import { CustomScrollbar, SideBarItem } from 'components';
@@ -29,13 +29,18 @@ const SideBarBoardsList = ({ windowHeight }) => {
   const handleDeleteBoard = async id => {
     try {
       await removeBoard(id);
-      await getAllBoards();
 
-      const firstBoard = allBoards[0];
-      if (firstBoard) {
+      if (allBoards.length === 0) {
+        clearEncodedTitleInUrl();
+      } else {
+        await getAllBoards();
+
+        const firstBoard = await allBoards[0];
+
+        console.log(firstBoard);
         setActiveBoard(firstBoard.id);
-        const encodedTitle = encodeURIComponent(firstBoard.title);
-        window.history.pushState(null, null, `${encodedTitle}`);
+        const { title } = firstBoard;
+        encodedTitleInUrl(title);
       }
     } catch (error) {
       console.error(error.message);

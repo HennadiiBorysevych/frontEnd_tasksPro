@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useEditProfile } from 'hooks';
 import PropTypes from 'prop-types';
@@ -17,12 +18,14 @@ import {
   AvatarInput,
   AvatarWrap,
   Container,
+  // TextChangePassword,
 } from './ProfilePopUp.styled.js';
 
 const initialValues = {
   name: '',
   email: '',
   password: '',
+  newPassword: '',
 };
 const formStyle = {
   display: 'flex',
@@ -33,6 +36,8 @@ const formStyle = {
 const ProfilePopUp = ({ user, handleModalClose }) => {
   const { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar } =
     useEditProfile(user);
+  const [isRequiredInputFocused, setIsRequiredInputFocused] = useState(false);
+
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: initialValues,
@@ -63,7 +68,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             <AvatarBg size="68" />
           )}
           <AddButtonWrap>
-            <SvgIcon svgName="icon-plus" variant='header' />
+            <SvgIcon svgName="icon-plus" variant="header" />
           </AddButtonWrap>
         </AvatarWrap>
         <form style={formStyle} onSubmit={handleModalSubmit}>
@@ -85,7 +90,11 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             type="email"
             placeholder={user?.email}
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={e => {
+              setIsRequiredInputFocused(false);
+              handleBlur(e);
+            }}
+            onFocus={() => setIsRequiredInputFocused(true)}
             value={values.email}
           />
           {errors.email && touched.email ? (
@@ -93,20 +102,44 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
           ) : null}
 
           <Input
-            name="password"
+            name="newPassword"
             type="password"
             placeholder="Enter new password"
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={e => {
+              setIsRequiredInputFocused(false);
+              handleBlur(e);
+            }}
+            onFocus={() => setIsRequiredInputFocused(true)}
             value={values.password}
           />
-          {errors.password && touched.password ? (
-            <span style={{ color: 'white' }}>{errors.password}</span>
+          {errors.newPassword && touched.newPassword ? (
+            <span style={{ color: 'white' }}>{errors.newPassword}</span>
           ) : null}
+
+          {isRequiredInputFocused && (
+            <>
+              <Input
+                name="password"
+                type="password"
+                placeholder="Enter your current password for confirmation"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.confirmPassword}
+              />
+              {errors.password && touched.password ? (
+                <span style={{ color: 'white' }}>{errors.password}</span>
+              ) : null}
+            </>
+          )}
 
           <PrimaryButton
             disabled={
-              !isAvatarLoad && !values.name && !values.email && !values.password
+              !isAvatarLoad &&
+              !values.name &&
+              !values.email &&
+              !values.password &&
+              !values.confirmPassword
             }
             style={{ marginTop: '10px' }}
             hasIcon={false}

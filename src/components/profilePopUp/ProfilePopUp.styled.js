@@ -105,3 +105,9 @@ export const AvatarBg = styled.div(
     },
   })
 );
+
+export const TextChangePassword = styled.p`
+  text-align: center;
+  color: ${props => `${props.theme.palette.text.primary}B2`};
+  cursor: pointer;
+`;
