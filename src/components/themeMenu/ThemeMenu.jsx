@@ -52,7 +52,7 @@ const ThemeMenu = () => {
 
   const handleThemeChange = async theme => {
     setIsOpen(false);
-
+    // localStorage.setItem('theme', newTheme);
     try {
       await dispatch(authOperations.updateUserTheme(theme));
       closeDropdown();

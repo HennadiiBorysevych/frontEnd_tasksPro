@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { useAuth } from 'hooks';
 import { authSchema } from 'validationSchemas';
 
-import { Input, PrimaryButton } from 'components';
+import { GoogleAuth, Input, PrimaryButton } from 'components';
 
 const initialValues = {
   name: '',
@@ -90,53 +90,56 @@ const AuthForm = ({ value, chgForm }) => {
   });
 
   return (
-    <form style={formStyle} onSubmit={handleSubmit}>
-      {value === 0 && (
+    <>
+      <form style={formStyle} onSubmit={handleSubmit}>
+        {value === 0 && (
+          <Input
+            name="name"
+            type="name"
+            placeholder="Enter your name"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.name}
+          />
+        )}
+        {value === 0 && errors.name && touched.name ? (
+          <span style={{ color: 'white' }}>{errors.name}</span>
+        ) : null}
+
         <Input
-          name="name"
-          type="name"
-          placeholder="Enter your name"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.name}
+          value={values.email}
         />
-      )}
-      {value === 0 && errors.name && touched.name ? (
-        <span style={{ color: 'white' }}>{errors.name}</span>
-      ) : null}
+        {errors.email && touched.email ? (
+          <span style={{ color: 'white' }}>{errors.email}</span>
+        ) : null}
 
-      <Input
-        name="email"
-        type="email"
-        placeholder="Enter your email"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={values.email}
-      />
-      {errors.email && touched.email ? (
-        <span style={{ color: 'white' }}>{errors.email}</span>
-      ) : null}
+        <Input
+          name="password"
+          type="password"
+          placeholder={formDistributor.passText}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.password}
+        />
+        {errors.password && touched.password ? (
+          <span style={{ color: 'white' }}>{errors.password}</span>
+        ) : null}
 
-      <Input
-        name="password"
-        type="password"
-        placeholder={formDistributor.passText}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={values.password}
-      />
-      {errors.password && touched.password ? (
-        <span style={{ color: 'white' }}>{errors.password}</span>
-      ) : null}
-
-      <PrimaryButton
-        style={{ marginTop: '14px' }}
-        hasIcon={false}
-        type="submit"
-      >
-        {formDistributor.buttText}
-      </PrimaryButton>
-    </form>
+        <PrimaryButton
+          style={{ marginTop: '14px' }}
+          hasIcon={false}
+          type="submit"
+        >
+          {formDistributor.buttText}
+        </PrimaryButton>
+      </form>
+      <GoogleAuth />
+    </>
   );
 };
 

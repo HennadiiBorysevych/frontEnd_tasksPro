@@ -40,7 +40,7 @@ export const Tabs = styled.div`
 export const Header = styled.header`
   display: flex;
   width: 100%;
-  background-color: #161616;
+  background-color: ${({ baseColor }) => baseColor};
   height: 60px;
   justify-content: space-between;
   align-items: start;
@@ -48,7 +48,7 @@ export const Header = styled.header`
 `;
 
 export const SideBar = styled.aside`
-  background-color: #161616;
+  background-color: ${({ baseColor }) => baseColor};
   height: 100vh;
   width: 260px;
   position: absolute;
@@ -90,8 +90,8 @@ export const UserName = styled.div`
 `;
 
 export const BoardBody = styled.div`
-  padding-top: 14px;
-  background-color: #1f1f1f;
+  min-height: 79vh;
+  background-color: ${({ baseColor }) => baseColor};
 `;
 
 export const ProjectName = styled.div`

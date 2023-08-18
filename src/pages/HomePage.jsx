@@ -11,6 +11,7 @@ import {
 import SharedLayout from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal } from 'components';
+import SkeletonLoader from 'components/skeleton/SkeletonLoader';
 
 import {
   BoardWrap,
@@ -73,15 +74,19 @@ const HomePage = () => {
           <Outlet />
         ) : (
           <DefaultWrapper defaultBoard={!allBoards}>
-            <WelcomeText>
-              Before starting your project, it is essential to{' '}
-              <CreateBoardLink onClick={toggleModal}>
-                create a board
-              </CreateBoardLink>{' '}
-              to visualize and track all the necessary tasks and milestones.
-              This board serves as a powerful tool to organize the workflow and
-              ensure effective collaboration among team members.
-            </WelcomeText>
+            {allBoards.length !== 0 ? (
+              <SkeletonLoader page="/board" />
+            ) : (
+              <WelcomeText>
+                Before starting your project, it is essential to{' '}
+                <CreateBoardLink onClick={toggleModal}>
+                  create a board
+                </CreateBoardLink>{' '}
+                to visualize and track all the necessary tasks and milestones.
+                This board serves as a powerful tool to organize the workflow
+                and ensure effective collaboration among team members.
+              </WelcomeText>
+            )}
           </DefaultWrapper>
         )}
         {isModal && (
