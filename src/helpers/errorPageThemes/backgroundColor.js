@@ -2,19 +2,19 @@ export function checkBgColor(bgColor) {
   let color = '#161616';
 
   switch (bgColor) {
-    case 'Dark':
-      color = '#1F1F1F';
+    case '#1F1F1F':
+      color = bgColor;
       break;
-    case 'Light':
-      color = '#FDFDFD';
+    case '#F6F6F7':
+      color = bgColor;
       break;
-    case 'Violet':
-      color = '#D6D8FF';
+    case '#ECEDFD':
+      color = bgColor;
       break;
-    case 'Void':
-      color = 'none';
-      break;
+
     default:
+      color = 'none';
+
       break;
   }
   return color;

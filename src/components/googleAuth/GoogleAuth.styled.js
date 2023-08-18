@@ -17,5 +17,5 @@ export const GoogleLink = styled.a`
   ${media.MEDIUM`
   width: 344px;
     margin-left: auto;
-    margin-right: auto;`}
+    margin-right: auto;`};
 `;

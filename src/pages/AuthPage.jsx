@@ -41,10 +41,17 @@ const AuthPage = e => {
     <Background>
       <Container windowHeight={windowHeight}>
         <AuthContainer>
-          <StyledTabs value={value} onChange={handleChange}>
-            <StyledTab label="Registration" />
-            <StyledTab label="Log In" />
-          </StyledTabs>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <StyledTabs value={value} onChange={handleChange}>
+              <StyledTab label="Registration" />
+              <StyledTab label="Log In" />
+            </StyledTabs>
+            <div
+              style={{ color: 'white', width: '135px', paddingBottom: '40px' }}
+            >
+              Forgot your password?
+            </div>
+          </div>
           <AuthForm value={value} chgForm={resetForm} />
         </AuthContainer>
       </Container>
