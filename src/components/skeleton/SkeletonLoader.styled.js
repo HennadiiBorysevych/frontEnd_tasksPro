@@ -90,8 +90,7 @@ export const UserName = styled.div`
 `;
 
 export const BoardBody = styled.div`
-min-height: 100vh;
-  padding-top: 14px;
+  min-height: 79vh;
   background-color: ${({ baseColor }) => baseColor};
 `;
 
