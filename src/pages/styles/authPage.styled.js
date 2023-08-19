@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import { media } from 'helpers';
 
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const StyledTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -43,6 +44,8 @@ export const StyledTab = styled(props => <Tab disableRipple {...props} />)(
 );
 
 export const AuthContainer = styled.div`
+  position: relative;
+
   width: 100%;
   padding: 24px;
 
@@ -53,6 +56,15 @@ export const AuthContainer = styled.div`
   padding: 40px;
   width: 424px;
   `}
+`;
+
+export const Password = styled(NavLink)`
+  position: absolute;
+  top: 30px;
+  right: 60px;
+
+  color: white;
+  width: min-content;
 `;
 
 export const TabsContainer = styled.div`
