@@ -18,7 +18,6 @@ import {
   AvatarInput,
   AvatarWrap,
   Container,
-  // TextChangePassword,
 } from './ProfilePopUp.styled.js';
 
 const initialValues = {
@@ -34,9 +33,10 @@ const formStyle = {
 };
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
+  const [isRequiredInputFocused, setIsRequiredInputFocused] = useState(false);
+
   const { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar } =
     useEditProfile(user);
-  const [isRequiredInputFocused, setIsRequiredInputFocused] = useState(false);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
@@ -90,10 +90,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             type="email"
             placeholder={user?.email}
             onChange={handleChange}
-            onBlur={e => {
-              setIsRequiredInputFocused(false);
-              handleBlur(e);
-            }}
+            onBlur={e => handleBlur(e)}
             onFocus={() => setIsRequiredInputFocused(true)}
             value={values.email}
           />
@@ -106,10 +103,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             type="password"
             placeholder="Enter new password"
             onChange={handleChange}
-            onBlur={e => {
-              setIsRequiredInputFocused(false);
-              handleBlur(e);
-            }}
+            onBlur={e => handleBlur(e)}
             onFocus={() => setIsRequiredInputFocused(true)}
             value={values.password}
           />
