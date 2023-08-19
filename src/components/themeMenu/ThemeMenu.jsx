@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { authOperations } from 'redux/auth';
-import { selectTheme } from 'redux/auth/authSelectors';
+import { useAuth } from 'hooks';
 
 import { SvgIcon } from 'components';
 
@@ -15,10 +13,9 @@ import {
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const themes = ['Dark', 'Light', 'Violet'];
+  const { theme, changeTheme } = useAuth();
 
-  const dispatch = useDispatch();
-  const selectedTheme = useSelector(selectTheme);
+  const themes = ['Dark', 'Light', 'Violet'];
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -50,11 +47,11 @@ const ThemeMenu = () => {
     };
   }, [isOpen]);
 
-  const handleThemeChange = async theme => {
+  const handleThemeChange = async newTheme => {
     setIsOpen(false);
-    // localStorage.setItem('theme', newTheme);
+    localStorage.setItem('theme', newTheme);
     try {
-      await dispatch(authOperations.updateUserTheme(theme));
+      await changeTheme(newTheme);
       closeDropdown();
     } catch (error) {
       console.error('Error updating theme:', error);
@@ -74,13 +71,13 @@ const ThemeMenu = () => {
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>
-          {themes.map(theme => (
+          {themes.map(newTheme => (
             <DropdownItem
-              key={theme}
-              onClick={() => handleThemeChange(theme)}
-              className={selectedTheme === theme ? 'selected' : ''}
+              key={newTheme}
+              onClick={() => handleThemeChange(newTheme)}
+              className={newTheme === theme ? 'selected' : ''}
             >
-              {theme}
+              {newTheme}
             </DropdownItem>
           ))}
         </DropdownMenu>

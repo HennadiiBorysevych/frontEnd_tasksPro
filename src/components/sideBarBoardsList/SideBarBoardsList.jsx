@@ -1,10 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { clearEncodedTitleInUrl, encodedTitleInUrl } from 'helpers';
 import { useBoardContext, useBoards } from 'hooks';
-import { useDispatch, useSelector } from 'react-redux';
+import { setUserFilter } from 'redux/userFilterSlice';
 
 import { CustomScrollbar, SideBarItem } from 'components';
-import { setUserFilter } from 'redux/userFilterSlice';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
