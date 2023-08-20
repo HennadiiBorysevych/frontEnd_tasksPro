@@ -41,6 +41,15 @@ const darkTheme = createTheme({
       iconLogOut: '#9DC888',
     },
   },
+  calendar: {
+    senseColor: '#bedbb0',
+    color: '#FFF',
+    backColor: '#1f1f1f',
+    activeColor: '#1F1F1F',
+    weekColor: '#ffffff80',
+    disColor: '#ffffff80',
+    hovColor: '#ffffff33',
+  },
 });
 
 const lightTheme = createTheme({
@@ -84,6 +93,15 @@ const lightTheme = createTheme({
       iconLogOut: '#9DC888',
     },
   },
+  calendar: {
+    senseColor: '#bedbb0',
+    color: '#161616',
+    backColor: '#FFF',
+    activeColor: '#161616',
+    weekColor: '#16161680',
+    disColor: '#16161680',
+    hovColor: '#16161633',
+  },
 });
 
 const violetTheme = createTheme({
@@ -126,6 +144,15 @@ const violetTheme = createTheme({
       primaryButton: '#7B7EDE',
       iconLogOut: '#B8BCFD',
     },
+  },
+  calendar: {
+    senseColor: '#5255BC',
+    color: '#161616',
+    backColor: '#FFF',
+    activeColor: '#FCFCFC',
+    weekColor: '#16161680',
+    disColor: '#16161680',
+    hovColor: '#16161633',
   },
 });
 
