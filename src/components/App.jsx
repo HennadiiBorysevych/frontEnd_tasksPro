@@ -12,6 +12,7 @@ import SkeletonLoader from './skeleton/SkeletonLoader';
 import Layout from './Layout';
 
 import 'react-toastify/dist/ReactToastify.css';
+import PasswordPage from 'pages/PasswordPage';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
@@ -60,6 +61,8 @@ const App = () => {
                 path="auth/:id"
                 element={<PublicPage component={<AuthPage />} />}
               />
+
+              <Route path="auth/forgot_password" element={<PasswordPage />} />
 
               <Route
                 path="home"
