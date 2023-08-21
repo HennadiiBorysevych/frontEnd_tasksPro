@@ -12,7 +12,6 @@ export const Background = styled.section`
 `;
 
 export const Container = styled.div`
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -16,3 +16,9 @@ export const PasswordContainer = styled.div`
   width: 424px;
   `}
 `;
+
+export const Title = styled.h4(props => ({
+  margin: ' 0 0 24px 0',
+  fontSize: '18px',
+  color: props.theme.palette.text.primary,
+}));
