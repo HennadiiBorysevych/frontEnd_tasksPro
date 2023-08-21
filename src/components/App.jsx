@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useAuth } from 'hooks';
 import { BoardProvider } from 'hooks';
+import PasswordPage from 'pages/PasswordPage';
 import PrivatePage from 'routes/PrivatePage';
 import PublicPage from 'routes/PublicPage';
 
@@ -12,7 +13,6 @@ import SkeletonLoader from './skeleton/SkeletonLoader';
 import Layout from './Layout';
 
 import 'react-toastify/dist/ReactToastify.css';
-import PasswordPage from 'pages/PasswordPage';
 
 const Welcome = lazy(() => import('../pages/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage'));
