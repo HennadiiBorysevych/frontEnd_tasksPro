@@ -8,7 +8,7 @@ const HeaderBox = styled.div`
   color: ${props => props.theme.palette.text.primary};
   background-color: ${props => props.theme.palette.background.header};
 
-  ${media.PREMEDIUM`
+  ${media.maxPREMEDIUM`
   padding: 14px 20px;`}
 
   ${media.MEDIUM`

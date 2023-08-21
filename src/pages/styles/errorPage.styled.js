@@ -91,7 +91,7 @@ export const Start = styled.p`
   font-size: 15px;
   line-height: 30px;
 
-  ${media.PREMEDIUM`
+  ${media.maxPREMEDIUM`
   margin-bottom: 14px;
   `}
 

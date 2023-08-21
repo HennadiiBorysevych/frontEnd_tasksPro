@@ -8,7 +8,7 @@ const media = Object.keys(breakpoints).reduce((acc, label) => {
     }
   `;
 
-  acc[`${label}`] = (first, ...interpolations) => css`
+  acc[`max${label}`] = (first, ...interpolations) => css`
     @media (max-width: ${breakpoints[label]}) {
       ${css(first, ...interpolations)};
     }

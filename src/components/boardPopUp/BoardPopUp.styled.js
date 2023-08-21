@@ -3,7 +3,7 @@ import { media } from 'helpers';
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  ${media.PRESMALL`
+  ${media.maxPRESMALL`
   max-width: 335px;
     `}
 

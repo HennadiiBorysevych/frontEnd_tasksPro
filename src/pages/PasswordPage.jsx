@@ -8,6 +8,7 @@ import {
 } from 'validationSchemas/passwordSchema';
 
 import { Input, PrimaryButton } from 'components';
+
 import { Background, Container } from './styles/commonStyles';
 import { PasswordContainer } from './styles/passwordPage';
 

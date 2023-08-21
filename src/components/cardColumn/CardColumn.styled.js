@@ -9,7 +9,7 @@ export const Column = styled.li`
   filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
   transition: filter 0.4s ease-in-out;
 
-  ${media.PRESMALL`
+  ${media.maxPRESMALL`
   width: calc(100vw - 40px);`}
 
   ${media.SMALL`

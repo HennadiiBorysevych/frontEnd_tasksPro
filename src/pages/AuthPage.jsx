@@ -7,9 +7,9 @@ import { Background, Container } from './styles/commonStyles';
 
 import {
   AuthContainer,
+  Password,
   StyledTab,
   StyledTabs,
-  Password,
 } from './styles/authPage.styled';
 
 const AuthPage = e => {
