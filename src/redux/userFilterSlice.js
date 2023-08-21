@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const userFilterSlice = createSlice({
   name: 'userFilter',
   initialState: {
-    value: 'without',
+    value: 'showAll',
   },
   reducers: {
     setUserFilter: (state, action) => {

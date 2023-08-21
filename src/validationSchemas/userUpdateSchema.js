@@ -9,14 +9,18 @@ const userUpdateSchema = Yup.object().shape({
     )
     .trim(),
   newPassword: Yup.string().min(8, 'Too Short!').max(64, 'Too Long!').trim(),
-  // password: Yup.string().when(['email', 'password'], {
-  //   is: (email, password) => email !== '' || password !== '',
+  // password: Yup.string().when('email', {
+  //   is: email => email !== '',
   //   then: Yup.string()
   //     .required('Please enter your current password to confirm changes')
-  //     .min(8, 'Too Short!')
-  //     .max(64, 'Too Long!')
   //     .trim(),
-  //   otherwise: Yup.string().trim(),
+  //   otherwise: Yup.string().when('newPassword', {
+  //     is: newPassword => newPassword !== '',
+  //     then: Yup.string()
+  //       .required('Please enter your current password to confirm changes')
+  //       .trim(),
+  //     otherwise: Yup.string().trim(),
+  //   }),
   // }),
 });
 

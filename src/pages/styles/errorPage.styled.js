@@ -8,7 +8,6 @@ import {
 } from 'helpers/errorPageThemes';
 
 import styled from '@emotion/styled';
-import { useAuth } from 'hooks';
 
 export const ErrorBackground = styled.section`
   background-color: ${props => `${props.theme.palette.background.bord}`};

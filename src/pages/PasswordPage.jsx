@@ -8,13 +8,20 @@ import {
 } from 'validationSchemas/passwordSchema';
 
 import { Input, PrimaryButton } from 'components';
+
 import { Background, Container } from './styles/commonStyles';
-import { PasswordContainer } from './styles/passwordPage';
+import { PasswordContainer, Title } from './styles/passwordPage';
 
 const initialValues = {
   email: '',
   password: '',
   verifyPassword: '',
+};
+
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '14px',
 };
 
 const PasswordPage = () => {
@@ -71,7 +78,10 @@ const PasswordPage = () => {
     <Background>
       <Container>
         <PasswordContainer>
-          <form onSubmit={handleSubmit}>
+          <form style={formStyle} onSubmit={handleSubmit}>
+            <Title>
+              {!passwordToken ? 'Password recovery' : 'Change your password'}
+            </Title>
             {!passwordToken ? (
               <Input
                 name="email"
@@ -83,14 +93,14 @@ const PasswordPage = () => {
               />
             ) : null}
             {!passwordToken && errors.email && touched.email ? (
-              <span>{errors.email}</span>
+              <span style={{ color: 'white' }}>{errors.email}</span>
             ) : null}
 
             {passwordToken ? (
               <Input
                 name="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Enter your new password"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
@@ -121,7 +131,7 @@ const PasswordPage = () => {
               hasIcon={false}
               type="submit"
             >
-              Send email
+              {!passwordToken ? 'Send email' : 'Change your password'}
             </PrimaryButton>
           </form>
         </PasswordContainer>

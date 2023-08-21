@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 export const Container = styled.div`
-  @media screen and (max-width: var(--preSmall)) {
+  @media screen and (max-width: var(--maxPRESMALL)) {
     max-width: 374px;
     width: 100%;
   }

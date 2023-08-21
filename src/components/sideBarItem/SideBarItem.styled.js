@@ -33,6 +33,7 @@ export const BoardName = styled.h2(props => ({
   fontWeight: 500,
   lineHeight: 1.25,
   letterSpacing: '-0.28px',
+  textAlign: 'left',
   color: props.isActive
     ? props.theme.palette.text.sidemenu
     : props.theme.palette.text.sidemenu + '80',

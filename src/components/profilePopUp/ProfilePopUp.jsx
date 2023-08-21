@@ -23,8 +23,8 @@ import {
 const initialValues = {
   name: '',
   email: '',
-  password: '',
   newPassword: '',
+  password: '',
 };
 const formStyle = {
   display: 'flex',
@@ -33,8 +33,9 @@ const formStyle = {
 };
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
-  const [isRequiredInputFocused, setIsRequiredInputFocused] = useState(false);
-
+  const [isNewPasswordInputFocused, setIsNewPasswordInputFocused] =
+    useState(false);
+  const [isEmailInputFocused, setIsEmailInputFocused] = useState(false);
   const { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar } =
     useEditProfile(user);
 
@@ -53,25 +54,25 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
   return (
     <Container>
       <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
-        <AvatarWrap>
-          <AvatarInput
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/png, image/jpeg"
-            background={userAvatar}
-            onChange={handleUserAvatar}
-          />
-          {userAvatar ? (
-            <UserAvatar avatar={userAvatar} />
-          ) : (
-            <AvatarBg size="68" />
-          )}
-          <AddButtonWrap>
-            <SvgIcon svgName="icon-plus" variant="header" />
-          </AddButtonWrap>
-        </AvatarWrap>
         <form style={formStyle} onSubmit={handleModalSubmit}>
+          <AvatarWrap>
+            <AvatarInput
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+              background={userAvatar}
+              onChange={handleUserAvatar}
+            />
+            {userAvatar ? (
+              <UserAvatar avatar={userAvatar} />
+            ) : (
+              <AvatarBg size="68" />
+            )}
+            <AddButtonWrap>
+              <SvgIcon svgName="icon-plus" variant="header" />
+            </AddButtonWrap>
+          </AvatarWrap>
           <Input
             name="name"
             type="name"
@@ -82,7 +83,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
           />
 
           {errors.name && touched.name ? (
-            <span style={{ color: 'white' }}>{errors.name}</span>
+            <span style={{ color: 'black' }}>{errors.name}</span>
           ) : null}
 
           <Input
@@ -91,11 +92,14 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             placeholder={user?.email}
             onChange={handleChange}
             onBlur={e => handleBlur(e)}
-            onFocus={() => setIsRequiredInputFocused(true)}
+            onFocus={() => {
+              setIsEmailInputFocused(true);
+              setIsNewPasswordInputFocused(false);
+            }}
             value={values.email}
           />
           {errors.email && touched.email ? (
-            <span style={{ color: 'white' }}>{errors.email}</span>
+            <span style={{ color: 'black' }}>{errors.email}</span>
           ) : null}
 
           <Input
@@ -104,14 +108,20 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             placeholder="Enter new password"
             onChange={handleChange}
             onBlur={e => handleBlur(e)}
-            onFocus={() => setIsRequiredInputFocused(true)}
-            value={values.password}
+            onFocus={() => {
+              setIsEmailInputFocused(false);
+              setIsNewPasswordInputFocused(true);
+            }}
+            value={values.newPassword}
           />
           {errors.newPassword && touched.newPassword ? (
-            <span style={{ color: 'white' }}>{errors.newPassword}</span>
+            <span style={{ color: 'black' }}>{errors.newPassword}</span>
           ) : null}
 
-          {isRequiredInputFocused && (
+          {(isNewPasswordInputFocused ||
+            isEmailInputFocused ||
+            values.email ||
+            values.newPassword) && (
             <>
               <Input
                 name="password"
@@ -119,10 +129,10 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
                 placeholder="Enter your current password for confirmation"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.confirmPassword}
+                value={values.password}
               />
               {errors.password && touched.password ? (
-                <span style={{ color: 'white' }}>{errors.password}</span>
+                <span style={{ color: 'black' }}>{errors.password}</span>
               ) : null}
             </>
           )}
@@ -133,7 +143,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
               !values.name &&
               !values.email &&
               !values.password &&
-              !values.confirmPassword
+              !values.newPassword
             }
             style={{ marginTop: '10px' }}
             hasIcon={false}
