@@ -5,7 +5,12 @@ import { AuthForm } from 'components';
 
 import { Background, Container } from './styles/commonStyles';
 
-import { AuthContainer, StyledTab, StyledTabs } from './styles/authPage.styled';
+import {
+  AuthContainer,
+  StyledTab,
+  StyledTabs,
+  Password,
+} from './styles/authPage.styled';
 
 const AuthPage = e => {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -41,17 +46,15 @@ const AuthPage = e => {
     <Background>
       <Container windowHeight={windowHeight}>
         <AuthContainer>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <StyledTabs value={value} onChange={handleChange}>
-              <StyledTab label="Registration" />
-              <StyledTab label="Log In" />
-            </StyledTabs>
-            <div
-              style={{ color: 'white', width: '135px', paddingBottom: '40px' }}
-            >
-              Forgot your password?
-            </div>
-          </div>
+          <StyledTabs value={value} onChange={handleChange}>
+            <StyledTab label="Registration" />
+            <StyledTab label="Log In" />
+          </StyledTabs>
+          {value === 1 && (
+            <Password to="/auth/forgot_password" style={{ color: 'white' }}>
+              Forgot password?
+            </Password>
+          )}
           <AuthForm value={value} chgForm={resetForm} />
         </AuthContainer>
       </Container>
