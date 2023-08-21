@@ -124,6 +124,36 @@ const updateUserHelp = createAsyncThunk(
   }
 );
 
+const recoverPassword = createAsyncThunk(
+  'auth/recoverPassword',
+  async (email, thunkAPI) => {
+    try {
+      const { data } = await axios.patch('api/users/forgotpasswordsend', email);
+
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+const recInPassword = createAsyncThunk(
+  'auth/recInPassword',
+  async (newPassword, thunkAPI) => {
+    try {
+      const { data } = await axios.patch(
+        '/api/users/forgotpassword',
+        newPassword
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const authOperations = {
   register,
   logIn,
@@ -133,5 +163,7 @@ const authOperations = {
   updateUserInfo,
   updateUserTheme,
   updateUserHelp,
+  recoverPassword,
+  recInPassword,
 };
 export default authOperations;
