@@ -70,6 +70,8 @@ const authSlice = createSlice({
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.message;
       })
+      .addCase(authOperations.recoverPassword.fulfilled)
+      .addCase(authOperations.recInPassword.fulfilled)
       .addMatcher(isAnyOf(...getActions('pending')), handlePending)
       .addMatcher(isAnyOf(...getActions('fulfilled')), handleFulfilled)
       .addMatcher(isAnyOf(...getActions('rejected')), handleRejected);
@@ -85,6 +87,8 @@ const extraActions = [
   authOperations.updateUserInfo,
   authOperations.updateUserTheme,
   authOperations.updateUserHelp,
+  authOperations.recoverPassword,
+  authOperations.recInPassword,
 ];
 
 export default authSlice.reducer;
