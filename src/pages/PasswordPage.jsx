@@ -100,7 +100,7 @@ const PasswordPage = () => {
               <Input
                 name="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Enter your new password"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
