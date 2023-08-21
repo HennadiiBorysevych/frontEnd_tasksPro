@@ -1,10 +1,10 @@
 import { media } from 'helpers';
 import {
-  checkBgColor,
+  // checkBgColor,
   checkBgImg,
-  checkBtnBgColor,
-  checkBtnTxtColor,
-  checkTxtColor,
+  // checkBtnBgColor,
+  // checkBtnTxtColor,
+  // checkTxtColor,
 } from 'helpers/errorPageThemes';
 
 import styled from '@emotion/styled';

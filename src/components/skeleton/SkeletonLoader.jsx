@@ -102,9 +102,20 @@ const SkeletonLoader = ({ page }) => {
           <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
             <BackgroundHome>
               {screenWidth > 1150 && (
-                <SideBar
-                  baseColor={theme === 'Violet' ? '#5255BC' : baseColor}
-                ></SideBar>
+                <SideBar baseColor={theme === 'Violet' ? '#5255BC' : baseColor}>
+                  <Skeleton
+                    width="12.5rem"
+                    height="25rem"
+                    style={{ marginBottom: 80, marginTop: 100 }}
+                  />
+
+                  <Skeleton
+                    width="12.5rem"
+                    height="25rem"
+                    style={{ marginBottom: 30 }}
+                  />
+                  <Skeleton width="15.5rem" height={50} />
+                </SideBar>
               )}
               <Header baseColor={highlightColor}>
                 <Logo>
@@ -160,7 +171,14 @@ const SkeletonLoader = ({ page }) => {
       {page === '/board' && (
         <>
           <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-            <BackgroundHome style={{ position: 'absolute' ,left: 275, top:70 , maxWidth:'77%'}}>
+            <BackgroundHome
+              style={{
+                position: 'absolute',
+                left: 275,
+                top: 70,
+                maxWidth: '77%',
+              }}
+            >
               <BoardBody
                 baseColor={theme === 'Violet' ? '#ECEDFD' : highlightColor}
               >

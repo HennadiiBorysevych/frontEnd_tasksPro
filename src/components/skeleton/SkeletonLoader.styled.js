@@ -51,7 +51,8 @@ export const SideBar = styled.aside`
   background-color: ${({ baseColor }) => baseColor};
   height: 100vh;
   width: 260px;
-  position: absolute;
+  position: fixed;
+  z-index: 10;
 `;
 
 export const Logo = styled.div`
@@ -90,7 +91,9 @@ export const UserName = styled.div`
 `;
 
 export const BoardBody = styled.div`
-  min-height: 79vh;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   background-color: ${({ baseColor }) => baseColor};
 `;
 

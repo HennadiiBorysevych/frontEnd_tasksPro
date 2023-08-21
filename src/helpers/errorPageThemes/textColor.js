@@ -8,9 +8,6 @@ export function checkTxtColor(txtColor) {
     case '#161616':
       color = txtColor;
       break;
-    case '#161616':
-      color = txtColor;
-      break;
     default:
       break;
   }
