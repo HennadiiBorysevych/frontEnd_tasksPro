@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { boardOperations, boardSelectors } from 'redux/boards';
 
 const useBoards = () => {
-  const boardLoading = useSelector(boardSelectors.selectLoading);
-  const allBoards = useSelector(boardSelectors.selectAllBoards);
-  const boardIndex = useSelector(boardSelectors.selectBoardIndex);
-  const oneBoard = useSelector(boardSelectors.selectOneBoard);
   const activeBoard = useSelector(boardSelectors.selectActiveBoard);
   const activeBoardId = useSelector(boardSelectors.selectActiveBoardId);
+  const allBoards = useSelector(boardSelectors.selectAllBoards);
+  const boardIndex = useSelector(boardSelectors.selectBoardIndex);
+  const boardLoading = useSelector(boardSelectors.selectLoading);
+  const oneBoard = useSelector(boardSelectors.selectOneBoard);
 
   const dispatch = useDispatch();
 

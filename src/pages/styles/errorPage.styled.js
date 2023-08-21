@@ -8,7 +8,6 @@ import {
 } from 'helpers/errorPageThemes';
 
 import styled from '@emotion/styled';
-import { useAuth } from 'hooks';
 
 export const ErrorBackground = styled.section`
   background-color: ${props => `${props.theme.palette.background.bord}`};
@@ -92,7 +91,7 @@ export const Start = styled.p`
   font-size: 15px;
   line-height: 30px;
 
-  ${media.maxPREMEDIUM`
+  ${media.PREMEDIUM`
   margin-bottom: 14px;
   `}
 

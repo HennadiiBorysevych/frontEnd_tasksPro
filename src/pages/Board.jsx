@@ -38,6 +38,7 @@ const Board = () => {
       dispatch(process(arg));
     }
   };
+
   return (
     <>
       <BoardHead />

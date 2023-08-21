@@ -11,6 +11,7 @@ import { BoardList } from './sideBarBoardsList.styled';
 const SideBarBoardsList = ({ windowHeight }) => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const { allBoards, getAllBoards, getOneBoard, removeBoard } = useBoards();
+
   const dispatch = useDispatch();
 
   const handleActiveBoard = async boardId => {
@@ -21,6 +22,7 @@ const SideBarBoardsList = ({ windowHeight }) => {
       const activatedBoard = await allBoards.find(
         board => board.id === boardId
       );
+
       const { title } = activatedBoard;
 
       if (title) {
@@ -40,17 +42,17 @@ const SideBarBoardsList = ({ windowHeight }) => {
       localStorage.removeItem(id);
       removeBoard(id);
 
-      if (allBoards.length === 0) {
+      const firstBoard = allBoards[0];
+
+      if (!firstBoard) {
         clearEncodedTitleInUrl();
+        return;
       } else {
         getAllBoards();
+        setActiveBoard(firstBoard?.id);
 
-        const firstBoard = allBoards[0];
-        if (firstBoard) {
-          setActiveBoard(firstBoard.id);
-          const { title } = firstBoard;
-          encodedTitleInUrl(title);
-        }
+        const { title } = firstBoard;
+        encodedTitleInUrl(title);
       }
     } catch (error) {
       console.error(error.message);

@@ -1,3 +1,4 @@
+import TextField from '@mui/material/TextField';
 import { media } from 'helpers';
 
 import Typography from 'components/typography/Typography';
@@ -7,6 +8,7 @@ import styled from '@emotion/styled';
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  gap: 40px;
   justify-content: ${({ boardName }) =>
     boardName ? 'space-between' : 'flex-end'};
 
@@ -23,4 +25,8 @@ export const Header = styled.div`
 
 export const BoardTitle = styled(Typography)`
   text-shadow: #ffffff 1px 0 1px;
+`;
+
+export const BoardTitleInput = styled(TextField)`
+  width: fit-content;
 `;

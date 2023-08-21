@@ -20,7 +20,7 @@ const BoardPopUp = ({ board, onClose }) => {
     setBackground,
     handleTitle,
     titleChecker,
-    handleBoradSubmit,
+    handleBoardSubmit,
   } = useBoard(board, onClose);
 
   return (
@@ -47,7 +47,7 @@ const BoardPopUp = ({ board, onClose }) => {
           setChosenBackground={setBackground}
         />
         <PrimaryButton
-          onClick={handleBoradSubmit}
+          onClick={handleBoardSubmit}
           hasIcon={false}
           variant="primary"
         >

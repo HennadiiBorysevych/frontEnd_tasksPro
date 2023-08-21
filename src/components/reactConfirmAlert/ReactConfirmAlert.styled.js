@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
 
+// #react-confirm-alert .react-confirm-alert-overlay.undefined {
+//   background-color: rgba(21, 21, 21, 0.5) !important;
+// }
+
 export const Overlay = styled.div`
-  /* background-color: rgba(21, 21, 21, 0.5); */
+  /* background-color: rgba(21, 21, 21, 0.5) !important; */
 `;
 
 export const AlertContainer = styled.div`
@@ -24,15 +28,29 @@ export const ConfirmDialog = styled.div`
 
 export const CancelButton = styled.button`
   background-color: green;
+  /* background-color: ${props => `${props.theme.palette}`}; */
   border: 1px solid black;
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: rgb(64, 212, 64);
+    background-color: greenyellow;
+    /* background-color: ${props => `${props.theme.palette}`}; */
   }
 `;
+// export const CancelButton = styled.button(props => ({
+//   backgroundColor: props.theme.palette.background.primaryButton,
+//   border: '1px solid black',
+//   padding: '10px',
+//   borderRadius: '5px',
+//   transition: 'background-color 0.3s ease',
+
+//   '&:hover': {
+//     backgroundColor: props.theme.palette.hover.primaryButton,
+//   },
+// }));
+
 export const ConfirmDeleteButton = styled.button`
   background-color: red;
   border: 1px solid black;

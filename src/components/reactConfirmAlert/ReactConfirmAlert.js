@@ -6,7 +6,6 @@ import { useCards } from 'hooks';
 import { SvgIcon } from 'components';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import './ReactConfirmAlert.styled.css';
 import {
   AlertContainer,
   CancelButton,

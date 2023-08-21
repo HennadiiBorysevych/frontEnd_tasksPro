@@ -29,6 +29,8 @@ const useEditProfile = user => {
       user: Object.keys(formattedValues).length ? formattedValues : null,
     };
 
+    console.log(formattedValues);
+
     const response = await updateProfileData(newUser);
 
     if (response.payload && response.payload.message === 'Update success') {

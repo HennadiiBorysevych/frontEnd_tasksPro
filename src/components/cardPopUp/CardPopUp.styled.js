@@ -6,7 +6,7 @@ export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  ${media.maxPRESMALL`
+  ${media.PRESMALL`
   max-width: 335px;`}
 
   ${media.SMALL`

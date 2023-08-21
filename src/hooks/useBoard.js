@@ -14,14 +14,14 @@ const useBoard = (currentBoard, closeModal) => {
   const { addNewBoard, updateExistingBoard } = useBoards();
 
   const initialBoard = currentBoard ? currentBoard : boardModel;
-
+  console.log(currentBoard?.title);
   const [title, setTitle] = useState(initialBoard?.title);
   const [icon, setIcon] = useState(initialBoard?.icon);
   const [background, setBackground] = useState(initialBoard?.background);
   const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
 
-  const handleBoradSubmit = () => {
+  const handleBoardSubmit = () => {
     if (title === '' && !currentBoard) {
       seTitleChecker(true);
       setTimeout(() => {
@@ -41,8 +41,10 @@ const useBoard = (currentBoard, closeModal) => {
       addNewBoard(rest);
       encodedTitleInUrl(title);
     }
-
-    closeModal();
+    // closeModal();
+    if (typeof closeModal === 'function') {
+      closeModal();
+    }
   };
 
   const handleTitle = useCallback(e => {
@@ -59,13 +61,14 @@ const useBoard = (currentBoard, closeModal) => {
   }, [background, icon, title]);
 
   return {
+    title,
     icon,
     background,
     setIcon,
     setBackground,
     handleTitle,
     titleChecker,
-    handleBoradSubmit,
+    handleBoardSubmit,
   };
 };
 
