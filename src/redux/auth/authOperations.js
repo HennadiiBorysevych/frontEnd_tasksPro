@@ -131,6 +131,7 @@ const recoverPassword = createAsyncThunk(
       const { data } = await axios.patch('api/users/forgotpasswordsend', email);
 
       token.set(data.token);
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

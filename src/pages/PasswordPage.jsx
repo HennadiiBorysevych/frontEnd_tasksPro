@@ -11,6 +11,9 @@ import { Input, PrimaryButton } from 'components';
 
 import { Background, Container } from './styles/commonStyles';
 import { PasswordContainer, Title } from './styles/passwordPage';
+import { useDispatch } from 'react-redux';
+
+import { authOperations } from 'redux/auth';
 
 const initialValues = {
   email: '',
@@ -26,12 +29,12 @@ const formStyle = {
 
 const PasswordPage = () => {
   const [passwordToken, setPasswordToken] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const rng = Math.floor(Math.random() * 11);
     setPasswordToken(rng <= 5 ? false : true);
   }, []);
-  console.log('CHECK PASSWORD TOKEN', passwordToken);
 
   const onHandleSubmit = async (
     { email, password, verifyPassword },
@@ -39,20 +42,18 @@ const PasswordPage = () => {
   ) => {
     try {
       if (email !== '') {
-        console.log(`send email to server`);
-        console.log(`ONE`);
+        console.log(email);
+        dispatch(authOperations.recoverPassword(email));
       }
 
       if (password !== verifyPassword) {
         alert('Password do not match');
-        console.log(`TWO`);
 
         return;
       }
 
       if (password !== '' && verifyPassword !== '') {
-        console.log(`send new password to server`);
-        console.log(`THREE`);
+        await dispatch(authOperations.recInPassword(password));
       }
 
       resetForm();
