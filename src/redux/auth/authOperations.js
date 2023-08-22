@@ -140,11 +140,11 @@ const recoverPassword = createAsyncThunk(
 
 const recInPassword = createAsyncThunk(
   'auth/recInPassword',
-  async (newPassword, thunkAPI) => {
+  async (passwordNew, thunkAPI) => {
     try {
       const { data } = await axios.patch(
         '/api/users/forgotpassword',
-        newPassword
+        passwordNew
       );
 
       return data;
