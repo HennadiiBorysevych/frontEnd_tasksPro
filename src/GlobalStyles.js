@@ -24,15 +24,6 @@ const GlobalStyles = () => {
           --lowPriorityColor: #8fa1d0;
           --mediumPriorityColor: #e09cb5;
           --highPriorityColor: #bedbb0;
-
-          /** breakpoints */
-          --xs: '320px';
-          --preSmall: '375px';
-          --small: '376px';
-          --preMedium: '767px';
-          --medium: '768px';
-          --preLarge: '1439px';
-          --large: '1440px';
         }
 
         #root {
@@ -61,6 +52,7 @@ const GlobalStyles = () => {
   h1,
   h2,
   h3,
+  h4,
   p {
     margin: 0;
   }

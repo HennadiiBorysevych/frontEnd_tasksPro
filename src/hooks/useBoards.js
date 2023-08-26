@@ -1,40 +1,50 @@
 import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  addBoard,
-  deleteBoard,
-  fetchBoards,
-  getBoard,
-  updateBoard,
-} from 'redux/boards/operations';
-import {
-  selectLoading,
-  selectAllBoards,
-  selectOneBoard,
-} from 'redux/boards/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { boardOperations, boardSelectors } from 'redux/boards';
 
 const useBoards = () => {
-  const loading = useSelector(selectLoading);
-  const allBoards = useSelector(selectAllBoards);
-  const oneBoard = useSelector(selectOneBoard);
+  const activeBoard = useSelector(boardSelectors.selectActiveBoard);
+  const activeBoardId = useSelector(boardSelectors.selectActiveBoardId);
+  const allBoards = useSelector(boardSelectors.selectAllBoards);
+  const boardIndex = useSelector(boardSelectors.selectBoardIndex);
+  const boardLoading = useSelector(boardSelectors.selectLoading);
+  const oneBoard = useSelector(boardSelectors.selectOneBoard);
 
   const dispatch = useDispatch();
 
-  const getAllBoards = useCallback(() => dispatch(fetchBoards()), [dispatch]);
+  const getAllBoards = useCallback(
+    () => dispatch(boardOperations.fetchBoards()),
+    [dispatch]
+  );
 
-  const getOneBoard = boardId => dispatch(getBoard(boardId));
+  const getOneBoard = useCallback(
+    boardId => dispatch(boardOperations.getBoard(boardId)),
+    [dispatch]
+  );
 
-  const addNewBoard = name => dispatch(addBoard(name));
+  const addNewBoard = useCallback(
+    name => dispatch(boardOperations.addBoard(name)),
+    [dispatch]
+  );
 
-  const updateExistingBoard = ({ boardId, updatedData }) =>
-    dispatch(updateBoard(boardId, updatedData));
+  const updateExistingBoard = useCallback(
+    (boardId, updatedData) =>
+      dispatch(boardOperations.updateBoard(boardId, updatedData)),
+    [dispatch]
+  );
 
-  const removeBoard = boardId => dispatch(deleteBoard(boardId));
+  const removeBoard = useCallback(
+    boardId => dispatch(boardOperations.deleteBoard(boardId)),
+    [dispatch]
+  );
 
   return {
-    loading,
+    boardLoading,
     allBoards,
+    boardIndex,
     oneBoard,
+    activeBoard,
+    activeBoardId,
     getAllBoards,
     getOneBoard,
     addNewBoard,

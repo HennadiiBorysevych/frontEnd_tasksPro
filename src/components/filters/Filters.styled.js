@@ -1,4 +1,5 @@
 import { hexToRgb } from 'helpers';
+import { media } from 'helpers';
 
 import SvgIcon from 'components/svgIcon/SvgIcon';
 
@@ -28,14 +29,13 @@ export const FilterTitle = styled.p`
 export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+  ${media.maxPRESMALL`
+  max-width: 300px;
+  `}
 
-  @media (max-width: 374px) {
-    max-width: 300px;
-  }
-
-  @media (min-width: 375px) {
-    width: 300px;
-  }
+  ${media.SMALL`
+  width: 300px;`}
 `;
 
 export const Line = styled.div`

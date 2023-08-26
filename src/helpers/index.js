@@ -1,5 +1,12 @@
-export { backgroundImage } from './backgroundImage';
-export { updateOrdersFromArray } from './dnd/updateOrdersFromArray';
-export { updateOrdersFromIndex } from './dnd/updateOrdersFromIndex';
-export { getPriorityStyles } from './getPriorityStyles';
-export { hexToRgb } from './hexToRgb';
+export { default as backgroundImage } from './backgroundImage';
+export { default as clearEncodedTitleInUrl } from './clearEncodedTitleInUrl';
+export {
+  processDndResult,
+  StrictModeDroppable,
+  updateOrdersFromArray,
+  updateOrdersFromIndex,
+} from './dragNDropActions';
+export { default as encodedTitleInUrl } from './encodedTitleInUrl';
+export { default as getPriorityStyles } from './getPriorityStyles';
+export { default as hexToRgb } from './hexToRgb';
+export { default as media } from './media';

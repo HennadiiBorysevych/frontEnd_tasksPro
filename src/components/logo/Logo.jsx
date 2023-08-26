@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import sprite from 'assets/images/sprite.svg';
+import { useAuth } from 'hooks';
 import PropTypes from 'prop-types';
-import { selectTheme } from 'redux/auth/authSelectors';
 
-import { Bord, LogoWrapper, Welcome } from './Logo.styled';
+import { Board, LogoWrapper, Welcome } from './Logo.styled';
 
 const Logo = ({ variant }) => {
   const [svgName, setSvgName] = useState('icon-logo-big');
-  const theme = useSelector(selectTheme);
+  const { theme } = useAuth();
 
   useEffect(() => {
     if (variant === 'bord') {
@@ -38,7 +37,7 @@ const Logo = ({ variant }) => {
       {variant === 'welcome' ? (
         <Welcome>Task Pro</Welcome>
       ) : (
-        <Bord>Task Pro</Bord>
+        <Board>Task Pro</Board>
       )}
     </LogoWrapper>
   );

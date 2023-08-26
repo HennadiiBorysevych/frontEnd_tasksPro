@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const Backdrop = styled.div(
@@ -18,12 +20,18 @@ export const Backdrop = styled.div(
     background: props.background,
   })
 );
-export const ModalBox = styled.div({
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  width: '335px',
 
-  '@media (min-width: 768px)': {
-    width: '350px',
-  },
-});
+export const ModalBox = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 335px;
+
+  ${media.SMALL`
+  width: 335px;
+    `}
+
+  ${media.MEDIUM`
+  width: 350px;
+    `}
+`;

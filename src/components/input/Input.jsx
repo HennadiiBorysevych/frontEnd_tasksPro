@@ -51,7 +51,9 @@ const Input = ({
               <SvgIcon
                 svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
                 size="18"
-                fill="#ffffff"
+                // fill="#ffffff"
+                variant="popUp"
+                isActive={true}
               />
             </PasswordWrapperIcon>
           )}

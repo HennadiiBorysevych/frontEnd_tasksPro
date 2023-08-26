@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { boardsOperations } from 'redux/boards';
+import { encodedTitleInUrl } from 'helpers';
+
+import useBoards from './useBoards';
 
 const boardModel = {
   title: '',
@@ -10,17 +11,17 @@ const boardModel = {
 };
 
 const useBoard = (currentBoard, closeModal) => {
-  const initialBoard = currentBoard ? currentBoard : boardModel;
+  const { addNewBoard, updateExistingBoard } = useBoards();
 
+  const initialBoard = currentBoard ? currentBoard : boardModel;
+  console.log(currentBoard?.title);
   const [title, setTitle] = useState(initialBoard?.title);
   const [icon, setIcon] = useState(initialBoard?.icon);
   const [background, setBackground] = useState(initialBoard?.background);
   const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const handleBoradSubmit = () => {
+  const handleBoardSubmit = () => {
     if (title === '' && !currentBoard) {
       seTitleChecker(true);
       setTimeout(() => {
@@ -31,17 +32,19 @@ const useBoard = (currentBoard, closeModal) => {
     const { id, user, ...rest } = board;
 
     if (currentBoard) {
-      dispatch(
-        boardsOperations.updateBoard({
-          boardId: id,
-          updatedData: rest,
-        })
-      );
+      updateExistingBoard({
+        boardId: id,
+        updatedData: rest,
+      });
+      encodedTitleInUrl(title);
     } else {
-      dispatch(boardsOperations.addBoard(rest));
+      addNewBoard(rest);
+      encodedTitleInUrl(title);
     }
-
-    closeModal();
+    // closeModal();
+    if (typeof closeModal === 'function') {
+      closeModal();
+    }
   };
 
   const handleTitle = useCallback(e => {
@@ -58,13 +61,14 @@ const useBoard = (currentBoard, closeModal) => {
   }, [background, icon, title]);
 
   return {
+    title,
     icon,
     background,
     setIcon,
     setBackground,
     handleTitle,
     titleChecker,
-    handleBoradSubmit,
+    handleBoardSubmit,
   };
 };
 

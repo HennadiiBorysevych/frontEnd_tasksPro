@@ -21,6 +21,7 @@ import {
 
 const SkeletonLoader = ({ page }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const theme = localStorage.getItem('theme');
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
@@ -32,6 +33,7 @@ const SkeletonLoader = ({ page }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   const generateSkeletonList = count => {
     return new Array(count)
       .fill(null)
@@ -45,6 +47,11 @@ const SkeletonLoader = ({ page }) => {
   };
 
   const skeletonColumns = screenWidth > 1150 ? 3 : screenWidth > 776 ? 2 : 1;
+
+  const baseColor =
+    theme === 'Dark' ? '#161616' : theme === 'Violet' ? '#5255BC' : '#eeeeee';
+  const highlightColor =
+    theme === 'Dark' ? '#1f1f1f' : theme === 'Violet' ? '#ECEDFD' : '#FCFCFC';
 
   return (
     <>
@@ -92,10 +99,25 @@ const SkeletonLoader = ({ page }) => {
       )}
       {page.includes('/home/') && (
         <>
-          <SkeletonTheme baseColor="#161616" highlightColor="#1f1f1f">
+          <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
             <BackgroundHome>
-              {screenWidth > 1150 && <SideBar></SideBar>}
-              <Header>
+              {screenWidth > 1150 && (
+                <SideBar baseColor={theme === 'Violet' ? '#5255BC' : baseColor}>
+                  <Skeleton
+                    width="12.5rem"
+                    height="25rem"
+                    style={{ marginBottom: 80, marginTop: 100 }}
+                  />
+
+                  <Skeleton
+                    width="12.5rem"
+                    height="25rem"
+                    style={{ marginBottom: 30 }}
+                  />
+                  <Skeleton width="15.5rem" height={50} />
+                </SideBar>
+              )}
+              <Header baseColor={highlightColor}>
                 <Logo>
                   <Skeleton />
                 </Logo>
@@ -111,7 +133,9 @@ const SkeletonLoader = ({ page }) => {
                   </UserPic>
                 </div>
               </Header>
-              <BoardBody>
+              <BoardBody
+                baseColor={theme === 'Violet' ? '#ECEDFD' : highlightColor}
+              >
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
@@ -125,6 +149,46 @@ const SkeletonLoader = ({ page }) => {
                     style={{ marginLeft: 60, marginBottom: 20 }}
                   />
                 </Button>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '30px',
+                    marginTop: 7,
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  {[...Array(skeletonColumns)].map((_, index) => (
+                    <ListWrapper key={index}>
+                      {generateSkeletonList(3)}
+                    </ListWrapper>
+                  ))}
+                </div>
+              </BoardBody>
+            </BackgroundHome>
+          </SkeletonTheme>
+        </>
+      )}
+      {page === '/board' && (
+        <>
+          <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+            <BackgroundHome
+              style={{
+                position: 'absolute',
+                left: 275,
+                top: 70,
+                maxWidth: '77%',
+              }}
+            >
+              <BoardBody
+                baseColor={theme === 'Violet' ? '#ECEDFD' : highlightColor}
+              >
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <ProjectName>
+                    <Skeleton style={{ marginLeft: 60 }} />
+                  </ProjectName>
+                </div>
                 <div
                   style={{
                     display: 'flex',

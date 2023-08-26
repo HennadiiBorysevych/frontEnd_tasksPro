@@ -1,12 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { updateOrdersFromArray } from 'helpers';
 
-import { logOut } from '../auth/authOperations';
-
-import operations from './columnOperations';
+import columnOperations from './columnOperations';
 
 const handlePending = state => {
   state.isLoading = true;
+};
+
+const handleFulfilled = state => {
+  state.isLoading = false;
+  state.error = null;
 };
 
 const handleRejected = (state, action) => {
@@ -21,43 +24,25 @@ const initialState = {
   error: null,
 };
 
-const columnsSlice = createSlice({
+const getActions = type => extraActions.map(action => action[type]);
+
+const columnSlice = createSlice({
   name: 'columns',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(operations.fetchColumns.pending, handlePending)
-      .addCase(operations.moveColumn.pending, handlePending)
-      .addCase(operations.addColumn.pending, handlePending)
-      .addCase(operations.deleteColumn.pending, handlePending)
-      .addCase(operations.getColumn.pending, handlePending)
-      .addCase(operations.updateColumn.pending, handlePending)
-      .addCase(operations.fetchColumns.rejected, handleRejected)
-      .addCase(operations.moveColumn.rejected, handleRejected)
-      .addCase(operations.addColumn.rejected, handleRejected)
-      .addCase(operations.deleteColumn.rejected, handleRejected)
-      .addCase(operations.getColumn.rejected, handleRejected)
-      .addCase(operations.updateColumn.rejected, handleRejected)
-      .addCase(operations.fetchColumns.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(columnOperations.fetchColumns.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(operations.moveColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(columnOperations.moveColumn.fulfilled, (state, action) => {
         state.items = updateOrdersFromArray(state.items, action.payload);
       })
-      .addCase(operations.addColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(columnOperations.addColumn.fulfilled, (state, action) => {
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
         state.items.push({ id, ...rest });
       })
-      .addCase(operations.deleteColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(columnOperations.deleteColumn.fulfilled, (state, action) => {
         const index = state.items.findIndex(
           column => column.id === action.payload
         );
@@ -65,9 +50,7 @@ const columnsSlice = createSlice({
           state.items.splice(index, 1);
         }
       })
-      .addCase(operations.getColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(columnOperations.getColumn.fulfilled, (state, action) => {
         const index = state.items.findIndex(
           column => column.id === action.payload
         );
@@ -75,21 +58,26 @@ const columnsSlice = createSlice({
           state.items[index] = action.payload;
         }
       })
-      .addCase(operations.updateColumn.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(columnOperations.updateColumn.fulfilled, (state, action) => {
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
         const index = state.items.findIndex(column => column.id === id);
         if (index !== -1) {
           state.items[index] = { id, ...rest };
         }
       })
-      .addCase(logOut.fulfilled, state => {
-        state.items = [];
-        state.error = null;
-        state.isLoading = false;
-      });
+      .addMatcher(isAnyOf(...getActions('pending')), handlePending)
+      .addMatcher(isAnyOf(...getActions('fulfilled')), handleFulfilled)
+      .addMatcher(isAnyOf(...getActions('rejected')), handleRejected);
   },
 });
 
-export default columnsSlice.reducer;
+const extraActions = [
+  columnOperations.fetchColumns,
+  columnOperations.getColumn,
+  columnOperations.addColumn,
+  columnOperations.updateColumn,
+  columnOperations.deleteColumn,
+  columnOperations.moveColumn,
+];
+
+export default columnSlice.reducer;

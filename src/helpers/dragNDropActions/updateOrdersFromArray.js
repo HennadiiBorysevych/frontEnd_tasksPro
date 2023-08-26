@@ -1,4 +1,4 @@
-export function updateOrdersFromArray(sourceArray, newOrdersArray) {
+function updateOrdersFromArray(sourceArray, newOrdersArray) {
   const idToOrder = {};
   newOrdersArray.forEach(item => {
     idToOrder[item.id] = item.order;
@@ -14,3 +14,5 @@ export function updateOrdersFromArray(sourceArray, newOrdersArray) {
     return item;
   });
 }
+
+export default updateOrdersFromArray;

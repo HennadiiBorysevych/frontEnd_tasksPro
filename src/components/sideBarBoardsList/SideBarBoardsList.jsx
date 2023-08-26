@@ -1,14 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useBoardContext } from 'hooks';
-import {
-  deleteBoard,
-  fetchBoards,
-  getBoard,
-} from 'redux/boards/boardOperations';
-import { selectAllBoards } from 'redux/boards/boardSelectors';
+import { clearEncodedTitleInUrl, encodedTitleInUrl } from 'helpers';
+import { useBoardContext, useBoards } from 'hooks';
+import { setUserFilter } from 'redux/userFilterSlice';
 
 import { CustomScrollbar, SideBarItem } from 'components';
 
@@ -16,20 +10,27 @@ import { BoardList } from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = ({ windowHeight }) => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
-  const boards = useSelector(selectAllBoards);
+  const { allBoards, getAllBoards, getOneBoard, removeBoard } = useBoards();
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleActiveBoard = async boardId => {
     try {
-      await dispatch(getBoard(boardId));
+      getOneBoard(boardId);
       await setActiveBoard(boardId);
-      const activatedBoard = await boards.find(board => board.id === boardId);
 
-      if (activatedBoard) {
-        const encodedTitle = encodeURIComponent(activatedBoard.title);
-        navigate(`${encodedTitle}`);
+      const activatedBoard = await allBoards.find(
+        board => board.id === boardId
+      );
+
+      const { title } = activatedBoard;
+
+      if (title) {
+        encodedTitleInUrl(title);
+      }
+      const filterBoard = localStorage.getItem(boardId);
+      if (filterBoard) {
+        dispatch(setUserFilter(filterBoard));
       }
     } catch (error) {
       console.error('Error getting board data', error);
@@ -38,12 +39,20 @@ const SideBarBoardsList = ({ windowHeight }) => {
 
   const handleDeleteBoard = async id => {
     try {
-      await dispatch(deleteBoard(id));
-      await dispatch(fetchBoards());
+      localStorage.removeItem(id);
+      removeBoard(id);
 
-      const firstBoard = boards[0];
-      if (firstBoard) {
-        setActiveBoard(firstBoard.id);
+      const firstBoard = allBoards[0];
+
+      if (!firstBoard) {
+        clearEncodedTitleInUrl();
+        return;
+      } else {
+        getAllBoards();
+        setActiveBoard(firstBoard?.id);
+
+        const { title } = firstBoard;
+        encodedTitleInUrl(title);
       }
     } catch (error) {
       console.error(error.message);
@@ -66,7 +75,7 @@ const SideBarBoardsList = ({ windowHeight }) => {
   return (
     <CustomScrollbar width="100%" maxHeight={boardListHeight} overflow="auto">
       <BoardList>
-        {boards.map(({ id, icon, title }) => (
+        {allBoards.map(({ id, icon, title }) => (
           <SideBarItem
             key={id}
             id={id}

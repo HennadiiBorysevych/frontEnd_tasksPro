@@ -9,6 +9,7 @@ export const BoardListItem = styled.li(props => ({
     ? props.theme.palette.background.sideBarItem
     : props.theme.palette.background.sidemenu + '80',
   padding: '0 24px',
+
   '& + &': {
     marginTop: '4px',
   },
@@ -32,6 +33,7 @@ export const BoardName = styled.h2(props => ({
   fontWeight: 500,
   lineHeight: 1.25,
   letterSpacing: '-0.28px',
+  textAlign: 'left',
   color: props.isActive
     ? props.theme.palette.text.sidemenu
     : props.theme.palette.text.sidemenu + '80',

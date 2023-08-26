@@ -1,25 +1,29 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 14px 20px;
   color: ${props => props.theme.palette.text.primary};
   background-color: ${props => props.theme.palette.background.header};
 
-  @media screen and (min-width: 768px) {
-    padding: 18px 32px;
-  }
-  @media screen and (min-width: 1440px) {
-    padding: 18px 24px;
+  ${media.maxPREMEDIUM`
+  padding: 14px 20px;`}
+
+  ${media.MEDIUM`
+  padding: 18px 32px;`}
+
+  ${media.LARGE`
+  padding: 18px 24px;
     justify-content: flex-end;
-  }
+    `}
 `;
 
 const SideBarButton = styled.button`
-  @media screen and (min-width: 1440px) {
-    display: none;
-  }
+  ${media.LARGE`
+  display: none;
+    `}
 `;
 
 const UserSettings = styled.div`

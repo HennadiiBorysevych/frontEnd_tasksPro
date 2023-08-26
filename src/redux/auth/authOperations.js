@@ -28,13 +28,14 @@ const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post('/api/auth/login', credentials);
     token.set(data.token);
+    console.log(data);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/api/auth/logout');
     token.unset();
@@ -77,7 +78,7 @@ const fetchCurrentUser = createAsyncThunk(
   }
 );
 
-export const updateUserInfo = createAsyncThunk(
+const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
     const formData = new FormData();
@@ -98,7 +99,7 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
-export const updateUserTheme = createAsyncThunk(
+const updateUserTheme = createAsyncThunk(
   'auth/updateUserTheme',
   async (updatedTheme, thunkAPI) => {
     try {
@@ -112,7 +113,7 @@ export const updateUserTheme = createAsyncThunk(
   }
 );
 
-export const updateUserHelp = createAsyncThunk(
+const updateUserHelp = createAsyncThunk(
   'auth/updateUserHelp',
   async (helpRequest, thunkAPI) => {
     try {
@@ -124,7 +125,40 @@ export const updateUserHelp = createAsyncThunk(
   }
 );
 
-const operations = {
+const recoverPassword = createAsyncThunk(
+  'auth/recoverPassword',
+  async (email, thunkAPI) => {
+    console.log(email);
+    try {
+      const { data } = await axios.patch('api/users/forgotpasswordsend', email);
+
+      token.set(data.token);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+const recInPassword = createAsyncThunk(
+  'auth/recInPassword',
+  async (passwordNew, thunkAPI) => {
+    try {
+      const { data } = await axios.patch(
+        '/api/users/forgotpassword',
+        passwordNew
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+const authOperations = {
+  token,
   register,
   logIn,
   googleAuth,
@@ -133,5 +167,7 @@ const operations = {
   updateUserInfo,
   updateUserTheme,
   updateUserHelp,
+  recoverPassword,
+  recInPassword,
 };
-export default operations;
+export default authOperations;

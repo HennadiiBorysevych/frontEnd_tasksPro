@@ -1,9 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useBoardContext, useModal } from 'hooks';
+import { useAuth, useBoardContext, useBoards, useModal } from 'hooks';
 import PropTypes from 'prop-types';
-import { selectTheme } from 'redux/auth/authSelectors';
-import { selectAllBoards } from 'redux/boards/boardSelectors';
 import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
 
 import { BoardPopUp, Modal, SvgIcon } from 'components';
@@ -28,10 +25,11 @@ const SideBarItem = ({
   const onToggleModalAndSideBar = useToggleModalAndSideBar();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
-  const boards = useSelector(selectAllBoards);
+  const { allBoards } = useBoards();
+  const { theme } = useAuth();
 
-  const editingBoard = boards.find(board => board.id === activeBoardId);
-  const selectedTheme = useSelector(selectTheme);
+  const editingBoard = allBoards.find(board => board.id === activeBoardId);
+
   const toggleWindows = () => {
     toggleModal();
     onToggleModalAndSideBar();
@@ -59,7 +57,7 @@ const SideBarItem = ({
               <SvgIcon svgName="icon-pencil" size={16} variant="support" />
             </button>
             <ReactConfirmAlert
-              selectedTheme={selectedTheme}
+              selectedTheme={theme}
               onDeleteAction={onDeleteClick}
               item="board and all content in it"
               owner="sidebar"

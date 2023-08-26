@@ -1,15 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import {
-  addBoard,
-  deleteBoard,
-  fetchBoards,
-  getBoard,
-  updateBoard,
-} from './boardOperations';
+import boardOperations from './boardOperations';
 
 const handlePending = state => {
   state.isLoading = true;
+};
+
+const handleFulfilled = state => {
+  state.isLoading = false;
+  state.error = null;
 };
 
 const handleRejected = (state, action) => {
@@ -25,33 +24,21 @@ const initialState = {
   error: null,
 };
 
-const boardsSlice = createSlice({
+const getActions = type => extraActions.map(action => action[type]);
+
+const boardSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchBoards.pending, handlePending)
-      .addCase(addBoard.pending, handlePending)
-      .addCase(deleteBoard.pending, handlePending)
-      .addCase(getBoard.pending, handlePending)
-      .addCase(updateBoard.pending, handlePending)
-      .addCase(fetchBoards.rejected, handleRejected)
-      .addCase(addBoard.rejected, handleRejected)
-      .addCase(deleteBoard.rejected, handleRejected)
-      .addCase(getBoard.rejected, handleRejected)
-      .addCase(updateBoard.rejected, handleRejected)
-      .addCase(fetchBoards.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(boardOperations.fetchBoards.fulfilled, (state, action) => {
         state.items = action.payload;
         if (action.payload.length > 0) {
           state.activeBoardIndex = action.payload[0].id;
         } // рахуємо з 1
       })
-      .addCase(addBoard.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(boardOperations.addBoard.fulfilled, (state, action) => {
         const {
           _id: id,
           title,
@@ -63,18 +50,14 @@ const boardsSlice = createSlice({
         state.items.unshift({ id, title, icon, background, isActive });
         state.activeBoardIndex = id;
       })
-      .addCase(deleteBoard.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(boardOperations.deleteBoard.fulfilled, (state, action) => {
         const deletedBoardId = action.payload;
         state.items = state.items.filter(item => item.id !== deletedBoardId);
         if (state.activeBoardIndex === deletedBoardId) {
           state.activeBoardIndex = null;
         }
       })
-      .addCase(getBoard.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(boardOperations.getBoard.fulfilled, (state, action) => {
         const index = state.items.findIndex(
           board => board.id === action.payload.board.id
         );
@@ -83,9 +66,7 @@ const boardsSlice = createSlice({
           state.activeBoardIndex = action.payload.board.id;
         }
       })
-      .addCase(updateBoard.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
+      .addCase(boardOperations.updateBoard.fulfilled, (state, action) => {
         const {
           _id: id,
           title,
@@ -103,8 +84,19 @@ const boardsSlice = createSlice({
             isActive,
           };
         }
-      });
+      })
+      .addMatcher(isAnyOf(...getActions('pending')), handlePending)
+      .addMatcher(isAnyOf(...getActions('rejected')), handleRejected)
+      .addMatcher(isAnyOf(...getActions('fulfilled')), handleFulfilled);
   },
 });
 
-export default boardsSlice.reducer;
+const extraActions = [
+  boardOperations.addBoard,
+  boardOperations.deleteBoard,
+  boardOperations.fetchBoards,
+  boardOperations.getBoard,
+  boardOperations.updateBoard,
+];
+
+export default boardSlice.reducer;

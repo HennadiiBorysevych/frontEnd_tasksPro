@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const Background = styled.section`
@@ -10,22 +12,21 @@ export const Background = styled.section`
 `;
 
 export const Container = styled.div`
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 20px;
 
-  @media screen and (min-width: 375px) {
-    width: 375px;
-  }
+  ${media.SMALL`
+  width: 375px;
+  `}
 
-  @media screen and (min-width: 768px) {
-    width: 768px;
-  }
+  ${media.MEDIUM`
+  width: 768px;
+  `}
 
-  @media screen and (min-width: 1440px) {
-    padding: 0;
-    width: 1440px;
-  }
+  ${media.LARGE`
+  padding: 0;
+  width: 1440px;
+  `}
 `;

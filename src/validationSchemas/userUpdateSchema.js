@@ -8,7 +8,20 @@ const userUpdateSchema = Yup.object().shape({
       'Email may contain only letters, apostrophe, dash and spaces and numbers. For example 9.WaFFe!s@mail.com'
     )
     .trim(),
-  password: Yup.string().min(8, 'Too Short!').max(64, 'Too Long!').trim(),
+  newPassword: Yup.string().min(8, 'Too Short!').max(64, 'Too Long!').trim(),
+  // password: Yup.string().when('email', {
+  //   is: email => email !== '',
+  //   then: Yup.string()
+  //     .required('Please enter your current password to confirm changes')
+  //     .trim(),
+  //   otherwise: Yup.string().when('newPassword', {
+  //     is: newPassword => newPassword !== '',
+  //     then: Yup.string()
+  //       .required('Please enter your current password to confirm changes')
+  //       .trim(),
+  //     otherwise: Yup.string().trim(),
+  //   }),
+  // }),
 });
 
 export default userUpdateSchema;

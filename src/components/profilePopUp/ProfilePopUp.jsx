@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useEditProfile } from 'hooks';
 import PropTypes from 'prop-types';
@@ -22,6 +23,7 @@ import {
 const initialValues = {
   name: '',
   email: '',
+  newPassword: '',
   password: '',
 };
 const formStyle = {
@@ -31,8 +33,12 @@ const formStyle = {
 };
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
+  const [isNewPasswordInputFocused, setIsNewPasswordInputFocused] =
+    useState(false);
+  const [isEmailInputFocused, setIsEmailInputFocused] = useState(false);
   const { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar } =
     useEditProfile(user);
+
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: initialValues,
@@ -48,25 +54,25 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
   return (
     <Container>
       <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
-        <AvatarWrap>
-          <AvatarInput
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/png, image/jpeg"
-            background={userAvatar}
-            onChange={handleUserAvatar}
-          />
-          {userAvatar ? (
-            <UserAvatar avatar={userAvatar} />
-          ) : (
-            <AvatarBg size="68" />
-          )}
-          <AddButtonWrap>
-            <SvgIcon svgName="icon-plus" variant='header' />
-          </AddButtonWrap>
-        </AvatarWrap>
         <form style={formStyle} onSubmit={handleModalSubmit}>
+          <AvatarWrap>
+            <AvatarInput
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+              background={userAvatar}
+              onChange={handleUserAvatar}
+            />
+            {userAvatar ? (
+              <UserAvatar avatar={userAvatar} />
+            ) : (
+              <AvatarBg size="68" />
+            )}
+            <AddButtonWrap>
+              <SvgIcon svgName="icon-plus" variant="header" />
+            </AddButtonWrap>
+          </AvatarWrap>
           <Input
             name="name"
             type="name"
@@ -77,7 +83,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
           />
 
           {errors.name && touched.name ? (
-            <span style={{ color: 'white' }}>{errors.name}</span>
+            <span style={{ color: 'black' }}>{errors.name}</span>
           ) : null}
 
           <Input
@@ -85,28 +91,59 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
             type="email"
             placeholder={user?.email}
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={e => handleBlur(e)}
+            onFocus={() => {
+              setIsEmailInputFocused(true);
+              setIsNewPasswordInputFocused(false);
+            }}
             value={values.email}
           />
           {errors.email && touched.email ? (
-            <span style={{ color: 'white' }}>{errors.email}</span>
+            <span style={{ color: 'black' }}>{errors.email}</span>
           ) : null}
 
           <Input
-            name="password"
+            name="newPassword"
             type="password"
             placeholder="Enter new password"
             onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
+            onBlur={e => handleBlur(e)}
+            onFocus={() => {
+              setIsEmailInputFocused(false);
+              setIsNewPasswordInputFocused(true);
+            }}
+            value={values.newPassword}
           />
-          {errors.password && touched.password ? (
-            <span style={{ color: 'white' }}>{errors.password}</span>
+          {errors.newPassword && touched.newPassword ? (
+            <span style={{ color: 'black' }}>{errors.newPassword}</span>
           ) : null}
+
+          {(isNewPasswordInputFocused ||
+            isEmailInputFocused ||
+            values.email ||
+            values.newPassword) && (
+            <>
+              <Input
+                name="password"
+                type="password"
+                placeholder="Enter your current password for confirmation"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+              {errors.password && touched.password ? (
+                <span style={{ color: 'black' }}>{errors.password}</span>
+              ) : null}
+            </>
+          )}
 
           <PrimaryButton
             disabled={
-              !isAvatarLoad && !values.name && !values.email && !values.password
+              !isAvatarLoad &&
+              !values.name &&
+              !values.email &&
+              !values.password &&
+              !values.newPassword
             }
             style={{ marginTop: '10px' }}
             hasIcon={false}

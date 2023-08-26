@@ -1,3 +1,5 @@
+import { media } from 'helpers';
+
 import styled from '@emotion/styled';
 
 export const SupportBox = styled.button`
@@ -14,10 +16,10 @@ export const SupportBox = styled.button`
     transform: scale(1.02);
   }
 
-  @media screen and (min-width: 768px) {
-    padding: 20px;
-    margin: 40px 24px 24px;
-  }
+  ${media.MEDIUM`
+  padding: 20px;
+  margin: 40px 24px 24px;
+  `}
 `;
 
 export const SupportPlate = styled.img`
@@ -32,10 +34,10 @@ export const SupportOffer = styled.p`
   line-height: 16px;
   letter-spacing: -0.24px;
 
-  @media screen and (min-width: 768px) {
-    line-height: 1.43;
-    font-size: 14px;
-  }
+  ${media.MEDIUM`
+  line-height: 1.43;
+  font-size: 14px;
+  `}
 `;
 
 export const AppName = styled.span`

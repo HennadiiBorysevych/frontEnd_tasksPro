@@ -1,12 +1,6 @@
-import styled from '@emotion/styled';
+import { hexToRgb } from 'helpers';
 
-const hexToRgb = hex => {
-  const bigint = parseInt(hex.slice(1), 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-  return `${r}, ${g}, ${b}`;
-};
+import styled from '@emotion/styled';
 
 export const SettingsBlock = styled.div`
   width: 100%;

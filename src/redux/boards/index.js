@@ -1,3 +1,3 @@
-export { default as boardsOperations } from './boardOperations';
-export { default as boardsSelectors } from './boardSelectors';
-export { default as boardsReducer } from './boardSlice';
+export { default as boardOperations } from './boardOperations';
+export { default as boardSelectors } from './boardSelectors';
+export { default as boardReducer } from './boardSlice';

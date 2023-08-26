@@ -1,5 +1,7 @@
+import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import { media } from 'helpers';
 
 import styled from '@emotion/styled';
 
@@ -42,16 +44,27 @@ export const StyledTab = styled(props => <Tab disableRipple {...props} />)(
 );
 
 export const AuthContainer = styled.div`
+  position: relative;
+
   width: 100%;
   padding: 24px;
 
   background-color: var(--bgColorAuth);
   border-radius: 8px;
 
-  @media screen and (min-width: 768px) {
-    padding: 40px;
-    width: 424px;
-  }
+  ${media.MEDIUM`
+  padding: 40px;
+  width: 424px;
+  `}
+`;
+
+export const Password = styled(NavLink)`
+  position: absolute;
+  top: 30px;
+  right: 60px;
+
+  color: white;
+  width: min-content;
 `;
 
 export const TabsContainer = styled.div`

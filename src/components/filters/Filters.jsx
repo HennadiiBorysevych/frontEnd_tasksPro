@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useModal } from 'hooks';
+import { useBoards, useModal } from 'hooks';
 import { selectUserFilter, setUserFilter } from 'redux/userFilterSlice';
 
 import { Modal, PopUpLayout } from 'components';
@@ -21,14 +21,14 @@ import {
 } from './Filters.styled';
 
 const Filters = () => {
-  const dispatch = useDispatch();
-
-  const userFilter = useSelector(selectUserFilter);
-
   const { isModal, toggleModal, onBackdropClick } = useModal();
+  const { activeBoardId } = useBoards();
+  const userFilter = useSelector(selectUserFilter);
+  const dispatch = useDispatch();
 
   function changeValue(event) {
     const newValue = event.target.value;
+    localStorage.setItem(activeBoardId, newValue);
     dispatch(setUserFilter(newValue));
   }
 

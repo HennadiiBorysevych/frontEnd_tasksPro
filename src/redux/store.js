@@ -11,8 +11,8 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import { authReducer } from './auth';
-import { boardsReducer } from './boards';
-import { columnsReducer } from './columns';
+import { boardReducer } from './boards';
+import { columnReducer } from './columns';
 import { cardReducer } from './tasks';
 import userFilterReducer from './userFilterSlice';
 
@@ -34,8 +34,8 @@ const persistedUserFilterReducer = persistReducer(
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    boards: boardsReducer,
-    columns: columnsReducer,
+    boards: boardReducer,
+    columns: columnReducer,
     tasks: cardReducer,
     userFilter: persistedUserFilterReducer,
   },

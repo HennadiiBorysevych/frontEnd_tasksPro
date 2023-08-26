@@ -1,15 +1,12 @@
 export function checkTxtColor(txtColor) {
-  let color = '';
+  let color = '#161616';
 
   switch (txtColor) {
-    case 'Dark':
-      color = '#FFFFFF';
+    case '#FFFFFF':
+      color = txtColor;
       break;
-    case 'Light':
-      color = '#000000';
-      break;
-    case 'Violet':
-      color = '#FFFFFF';
+    case '#161616':
+      color = txtColor;
       break;
     default:
       break;

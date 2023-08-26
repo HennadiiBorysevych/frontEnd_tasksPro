@@ -1,17 +1,18 @@
+import { media } from 'helpers';
 import {
-  checkBgColor,
+  // checkBgColor,
   checkBgImg,
-  checkBtnBgColor,
-  checkBtnTxtColor,
-  checkTxtColor,
+  // checkBtnBgColor,
+  // checkBtnTxtColor,
+  // checkTxtColor,
 } from 'helpers/errorPageThemes';
 
 import styled from '@emotion/styled';
 
 export const ErrorBackground = styled.section`
-  background-color: ${({ bgColor }) => checkBgColor(bgColor)};
+  background-color: ${props => `${props.theme.palette.background.bord}`};
   background-image: var(${({ bgImg }) => checkBgImg(bgImg)});
-  color: ${({ txtColor }) => checkTxtColor(txtColor)};
+  color: ${props => `${props.theme.palette.text.primary}`};
 
   text-align: center;
   display: flex;
@@ -24,13 +25,13 @@ export const Container = styled.div`
   padding: 0 20px;
   min-width: 200px;
 
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
-    width: 500px;
-  }
+  ${media.MEDIUM`
+  width: 500px;
+  `}
 
-  @media screen and (min-width: 1440px) {
-    width: 1000px;
-  }
+  ${media.LARGE`
+  width: 1000px;
+  `}
 `;
 
 export const Header = styled.div`
@@ -41,9 +42,9 @@ export const Header = styled.div`
 
   margin-bottom: 48px;
 
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-  }
+  ${media.MEDIUM`
+  flex-direction: row;
+  `}
 `;
 
 export const Code = styled.div`
@@ -55,9 +56,9 @@ export const Code = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 1440px) {
-    font-size: 50px;
-  }
+  ${media.LARGE`
+  font-size: 50px;
+  `}
 `;
 
 export const Num = styled.p`
@@ -66,10 +67,10 @@ export const Num = styled.p`
   font-size: 60px;
   line-height: 60px;
 
-  @media screen and (min-width: 1440px) {
-    font-size: 100px;
-    line-height: 100px;
-  }
+  ${media.LARGE`
+  font-size: 100px;
+  line-height: 100px;
+  `}
 `;
 
 export const Description = styled.h2`
@@ -79,10 +80,10 @@ export const Description = styled.h2`
 
   text-align: center;
 
-  @media screen and (min-width: 1439px) {
-    font-size: 40px;
+  ${media.LARGE`
+  font-size: 40px;
     line-height: 40px;
-  }
+  `}
 `;
 
 export const Start = styled.p`
@@ -90,15 +91,15 @@ export const Start = styled.p`
   font-size: 15px;
   line-height: 30px;
 
-  @media screen and (max-width: 767px) {
-    margin-bottom: 14px;
-  }
+  ${media.maxPREMEDIUM`
+  margin-bottom: 14px;
+  `}
 
-  @media screen and (min-width: 1440px) {
-    font-weight: 600;
+  ${media.LARGE`
+  font-weight: 600;
     font-size: 20px;
     line-height: 40px;
-  }
+  `}
 `;
 
 export const Text = styled.p`
@@ -112,12 +113,17 @@ export const Text = styled.p`
 export const Link = styled.li`
   padding: 14px 0;
   width: 100%;
-  background-color: ${({ btnBgColor }) => checkBtnBgColor(btnBgColor)};
+  background-color: ${props =>
+    `${props.theme.palette.background.primaryButton}`};
   border-radius: 8px;
-  color: ${({ btnColor }) => checkBtnTxtColor(btnColor)};
+  color: ${props => `${props.theme.palette.text.secondary}`};
   margin-bottom: 14px;
 
   list-style: none;
+
+  &:hover {
+    background-color: ${props => `${props.theme.palette.hover.primaryButton}`};
+  }
 `;
 
 export const InviteText = styled.span`

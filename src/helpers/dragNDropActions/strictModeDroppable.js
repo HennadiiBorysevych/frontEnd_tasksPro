@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 
-export function StrictModeDroppable({ children, ...props }) {
+function StrictModeDroppable({ children, ...props }) {
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
@@ -15,3 +15,5 @@ export function StrictModeDroppable({ children, ...props }) {
   }
   return <Droppable {...props}>{children}</Droppable>;
 }
+
+export default StrictModeDroppable;
