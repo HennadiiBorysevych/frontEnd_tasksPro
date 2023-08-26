@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 // import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
+import { authOperations } from 'redux/auth';
 // import { useAuth } from 'hooks';
 import {
   emailSendSchema,
@@ -11,10 +14,6 @@ import { Input, PrimaryButton } from 'components';
 
 import { Background, Container } from './styles/commonStyles';
 import { PasswordContainer, Title } from './styles/passwordPage';
-import { useDispatch } from 'react-redux';
-
-import { authOperations } from 'redux/auth';
-import { useSearchParams } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -31,7 +30,7 @@ const formStyle = {
 const PasswordPage = () => {
   const [passwordToken, setPasswordToken] = useState(false);
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const param = searchParams.get('token');
@@ -49,7 +48,7 @@ const PasswordPage = () => {
 
     setPasswordToken(false);
     console.log(param);
-  }, []);
+  }, [searchParams]);
 
   const onHandleSubmit = async (
     { email, password, verifyPassword },
