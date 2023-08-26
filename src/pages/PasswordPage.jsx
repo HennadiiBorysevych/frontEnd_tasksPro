@@ -14,6 +14,7 @@ import { PasswordContainer, Title } from './styles/passwordPage';
 import { useDispatch } from 'react-redux';
 
 import { authOperations } from 'redux/auth';
+import { useSearchParams } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -30,10 +31,24 @@ const formStyle = {
 const PasswordPage = () => {
   const [passwordToken, setPasswordToken] = useState(false);
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    const rng = Math.floor(Math.random() * 11);
-    setPasswordToken(rng <= 5 ? false : true);
+    const param = searchParams.get('token');
+    // const rng = Math.floor(Math.random() * 11);
+    // setPasswordToken(rng <= 5 ? false : true);
+
+    if (param) {
+      setPasswordToken(true);
+      authOperations.token.set(param);
+      console.log(param);
+      console.log(authOperations.token);
+
+      return;
+    }
+
+    setPasswordToken(false);
+    console.log(param);
   }, []);
 
   const onHandleSubmit = async (
@@ -43,7 +58,7 @@ const PasswordPage = () => {
     try {
       if (email !== '') {
         console.log(email);
-        dispatch(authOperations.recoverPassword(email));
+        dispatch(authOperations.recoverPassword({ email }));
       }
 
       if (password !== verifyPassword) {
@@ -53,7 +68,7 @@ const PasswordPage = () => {
       }
 
       if (password !== '' && verifyPassword !== '') {
-        await dispatch(authOperations.recInPassword(password));
+        dispatch(authOperations.recInPassword({ passwordNew: password }));
       }
 
       resetForm();
@@ -67,7 +82,6 @@ const PasswordPage = () => {
       //   }
     }
   };
-
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: initialValues,

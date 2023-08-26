@@ -28,6 +28,7 @@ const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post('/api/auth/login', credentials);
     token.set(data.token);
+    console.log(data);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -127,6 +128,7 @@ const updateUserHelp = createAsyncThunk(
 const recoverPassword = createAsyncThunk(
   'auth/recoverPassword',
   async (email, thunkAPI) => {
+    console.log(email);
     try {
       const { data } = await axios.patch('api/users/forgotpasswordsend', email);
 
@@ -156,6 +158,7 @@ const recInPassword = createAsyncThunk(
 );
 
 const authOperations = {
+  token,
   register,
   logIn,
   googleAuth,
