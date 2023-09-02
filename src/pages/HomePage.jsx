@@ -22,10 +22,10 @@ import {
 
 const HomePage = () => {
   const [firstLoad, setFirstLoad] = useState(true);
-  const { activeBoardId, activeBoard, setActiveBoard } = useBoardContext();
+  const { activeBoardId, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
-  const { allBoards, getAllBoards } = useBoards();
+  const { allBoards, boardLoading, getAllBoards } = useBoards();
   const { getAllColumns } = useColumns();
   const { getAllCards } = useCards();
 
@@ -46,15 +46,9 @@ const HomePage = () => {
         navigate(`${encodedTitle}`);
       }
       setFirstLoad(false);
+      setActiveBoard(null);
     }
-  }, [
-    activeBoard,
-    activeBoardId,
-    allBoards,
-    firstLoad,
-    navigate,
-    setActiveBoard,
-  ]);
+  }, [allBoards, firstLoad, navigate, setActiveBoard]);
 
   useEffect(() => {
     async function fetchData() {
@@ -74,7 +68,7 @@ const HomePage = () => {
           <Outlet />
         ) : (
           <DefaultWrapper defaultBoard={!allBoards}>
-            {allBoards.length !== 0 ? (
+            {boardLoading ? (
               <SkeletonLoader page="/board" />
             ) : (
               <WelcomeText>

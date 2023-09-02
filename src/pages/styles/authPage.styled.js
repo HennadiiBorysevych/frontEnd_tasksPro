@@ -1,9 +1,9 @@
+import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { media } from 'helpers';
 
 import styled from '@emotion/styled';
-import { NavLink } from 'react-router-dom';
 
 export const StyledTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {

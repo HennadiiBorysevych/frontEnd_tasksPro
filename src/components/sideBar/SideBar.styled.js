@@ -11,7 +11,8 @@ export const SideBarWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 225px;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
   background-color: ${props => `${props.theme.palette.background.sidemenu}`};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   color: ${props => `${props.theme.palette.text.sidemenu}`};
@@ -21,8 +22,9 @@ export const SideBarWrapper = styled.div`
   }
 
   ${media.MEDIUM`
-padding: 24px 0;
-  width: 260px;`}
+  padding: 24px 0;
+  width: 260px;
+  `}
 
   @media screen and (max-width: 1439px) {
     position: fixed;

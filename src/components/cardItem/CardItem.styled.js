@@ -41,6 +41,7 @@ export const Title = styled(Typography)`
 
 export const Description = styled(Typography)`
   margin-bottom: 14px;
+  min-height: 32px;
 `;
 
 export const Details = styled.div`

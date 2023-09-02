@@ -1,20 +1,22 @@
+import { css } from '@emotion/react';
+
 import styled from '@emotion/styled';
+// #react-confirm-alert .react-confirm-alert-overlay.undefined
 
-// #react-confirm-alert .react-confirm-alert-overlay.undefined {
-//   background-color: rgba(21, 21, 21, 0.5) !important;
-// }
-
-export const Overlay = styled.div`
-  /* background-color: rgba(21, 21, 21, 0.5) !important; */
-`;
-
+export const Overlay = styled.div(
+  () => css`
+    #react-confirm-alert .react-confirm-alert-overlay {
+      background-color: rgba(21, 21, 21, 0.5) !important;
+    }
+  `
+);
 export const AlertContainer = styled.div`
   background-color: ${props =>
     props.theme === 'Dark' ? '#333333' : '#ffffff'};
   color: ${props => (props.theme === 'Dark' ? '#ffffff' : '#333333')};
   padding: 20px;
   margin: 10px;
-  border: 1px solid black;
+  border: 1px solid #bedbb0;
   border-radius: 5px;
 `;
 

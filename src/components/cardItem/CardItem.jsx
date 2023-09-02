@@ -38,6 +38,12 @@ const CardItem = ({ item }) => {
     return [formatted, isDeadline];
   }, [deadline]);
 
+  const isDeadlineExpired = useMemo(() => {
+    const deadlineDate = new Date(deadline);
+    const currentDate = new Date();
+    return deadlineDate < currentDate;
+  }, [deadline]);
+
   return (
     <CardContainer priority={priority}>
       <Title variant="tastTitle">{title}</Title>
@@ -60,6 +66,16 @@ const CardItem = ({ item }) => {
           {isDeadlineToday && (
             <div>
               <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
+            </div>
+          )}
+          {!isDeadlineToday && isDeadlineExpired && (
+            <div>
+              <SvgIcon
+                svgName="icon-bell"
+                size={16}
+                variant="cardItem"
+                stroke="#b50b0b"
+              />
             </div>
           )}
           <button onClick={toggleModal}>

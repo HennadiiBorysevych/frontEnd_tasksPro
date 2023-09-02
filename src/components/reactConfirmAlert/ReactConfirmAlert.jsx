@@ -46,7 +46,7 @@ const ReactConfirmAlert = ({
       customUI: ({ onClose }) => (
         <Overlay>
           <AlertContainer theme={selectedTheme}>
-            <h1>Confirm the deletion</h1>
+            <h2>Confirm the deletion</h2>
             <p>Are you sure you want to delete this {item}?</p>
             <ConfirmDialog>
               <CancelButton onClick={onClose}>Cancel</CancelButton>
