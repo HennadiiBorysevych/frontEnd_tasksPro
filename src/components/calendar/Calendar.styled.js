@@ -8,7 +8,7 @@ export const TextWithGap = styled.span(props => ({
   fontSize: '14px',
   fontStyle: 'normal',
   fontWeight: 500,
-  lineheight: 'normal',
+  lineHeight: 'normal',
   letterSpacing: '-0.28px',
 }));
 

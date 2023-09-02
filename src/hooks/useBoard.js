@@ -14,7 +14,6 @@ const useBoard = (currentBoard, closeModal) => {
   const { addNewBoard, updateExistingBoard } = useBoards();
 
   const initialBoard = currentBoard ? currentBoard : boardModel;
-  console.log(currentBoard?.title);
   const [title, setTitle] = useState(initialBoard?.title);
   const [icon, setIcon] = useState(initialBoard?.icon);
   const [background, setBackground] = useState(initialBoard?.background);
@@ -41,7 +40,6 @@ const useBoard = (currentBoard, closeModal) => {
       addNewBoard(rest);
       encodedTitleInUrl(title);
     }
-    // closeModal();
     if (typeof closeModal === 'function') {
       closeModal();
     }

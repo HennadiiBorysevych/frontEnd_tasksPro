@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { useEditProfile } from 'hooks';
+import { useAuth, useEditProfile } from 'hooks';
 import PropTypes from 'prop-types';
 import { userUpdateSchema } from 'validationSchemas/';
 
@@ -33,6 +33,7 @@ const formStyle = {
 };
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
+  const { signOut } = useAuth();
   const [isNewPasswordInputFocused, setIsNewPasswordInputFocused] =
     useState(false);
   const [isEmailInputFocused, setIsEmailInputFocused] = useState(false);
@@ -46,9 +47,20 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
       validationSchema: userUpdateSchema,
     });
 
-  const handleModalSubmit = () => {
+  const handleModalSubmit = e => {
+    e.preventDefault();
     handleSubmit();
     handleModalClose();
+
+    if (
+      (values.email !== user.email && values.email !== '') ||
+      (values.newPassword && values.newPassword !== '')
+    ) {
+      console.log(values.email);
+      console.log(user.email);
+      console.log(values.newPassword);
+      signOut();
+    }
   };
 
   return (

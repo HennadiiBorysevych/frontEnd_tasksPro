@@ -40,19 +40,19 @@ const SideBarBoardsList = ({ windowHeight }) => {
   const handleDeleteBoard = async id => {
     try {
       localStorage.removeItem(id);
-      removeBoard(id);
+      await removeBoard(id);
+      await getAllBoards();
 
-      const firstBoard = allBoards[0];
-
-      if (!firstBoard) {
-        clearEncodedTitleInUrl();
-        return;
-      } else {
-        getAllBoards();
+      if (allBoards.length > 1) {
+        const firstBoard = allBoards[0];
         setActiveBoard(firstBoard?.id);
 
         const { title } = firstBoard;
         encodedTitleInUrl(title);
+      } else {
+        console.log(activeBoardId);
+        setActiveBoard(null);
+        clearEncodedTitleInUrl();
       }
     } catch (error) {
       console.error(error.message);

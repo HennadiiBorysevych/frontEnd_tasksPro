@@ -44,7 +44,7 @@ const App = () => {
       <GlobalStyles />
       <Suspense>
         {isFetchingCurrent ? (
-          <SkeletonLoader page="/home/" />
+          <SkeletonLoader page="/home" />
         ) : (
           <Routes>
             <Route path="/" element={<Layout />}>

@@ -21,16 +21,14 @@ const useEditProfile = user => {
       if (values[key] !== '')
         formattedValues = { ...formattedValues, [key]: values[key] };
     }
-
+    console.log(formattedValues);
     if (!Object.keys(formattedValues).length && !isAvatarLoad) return;
 
     const newUser = {
       avatarFile,
       user: Object.keys(formattedValues).length ? formattedValues : null,
     };
-
-    console.log(formattedValues);
-
+    console.log(newUser);
     const response = await updateProfileData(newUser);
 
     if (response.payload && response.payload.message === 'Update success') {

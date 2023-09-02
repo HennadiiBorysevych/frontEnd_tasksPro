@@ -13,10 +13,10 @@ const darkTheme = createTheme({
     background: {
       header: '#161616',
       dropdown: '#151515',
-      input: '#1F1F1F',
+      input: '#1F1F1F', //---!---
       sidemenu: '#121212',
       buttonPlus: '#BEDBB0',
-      buttonPlusSecondary: '#1F1F1F',
+      buttonPlusSecondary: '#1F1F1F', //---!---
       buttonPlusCard: '#FFFFFF',
       primaryButton: '#BEDBB0',
       primaryButtonPlus: '#161616',
@@ -31,8 +31,8 @@ const darkTheme = createTheme({
     text: {
       primary: '#FFFFFF',
       secondary: '#161616',
-      sidemenu: '#FFFFFF',
-      plus: '#FFFFFF',
+      sidemenu: '#FFFFFF', //---!---
+      plus: '#FFFFFF', //---!---
     },
     hover: {
       inputAndIcon: '#BEDBB0',
@@ -42,6 +42,7 @@ const darkTheme = createTheme({
     },
   },
   calendar: {
+    //---!---
     senseColor: '#bedbb0',
     color: '#FFF',
     backColor: '#1f1f1f',
@@ -65,9 +66,9 @@ const lightTheme = createTheme({
     background: {
       header: '#FCFCFC',
       dropdown: '#FCFCFC',
-      input: '#FCFCFC',
+      input: '#FCFCFC', //--modal!---
       sidemenu: '#FFFFFF',
-      buttonPlusSecondary: '#F6F6F7',
+      buttonPlusSecondary: '#F6F6F7', //---!---
       buttonPlusCard: '#161616',
       buttonPlus: '#BEDBB0',
       primaryButton: '#BEDBB0',
@@ -78,13 +79,13 @@ const lightTheme = createTheme({
       profile: '#BEDBB0',
       sideBarItem: '#F6F6F7',
       cardItem: '#FFFFFF',
-      scroll: 'e8e8e8',
+      scroll: 'e8e8e8', //----!--- (not all)
     },
     text: {
       primary: '#161616',
       secondary: '#161616',
       sidemenu: '#161616',
-      plus: '#FFFFFF',
+      plus: '#FFFFFF', //----?-----
     },
     hover: {
       inputAndIcon: '#BEDBB0',
@@ -94,6 +95,7 @@ const lightTheme = createTheme({
     },
   },
   calendar: {
+    //----!----
     senseColor: '#bedbb0',
     color: '#161616',
     backColor: '#FFF',
@@ -117,7 +119,7 @@ const violetTheme = createTheme({
     background: {
       header: '#FFFFFF',
       dropdown: '#FCFCFC',
-      input: '#FCFCFC',
+      input: '#FCFCFC', //---modal---
       sidemenu: '#5255BC',
       buttonPlus: '#B8BCFD',
       buttonPlusSecondary: '#B8BCFD',
@@ -146,6 +148,7 @@ const violetTheme = createTheme({
     },
   },
   calendar: {
+    //---!----
     senseColor: '#5255BC',
     color: '#161616',
     backColor: '#FFF',

@@ -1,6 +1,5 @@
 function clearEncodedTitleInUrl() {
-  window.history.pushState(null, null, window.location.pathname);
-  console.log(window.location.pathname);
+  window.history.pushState(null, null, '/frontEnd_tasksPro/home');
 }
 
 export default clearEncodedTitleInUrl;

@@ -82,16 +82,29 @@ const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
     const formData = new FormData();
+    console.log(updatedUser);
 
-    if (updatedUser.avatarFile)
+    if (updatedUser.avatarFile) {
+      console.log(updatedUser.avatarFile);
       formData.append('newAvatar', updatedUser.avatarFile);
+    }
     if (updatedUser.user) {
+      console.log(updatedUser.user);
       for (const key in updatedUser.user) {
         formData.append(`${key}`, updatedUser.user[key]);
       }
     }
+    console.log(formData);
+
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+    };
+
     try {
-      const response = await axios.patch('/api/users', formData);
+      const response = await axios.patch('/api/users', formData, {
+        headers,
+      });
+      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
