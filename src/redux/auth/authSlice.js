@@ -63,6 +63,7 @@ const authSlice = createSlice({
       })
       .addCase(authOperations.updateUserInfo.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        console.log(action.payload.user);
       })
       .addCase(authOperations.updateUserTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.theme;

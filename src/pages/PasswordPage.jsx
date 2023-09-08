@@ -1,53 +1,38 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { authOperations } from 'redux/auth';
-// import { useAuth } from 'hooks';
-import {
-  emailSendSchema,
-  passwordSchema,
-} from 'validationSchemas/passwordSchema';
 
-import { Input, PrimaryButton } from 'components';
+import { popUpInitialValues } from 'constants';
 
-import { Background, Container } from './styles/commonStyles';
-import { PasswordContainer, Title } from './styles/passwordPage';
+import { forgotPasswordSchema } from 'helpers/validationSchemas';
+import { useAuth } from 'hooks';
 
-const initialValues = {
-  email: '',
-  password: '',
-  verifyPassword: '',
-};
+import { Input, PopUpTitle, PrimaryButton } from 'ui';
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14px',
-};
+import { ErrorMessage, Form } from 'assets/styles/commonFormStyles.styled';
+
+import { Background, Container } from './styles/commonStyles.styled';
+import { PasswordContainer } from './styles/passwordPage.styled';
+
+const { recoveryPasswordValues } = popUpInitialValues;
 
 const PasswordPage = () => {
+  const { passwordRecovery, setNewPassword } = useAuth();
   const [passwordToken, setPasswordToken] = useState(false);
-  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const param = searchParams.get('token');
-    // const rng = Math.floor(Math.random() * 11);
-    // setPasswordToken(rng <= 5 ? false : true);
 
     if (param) {
       setPasswordToken(true);
       authOperations.token.set(param);
-      console.log(param);
-      console.log(authOperations.token);
-
       return;
     }
 
     setPasswordToken(false);
-    console.log(param);
   }, [searchParams]);
 
   const onHandleSubmit = async (
@@ -56,8 +41,10 @@ const PasswordPage = () => {
   ) => {
     try {
       if (email !== '') {
-        console.log(email);
-        dispatch(authOperations.recoverPassword({ email }));
+        passwordRecovery({ email });
+        toast.success(
+          'Your request has been sent. Check your email and follow the instructions'
+        );
       }
 
       if (password !== verifyPassword) {
@@ -67,35 +54,39 @@ const PasswordPage = () => {
       }
 
       if (password !== '' && verifyPassword !== '') {
-        dispatch(authOperations.recInPassword({ passwordNew: password }));
+        setNewPassword({ passwordNew: password });
+        toast.success('Your password has been changed successfully');
       }
 
       resetForm();
     } catch (error) {
-      //  if (error.response && error.response.status === 409) {
-      //     console.error('User already exists:', error.message);
-      //     // Handle the 409 error (user already exists) here
-      //    } else {
-      //     console.error('An error occurred:', error.message);
-      //     // Handle other errors here
-      //   }
+      if (error.response && error.response.status === 409) {
+        toast.error(`A user with this email ${email} already exists`);
+      } else {
+        console.error('An error occurred:', error.message);
+        // Handle other errors here
+      }
     }
   };
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
-      initialValues: initialValues,
+      initialValues: recoveryPasswordValues,
       onSubmit: onHandleSubmit,
-      validationSchema: !passwordToken ? emailSendSchema : passwordSchema,
+      validationSchema: !passwordToken
+        ? forgotPasswordSchema.emailSendSchema
+        : forgotPasswordSchema.passwordSchema,
     });
 
   return (
     <Background>
       <Container>
         <PasswordContainer>
-          <form style={formStyle} onSubmit={handleSubmit}>
-            <Title>
-              {!passwordToken ? 'Password recovery' : 'Change your password'}
-            </Title>
+          <Form onSubmit={handleSubmit}>
+            <PopUpTitle
+              title={
+                !passwordToken ? 'Password recovery' : 'Change your password'
+              }
+            ></PopUpTitle>
             {!passwordToken ? (
               <Input
                 name="email"
@@ -107,7 +98,9 @@ const PasswordPage = () => {
               />
             ) : null}
             {!passwordToken && errors.email && touched.email ? (
-              <span style={{ color: 'white' }}>{errors.email}</span>
+              <ErrorMessage style={{ color: 'white' }}>
+                {errors.email}
+              </ErrorMessage>
             ) : null}
 
             {passwordToken ? (
@@ -121,7 +114,9 @@ const PasswordPage = () => {
               />
             ) : null}
             {passwordToken && errors.password && touched.password ? (
-              <span style={{ color: 'white' }}>{errors.password}</span>
+              <ErrorMessage style={{ color: 'white' }}>
+                {errors.password}
+              </ErrorMessage>
             ) : null}
 
             {passwordToken ? (
@@ -137,17 +132,20 @@ const PasswordPage = () => {
             {passwordToken &&
             errors.verifyPassword &&
             touched.verifyPassword ? (
-              <span style={{ color: 'white' }}>{errors.verifyPassword}</span>
+              <ErrorMessage style={{ color: 'white' }}>
+                {errors.verifyPassword}
+              </ErrorMessage>
             ) : null}
 
             <PrimaryButton
+              id="recovery-password-submit-button"
               style={{ marginTop: '14px' }}
               hasIcon={false}
               type="submit"
             >
               {!passwordToken ? 'Send email' : 'Change your password'}
             </PrimaryButton>
-          </form>
+          </Form>
         </PasswordContainer>
       </Container>
     </Background>

@@ -1,10 +1,8 @@
-import { NavLink } from 'react-router-dom';
-import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
-
 import { GoogleAuth, Logo } from 'components';
 
-import { Background, Container } from './styles/commonStyles';
+import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
 
+import { Background, Container } from './styles/commonStyles.styled';
 import {
   RegisterLink,
   UserImage,
@@ -24,16 +22,18 @@ const WelcomePage = () => {
             height={124}
           />
           <Logo variant="welcome" />
-          <WelcomeText>
+          <WelcomeText variant="welcomePageText">
             Supercharge your productivity and take control of your tasks with
             Task Pro - Don't wait, start achieving your goals now!
           </WelcomeText>
           <ul>
             <li>
-              <RegisterLink to="/auth/register">Registration </RegisterLink>
+              <RegisterLink to="/auth/register" register="true">
+                Registration
+              </RegisterLink>
             </li>
             <li>
-              <NavLink to="/auth/login">Log In</NavLink>
+              <RegisterLink to="/auth/login">Log In</RegisterLink>
             </li>
             <li>
               <GoogleAuth />

@@ -28,7 +28,6 @@ const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post('/api/auth/login', credentials);
     token.set(data.token);
-    console.log(data);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -81,11 +80,10 @@ const fetchCurrentUser = createAsyncThunk(
 const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
-    const formData = new FormData();
     console.log(updatedUser);
+    const formData = new FormData();
 
     if (updatedUser.avatarFile) {
-      console.log(updatedUser.avatarFile);
       formData.append('newAvatar', updatedUser.avatarFile);
     }
     if (updatedUser.user) {
@@ -94,7 +92,6 @@ const updateUserInfo = createAsyncThunk(
         formData.append(`${key}`, updatedUser.user[key]);
       }
     }
-    console.log(formData);
 
     const headers = {
       'Content-Type': 'multipart/form-data',
@@ -104,7 +101,7 @@ const updateUserInfo = createAsyncThunk(
       const response = await axios.patch('/api/users', formData, {
         headers,
       });
-      console.log(response);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -141,12 +138,10 @@ const updateUserHelp = createAsyncThunk(
 const recoverPassword = createAsyncThunk(
   'auth/recoverPassword',
   async (email, thunkAPI) => {
-    console.log(email);
     try {
       const { data } = await axios.patch('api/users/forgotpasswordsend', email);
 
       token.set(data.token);
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import sprite from 'assets/images/sprite.svg';
-import { useAuth } from 'hooks';
 import PropTypes from 'prop-types';
+
+import { useAuth } from 'hooks';
+
+import sprite from 'assets/images/sprite.svg';
 
 import { Board, LogoWrapper, Welcome } from './Logo.styled';
 
@@ -30,7 +32,7 @@ const Logo = ({ variant }) => {
         width={iconSize}
         height={iconSize}
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg" //---?-------------
       >
         <use href={sprite + `#${svgName}`} />
       </svg>

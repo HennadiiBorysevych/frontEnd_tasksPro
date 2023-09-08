@@ -47,7 +47,33 @@ import bgMiniDefalult from 'assets/images/backgroundIcons/bg-miniDefault.webp';
 import bgMiniDefalultx2 from 'assets/images/backgroundIcons/bg-miniDefault@2x.webp';
 import bgMiniDefalultx3 from 'assets/images/backgroundIcons/bg-miniDefault@3x.webp';
 
-export const backgroundImages = [
+// import { SvgIcon } from 'components';
+
+// import styled from '@emotion/styled';
+
+// const DefaultBackgroundIconWrapper = styled.div(
+//   {
+//     width: '28px',
+//     height: '28px',
+//   },
+//   props => ({
+//     backgroundColor: props.theme.palette.background.primary,
+//   })
+// );
+
+const backgroundImages = [
+  // {
+  //   regular: (
+  //     <DefaultBackgroundIconWrapper>
+  //       <SvgIcon
+  //         svgName="icon-background-image"
+  //         size={16}
+  //         variant="background"
+  //       />
+  //     </DefaultBackgroundIconWrapper>
+  //   ),
+  //   title: 'default',
+  // },
   {
     regular: bgMiniDefalult,
     x2: bgMiniDefalultx2,
@@ -70,3 +96,5 @@ export const backgroundImages = [
   { regular: bgMini14, x2: bgMini14x2, x3: bgMini14x3, title: 'turkey' },
   { regular: bgMini15, x2: bgMini15x2, x3: bgMini15x3, title: 'track' },
 ];
+
+export default backgroundImages;

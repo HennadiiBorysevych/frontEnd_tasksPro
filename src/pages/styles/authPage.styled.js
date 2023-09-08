@@ -1,24 +1,29 @@
 import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { media } from 'helpers';
+
+import { baseColors } from 'constants';
 
 import styled from '@emotion/styled';
 
 export const StyledTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
-    backgroundColor: 'transparent',
+    display: 'none',
   },
   '& .MuiTabs-flexContainer': {
     display: 'flex',
     gap: '14px',
     border: 'none',
-    paddingBottom: '40px',
+    paddingBottom: '10px',
+
+    '@media screen and(min-width: 768px)': {
+      paddingBottom: '40px',
+    },
   },
 });
 
 export const StyledTab = styled(props => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
+  () => ({
     textTransform: 'none',
     borderRadius: 'none',
     padding: '0px',
@@ -27,57 +32,57 @@ export const StyledTab = styled(props => <Tab disableRipple {...props} />)(
     minWidth: '0px',
     minHeight: '0px',
 
-    color: 'gray',
+    color: `${baseColors.authColors.textSecondaryDark}`,
     fontFamily: 'inherit',
     fontSize: '18px',
     fontWeight: '500',
     fontHeight: '27px',
 
     '&:hover': {
-      color: '#fff',
+      color: `${baseColors.authColors.textSecondary}`,
       opacity: 1,
     },
     '&.Mui-selected': {
-      color: 'white',
+      color: `${baseColors.authColors.textSecondary}`,
     },
   })
 );
 
-export const AuthContainer = styled.div`
-  position: relative;
+export const AuthContainer = styled.div(
+  {
+    position: 'relative',
+    width: '100%',
+    padding: '24px',
+    backgroundColor: baseColors.authColors.form,
+    borderRadius: '8px',
+  },
+  props => ({
+    [props.theme.breakpoints.down('medium')]: {
+      maxWidth: '335px',
+    },
+    [props.theme.breakpoints.up('medium')]: {
+      padding: '40px',
+      width: '424px',
+    },
+  })
+);
 
-  width: 100%;
-  padding: 24px;
-
-  background-color: var(--bgColorAuth);
-  border-radius: 8px;
-
-  ${media.MEDIUM`
-  padding: 40px;
-  width: 424px;
-  `}
-`;
-
-export const Password = styled(NavLink)`
-  position: absolute;
-  top: 30px;
-  right: 60px;
-
-  color: white;
-  width: min-content;
-`;
-
-export const TabsContainer = styled.div`
-  padding-bottom: 40px;
-  list-style: none;
-  text-decoration: none;
-  color: white;
-`;
-export const AppName = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-
-  margin-top: 24px;
-`;
+export const Password = styled(NavLink)(
+  {
+    display: 'block',
+    fontSize: '12px',
+    color: baseColors.authColors.textSecondary,
+  },
+  props => ({
+    [props.theme.breakpoints.down('medium')]: {
+      marginBottom: '20px',
+      textAlign: 'center',
+    },
+    [props.theme.breakpoints.up('medium')]: {
+      position: 'absolute',
+      top: '41px',
+      fontSize: '14px',
+      right: '40px',
+    },
+  })
+);

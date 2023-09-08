@@ -1,57 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { Priority } from 'ui';
 
 import Calend from '../calendar/Calendar';
 
-import { Label, Priority, Radio, SettingsBlock } from './CardSettings.styled';
+import {
+  SettingsItem,
+  SettingsList,
+  SettingTitle,
+} from './CardSettings.styled';
 
-const CardsSettings = ({ priority, deadline, setPriority, setDeadline }) => {
-  function changeValue(event) {
-    setPriority(event.target.value);
+const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
+  // console.log(typeof setDeadline); // дописати prop-types
+  function changeValue(value) {
+    handlePriority(value);
   }
 
   return (
-    <SettingsBlock>
-      <Label>
-        Label color
-        <Priority>
-          <Radio
-            checked={priority === 'Low' ? true : false}
-            type="radio"
-            name="priority"
-            value="Low"
-            onChange={changeValue}
-          />
-
-          <Radio
-            type="radio"
-            name="priority"
-            value="Medium"
-            checked={priority === 'Medium' ? true : false}
-            onChange={changeValue}
-          />
-
-          <Radio
-            type="radio"
-            name="priority"
-            value="High"
-            checked={priority === 'High' ? true : false}
-            onChange={changeValue}
-          />
-          <Radio
-            type="radio"
-            name="priority"
-            value="Without"
-            checked={priority === 'Without' ? true : false}
-            onChange={changeValue}
-          />
-        </Priority>
-      </Label>
-      <Label>
-        Deadline
+    <SettingsList>
+      <SettingsItem>
+        <SettingTitle>Label color</SettingTitle>
+        <Priority
+          priority={priority}
+          setPriority={changeValue}
+          options={[
+            { value: 'low' },
+            { value: 'medium' },
+            { value: 'high' },
+            { value: 'without' },
+          ]}
+          variant="CardSettings"
+        />
+      </SettingsItem>
+      <SettingsItem>
+        <SettingTitle>Deadline</SettingTitle>
         <Calend selectedDate={deadline} setSelectedDate={setDeadline} />
-      </Label>
-    </SettingsBlock>
+      </SettingsItem>
+    </SettingsList>
   );
 };
 
 export default CardsSettings;
+
+CardsSettings.propTypes = {
+  priority: PropTypes.string.isRequired,
+  // deadline: PropTypes.shape({}),
+  handlePriority: PropTypes.func.isRequired,
+  setDeadline: PropTypes.func.isRequired,
+};

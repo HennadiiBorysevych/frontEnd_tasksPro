@@ -1,4 +1,3 @@
-export { default as BoardProvider, useBoardContext } from './BoardContext';
 export { default as useAuth } from './useAuth';
 export { default as useBackground } from './useBackground';
 export { default as useBoard } from './useBoard';

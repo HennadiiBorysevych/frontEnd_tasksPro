@@ -16,12 +16,18 @@
             "groups": [
               // External libraries and packages
               ["^react", "^@?\\w", "^axios", "^lodash"],
+              // Imports from the 'layouts' and 'routes' folders.
+              ["^(constants|layouts|routes)(/.*|$)"],
+              // Functions helpers and hooks
+              ["^(@|contexts|helpers|hooks)(/.*|$)"],
               // Internal packages.
-              ["^(@|components)(/.*|$)"],
+              ["^(@|components|blocks|ui)(/.*|$)"],
               // Side effect imports.
               ["^\\u0000"],
               // Parent imports. Put `..` last.
               ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Images and other media imports from internal directories.
+              ["^assets/(.*)$"],
               // Other relative imports. Put same-folder imports and `.` last.
               ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
               // Style imports.

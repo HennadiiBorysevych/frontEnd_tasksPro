@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField';
+
 import { encodedTitleInUrl } from 'helpers';
 import { useBoards } from 'hooks';
 
 import { Filters } from 'components';
 
-import { Header } from './boardHead.styled';
+import { FieldInput, Header } from './boardHead.styled';
 
 const BoardHead = () => {
   const { activeBoard, activeBoardId, allBoards, updateExistingBoard } =
@@ -28,10 +28,10 @@ const BoardHead = () => {
     setTitle(e.currentTarget.value);
   }, []);
 
-  const handleBoardChange = () => {
+  const handleBoardChange = async () => {
     const { id, user, ...rest } = editingBoard;
 
-    updateExistingBoard({
+    await updateExistingBoard({
       boardId: id,
       updatedData: { ...rest, title: title },
     });
@@ -47,11 +47,13 @@ const BoardHead = () => {
         active={decodedTitle === activeBoard.id}
       >
         {!!decodedTitle && (
-          <TextField
+          <FieldInput
             id="standard"
+            aria-label="Change board name"
             type="text"
             variant="standard"
             value={title}
+            placeholder={title}
             onChange={handleTitle}
             onBlur={handleBoardChange}
             fullWidth={true}

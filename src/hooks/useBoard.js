@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { encodedTitleInUrl } from 'helpers';
 
 import useBoards from './useBoards';
 
@@ -20,25 +19,28 @@ const useBoard = (currentBoard, closeModal) => {
   const [board, setBoard] = useState(initialBoard);
   const [titleChecker, seTitleChecker] = useState(false);
 
-  const handleBoardSubmit = () => {
-    if (title === '' && !currentBoard) {
+  const handleBoardSubmit = e => {
+    e.preventDefault();
+
+    if (title === '') {
       seTitleChecker(true);
       setTimeout(() => {
         seTitleChecker(false);
       }, 2000);
       return;
     }
+    //  && !currentBoard)
     const { id, user, ...rest } = board;
 
     if (currentBoard) {
+      console.log('Update');
       updateExistingBoard({
         boardId: id,
         updatedData: rest,
       });
-      encodedTitleInUrl(title);
     } else {
       addNewBoard(rest);
-      encodedTitleInUrl(title);
+      console.log('Add');
     }
     if (typeof closeModal === 'function') {
       closeModal();

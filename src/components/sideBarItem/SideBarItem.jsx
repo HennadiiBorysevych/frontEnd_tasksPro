@@ -1,11 +1,11 @@
 import React from 'react';
-import { useAuth, useBoardContext, useBoards, useModal } from 'hooks';
 import PropTypes from 'prop-types';
-import { useToggleModalAndSideBar } from 'sharedLayout/SharedLayout';
 
-import { BoardPopUp, Modal, SvgIcon } from 'components';
+import { useBoardContext, useToggleModalAndSideBar } from 'contexts';
+import { useAuth, useBoards, useModal } from 'hooks';
 
-import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
+import { BoardPopUp } from 'components';
+import { Modal, ReactConfirmAlert, SvgIcon } from 'ui';
 
 import {
   BoardIdentificationItem,
@@ -22,7 +22,7 @@ const SideBarItem = ({
   onHandleActiveBoard,
   onDeleteClick,
 }) => {
-  const onToggleModalAndSideBar = useToggleModalAndSideBar();
+  const { toggleModalAndSideBar } = useToggleModalAndSideBar();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
   const { allBoards } = useBoards();
@@ -32,7 +32,7 @@ const SideBarItem = ({
 
   const toggleWindows = () => {
     toggleModal();
-    onToggleModalAndSideBar();
+    toggleModalAndSideBar();
   };
 
   return (
@@ -53,7 +53,11 @@ const SideBarItem = ({
         </BoardIdentificationItem>
         {active && (
           <BoardItemControl>
-            <button aria-label="Edit board" onClick={toggleWindows}>
+            <button
+              id="edit-board-button"
+              aria-label="Edit board button"
+              onClick={toggleWindows}
+            >
               <SvgIcon svgName="icon-pencil" size={16} variant="support" />
             </button>
             <ReactConfirmAlert
@@ -61,7 +65,7 @@ const SideBarItem = ({
               onDeleteAction={onDeleteClick}
               item="board and all content in it"
               owner="sidebar"
-              onToggle={onToggleModalAndSideBar}
+              onToggle={() => toggleModalAndSideBar()}
             />
           </BoardItemControl>
         )}
@@ -76,8 +80,10 @@ const SideBarItem = ({
 };
 
 SideBarItem.propTypes = {
+  id: PropTypes.string.isRequired,
   iconName: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
   onHandleActiveBoard: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
 };

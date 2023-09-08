@@ -1,16 +1,16 @@
 import React from 'react';
-import { useBoard } from 'hooks';
 import PropTypes from 'prop-types';
 
-import {
-  BoardSettings,
-  ButtonPlus,
-  Input,
-  PopUpLayout,
-  PrimaryButton,
-} from 'components';
+import { useBoard } from 'hooks';
 
-import { Container } from './BoardPopUp.styled';
+import { Input, PopUpLayout, PrimaryButton } from 'ui';
+
+import BoardSettings from '../boardSettings/BoardSettings';
+
+import {
+  ErrorMessage,
+  Form,
+} from '../../assets/styles/commonFormStyles.styled';
 
 const BoardPopUp = ({ board, onClose }) => {
   const {
@@ -24,22 +24,17 @@ const BoardPopUp = ({ board, onClose }) => {
   } = useBoard(board, onClose);
 
   return (
-    <Container>
-      <PopUpLayout
-        title={board ? 'Edit board' : 'New board'}
-        handleClose={onClose}
-      >
+    <PopUpLayout
+      title={board ? 'Edit board' : 'New board'}
+      handleClose={onClose}
+    >
+      <Form onSubmit={handleBoardSubmit}>
         <Input
-          style={{
-            marginBottom: '14px',
-          }}
           onChange={handleTitle}
           placeholder={board ? board?.title : 'Title'}
         />
 
-        {titleChecker ? (
-          <span style={{ color: 'white' }}>Title is required</span>
-        ) : null}
+        {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
         <BoardSettings
           chosenIcon={icon}
           setChosenIcon={setIcon}
@@ -47,15 +42,15 @@ const BoardPopUp = ({ board, onClose }) => {
           setChosenBackground={setBackground}
         />
         <PrimaryButton
-          onClick={handleBoardSubmit}
-          hasIcon={false}
+          type="submit"
           variant="primary"
+          hasIcon={true}
+          id="create-or-edit-button"
         >
-          <ButtonPlus variant="primary" />
           {board ? 'Edit' : 'Create'}
         </PrimaryButton>
-      </PopUpLayout>
-    </Container>
+      </Form>
+    </PopUpLayout>
   );
 };
 

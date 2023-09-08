@@ -31,7 +31,7 @@ const persistedUserFilterReducer = persistReducer(
   userFilterReducer
 );
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     boards: boardReducer,
@@ -47,6 +47,11 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-export default store;
+const generalStore = {
+  persistor,
+  store,
+};
+
+export default generalStore;

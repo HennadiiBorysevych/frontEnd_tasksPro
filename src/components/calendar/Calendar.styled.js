@@ -2,23 +2,27 @@ import { css } from '@emotion/react';
 
 import styled from '@emotion/styled';
 
-export const TextWithGap = styled.span(props => ({
+export const CalendarButton = styled.button({
+  display: 'flex',
+  alignItems: 'center',
+  cursor: 'pointer',
+});
+
+export const DeadlineDay = styled.span(props => ({
   marginRight: '4px',
-  color: props.theme.calendar.senseColor,
+  color: props.theme.palette.accent.main,
   fontSize: '14px',
-  fontStyle: 'normal',
   fontWeight: 500,
-  lineHeight: 'normal',
   letterSpacing: '-0.28px',
+  display: 'block',
 }));
 
 export const BlockCalendar = styled.div(props => ({
-  backgroundColor: props.theme.calendar.backColor,
+  backgroundColor: props.theme.palette.background.calendar,
   padding: '18px',
   width: '233px',
-  fontFamily: 'Poppins, Arial, sans-serif',
+  fontFamily: 'inherit',
   fontSize: '16px',
-  fontStyle: 'normal',
   fontWeight: 500,
   lineHeight: 'normal',
   letterSpacing: '-0.32px',
@@ -34,21 +38,16 @@ export const NextLabelWithPadding = styled.span({
 export const DownWithPadding = styled.span({
   paddingTop: '5px',
 });
-export const CalendarWrapper = styled.span({
-  display: 'flex',
-  alignItems: 'center',
-  cursor: 'pointer',
-});
 
-export const CalendarLayout = styled.span({
+export const CalendarLayout = styled.span(props => ({
   position: 'fixed',
   top: 0,
   left: 0,
   width: '100vw',
   height: '100vh',
-  background: 'rgba(0, 0, 0, 0.5)',
+  background: props.theme.palette.background.backdrop,
   zIndex: 999,
-});
+}));
 
 export const CommonStyles = styled.div(
   props => css`
@@ -58,44 +57,40 @@ export const CommonStyles = styled.div(
     transform: translate(-50%, -50%);
     z-index: 1000;
 
-    .react-calendar__navigation__label {
-      color: ${props.theme.calendar.color};
-      font-family: 'Poppins', Arial, sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      letter-spacing: -0.32px;
+    .react-calendar__navigation {
+      height: 52px !important;
+
+      &::after {
+        all: unset;
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: ${props.theme.palette.text.primaryDark};
+        position: absolute;
+        bottom: 14px;
+      }
     }
-    & .react-calendar__navigation::after {
-      all: unset;
-      content: '';
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: white;
-      opacity: 0.2;
-      position: absolute;
-      bottom: 14px;
+    .react-calendar__navigation__label {
+      color: ${props.theme.palette.text.primary};
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.32px;
     }
     &
       .react-calendar__month-view__weekdays__weekday
-      react-calendar__month-view__weekdays__weekday--weekend {
+      .react-calendar__month-view__weekdays__weekday--weekend {
       align-items: center;
     }
     & .react-calendar__month-view__weekdays {
-      color: ${props.theme.calendar.weekColor};
-      font-family: 'Poppins', Arial, sans-serif;
+      color: ${props.theme.palette.text.primaryMedium};
       font-size: 14px;
-      font-style: normal;
       font-weight: 500;
-      line-height: normal;
       letter-spacing: -0.28px;
       padding-bottom: 11px;
       display: flex;
       gap: 2px;
-      text-decoration: underline;
-      text-decoration-color: black;
+
       overflow: hidden;
       text-underline-offset: 7px;
     }
@@ -105,30 +100,29 @@ export const CommonStyles = styled.div(
       padding: 1em 0.5em;
     }
     & .react-calendar__month-view__days {
+      color: ${props.theme.palette.text.primary};
       margin-left: -7px;
       margin-right: -7px;
     }
+
+    .react-calendar__month-view__days__day--neighboringMonth {
+      color: ${props.theme.palette.text.primaryDark};
+    }
     & .react-calendar__tile {
-      color: ${props.theme.calendar.color};
-      font-family: 'Poppins', Arial, sans-serif;
       font-size: 14px;
-      font-style: normal;
+      line-height: 1.29;
       font-weight: 400;
-      line-height: 18px;
       letter-spacing: -0.28px;
       padding: 5px 7px;
       border: 0px;
     }
-    .react-calendar__tile:disabled {
-      color: ${props.theme.calendar.disColor};
-    }
     .react-calendar__tile--active {
-      background-color: ${props.theme.calendar.senseColor};
-      color: ${props.theme.calendar.activeColor};
+      background-color: ${props.theme.palette.accent.main};
+      color: ${props.theme.palette.text.activeDay};
       border-radius: 50%;
     }
     .react-calendar__tile:hover {
-      background-color: ${props.theme.calendar.hovColor};
+      background-color: ${props.theme.palette.text.primaryDark};
       border-radius: 50%;
     }
     .react-calendar__navigation {

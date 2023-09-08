@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { useCard } from 'hooks';
 
-import { CardSettings, Input, PopUpLayout, PrimaryButton } from 'components';
+import { Input, PopUpLayout, PrimaryButton } from 'ui';
 
-import { Container, Wrapper } from './CardPopUp.styled';
+import CardSettings from '../cardSettings/CardSettings';
+
+import { ErrorMessage } from '../../assets/styles/commonFormStyles.styled';
 
 const CardPopUp = ({
   columnId,
@@ -12,6 +16,8 @@ const CardPopUp = ({
   handleModalClose,
   ...rest
 }) => {
+  // console.log(typeof columnId); //дописати prop-types
+
   const {
     priority,
     deadline,
@@ -24,46 +30,58 @@ const CardPopUp = ({
   } = useCard(columnId, cardIndex, card, handleModalClose);
 
   return (
-    <Container {...rest}>
+    <div {...rest}>
       <PopUpLayout
         title={card ? 'Edit card' : 'Add card'}
         handleClose={handleModalClose}
       >
+        {/* <Form > */}
         <Input
           name="title"
           onChange={handleInput}
           placeholder={card ? card?.title : 'Title'}
           style={{
-            marginBottom: '14px',
+            marginBottom: '14px', //---?---------------
           }}
         />
-        {titleChecker ? <Wrapper>Title is required</Wrapper> : null}
+        {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
         <Input
           name="description"
           onChange={handleInput}
           multiline={true}
           placeholder={card ? card?.description : 'Description'}
           style={{
-            marginBottom: '14px',
+            marginBottom: '14px', //---?---------------
           }}
         />
-        {descriptionChecker ? <Wrapper>Description is required</Wrapper> : null}
+        {descriptionChecker ? (
+          <ErrorMessage>Description is required</ErrorMessage>
+        ) : null}
         <CardSettings
           priority={priority}
           deadline={new Date(deadline)}
-          setPriority={handlePriority}
+          handlePriority={handlePriority}
           setDeadline={setDeadline}
         />
         <PrimaryButton
+          id="create-or-edit-card-button"
           hasIcon={true}
-          onClick={handleCardSubmit}
           variant="primary"
+          onClick={handleCardSubmit}
         >
           {card ? 'Edit' : 'Create'}
         </PrimaryButton>
+        {/* </Form> */}
       </PopUpLayout>
-    </Container>
+    </div>
   );
 };
 
 export default CardPopUp;
+
+CardPopUp.propTypes = {
+  columnId: PropTypes.string.isRequired,
+  cardIndex: PropTypes.number.isRequired,
+  // card:
+  handleModalClose: PropTypes.func.isRequired,
+};

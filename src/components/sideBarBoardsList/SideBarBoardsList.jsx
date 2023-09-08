@@ -1,14 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { clearEncodedTitleInUrl, encodedTitleInUrl } from 'helpers';
-import { useBoardContext, useBoards } from 'hooks';
 import { setUserFilter } from 'redux/userFilterSlice';
 
-import { CustomScrollbar, SideBarItem } from 'components';
+import { useBoardContext, useToggleModalAndSideBar } from 'contexts';
+import { clearEncodedTitleInUrl, encodedTitleInUrl } from 'helpers';
+import { useBoards } from 'hooks';
+
+import { CustomScrollBar } from 'ui';
+
+import SideBarItem from '../sideBarItem/SideBarItem';
 
 import { BoardList } from './sideBarBoardsList.styled';
 
-const SideBarBoardsList = ({ windowHeight }) => {
+const SideBarBoardsList = () => {
+  const { windowHeight } = useToggleModalAndSideBar();
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const { allBoards, getAllBoards, getOneBoard, removeBoard } = useBoards();
 
@@ -17,14 +22,13 @@ const SideBarBoardsList = ({ windowHeight }) => {
   const handleActiveBoard = async boardId => {
     try {
       getOneBoard(boardId);
-      await setActiveBoard(boardId);
+      setActiveBoard(boardId);
 
       const activatedBoard = await allBoards.find(
         board => board.id === boardId
       );
 
       const { title } = activatedBoard;
-
       if (title) {
         encodedTitleInUrl(title);
       }
@@ -50,7 +54,6 @@ const SideBarBoardsList = ({ windowHeight }) => {
         const { title } = firstBoard;
         encodedTitleInUrl(title);
       } else {
-        console.log(activeBoardId);
         setActiveBoard(null);
         clearEncodedTitleInUrl();
       }
@@ -73,7 +76,7 @@ const SideBarBoardsList = ({ windowHeight }) => {
   // Высота списка досок теперь будет всегда подстраиваться под максимальную высоту экрана
 
   return (
-    <CustomScrollbar width="100%" maxHeight={boardListHeight} overflow="auto">
+    <CustomScrollBar width="100%" maxHeight={boardListHeight} overflow="auto">
       <BoardList>
         {allBoards.map(({ id, icon, title }) => (
           <SideBarItem
@@ -87,7 +90,7 @@ const SideBarBoardsList = ({ windowHeight }) => {
           />
         ))}
       </BoardList>
-    </CustomScrollbar>
+    </CustomScrollBar>
   );
 };
 

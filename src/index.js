@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import useAuth from 'hooks/useAuth.js';
-import { persistor, store } from 'redux/store';
+import generalStore from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { themes } from 'themes';
 
-import App from 'components/App';
+import { useAuth } from 'hooks';
 
 import './GlobalStyles.js';
 
-import { darkTheme, lightTheme, violetTheme } from './themes/theme';
+import App from './App';
 
 import './index.css';
 
@@ -21,13 +21,13 @@ const ThemedApp = () => {
   const themeChoice = React.useMemo(() => {
     switch (theme) {
       case 'Dark':
-        return darkTheme;
+        return themes.darkTheme;
       case 'Light':
-        return lightTheme;
+        return themes.lightTheme;
       case 'Violet':
-        return violetTheme;
+        return themes.violetTheme;
       default:
-        return darkTheme;
+        return themes.darkTheme;
     }
   }, [theme]);
 
@@ -40,8 +40,8 @@ const ThemedApp = () => {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    <Provider store={generalStore.store}>
+      <PersistGate loading={null} persistor={generalStore.persistor}>
         <BrowserRouter basename="/frontEnd_tasksPro">
           <ThemedApp />
         </BrowserRouter>

@@ -1,13 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { useModal } from 'hooks';
 
-import { CardPopUp, Modal, PrimaryButton } from 'components';
+import { Modal, PrimaryButton } from 'ui';
+
+import CardPopUp from '../cardPopUp/CardPopUp';
 
 const AddCardBtn = ({ columnId, cardIndex }) => {
   const { isModal, onBackdropClick, toggleModal } = useModal();
+
   return (
     <>
       <PrimaryButton
+        id="add-card-button"
         hasIcon={true}
         type="button"
         svgName={'icon-plus'}
@@ -30,3 +36,8 @@ const AddCardBtn = ({ columnId, cardIndex }) => {
 };
 
 export default AddCardBtn;
+
+AddCardBtn.propTypes = {
+  columnId: PropTypes.string.isRequired,
+  cardIndex: PropTypes.number.isRequired,
+};

@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
+
+// import PropTypes from 'prop-types';
 import { useAuth, useCards, useModal } from 'hooks';
 
-import { CardPopUp, Modal } from 'components';
-import SvgIcon from 'components/svgIcon/SvgIcon';
-import Typography from 'components/typography/Typography';
-
-import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
+import { CardPopUp } from 'components';
+import { Modal, ReactConfirmAlert, SvgIcon, Typography } from 'ui';
 
 import {
   CardContainer,
@@ -20,6 +19,8 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
+  // console.log(typeof item);
+
   const { theme } = useAuth();
   const { removeCard } = useCards();
   const { isModal, onBackdropClick, toggleModal } = useModal();
@@ -74,11 +75,11 @@ const CardItem = ({ item }) => {
                 svgName="icon-bell"
                 size={16}
                 variant="cardItem"
-                stroke="#b50b0b"
+                stroke="#df1010" //---?----------------
               />
             </div>
           )}
-          <button onClick={toggleModal}>
+          <button onClick={toggleModal} id="al" aria-label="Edit card button">
             <SvgIcon svgName="icon-pencil" size={16} variant="popUp" />
           </button>
           <ReactConfirmAlert
