@@ -1,32 +1,37 @@
 import TextField from '@mui/material/TextField';
-import { media } from 'helpers';
-
-import Typography from 'components/typography/Typography';
 
 import styled from '@emotion/styled';
 
-export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  justify-content: ${({ boardName }) =>
-    boardName ? 'space-between' : 'flex-end'};
+export const Header = styled.div(props => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '40px',
+  justifyContent: `${props.boardName ? 'space-between' : 'flex-end'}`,
+  marginBottom: '39px',
+  width: '100%',
 
-  margin-bottom: 39px;
-  width: 100%;
+  [props.theme.breakpoints.up('medium')]: {
+    marginBottom: '26px',
+  },
 
-  ${media.MEDIUM`
-  margin-bottom: 26px;`}
+  [props.theme.breakpoints.up('large')]: {
+    marginBottom: '10px',
+  },
+}));
 
-  ${media.LARGE`
-  margin-bottom: 10px;
-    `}
-`;
-
-export const BoardTitle = styled(Typography)`
-  text-shadow: #ffffff 1px 0 1px;
-`;
-
-export const BoardTitleInput = styled(TextField)`
-  width: fit-content;
-`;
+export const FieldInput = styled(TextField)(
+  {
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#B2BAC2',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#E0E3E7',
+      },
+    },
+  },
+  props => ({
+    textShadow: `0.5px 0 3px ${props.theme.palette.text.shadowColor}`,
+    cursor: 'pointer',
+  })
+);

@@ -1,32 +1,34 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
+
+import { popUpInitialValues } from 'constants';
+
+import { authSchema } from 'helpers/validationSchemas';
 import { useAuth } from 'hooks';
-import { authSchema } from 'validationSchemas';
 
-import { GoogleAuth, Input, PrimaryButton } from 'components';
+import { GoogleAuth } from 'components';
+import { Input, PrimaryButton } from 'ui';
 
-const initialValues = {
-  name: '',
-  email: '',
-  password: '',
-};
+import {
+  ErrorMessage,
+  Form,
+} from '../../assets/styles/commonFormStyles.styled';
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14px',
-};
+const { authValues } = popUpInitialValues;
 
 const AuthForm = ({ value, chgForm }) => {
   const { signIn, signUp } = useAuth();
 
   useEffect(() => {
+    const { name, email, password } = authValues;
+
     async function breakFormikInputs() {
       await setValues({
-        name: initialValues.name,
-        email: initialValues.email,
-        password: initialValues.password,
+        name,
+        email,
+        password,
       });
     }
     async function breakFormikTouched() {
@@ -53,6 +55,7 @@ const AuthForm = ({ value, chgForm }) => {
         }
 
         await signIn({ email, password });
+        toast.success('Welcome to TaskPro!');
       } else {
         await signIn({ email, password });
       }
@@ -61,7 +64,7 @@ const AuthForm = ({ value, chgForm }) => {
     } catch (error) {
       if (error.response && error.response.status === 409) {
         console.error('User already exists:', error.message);
-        // Handle the 409 error (user already exists) here
+        toast.error('User with this email already exists');
       } else {
         console.error('An error occurred:', error.message);
         // Handle other errors here
@@ -84,14 +87,14 @@ const AuthForm = ({ value, chgForm }) => {
     setValues,
     setTouched,
   } = useFormik({
-    initialValues: initialValues,
+    initialValues: authValues,
     onSubmit: onHandleSubmit,
     validationSchema: authSchema,
   });
 
   return (
     <>
-      <form style={formStyle} onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         {value === 0 && (
           <Input
             name="name"
@@ -103,7 +106,7 @@ const AuthForm = ({ value, chgForm }) => {
           />
         )}
         {value === 0 && errors.name && touched.name ? (
-          <span style={{ color: 'white' }}>{errors.name}</span>
+          <ErrorMessage variant="authForm">{errors.name}</ErrorMessage>
         ) : null}
 
         <Input
@@ -115,7 +118,7 @@ const AuthForm = ({ value, chgForm }) => {
           value={values.email}
         />
         {errors.email && touched.email ? (
-          <span style={{ color: 'white' }}>{errors.email}</span>
+          <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
         ) : null}
 
         <Input
@@ -127,20 +130,25 @@ const AuthForm = ({ value, chgForm }) => {
           value={values.password}
         />
         {errors.password && touched.password ? (
-          <span style={{ color: 'white' }}>{errors.password}</span>
+          <ErrorMessage variant="authForm">{errors.password}</ErrorMessage>
         ) : null}
 
         <PrimaryButton
           style={{ marginTop: '14px' }}
-          hasIcon={false}
           type="submit"
+          aria-label="authorisation-button"
         >
           {formDistributor.buttText}
         </PrimaryButton>
-      </form>
+      </Form>
       <GoogleAuth />
     </>
   );
 };
 
 export default AuthForm;
+
+AuthForm.propTypes = {
+  value: PropTypes.number.isRequired,
+  chgForm: PropTypes.number.isRequired,
+};

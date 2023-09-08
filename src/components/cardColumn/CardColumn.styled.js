@@ -1,30 +1,37 @@
-import { media } from 'helpers';
-
 import styled from '@emotion/styled';
 
-export const Column = styled.li`
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  filter: ${({ isLoading }) => (isLoading ? 'blur(25px)' : 'none')};
-  transition: filter 0.4s ease-in-out;
+export const Column = styled.li(
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '14px',
+    transition: 'filter 0.4s ease-in-out',
+  },
+  props => ({
+    filter: props.isLoading ? 'blur(25px)' : 'none',
 
-  ${media.maxPRESMALL`
-  width: calc(100vw - 40px);`}
+    [props.theme.breakpoints.down('small')]: {
+      width: 'calc(100vw - 40px)',
+    },
+    [props.theme.breakpoints.up('small')]: {
+      width: '335px',
+    },
+  })
+);
 
-  ${media.SMALL`
-  width: 335px;`}
-`;
-
-export const ColumnHeading = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 20px 17px;
-  background-color: ${props => props.theme.palette.background.cardItem};
-  border-radius: 8px;
-  cursor: pointer;
-`;
+export const ColumnHeading = styled.div(
+  {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '18px 20px 17px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+  },
+  props => ({
+    backgroundColor: props.theme.palette.background.card,
+  })
+);
 
 export const ItemsContainer = styled.ul`
   display: flex;

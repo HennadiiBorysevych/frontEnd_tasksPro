@@ -5,7 +5,7 @@ import useCards from './useCards';
 const cardModel = {
   title: '',
   description: '',
-  priority: 'Without',
+  priority: 'without',
   deadline: 0,
 };
 
@@ -28,7 +28,9 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [titleChecker, seTitleChecker] = useState(false);
   const [descriptionChecker, setDescriptionChecker] = useState(false);
 
-  const handleCardSubmit = () => {
+  const handleCardSubmit = e => {
+    e.preventDefault();
+
     if (title === '' && !currentCard) {
       seTitleChecker(true);
       setTimeout(() => {
@@ -51,12 +53,14 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
           updatedData: { orderTask: order, ...rest },
         })
       : addNewCard(rest);
+    console.log('Add');
 
     closeModal();
   };
 
   const handleInput = useCallback(e => {
     const { name, value } = e.currentTarget;
+
     switch (name) {
       case 'title':
         setTitle(value);

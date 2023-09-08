@@ -34,6 +34,12 @@ const useAuth = () => {
   const sendToSupport = helpRequest =>
     dispatch(authOperations.updateUserHelp(helpRequest));
 
+  const passwordRecovery = email =>
+    dispatch(authOperations.recoverPassword(email));
+
+  const setNewPassword = passwordNew =>
+    dispatch(authOperations.recInPassword(passwordNew));
+
   return {
     isLoggedIn,
     user,
@@ -47,6 +53,8 @@ const useAuth = () => {
     updateProfileData,
     changeTheme,
     sendToSupport,
+    passwordRecovery,
+    setNewPassword,
   };
 };
 

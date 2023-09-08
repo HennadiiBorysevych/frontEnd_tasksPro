@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
-import { StrictModeDroppable } from 'helpers';
-import { useAuth, useCards, useColumns, useModal } from 'hooks';
+import PropTypes from 'prop-types';
 import { selectUserFilter } from 'redux/userFilterSlice';
 
-import { AddCardBtn, CardItem, ColumnPopUp, Modal, SvgIcon } from 'components';
+import { StrictModeDroppable } from 'helpers';
+import { useAuth, useCards, useColumns, useModal } from 'hooks';
 
-import CustomScrollBar from '../customScrollBar/CustomScrollBar';
-import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
-import Typography from '../typography/Typography';
+import { AddCardBtn, CardItem, ColumnPopUp } from 'components';
+import {
+  CustomScrollBar,
+  Modal,
+  ReactConfirmAlert,
+  SvgIcon,
+  Typography,
+} from 'ui';
 
 import {
   Column,
@@ -28,7 +33,7 @@ function CardsColumn({ provided, column }) {
   const [boardListHeight, setBoardListHeight] = useState(() => {
     return window.innerHeight - elementsTotalSize(window.innerWidth);
   });
-
+  const [modalType, setModalType] = useState(null);
   function elementsTotalSize(width) {
     if (width <= 767) {
       //mobile
@@ -54,6 +59,16 @@ function CardsColumn({ provided, column }) {
     };
   }, []);
 
+  const handleEditColumn = () => {
+    setModalType('editColumn');
+    toggleModal();
+  };
+
+  // const handleCreateCard = () => {
+  //   setModalType('createCard');
+  //   toggleModal();
+  // };
+
   const isLoading = columnLoading || cardLoading;
 
   return (
@@ -67,7 +82,12 @@ function CardsColumn({ provided, column }) {
           <Typography variant="columnTitle">{column.title}</Typography>
 
           <IconsContainer>
-            <button type="button" onClick={toggleModal}>
+            <button
+              type="button"
+              onClick={handleEditColumn}
+              id="edit-column-button"
+              aria-label="Edit column button"
+            >
               <SvgIcon
                 svgName="icon-pencil"
                 size={16}
@@ -126,14 +146,42 @@ function CardsColumn({ provided, column }) {
           )}
         </StrictModeDroppable>
         <AddCardBtn columnId={column.id} cardIndex={columnsAndTasks.length} />
+        {/* <PrimaryButton
+          hasIcon={true}
+          type="button"
+          svgName={'icon-plus'}
+          variant="primary"
+          onClick={handleCreateCard}
+        >
+          Add another card
+        </PrimaryButton> */}
       </Column>
-      {isModal && (
+      {isModal && modalType === 'editColumn' && (
         <Modal onBackdropClick={onBackdropClick}>
           <ColumnPopUp column={column} handleModalClose={toggleModal} />
         </Modal>
       )}
+      {/* {isModal && modalType === 'createCard' && (
+        <Modal onBackdropClick={onBackdropClick}>
+          <CardPopUp
+            columnId={column.id}
+            cardIndex={columnsAndTasks.length}
+            handleModalClose={toggleModal}
+          />
+        </Modal>
+      )} */}
     </>
   );
 }
 
 export default CardsColumn;
+
+CardsColumn.propTypes = {
+  column: PropTypes.shape({
+    columnOwner: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    items: PropTypes.array,
+    orderColumn: PropTypes.number,
+    title: PropTypes.string.isRequired,
+  }),
+};

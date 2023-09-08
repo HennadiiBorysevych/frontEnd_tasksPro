@@ -3,16 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { AuthForm } from 'components';
 
-import { Background, Container } from './styles/commonStyles';
-
 import {
   AuthContainer,
   Password,
   StyledTab,
   StyledTabs,
 } from './styles/authPage.styled';
+import { Background, Container } from './styles/commonStyles.styled';
 
-const AuthPage = e => {
+const AuthPage = () => {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const { id } = useParams();
   const history = useNavigate();
@@ -36,7 +35,7 @@ const AuthPage = e => {
     0: 'login',
   };
 
-  const handleChange = (evt, newVal) => {
+  const handleChange = (_, newVal) => {
     history(`/auth/${tabToIdx[value]}`);
     setValue(newVal);
     setResetForm(resetForm + 1);
@@ -51,9 +50,7 @@ const AuthPage = e => {
             <StyledTab label="Log In" />
           </StyledTabs>
           {value === 1 && (
-            <Password to="/auth/forgot_password" style={{ color: 'white' }}>
-              Forgot password?
-            </Password>
+            <Password to="/auth/forgot_password">Forgot password?</Password>
           )}
           <AuthForm value={value} chgForm={resetForm} />
         </AuthContainer>

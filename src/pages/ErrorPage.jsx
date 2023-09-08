@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+
 import { useAuth } from 'hooks';
 
 import {
@@ -46,7 +46,12 @@ const ErrorPage = () => {
   };
 
   return (
-    <ErrorBackground txtColor={userTheme} bgColor={userTheme} bgImg={userTheme}>
+    <ErrorBackground
+      isLoggedIn={isLoggedIn}
+      txtColor={userTheme}
+      bgColor={userTheme}
+      bgImg={userTheme}
+    >
       <Container>
         <Header>
           <Code>
@@ -59,11 +64,7 @@ const ErrorPage = () => {
           </Description>
         </Header>
         <Text>{errDis.text}</Text>
-        <NavLink to={errDis.nav}>
-          <Link btnColor={userTheme} btnBgColor={userTheme}>
-            {errDis.link}
-          </Link>
-        </NavLink>
+        <Link to={errDis.nav}>{errDis.link}</Link>
         <Text>{errDis.underLinkText}</Text>
       </Container>
     </ErrorBackground>

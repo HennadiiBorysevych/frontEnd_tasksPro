@@ -1,66 +1,72 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useAuth, useSupport } from 'hooks';
-import { supportSchema } from 'validationSchemas';
+import PropTypes from 'prop-types';
 
-import { Input, PopUpLayout, PrimaryButton } from 'components';
+import { popUpInitialValues } from 'constants';
 
-import { Container, Wrapper } from './SupportPopUp.styled';
+import { supportSchema } from 'helpers/validationSchemas';
+import { useSupport } from 'hooks';
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14px',
-};
+import { Input, PopUpLayout, PrimaryButton } from 'ui';
+
+import {
+  ErrorMessage,
+  Form,
+} from '../../assets/styles/commonFormStyles.styled';
+
+const { supportValues } = popUpInitialValues;
 
 const SupportPopUp = ({ onClose }) => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { handleSupportSubmit } = useSupport(onClose);
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
-      initialValues: { email: user?.email ?? '', comment: '' },
+      // initialValues: { email: user?.email ?? '', comment: '' },
+      initialValues: supportValues,
       onSubmit: handleSupportSubmit,
       validationSchema: supportSchema,
     });
 
   return (
-    <Container>
-      <PopUpLayout title="Need help" handleClose={onClose}>
-        <form style={formStyle} onSubmit={handleSubmit}>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email address"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-          />
-          {errors.email && touched.email ? (
-            <Wrapper>{errors.email}</Wrapper>
-          ) : null}
-          <Input
-            name="comment"
-            type="comment"
-            placeholder={'Comment'}
-            multiline={true}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.comment}
-          />
-          {errors.comment && touched.comment ? (
-            <Wrapper>{errors.comment}</Wrapper>
-          ) : null}
-          <PrimaryButton
-            type="submit"
-            hasIcon={false}
-            style={{ marginTop: '10px' }}
-          >
-            Send
-          </PrimaryButton>
-        </form>
-      </PopUpLayout>
-    </Container>
+    <PopUpLayout title="Need help" handleClose={onClose}>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          name="email"
+          type="email"
+          placeholder="Email address"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.email}
+        />
+        {errors.email && touched.email ? (
+          <ErrorMessage>{errors.email}</ErrorMessage>
+        ) : null}
+        <Input
+          name="comment"
+          type="comment"
+          placeholder={'Comment'}
+          multiline={true}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.comment}
+        />
+        {errors.comment && touched.comment ? (
+          <ErrorMessage>{errors.comment}</ErrorMessage>
+        ) : null}
+        <PrimaryButton
+          id="send-email-to-support"
+          type="submit"
+          style={{ marginTop: '10px' }} //---?-----------
+        >
+          Send
+        </PrimaryButton>
+      </Form>
+    </PopUpLayout>
   );
 };
 
 export default SupportPopUp;
+
+SupportPopUp.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};

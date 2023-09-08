@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { useAuth, useModal } from 'hooks';
 
-import { Modal, ProfilePopUp, UserAvatar } from 'components';
-import Typography from 'components/typography/Typography';
+import { ProfilePopUp, UserAvatar } from 'components';
+import { Modal, Typography } from 'ui';
 
 import { ClickWrap } from './Profile.styled';
 

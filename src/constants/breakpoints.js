@@ -1,11 +1,10 @@
 const breakpoints = {
-  XS: '320px',
-  PRESMALL: '374px',
-  SMALL: '375px',
-  PREMEDIUM: '767px',
-  MEDIUM: '768px',
-  PRELARGE: '1439px',
-  LARGE: '1440px',
+  values: {
+    nothing: 0,
+    small: 375,
+    medium: 768,
+    large: 1440,
+  },
 };
 
 export default breakpoints;

@@ -20,7 +20,8 @@ export const AvatarBg = styled.div(
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: props.theme.palette.background.bord,
+    backgroundColor: props.theme.palette.background.primary,
+
     '::before': {
       position: 'absolute',
       zIndex: '2',
@@ -29,7 +30,7 @@ export const AvatarBg = styled.div(
       transform: 'translate( -50%, 0)',
       content: '""',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: props.theme.palette.background.modal,
     },
     '::after': {
       position: 'absolute',
@@ -39,7 +40,7 @@ export const AvatarBg = styled.div(
       transform: 'translate( -50%, 54%)',
       content: '""',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: props.theme.palette.background.modal,
     },
   }),
   props => ({

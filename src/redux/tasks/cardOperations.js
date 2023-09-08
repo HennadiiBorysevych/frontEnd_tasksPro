@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
 const fetchTasks = createAsyncThunk(
   'tasks/fetchAll',
   async (boardId, thunkAPI) => {
@@ -24,9 +25,13 @@ const getTask = createAsyncThunk('tasks/getTask', async (taskId, thunkAPI) => {
     return thunkAPI.rejectWithValue(e.message);
   }
 });
+
 const addTask = createAsyncThunk('tasks/addTask', async (name, thunkAPI) => {
+  console.log(name);
   try {
     const response = await axios.post('/api/cards', name);
+    console.log(response.data);
+
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue(e.message);

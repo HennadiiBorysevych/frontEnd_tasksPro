@@ -1,4 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+
 import { updateOrdersFromArray } from 'helpers';
 
 import cardOperations from './cardOperations';
@@ -50,12 +51,15 @@ const cardSlice = createSlice({
           createdAt,
           updatedAt,
           ...rest
-        } = action.payload.data;
-        state.items.push({
+        } = action.payload;
+        console.log(action.payload);
+
+        state.items.unshift({
           id,
           order,
           ...rest,
         });
+        console.log(state.items);
       })
       .addCase(cardOperations.updateTask.fulfilled, (state, action) => {
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;

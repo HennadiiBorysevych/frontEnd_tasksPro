@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+
+import { SharedLayout } from 'layouts';
+
+import { useBoardContext } from 'contexts';
 import {
   useBackground,
-  useBoardContext,
   useBoards,
   useCards,
   useColumns,
   useModal,
 } from 'hooks';
-import SharedLayout from 'sharedLayout/SharedLayout';
 
-import { BoardPopUp, Modal } from 'components';
-import SkeletonLoader from 'components/skeleton/SkeletonLoader';
+import { BoardPopUp, SkeletonLoader } from 'components';
+import { Modal } from 'ui';
 
 import {
   BoardWrap,
@@ -21,7 +23,6 @@ import {
 } from './styles/homePage.styled';
 
 const HomePage = () => {
-  const [firstLoad, setFirstLoad] = useState(true);
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
@@ -35,20 +36,20 @@ const HomePage = () => {
     getAllBoards();
   }, [getAllBoards]);
 
+  const hasBoards = allBoards.length > 0;
+
   // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (firstLoad && allBoards.length > 0) {
+    if (activeBoardId && hasBoards) {
       const firstBoard = allBoards[0];
-      if (firstBoard) {
-        setActiveBoard(firstBoard.id);
 
+      if (firstBoard) {
+        setActiveBoard(firstBoard?.id);
         const encodedTitle = encodeURIComponent(firstBoard.title);
         navigate(`${encodedTitle}`);
       }
-      setFirstLoad(false);
-      setActiveBoard(null);
     }
-  }, [allBoards, firstLoad, navigate, setActiveBoard]);
+  }, [allBoards, navigate, activeBoardId, setActiveBoard, hasBoards]);
 
   useEffect(() => {
     async function fetchData() {
@@ -73,7 +74,11 @@ const HomePage = () => {
             ) : (
               <WelcomeText>
                 Before starting your project, it is essential to{' '}
-                <CreateBoardLink onClick={toggleModal}>
+                <CreateBoardLink
+                  href="#"
+                  aria-label="Create board"
+                  onClick={toggleModal}
+                >
                   create a board
                 </CreateBoardLink>{' '}
                 to visualize and track all the necessary tasks and milestones.

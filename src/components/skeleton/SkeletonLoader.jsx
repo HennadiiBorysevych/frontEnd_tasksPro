@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import PropTypes from 'prop-types';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import {
@@ -51,7 +52,7 @@ const SkeletonLoader = ({ page }) => {
   const baseColor =
     theme === 'Dark' ? '#161616' : theme === 'Violet' ? '#5255BC' : '#eeeeee';
   const highlightColor =
-    theme === 'Dark' ? '#1f1f1f' : theme === 'Violet' ? '#ECEDFD' : '#FCFCFC';
+    theme === 'Dark' ? '#1f1f1f' : theme === 'Violet' ? '#ECEDFD' : '#FCFCFC'; //---перевірити------------------
 
   return (
     <>
@@ -213,3 +214,7 @@ const SkeletonLoader = ({ page }) => {
 };
 
 export default SkeletonLoader;
+
+SkeletonLoader.propTypes = {
+  page: PropTypes.string.isRequired,
+};

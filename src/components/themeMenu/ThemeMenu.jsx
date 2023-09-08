@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from 'hooks';
 
-import { SvgIcon } from 'components';
+import { useAuth } from 'hooks';
 
 import {
   DropdownButton,
+  DropdownIcon,
   DropdownItem,
   DropdownMenu,
   DropdownWrapper,
@@ -60,14 +60,14 @@ const ThemeMenu = () => {
 
   return (
     <DropdownWrapper>
-      <DropdownButton onClick={toggleDropdown}>
+      <DropdownButton onClick={toggleDropdown} id="switcher-theme-button">
         Theme
-        <SvgIcon
+        <DropdownIcon
           svgName="icon-arrow-down"
           size="16"
           variant="header"
           isActive="true"
-        ></SvgIcon>
+        />
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>

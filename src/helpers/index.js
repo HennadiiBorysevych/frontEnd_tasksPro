@@ -7,6 +7,5 @@ export {
   updateOrdersFromIndex,
 } from './dragNDropActions';
 export { default as encodedTitleInUrl } from './encodedTitleInUrl';
-export { default as getPriorityStyles } from './getPriorityStyles';
-export { default as hexToRgb } from './hexToRgb';
+export { default as getPriorityColor } from './getPriorityColor';
 export { default as media } from './media';

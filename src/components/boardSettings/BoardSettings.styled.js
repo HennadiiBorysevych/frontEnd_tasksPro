@@ -1,46 +1,38 @@
-import Typography from 'components/typography/Typography';
+import { Typography } from 'ui';
 
 import styled from '@emotion/styled';
 
 export const BoardDecor = styled.div`
   margin-bottom: 40px;
+  margin-top: 14px;
 `;
 
 export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: calc(8 * 32px);
 
   & + & {
     margin-top: 24px;
   }
 `;
 
-export const RadioField = styled.input`
-  position: fixed;
-  opacity: 0;
-  pointer-events: none;
+export const RadioField = styled.input(
+  {
+    position: 'fixed',
+    opacity: 0,
+    pointerEvents: 'none',
+  },
+  props => ({
+    '&:hover ~ .background-label, &:checked ~ .background-label': {
+      outline: `1px solid ${props.theme.palette.accent.main}`,
+    },
+  })
+);
 
-  &:hover ~ .background-label,
-  &:checked ~ .background-label {
-    outline: 1px solid ${props => props.theme.palette.hover.inputAndIcon};
+export const IconLabel = styled.label`
+  & + & {
+    margin-left: 8px;
   }
-
-  &:hover ~ .icon-label,
-  &:checked ~ .icon-label {
-    color: rgba(255, 255, 255, 0.1);
-  }
-`;
-
-export const IconContainer = styled.div`
-  color: rgba(255, 255, 255, 0.1);
-  margin-right: 8px;
-  cursor: pointer;
-`;
-
-export const Svg = styled.svg`
-  width: 18px;
-  height: 18px;
 `;
 
 export const BoardText = styled(Typography)`
@@ -73,6 +65,6 @@ export const BackgroundImage = styled.div(props => ({
     transform: 'scale(1.1)',
   },
   '&:active, &.active': {
-    border: `1px solid ${props.theme.palette.background.buttonPlus}`,
+    border: `1px solid ${props.theme.palette.background.buttonPlusSideBar}`,
   },
 }));
