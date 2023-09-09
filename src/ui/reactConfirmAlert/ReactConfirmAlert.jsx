@@ -26,7 +26,6 @@ const ReactConfirmAlert = ({
   onToggle,
   ownerId,
 }) => {
-  // console.log(typeof ownerId); // дописати prop-types
   const { allCards } = useCards();
   const handleDeleteConfirm = () => {
     onDeleteAction();
@@ -97,5 +96,6 @@ ReactConfirmAlert.propTypes = {
   onDeleteAction: PropTypes.func.isRequired,
   item: PropTypes.string.isRequired,
   owner: PropTypes.string.isRequired,
+  ownerId: PropTypes.string,
   onToggle: PropTypes.func,
 };

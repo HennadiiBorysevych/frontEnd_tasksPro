@@ -51,6 +51,6 @@ export const ConfirmDeleteButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: rgb(239, 68, 68);
+    background-color: #ef4444;
   }
 `;

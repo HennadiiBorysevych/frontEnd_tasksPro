@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+
 import { useAuth } from 'hooks';
 
 const PrivatePage = ({ component: Component, redirectTo = '/welcome' }) => {

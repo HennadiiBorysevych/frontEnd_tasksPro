@@ -16,8 +16,6 @@ const CardPopUp = ({
   handleModalClose,
   ...rest
 }) => {
-  // console.log(typeof columnId); //дописати prop-types
-
   const {
     priority,
     deadline,
@@ -80,8 +78,16 @@ const CardPopUp = ({
 export default CardPopUp;
 
 CardPopUp.propTypes = {
-  columnId: PropTypes.string.isRequired,
-  cardIndex: PropTypes.number.isRequired,
-  // card:
+  columnId: PropTypes.string,
+  cardIndex: PropTypes.number,
+  card: PropTypes.shape({
+    cardOwner: PropTypes.string,
+    deadline: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.string,
+    order: PropTypes.number,
+    priority: PropTypes.string,
+    title: PropTypes.string,
+  }),
   handleModalClose: PropTypes.func.isRequired,
 };

@@ -48,9 +48,10 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(authOperations.logOut.fulfilled, state => {
-        state.user = { name: null, email: null };
-        state.token = null;
-        state.isLoggedIn = false;
+        return (state = initialState);
+        // state.user = { name: null, email: null };
+        // state.token = null;
+        // state.isLoggedIn = false;
       })
       .addCase(authOperations.fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload.user;

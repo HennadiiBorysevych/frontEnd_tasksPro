@@ -11,8 +11,8 @@ const SignOut = () => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
     navigate('/welcome');
   };
 

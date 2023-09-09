@@ -23,7 +23,10 @@ const useAuth = () => {
 
   const signOut = () => dispatch(authOperations.logOut());
 
-  const googleAuth = token => dispatch(authOperations.googleAuth(token));
+  const googleAuth = useCallback(
+    token => dispatch(authOperations.googleAuth(token)),
+    [dispatch]
+  );
 
   const updateProfileData = updatedProfile =>
     dispatch(authOperations.updateUserInfo(updatedProfile));

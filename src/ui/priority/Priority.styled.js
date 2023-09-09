@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+
 import { getPriorityColor } from 'helpers';
 
 export const PriorityList = styled.ul(({ variant }) => ({

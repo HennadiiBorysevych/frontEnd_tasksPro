@@ -51,10 +51,10 @@ const cardSlice = createSlice({
           createdAt,
           updatedAt,
           ...rest
-        } = action.payload;
-        console.log(action.payload);
+        } = action.payload.data;
+        console.log(action.payload.data);
 
-        state.items.unshift({
+        state.items.push({
           id,
           order,
           ...rest,

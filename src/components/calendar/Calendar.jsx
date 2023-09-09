@@ -63,7 +63,6 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
     if (selectedDateWithoutTime < todayWithoutTime) {
       toast.error('You cannot select a deadline date in the past');
-      return;
     } else {
       setSelectedDate(value);
     }

@@ -12,7 +12,6 @@ import {
 } from './CardSettings.styled';
 
 const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
-  // console.log(typeof setDeadline); // дописати prop-types
   function changeValue(value) {
     handlePriority(value);
   }
@@ -45,7 +44,7 @@ export default CardsSettings;
 
 CardsSettings.propTypes = {
   priority: PropTypes.string.isRequired,
-  // deadline: PropTypes.shape({}),
+  deadline: PropTypes.instanceOf(Date),
   handlePriority: PropTypes.func.isRequired,
   setDeadline: PropTypes.func.isRequired,
 };

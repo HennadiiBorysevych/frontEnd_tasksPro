@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 
-// import PropTypes from 'prop-types';
 import { useAuth, useCards, useModal } from 'hooks';
 
 import { CardPopUp } from 'components';
@@ -19,8 +19,6 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
-  // console.log(typeof item);
-
   const { theme } = useAuth();
   const { removeCard } = useCards();
   const { isModal, onBackdropClick, toggleModal } = useModal();
@@ -42,6 +40,7 @@ const CardItem = ({ item }) => {
   const isDeadlineExpired = useMemo(() => {
     const deadlineDate = new Date(deadline);
     const currentDate = new Date();
+
     return deadlineDate < currentDate;
   }, [deadline]);
 
@@ -64,22 +63,18 @@ const CardItem = ({ item }) => {
           </div>
         </DetailsContainer>
         <IconsContainer>
-          {isDeadlineToday && (
-            <div>
+          <div>
+            {isDeadlineToday && !isDeadlineExpired ? (
               <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
-            </div>
-          )}
-          {!isDeadlineToday && isDeadlineExpired && (
-            <div>
+            ) : (
               <SvgIcon
                 svgName="icon-bell"
                 size={16}
-                variant="cardItem"
-                stroke="#df1010" //---?----------------
+                variant="deadlineExpired"
               />
-            </div>
-          )}
-          <button onClick={toggleModal} id="al" aria-label="Edit card button">
+            )}
+          </div>
+          <button onClick={toggleModal} aria-label="Edit card button">
             <SvgIcon svgName="icon-pencil" size={16} variant="popUp" />
           </button>
           <ReactConfirmAlert
@@ -99,3 +94,15 @@ const CardItem = ({ item }) => {
   );
 };
 export default CardItem;
+
+CardItem.propTypes = {
+  item: PropTypes.shape({
+    cardOwner: PropTypes.string,
+    deadline: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    order: PropTypes.number,
+    priority: PropTypes.string,
+    title: PropTypes.string,
+  }),
+};

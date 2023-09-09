@@ -31,12 +31,17 @@ export const SvgStyled = styled.svg`
       return props.theme.palette.background.card;
     } else if (props.variant === 'background') {
       return props.theme.palette.icon.primaryExtraLight;
+    } else if (props.variant === 'deadlineExpired') {
+      return props.theme.palette.icon.attention;
     }
     return props.theme.palette.icon.buttonPlusAvatar; //---перевірити--------
   }};
 
   &:hover {
     stroke: ${props => {
+      if (props.variant === 'deadlineExpired') {
+        return props.theme.palette.icon.attentionHover;
+      }
       if (props.variant === 'logOut') {
         return props.theme.palette.icon.signOutHover;
       } else if (

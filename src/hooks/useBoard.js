@@ -33,14 +33,12 @@ const useBoard = (currentBoard, closeModal) => {
     const { id, user, ...rest } = board;
 
     if (currentBoard) {
-      console.log('Update');
       updateExistingBoard({
         boardId: id,
         updatedData: rest,
       });
     } else {
       addNewBoard(rest);
-      console.log('Add');
     }
     if (typeof closeModal === 'function') {
       closeModal();

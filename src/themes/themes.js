@@ -58,6 +58,8 @@ const darkTheme = createTheme({
     },
     icon: {
       activeSideBar: whiteBase,
+      attention: '#df1010',
+      attentionHover: '#ef4444',
       buttonPlusAvatar: blackBase,
       buttonPlusPrimary: whiteBase,
       buttonPlusSecondary: '#121212',
@@ -123,6 +125,8 @@ const lightTheme = createTheme({
     },
     icon: {
       activeSideBar: blackBase,
+      attention: '#df1010',
+      attentionHover: '#ef4444',
       buttonPlusAvatar: blackBase,
       buttonPlusPrimary: whiteBase,
       buttonPlusSecondary: whiteBase,
@@ -188,6 +192,8 @@ const violetTheme = createTheme({
     },
     icon: {
       activeSideBar: whiteBase,
+      attention: '#df1010',
+      attentionHover: '#ef4444',
       buttonPlusAvatar: blackBase,
       buttonPlusPrimary: blackBase,
       buttonPlusSecondary: whiteBase,

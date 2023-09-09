@@ -21,14 +21,15 @@ const SideBarBoardsList = () => {
 
   const handleActiveBoard = async boardId => {
     try {
-      getOneBoard(boardId);
-      setActiveBoard(boardId);
+      await getOneBoard(boardId);
+      await setActiveBoard(boardId);
 
       const activatedBoard = await allBoards.find(
         board => board.id === boardId
       );
 
       const { title } = activatedBoard;
+
       if (title) {
         encodedTitleInUrl(title);
       }

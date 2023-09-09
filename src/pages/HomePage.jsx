@@ -40,12 +40,12 @@ const HomePage = () => {
 
   // Отримання id активної дошки та розкодування id в назву і її додавання до адресного рядка
   useEffect(() => {
-    if (activeBoardId && hasBoards) {
+    if (hasBoards) {
       const firstBoard = allBoards[0];
 
       if (firstBoard) {
         setActiveBoard(firstBoard?.id);
-        const encodedTitle = encodeURIComponent(firstBoard.title);
+        const encodedTitle = encodeURIComponent(firstBoard?.title);
         navigate(`${encodedTitle}`);
       }
     }
@@ -60,7 +60,7 @@ const HomePage = () => {
     }
 
     fetchData();
-  }, [activeBoardId, getAllCards, getAllColumns]);
+  }, [activeBoardId, hasBoards, getAllCards, getAllColumns]);
 
   return (
     <SharedLayout>
