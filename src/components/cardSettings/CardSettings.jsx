@@ -24,10 +24,10 @@ const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
           priority={priority}
           setPriority={changeValue}
           options={[
-            { value: 'low' },
-            { value: 'medium' },
-            { value: 'high' },
-            { value: 'without' },
+            { value: 'Low' },
+            { value: 'Medium' },
+            { value: 'High' },
+            { value: 'Without' },
           ]}
           variant="CardSettings"
         />

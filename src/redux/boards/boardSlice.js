@@ -29,12 +29,15 @@ const getActions = type => extraActions.map(action => action[type]);
 const boardSlice = createSlice({
   name: 'boards',
   initialState,
-  reducers: {},
+  reducers: {
+    resetBoardState: state => {
+      return initialState;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(boardOperations.fetchBoards.fulfilled, (state, action) => {
         state.items = action.payload;
-        console.log(action.payload.length);
         if (action.payload.length > 0) {
           state.activeBoardIndex = action.payload[0].id;
         } // рахуємо з 1
@@ -99,5 +102,5 @@ const extraActions = [
   boardOperations.getBoard,
   boardOperations.updateBoard,
 ];
-
+export const { resetBoardState } = boardSlice.actions;
 export default boardSlice.reducer;

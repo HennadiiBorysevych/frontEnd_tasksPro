@@ -42,7 +42,7 @@ export const Radio = styled.input(props => ({
       width: '14px',
       height: '14px',
       backgroundColor:
-        props.value === 'without'
+        props.value === 'Without'
           ? props.theme.palette.background.withoutPriorityBackground
           : getPriorityColor(props.value),
     },
@@ -74,7 +74,7 @@ export const Radio = styled.input(props => ({
           outline: '1px solid',
           backgroundColor: 'transparent',
           outlineColor:
-            props.value === 'without'
+            props.value === 'Without'
               ? props.theme.palette.background.withoutPriorityBackground
               : getPriorityColor(props.value),
         },

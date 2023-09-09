@@ -52,10 +52,10 @@ const HomePage = () => {
   }, [allBoards, navigate, activeBoardId, setActiveBoard, hasBoards]);
 
   useEffect(() => {
-    async function fetchData() {
+     function fetchData() {
       if (activeBoardId) {
-        await getAllColumns(activeBoardId);
-        await getAllCards(activeBoardId);
+         getAllColumns(activeBoardId);
+         getAllCards(activeBoardId);
       }
     }
 

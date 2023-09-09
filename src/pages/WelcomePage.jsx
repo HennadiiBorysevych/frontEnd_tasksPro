@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+
 import { images } from 'constants';
 
 import { generateContentImages } from 'helpers';
+import { useBoards } from 'hooks';
 
 import { GoogleAuth, Logo } from 'components';
 
@@ -13,7 +16,13 @@ import {
 } from './styles/welcomePage.styled';
 
 const WelcomePage = () => {
+  const { resetBoardsState } = useBoards();
+
   const devicePixelRatio = window.devicePixelRatio || 1;
+
+  useEffect(() => {
+    resetBoardsState();
+  }, [resetBoardsState]);
 
   const matchedWelcomeImage = generateContentImages(
     images.welcomeImages,

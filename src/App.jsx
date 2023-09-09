@@ -23,7 +23,7 @@ const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 
 const App = () => {
   const { isLoggedIn, isFetchingCurrent, theme, fetchUser } = useAuth();
-
+  
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);

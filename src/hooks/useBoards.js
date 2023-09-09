@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { boardOperations, boardSelectors } from 'redux/boards';
 
+import { resetBoardState } from '../redux/boards/boardSlice';
 const useBoards = () => {
   const activeBoard = useSelector(boardSelectors.selectActiveBoard);
   const activeBoardId = useSelector(boardSelectors.selectActiveBoardId);
@@ -14,6 +15,10 @@ const useBoards = () => {
 
   const getAllBoards = useCallback(
     () => dispatch(boardOperations.fetchBoards()),
+    [dispatch]
+  );
+  const resetBoardsState = useCallback(
+    () => dispatch(resetBoardState()),
     [dispatch]
   );
 
@@ -50,6 +55,7 @@ const useBoards = () => {
     addNewBoard,
     updateExistingBoard,
     removeBoard,
+    resetBoardsState
   };
 };
 

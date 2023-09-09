@@ -32,10 +32,10 @@ const BoardHead = () => {
     setTitle(e.currentTarget.value);
   }, []);
 
-  const handleBoardChange = async () => {
+  const handleBoardChange =  () => {
     const { id, user, ...rest } = editingBoard;
 
-    await updateExistingBoard({
+     updateExistingBoard({
       boardId: id,
       updatedData: { ...rest, title: title },
     });
