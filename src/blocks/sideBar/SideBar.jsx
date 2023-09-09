@@ -29,7 +29,7 @@ const SideBar = () => {
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
-        <CustomScrollBar width="100%" overflow="auto">
+        <CustomScrollBar width="100%" height="100%" overflow="auto">
           <div>
             <Logo variant="bord" />
             <TitleBoardList variant="taskDescription">My boards</TitleBoardList>
