@@ -1,6 +1,8 @@
-import { GoogleAuth, Logo } from 'components';
+import { images } from 'constants';
 
-import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
+import { generateContentImages } from 'helpers';
+
+import { GoogleAuth, Logo } from 'components';
 
 import { Background, Container } from './styles/commonStyles.styled';
 import {
@@ -11,12 +13,19 @@ import {
 } from './styles/welcomePage.styled';
 
 const WelcomePage = () => {
+  const devicePixelRatio = window.devicePixelRatio || 1;
+
+  const matchedWelcomeImage = generateContentImages(
+    images.welcomeImages,
+    devicePixelRatio,
+    'image/webp'
+  );
   return (
     <Background>
       <Container>
         <WelcomeContainer>
           <UserImage
-            src={userAvatar}
+            src={matchedWelcomeImage.src}
             alt="user-avatar"
             width={124}
             height={124}

@@ -36,12 +36,25 @@ const columnSlice = createSlice({
       .addCase(columnOperations.fetchColumns.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(columnOperations.moveColumn.fulfilled, (state, action) => {
-        state.items = updateOrdersFromArray(state.items, action.payload);
+      .addCase(columnOperations.getColumn.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          column => column.id === action.payload
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
       })
       .addCase(columnOperations.addColumn.fulfilled, (state, action) => {
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
+        console.log(action.payload.data);
         state.items.push({ id, ...rest });
+      })
+      .addCase(columnOperations.updateColumn.fulfilled, (state, action) => {
+        const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
+        const index = state.items.findIndex(column => column.id === id);
+        if (index !== -1) {
+          state.items[index] = { id, ...rest };
+        }
       })
       .addCase(columnOperations.deleteColumn.fulfilled, (state, action) => {
         const index = state.items.findIndex(
@@ -51,20 +64,8 @@ const columnSlice = createSlice({
           state.items.splice(index, 1);
         }
       })
-      .addCase(columnOperations.getColumn.fulfilled, (state, action) => {
-        const index = state.items.findIndex(
-          column => column.id === action.payload
-        );
-        if (index !== -1) {
-          state.items[index] = action.payload;
-        }
-      })
-      .addCase(columnOperations.updateColumn.fulfilled, (state, action) => {
-        const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
-        const index = state.items.findIndex(column => column.id === id);
-        if (index !== -1) {
-          state.items[index] = { id, ...rest };
-        }
+      .addCase(columnOperations.moveColumn.fulfilled, (state, action) => {
+        state.items = updateOrdersFromArray(state.items, action.payload);
       })
       .addMatcher(isAnyOf(...getActions('pending')), handlePending)
       .addMatcher(isAnyOf(...getActions('fulfilled')), handleFulfilled)

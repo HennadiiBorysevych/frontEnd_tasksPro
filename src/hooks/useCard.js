@@ -6,7 +6,7 @@ const cardModel = {
   title: '',
   description: '',
   priority: 'without',
-  deadline: 0,
+  deadline: '',
 };
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
@@ -29,8 +29,6 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [descriptionChecker, setDescriptionChecker] = useState(false);
 
   const handleCardSubmit = e => {
-    e.preventDefault();
-
     if (title === '' && !currentCard) {
       seTitleChecker(true);
       setTimeout(() => {
@@ -47,13 +45,14 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
     }
     const { id, createdAt, order, updatedAt, ...rest } = card;
 
-    currentCard
-      ? updateExistingCard({
-          taskId: id,
-          updatedData: { orderTask: order, ...rest },
-        })
-      : addNewCard(rest);
-    console.log('Add');
+    if (currentCard) {
+      updateExistingCard({
+        taskId: id,
+        updatedData: { orderTask: order, ...rest },
+      });
+    } else {
+      addNewCard(rest);
+    }
 
     closeModal();
   };

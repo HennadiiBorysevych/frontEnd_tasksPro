@@ -24,13 +24,14 @@ export const SupportBox = styled.button(
   })
 );
 
-export const SupportPlate = styled.div`
-  /* display: block; */
+export const SupportPlate = styled.img`
+  display: block;
   margin-bottom: 14px;
 `;
 
-export const SupportOffer = styled.p(
+export const SupportOffer = styled.span(
   {
+    display: 'block',
     marginBottom: '18px',
     fontSize: '12px',
     fontWeight: '400',

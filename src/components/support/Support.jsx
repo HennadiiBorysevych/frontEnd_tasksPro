@@ -3,12 +3,12 @@ import React from 'react';
 import { images } from 'constants';
 
 import { useToggleModalAndSideBar } from 'contexts';
+import { generateContentImages } from 'helpers';
 import { useModal } from 'hooks';
 
 import { SupportPopUp } from 'components';
 import { Modal, SvgIcon } from 'ui';
 
-// import image from 'assets/images/welcomeAndPlate/plate.png';
 import {
   AppName,
   SupportBox,
@@ -22,6 +22,14 @@ const Support = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { toggleModalAndSideBar } = useToggleModalAndSideBar();
 
+  const devicePixelRatio = window.devicePixelRatio || 1;
+
+  const matchedPlantImage = generateContentImages(
+    images.plantsImages,
+    devicePixelRatio,
+    'image/webp'
+  );
+
   const toggleWindows = () => {
     toggleModal();
     toggleModalAndSideBar();
@@ -30,21 +38,13 @@ const Support = () => {
   return (
     <>
       <SupportBox onClick={toggleWindows}>
-        {images.plants.map((plant, index) => (
-          <>
-            <SupportPlate key={index}>
-              <picture>
-                <source
-                  srcSet={plant.src}
-                  type={plant.type}
-                  media={`(min-device-pixel-ratio: ${plant.dpi}) (min-resolution: ${plant.minResolution}dpi) (min-resolution: ${plant.dpi}dppx)`}
-                />
-                <img src={plant.src} alt="Plant" />
-              </picture>
-            </SupportPlate>
-          </>
-        ))}
-        {/* <SupportPlate src={image} alt="plate" width={54} height={78} /> */}
+        <SupportPlate
+          src={matchedPlantImage.src}
+          alt="plant"
+          width={54}
+          height={78}
+          onError={e => console.error('Помилка завантаження зображення:', e)}
+        />
         <SupportOffer>
           If you need help with <AppName>TaskPro</AppName>, check out our
           support resources or reach out to our customer support team.

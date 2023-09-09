@@ -16,12 +16,16 @@ const BoardHead = () => {
   const [title, setTitle] = useState(editingBoard?.title);
 
   useEffect(() => {
-    const updatedBoard = allBoards?.find(board => board.id === activeBoardId);
-    setEditingBoard(updatedBoard);
+    if (activeBoardId) {
+      const updatedBoard = allBoards?.find(board => board.id === activeBoardId);
+      setEditingBoard(updatedBoard);
+    }
   }, [activeBoardId, allBoards]);
 
   useEffect(() => {
-    setTitle(editingBoard?.title);
+    if (editingBoard) {
+      setTitle(editingBoard?.title);
+    }
   }, [editingBoard]);
 
   const handleTitle = useCallback(e => {
@@ -38,13 +42,13 @@ const BoardHead = () => {
     encodedTitleInUrl(title);
   };
 
-  const decodedTitle = decodeURIComponent(editingBoard.id);
+  const decodedTitle = decodeURIComponent(editingBoard?.id);
 
   return (
     <>
       <Header
-        boardName={editingBoard.title}
-        active={decodedTitle === activeBoard.id}
+        boardName={editingBoard?.title}
+        active={decodedTitle === activeBoard?.id}
       >
         {!!decodedTitle && (
           <FieldInput

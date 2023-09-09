@@ -34,9 +34,19 @@ const boardSlice = createSlice({
     builder
       .addCase(boardOperations.fetchBoards.fulfilled, (state, action) => {
         state.items = action.payload;
+        console.log(action.payload.length);
         if (action.payload.length > 0) {
           state.activeBoardIndex = action.payload[0].id;
         } // рахуємо з 1
+      })
+      .addCase(boardOperations.getBoard.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          board => board.id === action.payload.board.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload.board;
+          state.activeBoardIndex = action.payload.board.id;
+        }
       })
       .addCase(boardOperations.addBoard.fulfilled, (state, action) => {
         const {
@@ -49,22 +59,6 @@ const boardSlice = createSlice({
 
         state.items.unshift({ id, title, icon, background, isActive });
         state.activeBoardIndex = id;
-      })
-      .addCase(boardOperations.deleteBoard.fulfilled, (state, action) => {
-        const deletedBoardId = action.payload;
-        state.items = state.items.filter(item => item.id !== deletedBoardId);
-        if (state.activeBoardIndex === deletedBoardId) {
-          state.activeBoardIndex = null;
-        }
-      })
-      .addCase(boardOperations.getBoard.fulfilled, (state, action) => {
-        const index = state.items.findIndex(
-          board => board.id === action.payload.board.id
-        );
-        if (index !== -1) {
-          state.items[index] = action.payload.board;
-          state.activeBoardIndex = action.payload.board.id;
-        }
       })
       .addCase(boardOperations.updateBoard.fulfilled, (state, action) => {
         const {
@@ -83,6 +77,13 @@ const boardSlice = createSlice({
             background,
             isActive,
           };
+        }
+      })
+      .addCase(boardOperations.deleteBoard.fulfilled, (state, action) => {
+        const deletedBoardId = action.payload;
+        state.items = state.items.filter(item => item.id !== deletedBoardId);
+        if (state.activeBoardIndex === deletedBoardId) {
+          state.activeBoardIndex = null;
         }
       })
       .addMatcher(isAnyOf(...getActions('pending')), handlePending)

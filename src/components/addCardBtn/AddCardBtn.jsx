@@ -13,7 +13,7 @@ const AddCardBtn = ({ columnId, cardIndex }) => {
   return (
     <>
       <PrimaryButton
-        id="add-card-button"
+        aria-label="Add card button"
         hasIcon={true}
         type="button"
         svgName={'icon-plus'}

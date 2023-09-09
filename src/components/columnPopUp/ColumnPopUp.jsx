@@ -9,16 +9,11 @@ import { useColumn } from 'hooks';
 
 import { Input, PopUpLayout, PrimaryButton } from 'ui';
 
-import {
-  ErrorMessage,
-  Form,
-} from '../../assets/styles/commonFormStyles.styled';
+import { ErrorMessage, Form } from 'assets/styles/commonFormStyles.styled';
 
 const { columnValues } = popUpInitialValues;
 
 const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
-  // console.log(typeof column); // дописати prop-types
-
   const { handleColumnSubmit } = useColumn(
     column,
     columnIndex,
@@ -70,8 +65,22 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
 export default ColumnPopUp;
 
 ColumnPopUp.propTypes = {
-  boardId: PropTypes.string.isRequired,
-  columnIndex: PropTypes.number.isRequired,
-  column: PropTypes.shape({}),
+  boardId: PropTypes.string,
+  columnIndex: PropTypes.number,
+  column: PropTypes.shape({
+    id: PropTypes.string,
+    columnOwner: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        cardOwner: PropTypes.string,
+        order: PropTypes.number,
+        deadline: PropTypes.string,
+        id: PropTypes.string,
+        priority: PropTypes.string,
+        title: PropTypes.string,
+        description: PropTypes.string,
+      })
+    ),
+  }),
   handleModalClose: PropTypes.func.isRequired,
 };

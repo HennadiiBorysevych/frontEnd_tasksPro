@@ -10,7 +10,7 @@ import {
   SignOut,
   Support,
 } from 'components';
-import { ButtonPlus, Modal } from 'ui';
+import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
 
 import {
   CreateBoard,
@@ -29,29 +29,31 @@ const SideBar = () => {
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
-        <div>
-          <Logo variant="bord" />
-          <TitleBoardList variant="taskDescription">My boards</TitleBoardList>
-          <CreateBoard
-            type="button"
-            id="create-new-board-button"
-            onClick={() => {
-              toggleModal();
-              toggleModalAndSideBar();
-            }}
-          >
-            <TitleButton>
-              Create a <br />
-              new board
-            </TitleButton>
-            <ButtonPlus width={40} height={36} variant="sidemenu" size={20} />
-          </CreateBoard>
-          {activeBoardId && <SideBarBoardsList windowHeight={windowHeight} />}
-        </div>
-        <div>
-          <Support />
-          <SignOut />
-        </div>
+        <CustomScrollBar width="100%" overflow="auto">
+          <div>
+            <Logo variant="bord" />
+            <TitleBoardList variant="taskDescription">My boards</TitleBoardList>
+            <CreateBoard
+              type="button"
+              id="create-new-board-button"
+              onClick={() => {
+                toggleModal();
+                toggleModalAndSideBar();
+              }}
+            >
+              <TitleButton>
+                Create a <br />
+                new board
+              </TitleButton>
+              <ButtonPlus width={40} height={36} variant="sidemenu" size={20} />
+            </CreateBoard>
+            {activeBoardId && <SideBarBoardsList windowHeight={windowHeight} />}
+          </div>
+          <div>
+            <Support />
+            <SignOut />
+          </div>
+        </CustomScrollBar>
       </SideBarWrapper>
       {isOpen && <Overlay onClick={() => closeSideBar()} />}
       {isModal && (

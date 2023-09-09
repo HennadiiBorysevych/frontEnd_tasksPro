@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import generalStore from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { themes } from 'themes';
+import { appThemes } from 'themes';
 
 import { useAuth } from 'hooks';
 
@@ -21,13 +21,13 @@ const ThemedApp = () => {
   const themeChoice = React.useMemo(() => {
     switch (theme) {
       case 'Dark':
-        return themes.darkTheme;
+        return appThemes.darkTheme;
       case 'Light':
-        return themes.lightTheme;
+        return appThemes.lightTheme;
       case 'Violet':
-        return themes.violetTheme;
+        return appThemes.violetTheme;
       default:
-        return themes.darkTheme;
+        return appThemes.darkTheme;
     }
   }, [theme]);
 

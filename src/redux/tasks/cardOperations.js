@@ -31,7 +31,6 @@ const addTask = createAsyncThunk('tasks/addTask', async (name, thunkAPI) => {
   try {
     const response = await axios.post('/api/cards', name);
     console.log(response.data);
-
     return response.data;
   } catch (e) {
     return thunkAPI.rejectWithValue(e.message);
@@ -40,6 +39,8 @@ const addTask = createAsyncThunk('tasks/addTask', async (name, thunkAPI) => {
 const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ taskId, updatedData }, thunkAPI) => {
+    console.log(updatedData);
+    console.log(taskId);
     try {
       const response = await axios.patch(`/api/cards/${taskId}`, updatedData);
       return response.data;

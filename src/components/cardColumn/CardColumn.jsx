@@ -85,7 +85,6 @@ function CardsColumn({ provided, column }) {
             <button
               type="button"
               onClick={handleEditColumn}
-              id="edit-column-button"
               aria-label="Edit column button"
             >
               <SvgIcon
