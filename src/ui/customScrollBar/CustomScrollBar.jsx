@@ -63,5 +63,5 @@ export default CustomScrollbar;
 
 CustomScrollbar.propTypes = {
   width: PropTypes.string,
-  maxHeight: PropTypes.number,
+  maxHeight: PropTypes.string,
 };

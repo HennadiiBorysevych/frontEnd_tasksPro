@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 export const BoardList = styled.ul(
   {
     position: 'relative',
-    marginBbottom: '40px',
     height: '100%',
     maxHeight: '256px',
     overflowY: 'auto',
