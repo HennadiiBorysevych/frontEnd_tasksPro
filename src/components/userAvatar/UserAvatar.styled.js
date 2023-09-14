@@ -10,17 +10,24 @@ export const Avatar = styled.div(
   },
   props => ({
     margin: props.margin,
-    width: props.width,
-    height: props.height,
+    width: props.profile ? '32px' : '68px',
+    height: props.profile ? '32px' : '68px',
   })
 );
+
+export const AvatarImage = styled.img(props => ({
+  objectFit: 'cover',
+  width: props.profile ? '32px' : '68px',
+  height: props.profile ? '32px' : '68px',
+}));
 
 export const AvatarBg = styled.div(
   props => ({
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: props.theme.palette.background.bord,
+    backgroundColor: props.theme.palette.background.primary,
+
     '::before': {
       position: 'absolute',
       zIndex: '2',
@@ -28,8 +35,10 @@ export const AvatarBg = styled.div(
       left: '50%',
       transform: 'translate( -50%, 0)',
       content: '""',
+      width: props.profile ? '23px' : '10px',
+      height: props.profile ? '23px' : '10px',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: props.theme.palette.background.modal,
     },
     '::after': {
       position: 'absolute',
@@ -38,8 +47,10 @@ export const AvatarBg = styled.div(
       left: '50%',
       transform: 'translate( -50%, 54%)',
       content: '""',
+      width: props.profile ? '62px' : '28px',
+      height: props.profile ? '62px' : '28px',
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: props.theme.palette.background.modal,
     },
   }),
   props => ({

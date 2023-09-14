@@ -1,49 +1,57 @@
-const { default: styled } = require('@emotion/styled');
+import styled from '@emotion/styled/macro';
+
+import { SvgIcon } from 'ui';
 
 export const DropdownWrapper = styled.div`
   position: relative;
 `;
 
-export const DropdownButton = styled.button`
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.28px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+export const DropdownIcon = styled(SvgIcon)``;
 
-  &:hover {
-    color: ${props => props.theme.palette.hover.primaryButton}
-  }
-`;
+export const DropdownButton = styled.button(props => ({
+  fontSize: '14px',
+  fontWeight: 500,
+  letterSpacing: '-0.28px',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
 
-export const DropdownMenu = styled.ul`
-  list-style: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 2;
+  '&:hover': {
+    color: props.theme.palette.accent.light,
+    [DropdownIcon]: {
+      stroke: props.theme.palette.accent.light,
+    },
+  },
+}));
 
-  padding: 18px 44px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-radius: 8px;
-  border: 1px solid ${props => props.theme.palette.primary.border};
-  background: ${props => `${props.theme.palette.background.dropdown}`};
-  box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
-`;
+export const DropdownMenu = styled.ul(props => ({
+  position: 'absolute',
+  top: '100%',
+  left: 0,
+  zIndex: 2,
 
-export const DropdownItem = styled.li`
-  color: ${props => `${props.theme.palette.text.primary}`};
-  font-size: 14px;
-  letter-spacing: -0.28px;
+  width: '100px',
+  padding: '18px',
+  borderRadius: '8px',
+  border: `1px solid ${props.theme.palette.background.buttonPlusAvatar}`,
+  background: props.theme.palette.background.modal,
+  boxShadow: '0px 4px 16px 0px rgba(17, 17, 17, 0.1)',
+}));
 
-  &.selected {
-    color: ${props => `${props.theme.palette.hover.inputAndIcon}`};
-  }
+export const DropdownItem = styled.li(props => ({
+  color: props.theme.palette.text.themeMenuItems,
+  fontSize: '14px',
+  letterSpacing: '-0.28px',
 
-  &:hover {
-    cursor: pointer;
-  }
-`;
+  '& + &': {
+    marginTop: '4px',
+  },
+
+  '&.selected': {
+    color: props.theme.palette.accent.main,
+  },
+
+  '&:hover': {
+    cursor: 'pointer',
+  },
+}));

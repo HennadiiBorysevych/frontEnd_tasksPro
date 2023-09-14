@@ -1,4 +1,3 @@
-export { default as backgroundImage } from './backgroundImage';
 export { default as clearEncodedTitleInUrl } from './clearEncodedTitleInUrl';
 export {
   processDndResult,
@@ -6,7 +5,12 @@ export {
   updateOrdersFromArray,
   updateOrdersFromIndex,
 } from './dragNDropActions';
-export { default as encodedTitleInUrl } from './encodedTitleInUrl';
-export { default as getPriorityStyles } from './getPriorityStyles';
-export { default as hexToRgb } from './hexToRgb';
-export { default as media } from './media';
+export { default as encodeTitleInUrl } from './encodeTitleInUrl';
+export { default as formatSelectedDate } from './formatSelectedDate';
+export { default as formatShortDeadlineForMarkup } from './formatShortDeadlineForMarkup';
+export { default as formatShortWeekday } from './formatShortWeekday';
+export { default as generateContentImages } from './generateContentImages';
+export { default as getBackgroundImage } from './getBackgroundImage';
+export { default as getCurrentDeadlineDate } from './getCurrentDeadlineDate';
+export { default as getPriorityColor } from './getPriorityColor';
+export { default as getShortDeadlineDate } from './getShortDeadlineDate';

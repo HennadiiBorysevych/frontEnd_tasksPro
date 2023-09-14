@@ -1,23 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from 'hooks';
 
-import { SvgIcon } from 'components';
+import { useAuthCollector } from 'hooks';
+
+import { SvgIcon } from 'ui';
 
 import { ButtonSignOut, TextSignOut } from './SignOut.styled';
 
 const SignOut = () => {
-  const { signOut } = useAuth();
+  const { signOut } = useAuthCollector();
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
     navigate('/welcome');
   };
 
   return (
     <>
-      <ButtonSignOut type="button" onClick={handleSignOut}>
+      <ButtonSignOut id="sign-out-button" type="button" onClick={handleSignOut}>
         <SvgIcon svgName="icon-login" size={32} variant="logOut" />
         <TextSignOut>Log out</TextSignOut>
       </ButtonSignOut>

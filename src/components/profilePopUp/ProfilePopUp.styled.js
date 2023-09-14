@@ -1,49 +1,23 @@
-import { media } from 'helpers';
-
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-
-  ${media.maxPRESMALL`
-   max-width: 335px;
-    `}
-
-  ${media.SMALL`
-  width: 335px;
-  `}
-
-    ${media.MEDIUM`
-  width: 400px;
-  `}
-`;
-
-export const AvatarWrap = styled.div(
-  {
-    position: 'relative',
-    margin: '0 auto 24px auto',
-    width: '68px',
-    height: '68px',
-  },
-  props => ({
-    background: props.background ?? null,
-  })
-);
+export const AvatarWrap = styled.div(props => ({
+  position: 'relative',
+  marginBottom: '14px',
+  width: '68px',
+  height: '79px',
+  backgroundColor: props.avatar ? null : props.theme.palette.background.primary,
+}));
 
 export const AddButtonWrap = styled.div(props => ({
   position: 'absolute',
   zIndex: '3',
   bottom: '0%',
   left: '50%',
-  transform: 'translate( -50%, 50%)',
-  width: '24px',
-  height: '24px',
+  transform: 'translate( -50%)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '6px',
-  backgroundColor: props.theme.palette.background.profile,
 }));
 
 export const AvatarInput = styled.input({
@@ -57,21 +31,15 @@ export const AvatarInput = styled.input({
     visibility: 'hidden',
   },
 });
-export const Input = styled.input({
-  padding: '14px 18px',
-  width: '100%',
-  fontSize: '14px',
-  borderRadius: '8px',
-});
 
 export const AvatarBg = styled.div(
   props => ({
     position: 'relative',
     width: '100%',
-    height: '100%',
+    height: '68px',
     borderRadius: '8px',
     overflow: 'hidden',
-    backgroundColor: props.theme.palette.background.bord,
+    backgroundColor: props.theme.palette.background.primary,
 
     '::before': {
       position: 'absolute',
@@ -79,9 +47,9 @@ export const AvatarBg = styled.div(
       top: '30%',
       left: '50%',
       transform: 'translate( -50%, 0)',
-      content: '""',
+      content: "''",
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: props.theme.palette.background.avatarDefault,
     },
     '::after': {
       position: 'absolute',
@@ -89,9 +57,9 @@ export const AvatarBg = styled.div(
       bottom: '0',
       left: '50%',
       transform: 'translate( -50%, 54%)',
-      content: '""',
+      content: "''",
       borderRadius: '50%',
-      backgroundColor: props.theme.palette.background.popUp,
+      backgroundColor: props.theme.palette.background.avatarDefault,
     },
   }),
   props => ({
@@ -105,9 +73,3 @@ export const AvatarBg = styled.div(
     },
   })
 );
-
-export const TextChangePassword = styled.p`
-  text-align: center;
-  color: ${props => `${props.theme.palette.text.primary}B2`};
-  cursor: pointer;
-`;

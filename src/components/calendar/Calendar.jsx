@@ -1,54 +1,56 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
+import { toast } from 'react-toastify';
 import { ThemeProvider } from '@emotion/react';
+import PropTypes from 'prop-types';
 
-import { SvgIcon } from 'components';
+import { formatSelectedDate, formatShortWeekday } from 'helpers';
+
+import { SvgIcon } from 'ui';
 
 import {
   BlockCalendar,
+  CalendarButton,
   CalendarLayout,
-  CalendarWrapper,
   CommonStyles,
-  DownWithPadding,
+  DeadlineDay,
   NextLabelWithPadding,
   PrevLabelWithPadding,
-  TextWithGap,
 } from './Calendar.styled';
 
 const Calend = ({ selectedDate, setSelectedDate }) => {
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+
   const today = new Date();
   const futureDate = new Date();
   futureDate.setFullYear(today.getFullYear() + 5);
 
   const initialSelectedDate = selectedDate || today;
+  const isDeadlineToday = selectedDate.toDateString() === today.toDateString();
 
-  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
-
-  const toggleCalendarVisibility = () => {
+  const toggleCalendarVisibility = e => {
     setIsCalendarVisible(prevValue => !prevValue);
   };
 
-  const formatShortWeekday = (locale, date) => {
-    const options = { weekday: 'short' };
-    const formattedWeekday = new Intl.DateTimeFormat(locale, options).format(
-      date
-    );
-    return formattedWeekday.slice(0, 2);
-  };
-
-  const formatSelectedDate = date => {
-    const options = {
-      month: 'long',
-      day: 'numeric',
-    };
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(
-      date
-    );
-    return formattedDate;
-  };
-
   const handleDayClick = value => {
-    setSelectedDate(value);
+    const selectedDateWithoutTime = new Date(
+      value.getFullYear(),
+      value.getMonth(),
+      value.getDate()
+    );
+
+    const todayWithoutTime = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    if (selectedDateWithoutTime < todayWithoutTime) {
+      toast.error('You cannot select a deadline date in the past');
+      return;
+    } else {
+      setSelectedDate(value);
+    }
     toggleCalendarVisibility();
   };
 
@@ -65,25 +67,24 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
   return (
     <ThemeProvider theme={{}}>
-      <div>
-        <CalendarWrapper onClick={toggleCalendarVisibility}>
-          <TextWithGap>
-            {selectedDate.toDateString() === today.toDateString()
-              ? 'Today, '
-              : ''}{' '}
+      <>
+        <CalendarButton
+          type="button"
+          onClick={toggleCalendarVisibility}
+          aria-label="open calendar for choosing deadline date"
+        >
+          <DeadlineDay>
+            {isDeadlineToday ? 'Today, ' : ''}{' '}
             {formatSelectedDate(selectedDate)}
-          </TextWithGap>
-          <DownWithPadding>
-            <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
-          </DownWithPadding>
-        </CalendarWrapper>
+          </DeadlineDay>
+          <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
+        </CalendarButton>
 
         {isCalendarVisible && (
           <CommonStyles>
             <BlockCalendar>
               <Calendar
                 value={initialSelectedDate}
-                minDate={today}
                 maxDate={futureDate}
                 formatShortWeekday={formatShortWeekday}
                 prev2Label={null}
@@ -118,11 +119,16 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
         )}
 
         {isCalendarVisible && (
-          <CalendarLayout onClick={toggleCalendarVisibility}></CalendarLayout>
+          <CalendarLayout onClick={toggleCalendarVisibility} />
         )}
-      </div>
+      </>
     </ThemeProvider>
   );
 };
 
 export default Calend;
+
+Calend.propTypes = {
+  selectedDate: PropTypes.object.isRequired,
+  setSelectedDate: PropTypes.func.isRequired,
+};

@@ -8,15 +8,15 @@ export const ButtonSignOut = styled.button`
   width: 100%;
 `;
 
-export const TextSignOut = styled.p`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.25;
-  color: ${props => props.theme.palette.text.sidemenu};
-  transition: box-shadow 0.3s, transform 0.3s;
+export const TextSignOut = styled.span(props => ({
+  display: 'block',
+  fontSize: '14px',
+  fontWeight: 500,
+  color: props.theme.palette.text.sidebarPrimary,
+  transition: 'box-shadow 0.3s, transform 0.3s',
 
-  &:hover {
-    color: ${props => props.theme.palette.primary.iconLog};
-    transform: scale(1.02);
-  }
-`;
+  '&:hover': {
+    color: props.theme.palette.icon.signOut,
+    transform: 'scale(1.02)',
+  },
+}));

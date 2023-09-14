@@ -1,15 +1,21 @@
-import React, { useMemo } from 'react';
-import { useAuth, useCards, useModal } from 'hooks';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { CardPopUp, Modal } from 'components';
-import SvgIcon from 'components/svgIcon/SvgIcon';
-import Typography from 'components/typography/Typography';
+import {
+  formatShortDeadlineForMarkup,
+  getCurrentDeadlineDate,
+  getShortDeadlineDate,
+} from 'helpers';
+import { useAuthCollector, useCardsCollector, useModal } from 'hooks';
 
-import ReactConfirmAlert from '../reactConfirmAlert/ReactConfirmAlert';
+import { Modal, ReactConfirmAlert, SvgIcon, Typography } from 'ui';
+
+import CardPopUp from '../cardPopUp/CardPopUp';
 
 import {
   CardContainer,
   Circle,
+  DeadlineMessage,
   Description,
   DetailLabel,
   Details,
@@ -20,26 +26,28 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
-  const { theme } = useAuth();
-  const { removeCard } = useCards();
+  const { theme } = useAuthCollector();
+  const { removeCard } = useCardsCollector();
   const { isModal, onBackdropClick, toggleModal } = useModal();
 
   const { title, description, priority, deadline, id } = item;
 
-  const [formattedDeadline, isDeadlineToday] = useMemo(() => {
-    const deadlineDate = new Date(deadline);
-    const formatted = `${
-      deadlineDate.getMonth() + 1
-    }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
-    const currentDate = new Date();
-    const isDeadline =
-      deadlineDate.toDateString() === currentDate.toDateString();
+  const today = new Date();
+  const currentDate = getCurrentDeadlineDate(today);
+  const currentDeadlineDate = getCurrentDeadlineDate(deadline);
+  const shortCurrentDate = getShortDeadlineDate(currentDate);
+  const shortCurrentDeadlineDate = getShortDeadlineDate(currentDeadlineDate);
 
-    return [formatted, isDeadline];
-  }, [deadline]);
+  const formattedDeadline = formatShortDeadlineForMarkup(deadline);
+  const deadlineToday = shortCurrentDate === shortCurrentDeadlineDate;
+  const deadlineExpired = shortCurrentDeadlineDate < shortCurrentDate;
 
   return (
     <CardContainer priority={priority}>
+      {deadlineExpired && <DeadlineMessage>Deadline expired</DeadlineMessage>}
+      {deadlineToday && (
+        <DeadlineMessage today={true}>Deadline is today</DeadlineMessage>
+      )}
       <Title variant="tastTitle">{title}</Title>
       <Description variant="taskDescription">{description}</Description>
       <Details>
@@ -57,12 +65,19 @@ const CardItem = ({ item }) => {
           </div>
         </DetailsContainer>
         <IconsContainer>
-          {isDeadlineToday && (
-            <div>
+          <div>
+            {deadlineToday && (
               <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
-            </div>
-          )}
-          <button onClick={toggleModal}>
+            )}
+            {deadlineExpired && (
+              <SvgIcon
+                svgName="icon-bell"
+                size={16}
+                variant="deadlineExpired"
+              />
+            )}
+          </div>
+          <button onClick={toggleModal} aria-label="Edit card button">
             <SvgIcon svgName="icon-pencil" size={16} variant="popUp" />
           </button>
           <ReactConfirmAlert
@@ -82,3 +97,15 @@ const CardItem = ({ item }) => {
   );
 };
 export default CardItem;
+
+CardItem.propTypes = {
+  item: PropTypes.shape({
+    cardOwner: PropTypes.string,
+    deadline: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    order: PropTypes.number,
+    priority: PropTypes.string,
+    title: PropTypes.string,
+  }),
+};

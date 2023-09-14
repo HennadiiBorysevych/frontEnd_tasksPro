@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { backgroundImage } from 'helpers';
 
-import useBoards from './useBoards';
+import { getBackgroundImage } from 'helpers';
+
+import useBoardsCollector from './useBoardsCollector';
 
 const useBackground = () => {
   const [bgPic, setBgPic] = useState('');
-  const { allBoards, boardIndex } = useBoards();
+  const { allBoards, boardIndex } = useBoardsCollector();
 
   const handleResize = useCallback(() => {
     const boardBG = allBoards.find(board => {
@@ -14,7 +15,7 @@ const useBackground = () => {
     if (boardBG === 'default' || boardBG === undefined || boardBG === 'empty') {
       setBgPic('#1f1f1f');
     } else {
-      const imageUrl = backgroundImage(boardBG);
+      const imageUrl = getBackgroundImage(boardBG);
       setBgPic(imageUrl);
     }
   }, [allBoards, boardIndex]);

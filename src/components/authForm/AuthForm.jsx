@@ -1,32 +1,36 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
-import { useAuth } from 'hooks';
-import { authSchema } from 'validationSchemas';
+import PropTypes from 'prop-types';
 
-import { GoogleAuth, Input, PrimaryButton } from 'components';
+import { popUpInitialValues } from 'constants';
 
-const initialValues = {
-  name: '',
-  email: '',
-  password: '',
-};
+import { authSchema } from 'helpers/validationSchemas';
+import { useAuthCollector } from 'hooks';
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14px',
-};
+import { Input, PrimaryButton } from 'ui';
+import {
+  ErrorMessage,
+  Form,
+  InputItem,
+  InputList,
+} from 'ui/commonPopUp/commonPopUp.styled';
+
+import GoogleAuth from '../googleAuth/GoogleAuth';
+
+const { authValues } = popUpInitialValues;
 
 const AuthForm = ({ value, chgForm }) => {
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp } = useAuthCollector();
 
   useEffect(() => {
+    const { name, email, password } = authValues;
+
     async function breakFormikInputs() {
       await setValues({
-        name: initialValues.name,
-        email: initialValues.email,
-        password: initialValues.password,
+        name,
+        email,
+        password,
       });
     }
     async function breakFormikTouched() {
@@ -53,15 +57,19 @@ const AuthForm = ({ value, chgForm }) => {
         }
 
         await signIn({ email, password });
+        toast.success('Welcome to TaskPro!');
       } else {
-        await signIn({ email, password });
+        const data = await signIn({ email, password });
+        if (data.payload === 'Request failed with status code 401') {
+          toast.error('Email or password are wrong');
+        }
       }
 
       resetForm();
     } catch (error) {
       if (error.response && error.response.status === 409) {
         console.error('User already exists:', error.message);
-        // Handle the 409 error (user already exists) here
+        toast.error('User with this email already exists');
       } else {
         console.error('An error occurred:', error.message);
         // Handle other errors here
@@ -84,63 +92,74 @@ const AuthForm = ({ value, chgForm }) => {
     setValues,
     setTouched,
   } = useFormik({
-    initialValues: initialValues,
+    initialValues: authValues,
     onSubmit: onHandleSubmit,
     validationSchema: authSchema,
   });
 
   return (
     <>
-      <form style={formStyle} onSubmit={handleSubmit}>
-        {value === 0 && (
-          <Input
-            name="name"
-            type="name"
-            placeholder="Enter your name"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.name}
-          />
-        )}
-        {value === 0 && errors.name && touched.name ? (
-          <span style={{ color: 'white' }}>{errors.name}</span>
-        ) : null}
-
-        <Input
-          name="email"
-          type="email"
-          placeholder="Enter your email"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-        />
-        {errors.email && touched.email ? (
-          <span style={{ color: 'white' }}>{errors.email}</span>
-        ) : null}
-
-        <Input
-          name="password"
-          type="password"
-          placeholder={formDistributor.passText}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-        />
-        {errors.password && touched.password ? (
-          <span style={{ color: 'white' }}>{errors.password}</span>
-        ) : null}
+      <Form onSubmit={handleSubmit}>
+        <InputList>
+          <InputItem>
+            {value === 0 && (
+              <Input
+                name="name"
+                type="name"
+                placeholder="Enter your name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+              />
+            )}
+            {value === 0 && errors.name && touched.name ? (
+              <ErrorMessage variant="authForm">{errors.name}</ErrorMessage>
+            ) : null}
+          </InputItem>
+          <InputItem>
+            <Input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+            />
+            {errors.email && touched.email ? (
+              <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
+            ) : null}
+          </InputItem>
+          <InputItem>
+            <Input
+              name="password"
+              type="password"
+              placeholder={formDistributor.passText}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+            />
+            {errors.password && touched.password ? (
+              <ErrorMessage variant="authForm">{errors.password}</ErrorMessage>
+            ) : null}
+          </InputItem>
+        </InputList>
 
         <PrimaryButton
-          style={{ marginTop: '14px' }}
-          hasIcon={false}
+          version="formPopUp"
           type="submit"
+          aria-label="authorisation-button"
         >
           {formDistributor.buttText}
         </PrimaryButton>
-      </form>
+      </Form>
       <GoogleAuth />
     </>
   );
 };
 
 export default AuthForm;
+
+AuthForm.propTypes = {
+  value: PropTypes.number.isRequired,
+  chgForm: PropTypes.number.isRequired,
+};

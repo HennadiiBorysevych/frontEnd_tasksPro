@@ -1,11 +1,11 @@
-import { media } from 'helpers';
+import { baseColors } from 'constants';
 
 import styled from '@emotion/styled';
 
 // WELCOME PAGE
 export const Background = styled.section`
   position: relative;
-  background-image: var(--welcomeBgColor);
+  background-image: ${baseColors.authColors.background};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@ export const Background = styled.section`
 
 export const BackgroundLogin = styled.section`
   position: relative;
-  background-image: var(--welcomeBgColor);
+  background-image: ${baseColors.authColors.background};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,100 +37,125 @@ export const Tabs = styled.div`
   align-items: start;
 `;
 
-export const Header = styled.header`
-  display: flex;
-  width: 100%;
-  background-color: ${({ baseColor }) => baseColor};
-  height: 60px;
-  justify-content: space-between;
-  align-items: start;
-  padding: 20px;
-`;
+export const Header = styled.header(
+  {
+    display: 'flex',
+    width: '100%',
+    height: '60px',
+    justifyContent: 'space-between',
+    alignItems: 'start',
+    padding: '20px',
+  },
+  props => ({
+    backgroundColor: props.baseColor,
+  })
+);
 
-export const SideBar = styled.aside`
-  background-color: ${({ baseColor }) => baseColor};
-  height: 100vh;
-  width: 260px;
-  position: fixed;
-  z-index: 10;
-`;
+export const SideBar = styled.aside(
+  {
+    height: '100vh',
+    width: '260px',
+    position: 'fixed',
+    zIndex: '10',
+  },
+  props => ({
+    backgroundColor: props.baseColor,
+  })
+);
 
-export const Logo = styled.div`
-  width: 30px;
-  height: 120px;
+export const Logo = styled.div(
+  {
+    width: '30px',
+    height: '120px',
+  },
+  props => ({
+    [props.theme.breakpoints.up('large')]: {
+      width: '115px',
+      height: '34px',
+    },
+  })
+);
 
-  ${media.LARGE`
-  width: 115px;
-    height: 34px;
-  `}
-`;
-
-export const Theme = styled.div`
-  width: 65px;
-  height: 68px;
-
-  ${media.LARGE`
-  width: 115px;
-    height: 68px;
-  `}
-`;
+export const Theme = styled.div(
+  {
+    width: '65px',
+    height: '68px',
+  },
+  props => ({
+    [props.theme.breakpoints.up('large')]: {
+      width: '115px',
+      height: '68px',
+    },
+  })
+);
 
 export const UserPic = styled.div`
   width: 32px;
   height: 32px;
 `;
 
-export const UserName = styled.div`
-  width: 65px;
-  height: 68px;
+export const UserName = styled.div(
+  {
+    width: '65px',
+    height: '68px',
+  },
+  props => ({
+    [props.theme.breakpoints.up('large')]: {
+      width: '115px',
+      height: '68px',
+    },
+  })
+);
 
-  ${media.LARGE`
-  width: 115px;
-    height: 68px;
-  `}
-`;
+export const BoardBody = styled.div(
+  {
+    position: 'fixed',
+    width: '100vw',
+    height: '100vh',
+  },
+  props => ({
+    backgroundColor: props.baseColor,
+  })
+);
 
-export const BoardBody = styled.div`
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: ${({ baseColor }) => baseColor};
-`;
+export const ProjectName = styled.div(
+  {
+    width: '80%',
+    height: '21px',
+  },
+  props => ({
+    [props.theme.breakpoints.up('medium')]: {
+      width: '90%',
+      height: '40px',
+    },
+  })
+);
 
-export const ProjectName = styled.div`
-  width: 80%;
-  height: 21px;
+export const Filters = styled.div(
+  {
+    width: '40px',
+    height: '2px',
+  },
+  props => ({
+    [props.theme.breakpoints.up('medium')]: {
+      width: '60px',
+      height: '30px',
+    },
+  })
+);
 
-  ${media.MEDIUM`
-  width: 90%;
-    height: 40px;
-  `}/* @media (min-width: 778px) {
-    width: 90%;
-    height: 40px;
-  } */
-`;
-export const Filters = styled.div`
-  width: 40px;
-  height: 2px;
+export const Button = styled.div(
+  {
+    marginTop: '30px',
+    width: '80%',
+  },
+  props => ({
+    [props.theme.breakpoints.up('medium')]: {
+      width: '80%',
+    },
+  })
+);
 
-  ${media.MEDIUM`
-  width: 60px;
-    height: 30px;
-  `}/* @media (min-width: 778px) {
-    width: 60px;
-    height: 30px;
-  } */
-`;
-export const Button = styled.div`
-  margin-top: 30px;
-  width: 80%;
-
-  ${media.MEDIUM`
-  width: 80%;
-  `}/* @media (min-width: 778px) {
-    width: 80%;
-  } */
-`;
 export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;

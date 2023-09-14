@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import useCards from './useCards';
+import useCardsCollector from './useCardsCollector';
 
 const cardModel = {
   title: '',
   description: '',
   priority: 'Without',
-  deadline: 0,
+  deadline: '',
 };
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
-  const { addNewCard, updateExistingCard } = useCards();
+  const { addNewCard, updateExistingCard } = useCardsCollector();
   const initialCard = currentCard
     ? getFormattedCard(currentCard)
     : {
@@ -25,38 +25,25 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [priority, setPriority] = useState(initialCard?.priority);
   const [deadline, setDeadline] = useState(initialCard?.deadline);
   const [card, setCard] = useState(initialCard);
-  const [titleChecker, seTitleChecker] = useState(false);
-  const [descriptionChecker, setDescriptionChecker] = useState(false);
 
   const handleCardSubmit = () => {
-    if (title === '' && !currentCard) {
-      seTitleChecker(true);
-      setTimeout(() => {
-        seTitleChecker(false);
-      }, 2000);
-      return;
-    }
-    if (description === '' && !currentCard) {
-      setDescriptionChecker(true);
-      setTimeout(() => {
-        setDescriptionChecker(false);
-      }, 2000);
-      return;
-    }
     const { id, createdAt, order, updatedAt, ...rest } = card;
 
-    currentCard
-      ? updateExistingCard({
-          taskId: id,
-          updatedData: { orderTask: order, ...rest },
-        })
-      : addNewCard(rest);
+    if (currentCard) {
+      updateExistingCard({
+        taskId: id,
+        updatedData: { orderTask: order, ...rest },
+      });
+    } else {
+      addNewCard(rest);
+    }
 
     closeModal();
   };
 
   const handleInput = useCallback(e => {
     const { name, value } = e.currentTarget;
+
     switch (name) {
       case 'title':
         setTitle(value);
@@ -88,8 +75,6 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
     setDeadline,
     handleInput,
     handlePriority,
-    descriptionChecker,
-    titleChecker,
     handleCardSubmit,
   };
 };

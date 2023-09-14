@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from 'hooks';
 
-import { SvgIcon } from 'components';
+import { useAuthCollector } from 'hooks';
 
 import {
   DropdownButton,
+  DropdownIcon,
   DropdownItem,
   DropdownMenu,
   DropdownWrapper,
@@ -13,7 +13,7 @@ import {
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { theme, changeTheme } = useAuth();
+  const { theme, changeTheme } = useAuthCollector();
 
   const themes = ['Dark', 'Light', 'Violet'];
 
@@ -60,14 +60,18 @@ const ThemeMenu = () => {
 
   return (
     <DropdownWrapper>
-      <DropdownButton onClick={toggleDropdown}>
+      <DropdownButton
+        onClick={toggleDropdown}
+        type="button"
+        id="switcher-theme-button"
+      >
         Theme
-        <SvgIcon
+        <DropdownIcon
           svgName="icon-arrow-down"
           size="16"
           variant="header"
           isActive="true"
-        ></SvgIcon>
+        />
       </DropdownButton>
       {isOpen && (
         <DropdownMenu>

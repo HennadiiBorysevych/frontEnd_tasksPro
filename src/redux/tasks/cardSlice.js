@@ -1,4 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+
 import { updateOrdersFromArray } from 'helpers';
 
 import cardOperations from './cardOperations';
@@ -51,6 +52,7 @@ const cardSlice = createSlice({
           updatedAt,
           ...rest
         } = action.payload.data;
+
         state.items.push({
           id,
           order,

@@ -5,13 +5,16 @@ export const BoardListItem = styled.li(props => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  backgroundColor: props.isActive
-    ? props.theme.palette.background.sideBarItem
-    : props.theme.palette.background.sidemenu + '80',
-  padding: '0 24px',
+  backgroundColor:
+    props.isActive && props.theme.palette.background.activeBoardItem,
+  padding: '0 14px',
 
   '& + &': {
     marginTop: '4px',
+  },
+
+  [props.theme.breakpoints.up('medium')]: {
+    padding: '0 24px',
   },
 
   ...(props.isActive && {
@@ -22,7 +25,7 @@ export const BoardListItem = styled.li(props => ({
       right: 0,
       height: '100%',
       width: '4px',
-      backgroundColor: props.theme.palette.primary.iconLog,
+      backgroundColor: props.theme.palette.icon.signOut,
       borderRadius: '4px 0px 0px 4px',
     },
   }),
@@ -31,12 +34,11 @@ export const BoardListItem = styled.li(props => ({
 export const BoardName = styled.h2(props => ({
   fontSize: '14px',
   fontWeight: 500,
-  lineHeight: 1.25,
   letterSpacing: '-0.28px',
   textAlign: 'left',
   color: props.isActive
-    ? props.theme.palette.text.sidemenu
-    : props.theme.palette.text.sidemenu + '80',
+    ? props.theme.palette.text.sidebarPrimary
+    : props.theme.palette.text.sidebarSecondary,
 }));
 
 export const BoardIdentificationItem = styled.button`

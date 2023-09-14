@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { encodedTitleInUrl } from 'helpers';
+import { useDispatch } from 'react-redux';
+import { setUserFilter } from 'redux/userFilterSlice';
 
-import useBoards from './useBoards';
+import { useBoardContext } from 'contexts';
+import { clearEncodedTitleInUrl, encodeTitleInUrl } from 'helpers';
+
+import useBoardsCollector from './useBoardsCollector';
 
 const boardModel = {
   title: '',
@@ -11,24 +15,20 @@ const boardModel = {
 };
 
 const useBoard = (currentBoard, closeModal) => {
-  const { addNewBoard, updateExistingBoard } = useBoards();
+  const { addNewBoard, updateExistingBoard } = useBoardsCollector();
+  const { activeBoardId, setActiveBoard } = useBoardContext();
+  const { allBoards, getAllBoards, getOneBoard, removeBoard } =
+    useBoardsCollector();
 
   const initialBoard = currentBoard ? currentBoard : boardModel;
-  console.log(currentBoard?.title);
   const [title, setTitle] = useState(initialBoard?.title);
   const [icon, setIcon] = useState(initialBoard?.icon);
   const [background, setBackground] = useState(initialBoard?.background);
   const [board, setBoard] = useState(initialBoard);
-  const [titleChecker, seTitleChecker] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleBoardSubmit = () => {
-    if (title === '' && !currentBoard) {
-      seTitleChecker(true);
-      setTimeout(() => {
-        seTitleChecker(false);
-      }, 2000);
-      return;
-    }
     const { id, user, ...rest } = board;
 
     if (currentBoard) {
@@ -36,12 +36,9 @@ const useBoard = (currentBoard, closeModal) => {
         boardId: id,
         updatedData: rest,
       });
-      encodedTitleInUrl(title);
     } else {
       addNewBoard(rest);
-      encodedTitleInUrl(title);
     }
-    // closeModal();
     if (typeof closeModal === 'function') {
       closeModal();
     }
@@ -60,15 +57,61 @@ const useBoard = (currentBoard, closeModal) => {
     });
   }, [background, icon, title]);
 
+  const handleActiveBoard = async boardId => {
+    try {
+      await getOneBoard(boardId);
+      await setActiveBoard(boardId);
+
+      const activatedBoard = await allBoards.find(
+        board => board.id === boardId
+      );
+
+      const { title } = activatedBoard;
+
+      if (title) {
+        encodeTitleInUrl(title);
+      }
+      const filterBoard = localStorage.getItem(boardId);
+      if (filterBoard) {
+        dispatch(setUserFilter(filterBoard));
+      }
+    } catch (error) {
+      console.error('Error getting board data', error);
+    }
+  };
+
+  const handleDeleteBoard = async id => {
+    try {
+      localStorage.removeItem(id);
+      await removeBoard(id);
+      await getAllBoards();
+
+      if (allBoards.length > 1) {
+        const firstBoard = allBoards[0];
+        setActiveBoard(firstBoard?.id);
+
+        const { title } = firstBoard;
+        encodeTitleInUrl(title);
+      } else {
+        setActiveBoard(null);
+        clearEncodedTitleInUrl();
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return {
     title,
     icon,
     background,
+    activeBoardId,
     setIcon,
     setBackground,
     handleTitle,
-    titleChecker,
     handleBoardSubmit,
+    handleActiveBoard,
+    handleDeleteBoard,
   };
 };
 

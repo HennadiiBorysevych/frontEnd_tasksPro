@@ -1,19 +1,18 @@
-import { media } from 'helpers';
-
 import styled from '@emotion/styled';
 
-export const BoardList = styled.ul`
-  position: relative;
-  margin-bottom: 40px;
-  height: 100%;
-  max-height: 256px;
-  overflow-y: auto;
-
-  ${media.MEDIUM`
-  max-height: 380px;
-  `}
-
-  ${media.LARGE`
-  max-height: 100%;
-  `}
-`;
+export const BoardList = styled.ul(
+  {
+    position: 'relative',
+    height: '100%',
+    maxHeight: 'calc(100vh - 686px)',
+  },
+  props => ({
+    [props.theme.breakpoints.up('medium')]: {
+      maxHeight: 'calc(100vh - 898px)',
+    },
+    [props.theme.breakpoints.up('large')]: {
+      minHeight: '126px',
+      maxHeight: 'calc(100vh - 644px)',
+    },
+  })
+);

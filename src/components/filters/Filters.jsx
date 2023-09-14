@@ -1,116 +1,102 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useBoards, useModal } from 'hooks';
 import { selectUserFilter, setUserFilter } from 'redux/userFilterSlice';
 
-import { Modal, PopUpLayout } from 'components';
+import { useBoardsCollector } from 'hooks';
+
+import { PopUpLayout, Priority } from 'ui';
 
 import {
   Container,
+  FilterContainer,
   FilterHeader,
+  FiltersButton,
   FiltersIcon,
-  FiltersLink,
-  FilterTitle,
-  Label,
+  FiltersTitle,
+  FilterWrapper,
   LabelsTitle,
   Line,
-  Priority,
-  Radio,
-  ShowAllLabel,
-  ShowAllRadio,
 } from './Filters.styled';
 
 const Filters = () => {
-  const { isModal, toggleModal, onBackdropClick } = useModal();
-  const { activeBoardId } = useBoards();
-  const userFilter = useSelector(selectUserFilter);
+  const { activeBoardId } = useBoardsCollector();
+  const [isOpen, setIsOpen] = useState(false);
+  const priority = useSelector(selectUserFilter);
   const dispatch = useDispatch();
+  const filterContainerRef = useRef(null);
 
-  function changeValue(event) {
-    const newValue = event.target.value;
-    localStorage.setItem(activeBoardId, newValue);
-    dispatch(setUserFilter(newValue));
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const handleWindowClick = e => {
+      if (
+        isOpen &&
+        filterContainerRef.current &&
+        !filterContainerRef.current.contains(e.target)
+      ) {
+        closeDropdown();
+      }
+    };
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        closeDropdown();
+      }
+    };
+
+    window.addEventListener('mousedown', handleWindowClick);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('mousedown', handleWindowClick);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
+  function changeValue(value) {
+    localStorage.setItem(activeBoardId, value);
+    dispatch(setUserFilter(value));
   }
 
   return (
-    <>
-      <FiltersLink onClick={toggleModal}>
+    <Container>
+      <FiltersButton onClick={toggleDropdown} aria-label="Open filters popup">
         <FiltersIcon svgName="icon-filter" variant="header" isActive="true" />
-        <FilterTitle variant="columnTitle">Filters</FilterTitle>
-      </FiltersLink>
-      {isModal && (
-        <Modal onBackdropClick={onBackdropClick}>
-          <Container>
-            <PopUpLayout title="Filters" handleClose={toggleModal}>
+        <FiltersTitle variant="columnTitle">Filters</FiltersTitle>
+      </FiltersButton>
+      {isOpen && (
+        <FilterContainer ref={filterContainerRef}>
+          <PopUpLayout title="Filters" handleClose={toggleDropdown}>
+            <FilterWrapper>
               <Line>
                 <FilterHeader>
                   <LabelsTitle>Label color</LabelsTitle>
-                  <ShowAllLabel htmlFor="showAll">
-                    <ShowAllRadio
-                      type="radio"
-                      id="showAll"
-                      name="priority"
-                      value="showAll"
-                      checked={userFilter === 'showAll'}
-                      onChange={changeValue}
-                    />
-                    Show all
-                  </ShowAllLabel>
                 </FilterHeader>
               </Line>
               <div>
-                <Priority>
-                  <Label htmlFor="without">
-                    <Radio
-                      type="radio"
-                      id="without"
-                      name="priority"
-                      value="without"
-                      checked={userFilter === 'without'}
-                      onChange={changeValue}
-                    />
-                    Without priority
-                  </Label>
-                  <Label htmlFor="low">
-                    <Radio
-                      type="radio"
-                      id="low"
-                      name="priority"
-                      value="low"
-                      checked={userFilter === 'low'}
-                      onChange={changeValue}
-                    />
-                    Low
-                  </Label>
-                  <Label htmlFor="medium">
-                    <Radio
-                      type="radio"
-                      id="medium"
-                      name="priority"
-                      value="medium"
-                      checked={userFilter === 'medium'}
-                      onChange={changeValue}
-                    />
-                    Medium
-                  </Label>
-                  <Label htmlFor="high">
-                    <Radio
-                      type="radio"
-                      id="high"
-                      name="priority"
-                      value="high"
-                      checked={userFilter === 'high'}
-                      onChange={changeValue}
-                    />
-                    High
-                  </Label>
-                </Priority>
+                <Priority
+                  priority={priority}
+                  setPriority={changeValue}
+                  options={[
+                    { value: 'showAll', label: 'ShowAll' },
+                    { value: 'without', label: 'Without priority' },
+                    { value: 'low', label: 'Low' },
+                    { value: 'medium', label: 'Medium' },
+                    { value: 'high', label: 'High' },
+                  ]}
+                  variant="Filters"
+                />
               </div>
-            </PopUpLayout>
-          </Container>
-        </Modal>
+            </FilterWrapper>
+          </PopUpLayout>
+        </FilterContainer>
       )}
-    </>
+    </Container>
   );
 };
 

@@ -43,16 +43,11 @@ import bgMini14x3 from 'assets/images/backgroundIcons/bg-mini14@3x.webp';
 import bgMini15 from 'assets/images/backgroundIcons/bg-mini15.webp';
 import bgMini15x2 from 'assets/images/backgroundIcons/bg-mini15@2x.webp';
 import bgMini15x3 from 'assets/images/backgroundIcons/bg-mini15@3x.webp';
-import bgMiniDefalult from 'assets/images/backgroundIcons/bg-miniDefault.webp';
-import bgMiniDefalultx2 from 'assets/images/backgroundIcons/bg-miniDefault@2x.webp';
-import bgMiniDefalultx3 from 'assets/images/backgroundIcons/bg-miniDefault@3x.webp';
 
-export const backgroundImages = [
+const backgroundImages = [
   {
-    regular: bgMiniDefalult,
-    x2: bgMiniDefalultx2,
-    x3: bgMiniDefalultx3,
     title: 'default',
+    isDefault: true,
   },
   { regular: bgMini1, x2: bgMini1x2, x3: bgMini1x3, title: 'flowers' },
   { regular: bgMini2, x2: bgMini2x2, x3: bgMini2x3, title: 'rocks' },
@@ -70,3 +65,5 @@ export const backgroundImages = [
   { regular: bgMini14, x2: bgMini14x2, x3: bgMini14x3, title: 'turkey' },
   { regular: bgMini15, x2: bgMini15x2, x3: bgMini15x3, title: 'track' },
 ];
+
+export default backgroundImages;

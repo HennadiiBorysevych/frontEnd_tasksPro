@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import useAuth from './useAuth';
+import useAuthCollector from './useAuthCollector';
 
-const useEditProfile = user => {
-  const [userAvatar, setUserAvatar] = useState(user?.avatarURL ?? '');
+const useEditProfile = (currentUser, handleModalClose) => {
+  const [userAvatar, setUserAvatar] = useState(currentUser?.avatarURL ?? '');
   const [avatarFile, setAvatarFile] = useState(null);
   const [isAvatarLoad, setIsAvatarLoad] = useState(false);
+  const { updateProfileData, signOut } = useAuthCollector();
 
-  const { updateProfileData } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     avatarFile ? setIsAvatarLoad(true) : setIsAvatarLoad(false);
@@ -21,20 +23,42 @@ const useEditProfile = user => {
       if (values[key] !== '')
         formattedValues = { ...formattedValues, [key]: values[key] };
     }
-
     if (!Object.keys(formattedValues).length && !isAvatarLoad) return;
 
     const newUser = {
       avatarFile,
       user: Object.keys(formattedValues).length ? formattedValues : null,
     };
+    const keysToDisplay = Object.keys(formattedValues).filter(
+      key => key !== 'password'
+    );
 
-    console.log(formattedValues);
+    let toastMessage = '';
+
+    if (keysToDisplay.includes('newPassword')) {
+      const updatedKeysToDisplay = keysToDisplay.map(key =>
+        key === 'newPassword' ? 'password' : key
+      );
+      toastMessage = `User ${updatedKeysToDisplay.join(
+        ', '
+      )} successfully updated`;
+    }
 
     const response = await updateProfileData(newUser);
+    localStorage.clear();
+    if (
+      response.payload &&
+      response.payload.message === 'Update success' &&
+      formattedValues
+    ) {
+      toast.success(toastMessage);
+    }
 
-    if (response.payload && response.payload.message === 'Update success') {
-      toast.success(`User data successfully updated`);
+    handleModalClose();
+
+    if (formattedValues.password) {
+      signOut();
+      navigate('/auth/login');
     }
   };
 
@@ -45,10 +69,18 @@ const useEditProfile = user => {
     reader.readAsDataURL(file);
     reader.onload = async () => {
       setUserAvatar(reader.result);
+      if (reader.result) {
+        toast.success('User avatar has successfully added');
+      }
     };
   };
 
-  return { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar };
+  return {
+    userAvatar,
+    isAvatarLoad,
+    handleChangeProfile,
+    handleUserAvatar,
+  };
 };
 
 export default useEditProfile;

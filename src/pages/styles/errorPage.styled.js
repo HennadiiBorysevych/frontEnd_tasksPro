@@ -1,106 +1,94 @@
-import { media } from 'helpers';
-import {
-  // checkBgColor,
-  checkBgImg,
-  // checkBtnBgColor,
-  // checkBtnTxtColor,
-  // checkTxtColor,
-} from 'helpers/errorPageThemes';
+import { NavLink } from 'react-router-dom';
+
+import { baseColors } from 'constants';
 
 import styled from '@emotion/styled';
 
-export const ErrorBackground = styled.section`
-  background-color: ${props => `${props.theme.palette.background.bord}`};
-  background-image: var(${({ bgImg }) => checkBgImg(bgImg)});
-  color: ${props => `${props.theme.palette.text.primary}`};
+export const ErrorBackground = styled.section(({ theme, isLoggedIn }) => ({
+  backgroundColor: theme.palette.background.primary,
+  backgroundImage: !isLoggedIn ? baseColors.authColors.background : 'none',
+  color: theme.palette.text.primary,
+  textAlign: 'center',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '100vh',
+}));
 
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-`;
+export const Container = styled.div(({ theme }) => ({
+  padding: '0 20px',
+  minWidth: '200px',
 
-export const Container = styled.div`
-  padding: 0 20px;
-  min-width: 200px;
+  [theme.breakpoints.up('medium')]: {
+    width: '500px',
+  },
+  [theme.breakpoints.up('large')]: {
+    width: '1000px',
+  },
+}));
 
-  ${media.MEDIUM`
-  width: 500px;
-  `}
+export const Header = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '25px',
+  alignItems: 'center',
+  marginBottom: '48px',
 
-  ${media.LARGE`
-  width: 1000px;
-  `}
-`;
+  [theme.breakpoints.up('medium')]: {
+    flexDirection: 'row',
+  },
+}));
 
-export const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  align-items: center;
+export const Code = styled.div(({ theme }) => ({
+  textTransform: 'uppercase',
+  fontWeight: '700',
+  fontSize: '30px',
+  lineHeight: '40px',
+  display: 'flex',
+  flexDirection: 'column',
 
-  margin-bottom: 48px;
+  [theme.breakpoints.up('large')]: {
+    fontSize: '50px',
+  },
+}));
 
-  ${media.MEDIUM`
-  flex-direction: row;
-  `}
-`;
+export const Num = styled.p(({ theme }) => ({
+  display: 'block',
+  fontSize: '60px',
+  lineHeight: '60px',
 
-export const Code = styled.div`
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 40px;
+  [theme.breakpoints.up('large')]: {
+    fontSize: '100px',
+    lineHeight: '100px',
+  },
+}));
 
-  display: flex;
-  flex-direction: column;
+export const Description = styled.h2(({ theme }) => ({
+  fontWeight: '600',
+  fontSize: '20px',
+  lineHeight: '40px',
+  textAlign: 'center',
 
-  ${media.LARGE`
-  font-size: 50px;
-  `}
-`;
+  [theme.breakpoints.up('large')]: {
+    fontSize: '40px',
+    lineHeight: '40px',
+  },
+}));
 
-export const Num = styled.p`
-  display: block;
+export const Start = styled.p(({ theme }) => ({
+  fontWeight: '400',
+  fontSize: '15px',
+  lineHeight: '30px',
 
-  font-size: 60px;
-  line-height: 60px;
-
-  ${media.LARGE`
-  font-size: 100px;
-  line-height: 100px;
-  `}
-`;
-
-export const Description = styled.h2`
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 40px;
-
-  text-align: center;
-
-  ${media.LARGE`
-  font-size: 40px;
-    line-height: 40px;
-  `}
-`;
-
-export const Start = styled.p`
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 30px;
-
-  ${media.maxPREMEDIUM`
-  margin-bottom: 14px;
-  `}
-
-  ${media.LARGE`
-  font-weight: 600;
-    font-size: 20px;
-    line-height: 40px;
-  `}
-`;
+  [theme.breakpoints.down('medium')]: {
+    marginBottom: '14px',
+  },
+  [theme.breakpoints.up('large')]: {
+    fontWeight: '600',
+    fontSize: '20px',
+    lineHeight: '40px',
+  },
+}));
 
 export const Text = styled.p`
   font-weight: 500;
@@ -110,21 +98,24 @@ export const Text = styled.p`
   margin-bottom: 14px;
 `;
 
-export const Link = styled.li`
-  padding: 14px 0;
-  width: 100%;
-  background-color: ${props =>
-    `${props.theme.palette.background.primaryButton}`};
-  border-radius: 8px;
-  color: ${props => `${props.theme.palette.text.secondary}`};
-  margin-bottom: 14px;
+export const Link = styled(NavLink)(
+  {
+    display: 'block',
+    padding: '14px 0',
+    width: '100%',
+    borderRadius: '8px',
+    marginBottom: '14px',
+    transition: 'background-color 0.3s ease',
+  },
+  props => ({
+    backgroundColor: props.theme.palette.accent.main,
+    color: props.theme.palette.text.primaryButton,
 
-  list-style: none;
-
-  &:hover {
-    background-color: ${props => `${props.theme.palette.hover.primaryButton}`};
-  }
-`;
+    '&:hover': {
+      backgroundColor: props.theme.palette.accent.light,
+    },
+  })
+);
 
 export const InviteText = styled.span`
   display: inline-block;

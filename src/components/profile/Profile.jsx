@@ -1,20 +1,25 @@
 import React from 'react';
-import { useAuth, useModal } from 'hooks';
 
-import { Modal, ProfilePopUp, UserAvatar } from 'components';
-import Typography from 'components/typography/Typography';
+import { useAuthCollector, useModal } from 'hooks';
 
-import { ClickWrap } from './Profile.styled';
+import { Modal } from 'ui';
+
+import ProfilePopUp from '../profilePopUp/ProfilePopUp';
+import UserAvatar from '../userAvatar/UserAvatar';
+
+import { ClickWrap, UserAvatarWrapper, UserName } from './Profile.styled';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user } = useAuthCollector();
   const { isModal, toggleModal, onBackdropClick } = useModal();
 
   return (
     <div>
       <ClickWrap onClick={toggleModal}>
-        <Typography variant="columnTitle">{user?.name ?? 'No User'}</Typography>
-        <UserAvatar avatar={user?.avatarURL} width="32px" height="32px" />
+        <UserName variant="columnTitle">{user?.name ?? 'No User'}</UserName>
+        <UserAvatarWrapper>
+          <UserAvatar avatar={user?.avatarURL} profile="true" />
+        </UserAvatarWrapper>
       </ClickWrap>
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>

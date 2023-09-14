@@ -1,27 +1,31 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { encodedTitleInUrl } from 'helpers';
-import { useBoards } from 'hooks';
 
-import { Filters } from 'components';
+import { encodeTitleInUrl } from 'helpers';
+import { useBoardsCollector } from 'hooks';
 
-import { Header } from './boardHead.styled';
+import Filters from '../filters/Filters';
+
+import { FieldInput, Header } from './boardHead.styled';
 
 const BoardHead = () => {
   const { activeBoard, activeBoardId, allBoards, updateExistingBoard } =
-    useBoards();
+    useBoardsCollector();
   const [editingBoard, setEditingBoard] = useState(
     allBoards.find(board => board.id === activeBoardId)
   );
   const [title, setTitle] = useState(editingBoard?.title);
 
   useEffect(() => {
-    const updatedBoard = allBoards?.find(board => board.id === activeBoardId);
-    setEditingBoard(updatedBoard);
+    if (activeBoardId) {
+      const updatedBoard = allBoards?.find(board => board.id === activeBoardId);
+      setEditingBoard(updatedBoard);
+    }
   }, [activeBoardId, allBoards]);
 
   useEffect(() => {
-    setTitle(editingBoard?.title);
+    if (editingBoard) {
+      setTitle(editingBoard?.title);
+    }
   }, [editingBoard]);
 
   const handleTitle = useCallback(e => {
@@ -35,23 +39,25 @@ const BoardHead = () => {
       boardId: id,
       updatedData: { ...rest, title: title },
     });
-    encodedTitleInUrl(title);
+    encodeTitleInUrl(title);
   };
 
-  const decodedTitle = decodeURIComponent(editingBoard.id);
+  const decodedTitle = decodeURIComponent(editingBoard?.id);
 
   return (
     <>
       <Header
-        boardName={editingBoard.title}
-        active={decodedTitle === activeBoard.id}
+        boardName={editingBoard?.title}
+        active={decodedTitle === activeBoard?.id}
       >
         {!!decodedTitle && (
-          <TextField
+          <FieldInput
             id="standard"
+            aria-label="Change board name"
             type="text"
             variant="standard"
             value={title}
+            placeholder={title}
             onChange={handleTitle}
             onBlur={handleBoardChange}
             fullWidth={true}

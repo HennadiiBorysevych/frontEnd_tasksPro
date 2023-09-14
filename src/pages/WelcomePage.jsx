@@ -1,10 +1,13 @@
-import { NavLink } from 'react-router-dom';
-import userAvatar from 'assets/images/welcomeAndPlate/welcome.png';
+import { useEffect } from 'react';
+
+import { images } from 'constants';
+
+import { generateContentImages } from 'helpers';
+import { useBoardsCollector } from 'hooks';
 
 import { GoogleAuth, Logo } from 'components';
 
-import { Background, Container } from './styles/commonStyles';
-
+import { Background, Container } from './styles/commonStyles.styled';
 import {
   RegisterLink,
   UserImage,
@@ -13,27 +16,42 @@ import {
 } from './styles/welcomePage.styled';
 
 const WelcomePage = () => {
+  const { resetBoardsState } = useBoardsCollector();
+
+  const devicePixelRatio = window.devicePixelRatio || 1;
+
+  useEffect(() => {
+    resetBoardsState();
+  }, [resetBoardsState]);
+
+  const matchedWelcomeImage = generateContentImages(
+    images.welcomeImages,
+    devicePixelRatio,
+    'image/webp'
+  );
   return (
     <Background>
       <Container>
         <WelcomeContainer>
           <UserImage
-            src={userAvatar}
+            src={matchedWelcomeImage.src}
             alt="user-avatar"
             width={124}
             height={124}
           />
           <Logo variant="welcome" />
-          <WelcomeText>
+          <WelcomeText variant="welcomePageText">
             Supercharge your productivity and take control of your tasks with
             Task Pro - Don't wait, start achieving your goals now!
           </WelcomeText>
           <ul>
             <li>
-              <RegisterLink to="/auth/register">Registration </RegisterLink>
+              <RegisterLink to="/auth/register" register="true">
+                Registration
+              </RegisterLink>
             </li>
             <li>
-              <NavLink to="/auth/login">Log In</NavLink>
+              <RegisterLink to="/auth/login">Log In</RegisterLink>
             </li>
             <li>
               <GoogleAuth />
