@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBoardContext, useToggleModalAndSideBar } from 'contexts';
-import { useAuth, useBoards, useModal } from 'hooks';
+import { useAuthCollector, useBoardsCollector, useModal } from 'hooks';
 
-import { BoardPopUp } from 'components';
 import { Modal, ReactConfirmAlert, SvgIcon } from 'ui';
+
+import BoardPopUp from '../boardPopUp/BoardPopUp';
 
 import {
   BoardIdentificationItem,
@@ -25,8 +26,8 @@ const SideBarItem = ({
   const { toggleModalAndSideBar } = useToggleModalAndSideBar();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
-  const { allBoards } = useBoards();
-  const { theme } = useAuth();
+  const { allBoards } = useBoardsCollector();
+  const { theme } = useAuthCollector();
 
   const editingBoard = allBoards.find(board => board.id === activeBoardId);
 

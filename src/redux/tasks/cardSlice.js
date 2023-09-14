@@ -52,14 +52,12 @@ const cardSlice = createSlice({
           updatedAt,
           ...rest
         } = action.payload.data;
-        console.log(action.payload.data);
 
         state.items.push({
           id,
           order,
           ...rest,
         });
-        console.log(state.items);
       })
       .addCase(cardOperations.updateTask.fulfilled, (state, action) => {
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;

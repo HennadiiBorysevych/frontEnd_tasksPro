@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import { SvgIcon } from 'ui';
 
 import { ButtonSignOut, TextSignOut } from './SignOut.styled';
 
 const SignOut = () => {
-  const { signOut } = useAuth();
+  const { signOut } = useAuthCollector();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {

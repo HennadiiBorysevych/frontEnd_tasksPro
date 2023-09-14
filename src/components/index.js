@@ -1,4 +1,3 @@
-export { default as AddCardBtn } from './addCardBtn/AddCardBtn';
 export { default as AuthForm } from './authForm/AuthForm';
 export { default as BoardHead } from './boardHead/BoardHead';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
@@ -9,7 +8,6 @@ export { default as CardItem } from './cardItem/CardItem';
 export { default as CardPopUp } from './cardPopUp/CardPopUp';
 export { default as CardSettings } from './cardSettings/CardSettings';
 export { default as ColumnPopUp } from './columnPopUp/ColumnPopUp';
-export { default as CommonPopUp } from './commonPopUp/CommonPopUp';
 export { default as Filters } from './filters/Filters';
 export { default as GoogleAuth } from './googleAuth/GoogleAuth';
 export { default as Logo } from './logo/Logo';

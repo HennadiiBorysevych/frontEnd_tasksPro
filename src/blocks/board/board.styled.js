@@ -1,31 +1,34 @@
+import { CustomScrollBar } from 'ui';
+
 import styled from '@emotion/styled';
 
-export const ContainerWrapper = styled.div(
-  {
-    display: 'flex',
-    flexWrap: 'nowrap',
-    paddingBottom: '24px',
+export const Scrollbar = styled(CustomScrollBar)(props => ({
+  paddingBottom: '34px',
+
+  [props.theme.breakpoints.up('medium')]: {
+    paddingBottom: '64px',
   },
-  props => ({
-    [props.theme.breakpoints.up('medium')]: {
-      paddingBottom: '52px',
-    },
-    [props.theme.breakpoints.up('large')]: {
-      paddingBottom: '16px',
-    },
-  })
-);
+  [props.theme.breakpoints.up('large')]: {
+    paddingBottom: '28px',
+  },
+}));
+
+export const ContainerWrapper = styled.div({
+  display: 'flex',
+  flexWrap: 'nowrap',
+});
 
 export const ColumnsContainer = styled.ul(
   {
     display: 'flex',
     flexWrap: 'nowrap',
-    gap: '28px',
-    marginRight: '21px',
+    gap: '8px',
   },
   props => ({
+    marginRight: props.columns.length > 0 ? '8px' : 0,
     [props.theme.breakpoints.up('medium')]: {
-      gap: '34px',
+      gap: '18px',
+      marginRight: props.columns.length > 0 ? '18px' : 0,
     },
   })
 );

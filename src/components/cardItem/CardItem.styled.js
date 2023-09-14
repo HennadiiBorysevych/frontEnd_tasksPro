@@ -30,6 +30,14 @@ export const CardContainer = styled.div(props => ({
   },
 }));
 
+export const DeadlineMessage = styled.p(({ theme, today }) => ({
+  position: 'absolute',
+  top: '14px',
+  right: '24px',
+  fontSize: '10px',
+  color: today ? theme.palette.accent.main : theme.palette.text.attention,
+}));
+
 export const Title = styled(Typography)`
   margin: 0 0 8px;
 `;
@@ -44,7 +52,7 @@ export const Details = styled.div(props => ({
   justifyContent: 'space-between',
   alignItems: 'flex-end',
   paddingTop: '14px',
-  borderTop: `1px solid ${props.theme.palette.text.primaryDark}`,
+  borderTop: `1px solid ${props.theme.palette.background.lineBefore}`,
 }));
 
 export const DetailsContainer = styled.div`

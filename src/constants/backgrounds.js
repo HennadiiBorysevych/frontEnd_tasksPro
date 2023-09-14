@@ -43,42 +43,11 @@ import bgMini14x3 from 'assets/images/backgroundIcons/bg-mini14@3x.webp';
 import bgMini15 from 'assets/images/backgroundIcons/bg-mini15.webp';
 import bgMini15x2 from 'assets/images/backgroundIcons/bg-mini15@2x.webp';
 import bgMini15x3 from 'assets/images/backgroundIcons/bg-mini15@3x.webp';
-import bgMiniDefalult from 'assets/images/backgroundIcons/bg-miniDefault.webp';
-import bgMiniDefalultx2 from 'assets/images/backgroundIcons/bg-miniDefault@2x.webp';
-import bgMiniDefalultx3 from 'assets/images/backgroundIcons/bg-miniDefault@3x.webp';
-
-// import { SvgIcon } from 'components';
-
-// import styled from '@emotion/styled';
-
-// const DefaultBackgroundIconWrapper = styled.div(
-//   {
-//     width: '28px',
-//     height: '28px',
-//   },
-//   props => ({
-//     backgroundColor: props.theme.palette.background.primary,
-//   })
-// );
 
 const backgroundImages = [
-  // {
-  //   regular: (
-  //     <DefaultBackgroundIconWrapper>
-  //       <SvgIcon
-  //         svgName="icon-background-image"
-  //         size={16}
-  //         variant="background"
-  //       />
-  //     </DefaultBackgroundIconWrapper>
-  //   ),
-  //   title: 'default',
-  // },
   {
-    regular: bgMiniDefalult,
-    x2: bgMiniDefalultx2,
-    x3: bgMiniDefalultx3,
     title: 'default',
+    isDefault: true,
   },
   { regular: bgMini1, x2: bgMini1x2, x3: bgMini1x3, title: 'flowers' },
   { regular: bgMini2, x2: bgMini2x2, x3: bgMini2x3, title: 'rocks' },

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 
-import SvgIcon from '../../ui/svgIcon/SvgIcon';
+import { SvgIcon } from 'ui';
 
 export const DropdownWrapper = styled.div`
   position: relative;
@@ -25,16 +25,13 @@ export const DropdownButton = styled.button(props => ({
 }));
 
 export const DropdownMenu = styled.ul(props => ({
-  listStyle: 'none',
   position: 'absolute',
   top: '100%',
   left: 0,
   zIndex: 2,
 
-  padding: '18px 44px 18px 18px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '4px',
+  width: '100px',
+  padding: '18px',
   borderRadius: '8px',
   border: `1px solid ${props.theme.palette.background.buttonPlusAvatar}`,
   background: props.theme.palette.background.modal,
@@ -42,9 +39,13 @@ export const DropdownMenu = styled.ul(props => ({
 }));
 
 export const DropdownItem = styled.li(props => ({
-  color: props.theme.palette.text.primary,
+  color: props.theme.palette.text.themeMenuItems,
   fontSize: '14px',
   letterSpacing: '-0.28px',
+
+  '& + &': {
+    marginTop: '4px',
+  },
 
   '&.selected': {
     color: props.theme.palette.accent.main,

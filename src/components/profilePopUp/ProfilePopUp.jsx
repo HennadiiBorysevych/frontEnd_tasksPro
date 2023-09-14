@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 
 import { popUpInitialValues } from 'constants';
@@ -7,14 +6,10 @@ import { popUpInitialValues } from 'constants';
 import { userUpdateSchema } from 'helpers/validationSchemas';
 import { useEditProfile } from 'hooks';
 
-import { Input, PopUpLayout, PrimaryButton, SvgIcon } from 'ui';
+import { ButtonPlus, CommonPopUp } from 'ui';
 
 import UserAvatar from '../userAvatar/UserAvatar';
 
-import {
-  ErrorMessage,
-  Form,
-} from '../../assets/styles/commonFormStyles.styled';
 import {
   AddButtonWrap,
   AvatarBg,
@@ -26,115 +21,181 @@ const { updateProfileValues } = popUpInitialValues;
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const { userAvatar, isAvatarLoad, handleChangeProfile, handleUserAvatar } =
-    useEditProfile(user, handleModalClose);
+  const { userAvatar, handleChangeProfile, handleUserAvatar } = useEditProfile(
+    user,
+    handleModalClose
+  );
 
-  const { handleChange, handleSubmit, values, errors, touched } = useFormik({
-    initialValues: updateProfileValues,
-    onSubmit: handleChangeProfile,
-    validationSchema: userUpdateSchema,
-  });
+  // const { handleChange, handleSubmit, values, errors, touched } = useFormik({
+  //   initialValues: updateProfileValues,
+  //   onSubmit: handleChangeProfile,
+  //   validationSchema: userUpdateSchema,
+  // });
 
   const handleRequiredFieldChange = e => {
     const { name } = e.target;
-    if (name === 'email' || name === 'newPassword') {
+    if (name === 'email' || name === 'newPassword' || name === 'password') {
       setShowPasswordConfirm(true);
     } else {
       setShowPasswordConfirm(false);
     }
-    handleChange(e);
+    // handleChange(e);
   };
 
+  const inputs = [
+    {
+      name: 'name',
+      type: 'text',
+      placeholder: user?.name,
+    },
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: user?.email,
+    },
+    {
+      name: 'newPassword',
+      type: 'password',
+      placeholder: 'Enter new password',
+    },
+  ];
+
+  if (showPasswordConfirm) {
+    inputs.push({
+      name: 'password',
+      type: 'password',
+      placeholder: 'Enter your current password for confirmation',
+    });
+  }
+
   return (
-    <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
-      <Form onSubmit={handleSubmit}>
-        <AvatarWrap>
-          <AvatarInput
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/png, image/jpeg"
-            background={userAvatar}
-            onChange={handleUserAvatar}
-          />
-          {userAvatar ? (
-            <UserAvatar avatar={userAvatar} />
-          ) : (
-            <AvatarBg size="68" />
-          )}
-          <AddButtonWrap>
-            <SvgIcon svgName="icon-plus" />
-          </AddButtonWrap>
-        </AvatarWrap>
-        <Input
-          name="name"
-          type="name"
-          placeholder={user?.name}
-          onChange={event => handleRequiredFieldChange(event)}
-          value={values.name}
+    <CommonPopUp
+      title="Edit profile"
+      onClose={handleModalClose}
+      onSubmit={handleChangeProfile}
+      onChange={handleRequiredFieldChange}
+      inputs={inputs}
+      initialValues={updateProfileValues}
+      validationSchema={userUpdateSchema}
+      buttonText="Send"
+      version="formPopUp"
+      id="send-user-updated-data"
+      avatar={true}
+    >
+      <AvatarWrap avatar={true}>
+        <AvatarInput
+          type="file"
+          id="avatar"
+          name="avatar"
+          accept="image/png, image/jpeg"
+          background={userAvatar}
+          onChange={handleUserAvatar}
         />
-
-        {errors.name && touched.name ? (
-          <ErrorMessage style={{ color: 'black' }}>{errors.name}</ErrorMessage>
-        ) : null}
-
-        <Input
-          name="email"
-          type="email"
-          placeholder={user?.email}
-          onChange={event => handleRequiredFieldChange(event)}
-          value={values.email}
-        />
-        {errors.email && touched.email ? (
-          <ErrorMessage style={{ color: 'black' }}>{errors.email}</ErrorMessage>
-        ) : null}
-
-        <Input
-          name="newPassword"
-          type="password"
-          placeholder="Enter new password"
-          onChange={event => handleRequiredFieldChange(event)}
-          value={values.newPassword}
-        />
-        {errors.newPassword && touched.newPassword ? (
-          <ErrorMessage style={{ color: 'black' }}>
-            {errors.newPassword}
-          </ErrorMessage>
-        ) : null}
-
-        {showPasswordConfirm && (
-          <>
-            <Input
-              name="password"
-              type="password"
-              placeholder="Enter your current password for confirmation"
-              onChange={handleChange}
-              value={values.password}
-            />
-            {errors.password && touched.password ? (
-              <ErrorMessage style={{ color: 'black' }}>
-                {errors.password}
-              </ErrorMessage>
-            ) : null}
-          </>
+        {userAvatar ? (
+          <UserAvatar avatar={userAvatar} />
+        ) : (
+          <AvatarBg size="68" />
         )}
+        <AddButtonWrap>
+          <ButtonPlus variant="addAvatar" width={24} height={24} size={10} />
+        </AddButtonWrap>
+      </AvatarWrap>
+    </CommonPopUp>
+    // <PopUpLayout title="Edit profile" handleClose={handleModalClose}>
+    //   <Form onSubmit={handleSubmit}>
+    //     <AvatarWrap avatar={userAvatar}>
+    //       <AvatarInput
+    //         type="file"
+    //         id="avatar"
+    //         name="avatar"
+    //         accept="image/png, image/jpeg"
+    //         background={userAvatar}
+    //         onChange={handleUserAvatar}
+    //       />
+    //       {userAvatar ? (
+    //         <UserAvatar avatar={userAvatar} />
+    //       ) : (
+    //         <AvatarBg size="68" />
+    //       )}
+    //       <AddButtonWrap>
+    //         <ButtonPlus variant="sidemenu" width={24} height={24} size={10} />
+    //       </AddButtonWrap>
+    //     </AvatarWrap>
+    //     <ul>
+    //       <InputItem>
+    //         <Input
+    //           name="name"
+    //           type="name"
+    //           placeholder={user?.name}
+    //           onChange={event => handleRequiredFieldChange(event)}
+    //           value={values.name}
+    //         />
 
-        <PrimaryButton
-          id="send-user-updated-data"
-          disabled={
-            !isAvatarLoad &&
-            !values.name &&
-            !values.email &&
-            !values.password &&
-            !values.newPassword
-          }
-          style={{ marginTop: '10px' }} //---?------------------
-          type="submit"
-        >
-          Send
-        </PrimaryButton>
-      </Form>
-    </PopUpLayout>
+    //         {errors.name && touched.name ? (
+    //           <ErrorMessage>{errors.name}</ErrorMessage>
+    //         ) : null}
+    //       </InputItem>
+
+    //       <InputItem>
+    //         <Input
+    //           name="email"
+    //           type="email"
+    //           placeholder={user?.email}
+    //           onChange={event => handleRequiredFieldChange(event)}
+    //           value={values.email}
+    //         />
+    //         {errors.email && touched.email ? (
+    //           <ErrorMessage>{errors.email}</ErrorMessage>
+    //         ) : null}
+    //       </InputItem>
+
+    //       <InputItem>
+    //         <Input
+    //           name="newPassword"
+    //           type="password"
+    //           placeholder="Enter new password"
+    //           onChange={event => handleRequiredFieldChange(event)}
+    //           value={values.newPassword}
+    //         />
+    //         {errors.newPassword && touched.newPassword ? (
+    //           <ErrorMessage>{errors.newPassword}</ErrorMessage>
+    //         ) : null}
+    //       </InputItem>
+
+    //       <InputItem>
+    //         {showPasswordConfirm && (
+    //           <>
+    //             <Input
+    //               name="password"
+    //               type="password"
+    //               placeholder="Enter your current password for confirmation"
+    //               onChange={handleChange}
+    //               value={values.password}
+    //             />
+    //             {errors.password && touched.password ? (
+    //               <ErrorMessage>{errors.password}</ErrorMessage>
+    //             ) : null}
+    //           </>
+    //         )}
+    //       </InputItem>
+    //     </ul>
+
+    //     <PrimaryButton
+    //       version="formPopUp"
+    //       id="send-user-updated-data"
+    //       disabled={
+    //         !isAvatarLoad &&
+    //         !values.name &&
+    //         !values.email &&
+    //         !values.password &&
+    //         !values.newPassword
+    //       }
+    //       type="submit"
+    //     >
+    //       Send
+    //     </PrimaryButton>
+    //   </Form>
+    // </PopUpLayout>
   );
 };
 

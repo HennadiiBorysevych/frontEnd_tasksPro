@@ -7,10 +7,14 @@ export const BoardListItem = styled.li(props => ({
   justifyContent: 'space-between',
   backgroundColor:
     props.isActive && props.theme.palette.background.activeBoardItem,
-  padding: '0 24px',
+  padding: '0 14px',
 
   '& + &': {
     marginTop: '4px',
+  },
+
+  [props.theme.breakpoints.up('medium')]: {
+    padding: '0 24px',
   },
 
   ...(props.isActive && {
@@ -30,7 +34,6 @@ export const BoardListItem = styled.li(props => ({
 export const BoardName = styled.h2(props => ({
   fontSize: '14px',
   fontWeight: 500,
-  lineHeight: 1.25,
   letterSpacing: '-0.28px',
   textAlign: 'left',
   color: props.isActive

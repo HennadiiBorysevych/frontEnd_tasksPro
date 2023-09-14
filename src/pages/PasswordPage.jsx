@@ -7,11 +7,15 @@ import { authOperations } from 'redux/auth';
 import { popUpInitialValues } from 'constants';
 
 import { forgotPasswordSchema } from 'helpers/validationSchemas';
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import { Input, PopUpTitle, PrimaryButton } from 'ui';
-
-import { ErrorMessage, Form } from 'assets/styles/commonFormStyles.styled';
+import {
+  ErrorMessage,
+  Form,
+  InputItem,
+  InputList,
+} from 'ui/commonPopUp/commonPopUp.styled';
 
 import { Background, Container } from './styles/commonStyles.styled';
 import { PasswordContainer } from './styles/passwordPage.styled';
@@ -19,7 +23,7 @@ import { PasswordContainer } from './styles/passwordPage.styled';
 const { recoveryPasswordValues } = popUpInitialValues;
 
 const PasswordPage = () => {
-  const { passwordRecovery, setNewPassword } = useAuth();
+  const { passwordRecovery, setNewPassword } = useAuthCollector();
   const [passwordToken, setPasswordToken] = useState(false);
   const [searchParams] = useSearchParams();
 
@@ -81,65 +85,71 @@ const PasswordPage = () => {
     <Background>
       <Container>
         <PasswordContainer>
+          <PopUpTitle
+            variant="Auth form"
+            title={
+              !passwordToken ? 'Password recovery' : 'Change your password'
+            }
+          />
           <Form onSubmit={handleSubmit}>
-            <PopUpTitle
-              title={
-                !passwordToken ? 'Password recovery' : 'Change your password'
-              }
-            ></PopUpTitle>
-            {!passwordToken ? (
-              <Input
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-            ) : null}
-            {!passwordToken && errors.email && touched.email ? (
-              <ErrorMessage style={{ color: 'white' }}>
-                {errors.email}
-              </ErrorMessage>
-            ) : null}
-
-            {passwordToken ? (
-              <Input
-                name="password"
-                type="password"
-                placeholder="Enter your new password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-            ) : null}
-            {passwordToken && errors.password && touched.password ? (
-              <ErrorMessage style={{ color: 'white' }}>
-                {errors.password}
-              </ErrorMessage>
-            ) : null}
-
-            {passwordToken ? (
-              <Input
-                name="verifyPassword"
-                type="password"
-                placeholder="Confirm your password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.verifyPassword}
-              />
-            ) : null}
-            {passwordToken &&
-            errors.verifyPassword &&
-            touched.verifyPassword ? (
-              <ErrorMessage style={{ color: 'white' }}>
-                {errors.verifyPassword}
-              </ErrorMessage>
-            ) : null}
+            <InputList>
+              <InputItem>
+                {!passwordToken ? (
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                ) : null}
+                {!passwordToken && errors.email && touched.email ? (
+                  <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
+                ) : null}
+              </InputItem>
+              <InputItem>
+                {' '}
+                {passwordToken ? (
+                  <Input
+                    name="password"
+                    type="password"
+                    placeholder="Enter your new password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                ) : null}
+                {passwordToken && errors.password && touched.password ? (
+                  <ErrorMessage variant="authForm">
+                    {errors.password}
+                  </ErrorMessage>
+                ) : null}
+              </InputItem>
+              <InputItem>
+                {passwordToken ? (
+                  <Input
+                    name="verifyPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.verifyPassword}
+                  />
+                ) : null}
+                {passwordToken &&
+                errors.verifyPassword &&
+                touched.verifyPassword ? (
+                  <ErrorMessage variant="authForm">
+                    {errors.verifyPassword}
+                  </ErrorMessage>
+                ) : null}
+              </InputItem>
+            </InputList>
 
             <PrimaryButton
+              version="formPopUp"
               id="recovery-password-submit-button"
-              style={{ marginTop: '14px' }}
               hasIcon={false}
               type="submit"
             >

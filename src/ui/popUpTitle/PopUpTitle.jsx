@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Title } from './popUpTitle.styled';
 
-const PopUpTitle = ({ title }) => {
-  return <Title>{title}</Title>;
+const PopUpTitle = ({ title, variant }) => {
+  return <Title variant={variant}>{title}</Title>;
 };
 
 export default PopUpTitle;
 
 PopUpTitle.propTypes = {
   title: PropTypes.string.isRequired,
+  variant: PropTypes.string,
 };

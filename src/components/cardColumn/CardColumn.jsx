@@ -1,73 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { selectUserFilter } from 'redux/userFilterSlice';
 
 import { StrictModeDroppable } from 'helpers';
-import { useAuth, useCards, useColumns, useModal } from 'hooks';
+import {
+  useAuthCollector,
+  useCardsCollector,
+  useColumnsCollector,
+  useModal,
+} from 'hooks';
 
-import { AddCardBtn, CardItem, ColumnPopUp } from 'components';
 import {
   CustomScrollBar,
   Modal,
+  PrimaryButton,
   ReactConfirmAlert,
   SvgIcon,
   Typography,
 } from 'ui';
 
+import CardItem from '../cardItem/CardItem';
+import CardPopUp from '../cardPopUp/CardPopUp';
+import ColumnPopUp from '../columnPopUp/ColumnPopUp';
+
 import {
   Column,
   ColumnHeading,
+  DraggableItem,
   IconsContainer,
   ItemsContainer,
 } from './CardColumn.styled';
 
 function CardsColumn({ provided, column }) {
-  const { theme } = useAuth();
-  const { columnLoading, columnsAndTasks, removeColumn } = useColumns();
-  const { cardLoading } = useCards();
+  const { theme } = useAuthCollector();
+  const { columnLoading, columnsAndTasks, removeColumn } =
+    useColumnsCollector();
+  const { cardLoading } = useCardsCollector();
   const { isModal, onBackdropClick, toggleModal } = useModal();
   const userFilter = useSelector(selectUserFilter);
 
-  const [boardListHeight, setBoardListHeight] = useState(() => {
-    return window.innerHeight - elementsTotalSize(window.innerWidth);
-  });
   const [modalType, setModalType] = useState(null);
-  function elementsTotalSize(width) {
-    if (width <= 767) {
-      //mobile
-      return 343;
-    } else if (width >= 768 && width <= 1439) {
-      // tablet
-      return 380;
-    } else {
-      // desktop
-      return 282;
-    }
-  }
-
-  useEffect(() => {
-    const updateWindowHeight = () => {
-      setBoardListHeight(
-        window.innerHeight - elementsTotalSize(window.innerWidth)
-      );
-    };
-    window.addEventListener('resize', updateWindowHeight);
-    return () => {
-      window.removeEventListener('resize', updateWindowHeight);
-    };
-  }, []);
 
   const handleEditColumn = () => {
     setModalType('editColumn');
     toggleModal();
   };
 
-  // const handleCreateCard = () => {
-  //   setModalType('createCard');
-  //   toggleModal();
-  // };
+  const handleCreateCard = () => {
+    setModalType('createCard');
+    toggleModal();
+  };
 
   const isLoading = columnLoading || cardLoading;
 
@@ -110,7 +94,7 @@ function CardsColumn({ provided, column }) {
           isCombineEnabled={true}
         >
           {provided => (
-            <CustomScrollBar maxHeight={boardListHeight}>
+            <CustomScrollBar variant="columns">
               <ItemsContainer
                 {...provided.droppableProps}
                 ref={provided.innerRef}
@@ -129,13 +113,13 @@ function CardsColumn({ provided, column }) {
                       index={index}
                     >
                       {provided => (
-                        <li
+                        <DraggableItem
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           ref={provided.innerRef}
                         >
                           <CardItem item={{ ...item }} />
-                        </li>
+                        </DraggableItem>
                       )}
                     </Draggable>
                   ))}
@@ -144,23 +128,23 @@ function CardsColumn({ provided, column }) {
             </CustomScrollBar>
           )}
         </StrictModeDroppable>
-        <AddCardBtn columnId={column.id} cardIndex={columnsAndTasks.length} />
-        {/* <PrimaryButton
+        <PrimaryButton
           hasIcon={true}
           type="button"
           svgName={'icon-plus'}
           variant="primary"
+          version="board"
           onClick={handleCreateCard}
         >
           Add another card
-        </PrimaryButton> */}
+        </PrimaryButton>
       </Column>
       {isModal && modalType === 'editColumn' && (
         <Modal onBackdropClick={onBackdropClick}>
           <ColumnPopUp column={column} handleModalClose={toggleModal} />
         </Modal>
       )}
-      {/* {isModal && modalType === 'createCard' && (
+      {isModal && modalType === 'createCard' && (
         <Modal onBackdropClick={onBackdropClick}>
           <CardPopUp
             columnId={column.id}
@@ -168,7 +152,7 @@ function CardsColumn({ provided, column }) {
             handleModalClose={toggleModal}
           />
         </Modal>
-      )} */}
+      )}
     </>
   );
 }

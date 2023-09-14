@@ -14,6 +14,36 @@ export const PriorityItem = styled.li(({ variant }) => ({
   height: variant === 'Filters' ? '100%' : '14px',
 }));
 
+export const LabelSubtitle = styled.span(props => ({
+  color: props.theme.palette.text.primaryMedium,
+  fontSize: '12px',
+  letterSpacing: '-0.24px',
+}));
+
+export const Label = styled.label(props => ({
+  position: props.value === 'showAll' ? 'absolute' : 'static',
+  top: props.value === 'showAll' && '10px',
+  right: props.value === 'showAll' && 0,
+  textDecoration: props.value === 'showAll' && 'underline',
+  textDecorationColor:
+    props.value === 'showAll' && props.theme.palette.text.primaryMedium,
+
+  ...(props.value !== 'showAll' && {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+  }),
+  cursor: 'pointer',
+
+  '&:hover': {
+    textDecorationColor:
+      props.value === 'showAll' && props.theme.palette.accent.main,
+    [LabelSubtitle]: {
+      color: props.theme.palette.accent.main,
+    },
+  },
+}));
+
 export const Radio = styled.input(props => ({
   position: props.value === 'showAll' ? 'absolute' : 'relative',
   visibility: 'hidden',
@@ -29,6 +59,12 @@ export const Radio = styled.input(props => ({
   clip: props.value === 'showAll' && 'rect(0 0 0 0)',
   overflow: props.value === 'showAll' && 'hidden',
 
+  '&:checked + span': {
+    color: props.theme.palette.text.primary,
+    textDecorationColor:
+      props.value === 'showAll' && props.theme.palette.text.primary,
+  },
+
   ...(props.value !== 'showAll' && {
     '&::after': {
       visibility: 'visible',
@@ -42,7 +78,7 @@ export const Radio = styled.input(props => ({
       width: '14px',
       height: '14px',
       backgroundColor:
-        props.value === 'Without'
+        props.value === 'without' || props.value === 'Without'
           ? props.theme.palette.background.withoutPriorityBackground
           : getPriorityColor(props.value),
     },
@@ -74,41 +110,11 @@ export const Radio = styled.input(props => ({
           outline: '1px solid',
           backgroundColor: 'transparent',
           outlineColor:
-            props.value === 'Without'
+            props.value === 'without' || props.value === 'Without'
               ? props.theme.palette.background.withoutPriorityBackground
               : getPriorityColor(props.value),
         },
       },
     },
   }),
-}));
-
-export const LabelSubtitle = styled.span(props => ({
-  color: props.theme.palette.text.primaryMedium,
-  fontSize: '12px',
-  letterSpacing: '-0.24px',
-}));
-
-export const Label = styled.label(props => ({
-  position: props.value === 'showAll' ? 'absolute' : 'static',
-  top: props.value === 'showAll' && '10px',
-  right: props.value === 'showAll' && 0,
-  textDecoration: props.value === 'showAll' && 'underline',
-  textDecorationColor:
-    props.value === 'showAll' && props.theme.palette.text.primaryMedium,
-
-  ...(props.value !== 'showAll' && {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-  }),
-  cursor: 'pointer',
-
-  '&:hover': {
-    textDecorationColor:
-      props.value === 'showAll' && props.theme.palette.accent.main,
-    [LabelSubtitle]: {
-      color: props.theme.palette.accent.main,
-    },
-  },
 }));

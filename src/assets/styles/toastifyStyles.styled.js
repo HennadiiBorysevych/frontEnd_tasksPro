@@ -20,8 +20,9 @@ export const StyledContainer = styled(ToastContainer)(({ theme }) => ({
     color:
       theme === 'Violet' ? generalColors.whiteBase : generalColors.blackBase,
   },
-  '.Toastify__toast-icon': {
-    color: theme === 'Violet' ? generalColors.whiteBase : '#121212',
+  '.Toastify__toast-icon > svg': {
+    fill:
+      theme === 'Violet' ? generalColors.whiteBase : generalColors.blackBase,
   },
   '.Toastify__close-button': {
     backgroundColor: 'transparent',
@@ -29,10 +30,15 @@ export const StyledContainer = styled(ToastContainer)(({ theme }) => ({
 
   '.Toastify__close-button > svg': {
     fill:
-      theme === 'Violet' ? generalColors.whiteBase : generalColors.blackBase,
+      theme === 'Violet'
+        ? `${generalColors.whiteBase} !important`
+        : `${generalColors.blackBase} !important`,
   },
   '.Toastify__progress-bar--success': {
-    backgroundColor: '#07bc0c',
+    backgroundColor:
+      theme === 'Violet'
+        ? `${generalColors.whiteBase}`
+        : `${generalColors.accentGreenBase}`, // '#07bc0c'
   },
   '.Toastify__progress-bar--error': {
     backgroundColor: '#e74c3c',

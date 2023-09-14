@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { images } from 'constants';
 
 import { generateContentImages } from 'helpers';
-import { useBoards } from 'hooks';
+import { useBoardsCollector } from 'hooks';
 
 import { GoogleAuth, Logo } from 'components';
 
@@ -16,7 +16,7 @@ import {
 } from './styles/welcomePage.styled';
 
 const WelcomePage = () => {
-  const { resetBoardsState } = useBoards();
+  const { resetBoardsState } = useBoardsCollector();
 
   const devicePixelRatio = window.devicePixelRatio || 1;
 

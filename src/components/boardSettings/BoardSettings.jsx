@@ -10,6 +10,7 @@ import {
   BackgroundImage,
   BoardDecor,
   BoardText,
+  DefaultBackgroundIconWrapper,
   IconLabel,
   RadioField,
   Row,
@@ -74,11 +75,26 @@ const BoardSettings = ({
                   checked={chosenBackground === bgIndex.title}
                   onChange={() => setChosenBackground(bgIndex.title)}
                 />
-                <BackgroundImage
-                  bgIndex={bgIndex}
-                  isActive={chosenBackground === bgIndex.title}
-                  className={chosenBackground === bgIndex.title ? 'active' : ''}
-                />
+                {bgIndex.isDefault ? (
+                  <DefaultBackgroundIconWrapper>
+                    <SvgIcon
+                      svgName="icon-background-image"
+                      size={16}
+                      variant="background"
+                      className={
+                        chosenBackground === bgIndex.title ? 'active' : ''
+                      }
+                    />
+                  </DefaultBackgroundIconWrapper>
+                ) : (
+                  <BackgroundImage
+                    bgIndex={bgIndex}
+                    isActive={chosenBackground === bgIndex.title}
+                    className={
+                      chosenBackground === bgIndex.title ? 'active' : ''
+                    }
+                  />
+                )}
               </label>
             ))}
           </Row>

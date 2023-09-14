@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { OverlayScrollbars } from 'overlayscrollbars';
 import PropTypes from 'prop-types';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import 'overlayscrollbars/overlayscrollbars.css';
 import { CommonStyles } from './CustomScrollBar.styled';
 
-const CustomScrollbar = ({ width, maxHeight, children }) => {
+const CustomScrollbar = ({ width, maxHeight, children, variant }) => {
   const containerRef = useRef(null);
-  const { theme } = useAuth();
+  const { theme } = useAuthCollector();
 
   useEffect(() => {
     const containerElement = containerRef.current;
@@ -22,17 +22,17 @@ const CustomScrollbar = ({ width, maxHeight, children }) => {
         clickScrolling: false,
         touchSupport: true,
       },
-      callbacks: {
-        onInitialized: () => {
-          const scrollbar = containerElement.querySelector(
-            '.os-scrollbar-horizontal'
-          );
-          if (scrollbar) {
-            scrollbar.style.width = '18px';
-            scrollbar.style.height = '18px';
-          }
-        },
-      },
+      // callbacks: {
+      //   onInitialized: () => {
+      //     const scrollbar = containerElement.querySelector(
+      //       '.os-scrollbar-horizontal'
+      //     );
+      //     if (scrollbar) {
+      //       scrollbar.style.width = '18px';
+      //       scrollbar.style.height = '18px';
+      //     }
+      //   },
+      // },
     });
 
     // Clean up the OverlayScrollbars instance when the component unmounts
@@ -53,6 +53,7 @@ const CustomScrollbar = ({ width, maxHeight, children }) => {
         maxHeight,
         overflow: 'hidden',
       }}
+      variant={variant}
     >
       <div>{children}</div>
     </CommonStyles>

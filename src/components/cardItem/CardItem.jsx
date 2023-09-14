@@ -1,14 +1,21 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useAuth, useCards, useModal } from 'hooks';
+import {
+  formatShortDeadlineForMarkup,
+  getCurrentDeadlineDate,
+  getShortDeadlineDate,
+} from 'helpers';
+import { useAuthCollector, useCardsCollector, useModal } from 'hooks';
 
-import { CardPopUp } from 'components';
 import { Modal, ReactConfirmAlert, SvgIcon, Typography } from 'ui';
+
+import CardPopUp from '../cardPopUp/CardPopUp';
 
 import {
   CardContainer,
   Circle,
+  DeadlineMessage,
   Description,
   DetailLabel,
   Details,
@@ -19,33 +26,28 @@ import {
 } from './CardItem.styled';
 
 const CardItem = ({ item }) => {
-  const { theme } = useAuth();
-  const { removeCard } = useCards();
+  const { theme } = useAuthCollector();
+  const { removeCard } = useCardsCollector();
   const { isModal, onBackdropClick, toggleModal } = useModal();
 
   const { title, description, priority, deadline, id } = item;
 
-  const [formattedDeadline, isDeadlineToday] = useMemo(() => {
-    const deadlineDate = new Date(deadline);
-    const formatted = `${
-      deadlineDate.getMonth() + 1
-    }/${deadlineDate.getDate()}/${deadlineDate.getFullYear()}`;
-    const currentDate = new Date();
-    const isDeadline =
-      deadlineDate.toDateString() === currentDate.toDateString();
+  const today = new Date();
+  const currentDate = getCurrentDeadlineDate(today);
+  const currentDeadlineDate = getCurrentDeadlineDate(deadline);
+  const shortCurrentDate = getShortDeadlineDate(currentDate);
+  const shortCurrentDeadlineDate = getShortDeadlineDate(currentDeadlineDate);
 
-    return [formatted, isDeadline];
-  }, [deadline]);
-
-  const isDeadlineExpired = useMemo(() => {
-    const deadlineDate = new Date(deadline);
-    const currentDate = new Date();
-
-    return deadlineDate < currentDate;
-  }, [deadline]);
+  const formattedDeadline = formatShortDeadlineForMarkup(deadline);
+  const deadlineToday = shortCurrentDate === shortCurrentDeadlineDate;
+  const deadlineExpired = shortCurrentDeadlineDate < shortCurrentDate;
 
   return (
     <CardContainer priority={priority}>
+      {deadlineExpired && <DeadlineMessage>Deadline expired</DeadlineMessage>}
+      {deadlineToday && (
+        <DeadlineMessage today={true}>Deadline is today</DeadlineMessage>
+      )}
       <Title variant="tastTitle">{title}</Title>
       <Description variant="taskDescription">{description}</Description>
       <Details>
@@ -64,9 +66,10 @@ const CardItem = ({ item }) => {
         </DetailsContainer>
         <IconsContainer>
           <div>
-            {isDeadlineToday && !isDeadlineExpired ? (
+            {deadlineToday && (
               <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
-            ) : (
+            )}
+            {deadlineExpired && (
               <SvgIcon
                 svgName="icon-bell"
                 size={16}

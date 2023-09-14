@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { boardOperations, boardSelectors } from 'redux/boards';
 
 import { resetBoardState } from '../redux/boards/boardSlice';
-const useBoards = () => {
+const useBoardsCollector = () => {
   const activeBoard = useSelector(boardSelectors.selectActiveBoard);
   const activeBoardId = useSelector(boardSelectors.selectActiveBoardId);
   const allBoards = useSelector(boardSelectors.selectAllBoards);
@@ -55,8 +55,8 @@ const useBoards = () => {
     addNewBoard,
     updateExistingBoard,
     removeBoard,
-    resetBoardsState
+    resetBoardsState,
   };
 };
 
-export default useBoards;
+export default useBoardsCollector;

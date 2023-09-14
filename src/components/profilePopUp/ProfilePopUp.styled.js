@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 
 export const AvatarWrap = styled.div(props => ({
   position: 'relative',
-  margin: '0 auto 24px auto',
+  marginBottom: '14px',
   width: '68px',
-  height: '68px',
-  backgroundColor: props.theme.palette.background.primary ?? null,
+  height: '79px',
+  backgroundColor: props.avatar ? null : props.theme.palette.background.primary,
 }));
 
 export const AddButtonWrap = styled.div(props => ({
@@ -13,14 +13,11 @@ export const AddButtonWrap = styled.div(props => ({
   zIndex: '3',
   bottom: '0%',
   left: '50%',
-  transform: 'translate( -50%, 50%)',
-  width: '24px',
-  height: '24px',
+  transform: 'translate( -50%)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '6px',
-  backgroundColor: props.theme.palette.background.buttonPlusAvatar,
 }));
 
 export const AvatarInput = styled.input({
@@ -34,18 +31,12 @@ export const AvatarInput = styled.input({
     visibility: 'hidden',
   },
 });
-export const Input = styled.input({
-  padding: '14px 18px',
-  width: '100%',
-  fontSize: '14px',
-  borderRadius: '8px',
-});
 
 export const AvatarBg = styled.div(
   props => ({
     position: 'relative',
     width: '100%',
-    height: '100%',
+    height: '68px',
     borderRadius: '8px',
     overflow: 'hidden',
     backgroundColor: props.theme.palette.background.primary,

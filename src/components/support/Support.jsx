@@ -6,8 +6,9 @@ import { useToggleModalAndSideBar } from 'contexts';
 import { generateContentImages } from 'helpers';
 import { useModal } from 'hooks';
 
-import { SupportPopUp } from 'components';
 import { Modal, SvgIcon } from 'ui';
+
+import SupportPopUp from '../supportPopUp/SupportPopUp';
 
 import {
   AppName,

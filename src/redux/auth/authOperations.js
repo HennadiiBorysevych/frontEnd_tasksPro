@@ -80,14 +80,12 @@ const fetchCurrentUser = createAsyncThunk(
 const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
-    console.log(updatedUser);
     const formData = new FormData();
 
     if (updatedUser.avatarFile) {
       formData.append('newAvatar', updatedUser.avatarFile);
     }
     if (updatedUser.user) {
-      console.log(updatedUser.user);
       for (const key in updatedUser.user) {
         formData.append(`${key}`, updatedUser.user[key]);
       }
@@ -101,7 +99,6 @@ const updateUserInfo = createAsyncThunk(
       const response = await axios.patch('/api/users', formData, {
         headers,
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

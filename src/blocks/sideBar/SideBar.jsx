@@ -10,11 +10,13 @@ import {
   SignOut,
   Support,
 } from 'components';
-import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
+import { CustomScrollBar, Modal } from 'ui';
 
 import {
   CreateBoard,
+  CreateBoardPlus,
   Overlay,
+  SideBarContainer,
   SideBarWrapper,
   TitleBoardList,
   TitleButton,
@@ -29,30 +31,46 @@ const SideBar = () => {
   return (
     <>
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
-        <CustomScrollBar width="100%" height="100%" overflow="auto">
-          <div>
-            <Logo variant="bord" />
-            <TitleBoardList variant="taskDescription">My boards</TitleBoardList>
-            <CreateBoard
-              type="button"
-              id="create-new-board-button"
-              onClick={() => {
-                toggleModal();
-                toggleModalAndSideBar();
-              }}
-            >
-              <TitleButton>
-                Create a <br />
-                new board
-              </TitleButton>
-              <ButtonPlus width={40} height={36} variant="sidemenu" size={20} />
-            </CreateBoard>
-            {activeBoardId && <SideBarBoardsList windowHeight={windowHeight} />}
-          </div>
-          <div>
-            <Support />
-            <SignOut />
-          </div>
+        <CustomScrollBar
+          width="100%"
+          variant="sidebar"
+          height="100%"
+          overflow="auto"
+        >
+          <SideBarContainer>
+            <div>
+              <Logo variant="bord" />
+              <TitleBoardList variant="taskDescription">
+                My boards
+              </TitleBoardList>
+              <CreateBoard
+                type="button"
+                id="create-new-board-button"
+                onClick={() => {
+                  toggleModal();
+                  toggleModalAndSideBar();
+                }}
+              >
+                <TitleButton>
+                  Create a <br />
+                  new board
+                </TitleButton>
+                <CreateBoardPlus
+                  width={40}
+                  height={36}
+                  variant="sidemenu"
+                  size={20}
+                />
+              </CreateBoard>
+              {activeBoardId && (
+                <SideBarBoardsList windowHeight={windowHeight} />
+              )}
+            </div>
+            <div>
+              <Support />
+              <SignOut />
+            </div>
+          </SideBarContainer>
         </CustomScrollBar>
       </SideBarWrapper>
       {isOpen && <Overlay onClick={() => closeSideBar()} />}

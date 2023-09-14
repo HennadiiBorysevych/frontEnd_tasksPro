@@ -1,13 +1,10 @@
-import { Typography } from 'ui';
+import { ButtonPlus, Typography } from 'ui';
 
 import styled from '@emotion/styled';
 
 export const SideBarWrapper = styled.div(
   {
     padding: '24px 0',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
     width: '225px',
     height: '100vh',
     overflow: 'auto',
@@ -42,6 +39,13 @@ export const SideBarWrapper = styled.div(
   })
 );
 
+export const SideBarContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: 'calc(100vh - 48px)',
+});
+
 export const Overlay = styled.div(({ theme }) => ({
   position: 'fixed',
   top: '0',
@@ -69,11 +73,16 @@ export const CreateBoard = styled.button(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
-  borderTop: `1px solid ${theme.palette.text.primaryDark}`,
-  borderBottom: `1px solid ${theme.palette.text.primaryDark}`,
+  borderTop: `1px solid ${theme.palette.background.createBoardBorder}`,
+  borderBottom: `1px solid ${theme.palette.background.createBoardBorder}`,
   padding: '14px',
   marginBottom: '40px',
   transition: 'box-shadow 0.3s, transform 0.3s',
+  fontFamily: 'inherit',
+  fontSize: '14px',
+  fontWeight: 500,
+  lineHeight: 'normal',
+  letterSpacing: '-0.28px',
 
   '&:hover': {
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
@@ -85,8 +94,15 @@ export const CreateBoard = styled.button(({ theme }) => ({
   },
 }));
 
-export const TitleButton = styled.p`
+export const TitleButton = styled.span`
+  display: block;
   margin: 0;
   padding: 0;
   text-align: left;
 `;
+
+export const CreateBoardPlus = styled(ButtonPlus)(props => ({
+  '&:hover': {
+    backgroundColor: props.theme.palette.background.buttonPlusHoverSideBar,
+  },
+}));

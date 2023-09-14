@@ -3,7 +3,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-import { useCards } from 'hooks';
+import { useCardsCollector } from 'hooks';
 
 import SvgIcon from '../svgIcon/SvgIcon';
 
@@ -26,7 +26,7 @@ const ReactConfirmAlert = ({
   onToggle,
   ownerId,
 }) => {
-  const { allCards } = useCards();
+  const { allCards } = useCardsCollector();
   const handleDeleteConfirm = () => {
     onDeleteAction();
   };

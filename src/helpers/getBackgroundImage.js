@@ -2,7 +2,7 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { dpr } from '@cloudinary/url-gen/actions/delivery';
 import { fill } from '@cloudinary/url-gen/actions/resize';
 
-const backgroundImage = bg => {
+const getBackgroundImage = bg => {
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'dpjbgqovu',
@@ -27,4 +27,4 @@ const backgroundImage = bg => {
   return imageUrl;
 };
 
-export default backgroundImage;
+export default getBackgroundImage;
