@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+
 import { useAuthCollector } from 'hooks';
 
 const PublicPage = ({ component: Component, redirectTo = '/home' }) => {
