@@ -21,6 +21,7 @@ const HeaderBox = styled.div(
 );
 
 const SideBarButton = styled.button(props => ({
+  height: '28px',
   [props.theme.breakpoints.up('large')]: {
     display: 'none',
   },

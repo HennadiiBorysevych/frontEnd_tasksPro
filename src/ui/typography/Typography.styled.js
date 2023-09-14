@@ -41,7 +41,7 @@ export const typographyVariants = {
     WebkitBoxOrient: 'vertical',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    color: props.theme.palette.text.cardDescription,
+    color: props.theme.palette.text.secondary,
   })),
 
   [TypographyVariants.subTitle]: styled.p(props => ({

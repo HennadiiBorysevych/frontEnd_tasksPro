@@ -46,6 +46,7 @@ export const TextareaStyled = styled.textarea(props => ({
   CommonInputStyles,
   resize: 'none',
   overflow: 'auto',
+  display: 'block',
 
   height: props.height ? `${props.height}px` : '154px',
   background: props.theme.palette.background.input,

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import { ThemeProvider } from '@emotion/react';
 import PropTypes from 'prop-types';
 
+import { formatSelectedDate, formatShortWeekday } from 'helpers';
+
 import { SvgIcon } from 'ui';
 
 import {
@@ -17,35 +19,17 @@ import {
 } from './Calendar.styled';
 
 const Calend = ({ selectedDate, setSelectedDate }) => {
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+
   const today = new Date();
   const futureDate = new Date();
   futureDate.setFullYear(today.getFullYear() + 5);
 
   const initialSelectedDate = selectedDate || today;
-
-  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+  const isDeadlineToday = selectedDate.toDateString() === today.toDateString();
 
   const toggleCalendarVisibility = e => {
     setIsCalendarVisible(prevValue => !prevValue);
-  };
-
-  const formatShortWeekday = (locale, date) => {
-    const options = { weekday: 'short' };
-    const formattedWeekday = new Intl.DateTimeFormat(locale, options).format(
-      date
-    );
-    return formattedWeekday.slice(0, 2);
-  };
-
-  const formatSelectedDate = date => {
-    const options = {
-      month: 'long',
-      day: 'numeric',
-    };
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(
-      date
-    );
-    return formattedDate;
   };
 
   const handleDayClick = value => {
@@ -63,6 +47,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
     if (selectedDateWithoutTime < todayWithoutTime) {
       toast.error('You cannot select a deadline date in the past');
+      return;
     } else {
       setSelectedDate(value);
     }
@@ -84,13 +69,12 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
     <ThemeProvider theme={{}}>
       <>
         <CalendarButton
+          type="button"
           onClick={toggleCalendarVisibility}
           aria-label="open calendar for choosing deadline date"
         >
           <DeadlineDay>
-            {selectedDate.toDateString() === today.toDateString()
-              ? 'Today, '
-              : ''}{' '}
+            {isDeadlineToday ? 'Today, ' : ''}{' '}
             {formatSelectedDate(selectedDate)}
           </DeadlineDay>
           <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />

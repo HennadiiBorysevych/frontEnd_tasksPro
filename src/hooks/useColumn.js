@@ -1,18 +1,30 @@
-import useColumns from './useColumns';
+import { useCallback, useState } from 'react';
+
+import useColumnsCollector from './useColumnsCollector';
+
+const columnModel = {
+  title: '',
+};
 
 const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
-  const { addNewColumn, updateExistingColumn } = useColumns();
+  const { addNewColumn, updateExistingColumn } = useColumnsCollector();
+  const initialColumn = currentColumn ? currentColumn : columnModel;
+  const [title, setTitle] = useState(initialColumn?.title);
 
-  const handleColumnSubmit = values => {
+  const handleTitle = useCallback(e => {
+    setTitle(e.currentTarget.value);
+  }, []);
+
+  const handleColumnSubmit = () => {
     if (currentColumn) {
       const { id, order, columnOwner } = currentColumn;
       updateExistingColumn({
         columnId: id,
-        updatedData: { title: values.title, orderColumn: order, columnOwner },
+        updatedData: { title: title, orderColumn: order, columnOwner },
       });
     } else {
       addNewColumn({
-        title: values.title,
+        title: title,
         columnOwner: boardId,
         orderColumn: columnIndex,
       });
@@ -21,7 +33,7 @@ const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
     closeModal();
   };
 
-  return { handleColumnSubmit };
+  return { handleColumnSubmit, handleTitle };
 };
 
 export default useColumn;

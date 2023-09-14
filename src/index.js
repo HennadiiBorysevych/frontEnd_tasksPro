@@ -7,7 +7,7 @@ import generalStore from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { appThemes } from 'themes';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import './GlobalStyles.js';
 
@@ -16,7 +16,7 @@ import App from './App';
 import './index.css';
 
 const ThemedApp = () => {
-  const { theme } = useAuth();
+  const { theme } = useAuthCollector();
 
   const themeChoice = React.useMemo(() => {
     switch (theme) {

@@ -4,15 +4,16 @@ export const BoardWrap = styled.div(
   {
     padding: '14px 20px 24px',
     backgroundSize: 'cover',
-    minHeight: 'calc(100vh - 60px)',
+    height: '100%',
+    maxHeight: 'calc(100vh - 60px)',
   },
   props => ({
     backgroundColor: props.theme.palette.background.primary,
     backgroundImage: `url(${props.bg})`,
 
     [props.theme.breakpoints.up('medium')]: {
-      padding: '26px 32px',
-      minHeight: 'calc(100vh - 68px)',
+      padding: '26px 32px 32px',
+      maxHeight: 'calc(100vh - 68px)',
     },
 
     [props.theme.breakpoints.up('large')]: {
@@ -51,7 +52,7 @@ export const WelcomeText = styled.p(({ theme }) => ({
   fontWeight: 400,
   lineHeight: '1.3',
   letterSpacing: '-0.24px',
-  color: theme.palette.text.homeDefault,
+  color: theme.palette.text.secondary,
   textAlign: 'center',
 }));
 

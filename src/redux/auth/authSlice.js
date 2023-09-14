@@ -49,9 +49,6 @@ const authSlice = createSlice({
       })
       .addCase(authOperations.logOut.fulfilled, state => {
         return (state = initialState);
-        // state.user = { name: null, email: null };
-        // state.token = null;
-        // state.isLoggedIn = false;
       })
       .addCase(authOperations.fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -64,7 +61,6 @@ const authSlice = createSlice({
       })
       .addCase(authOperations.updateUserInfo.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        console.log(action.payload.user);
       })
       .addCase(authOperations.updateUserTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.theme;

@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { encodedTitleInUrl } from 'helpers';
-import { useBoards } from 'hooks';
+import { encodeTitleInUrl } from 'helpers';
+import { useBoardsCollector } from 'hooks';
 
-import { Filters } from 'components';
+import Filters from '../filters/Filters';
 
 import { FieldInput, Header } from './boardHead.styled';
 
 const BoardHead = () => {
   const { activeBoard, activeBoardId, allBoards, updateExistingBoard } =
-    useBoards();
+    useBoardsCollector();
   const [editingBoard, setEditingBoard] = useState(
     allBoards.find(board => board.id === activeBoardId)
   );
@@ -32,14 +32,14 @@ const BoardHead = () => {
     setTitle(e.currentTarget.value);
   }, []);
 
-  const handleBoardChange =  () => {
+  const handleBoardChange = () => {
     const { id, user, ...rest } = editingBoard;
 
-     updateExistingBoard({
+    updateExistingBoard({
       boardId: id,
       updatedData: { ...rest, title: title },
     });
-    encodedTitleInUrl(title);
+    encodeTitleInUrl(title);
   };
 
   const decodedTitle = decodeURIComponent(editingBoard?.id);

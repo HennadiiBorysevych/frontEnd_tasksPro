@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { cardOperations, cardSelectors } from 'redux/tasks';
 
-const useCards = () => {
+const useCardsCollector = () => {
   const cardLoading = useSelector(cardSelectors.selectLoading);
   const allCards = useSelector(cardSelectors.selectAllTasks);
   const oneCard = useSelector(cardSelectors.selectOneTask);
@@ -60,4 +60,4 @@ const useCards = () => {
   };
 };
 
-export default useCards;
+export default useCardsCollector;

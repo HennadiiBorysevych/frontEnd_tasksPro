@@ -13,10 +13,12 @@ const PrimaryButton = ({
   hasIcon,
   svgName,
   variant,
+  version,
   ...rest
 }) => {
   return (
     <ButtonStyled
+      version={version}
       onClick={onClick}
       style={{ width, height }}
       svgName={svgName}

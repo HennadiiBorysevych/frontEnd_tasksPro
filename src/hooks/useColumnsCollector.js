@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { columnOperations, columnSelectors } from 'redux/columns';
 
-const useColumns = () => {
+const useColumnsCollector = () => {
   const columnLoading = useSelector(columnSelectors.selectLoading);
   const allColumns = useSelector(columnSelectors.selectAllColumns);
   const oneColumn = useSelector(columnSelectors.selectOneColumn);
@@ -56,4 +56,4 @@ const useColumns = () => {
   };
 };
 
-export default useColumns;
+export default useColumnsCollector;

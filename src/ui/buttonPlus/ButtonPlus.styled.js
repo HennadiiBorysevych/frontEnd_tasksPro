@@ -12,6 +12,8 @@ export const SpanStyled = styled.span(props => ({
       ? props.theme.palette.background.buttonPlusSideBar
       : props.variant === 'addColumn'
       ? props.theme.palette.background.buttonPlusSecondary
+      : props.variant === 'addAvatar'
+      ? props.theme.palette.background.buttonPlusAvatar
       : props.theme.palette.background.buttonPlus,
   transition: 'all 250ms linear',
   cursor: 'pointer',

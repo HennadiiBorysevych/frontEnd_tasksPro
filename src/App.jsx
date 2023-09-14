@@ -6,8 +6,8 @@ import { AuthPage, PasswordPage, WelcomePage } from 'pages';
 import { Layout } from 'layouts';
 import { PrivatePage, PublicPage } from 'routes';
 
-import { BoardProvider } from 'contexts';
-import { useAuth } from 'hooks';
+import { BoardProvider, ToggleProvider } from 'contexts';
+import { useAuthCollector } from 'hooks';
 
 import { SkeletonLoader } from 'components';
 
@@ -22,8 +22,9 @@ const Board = lazy(() => import('./blocks/board/Board'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 
 const App = () => {
-  const { isLoggedIn, isFetchingCurrent, theme, fetchUser } = useAuth();
-  
+  const { isLoggedIn, isFetchingCurrent, theme, fetchUser } =
+    useAuthCollector();
+
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
@@ -60,7 +61,15 @@ const App = () => {
               />
               <Route
                 path="auth/:id"
-                element={<PublicPage component={<AuthPage />} />}
+                element={
+                  <PublicPage
+                    component={
+                      <ToggleProvider>
+                        <AuthPage />
+                      </ToggleProvider>
+                    }
+                  />
+                }
               />
 
               <Route path="auth/forgot_password" element={<PasswordPage />} />

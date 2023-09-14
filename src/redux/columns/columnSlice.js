@@ -46,7 +46,6 @@ const columnSlice = createSlice({
       })
       .addCase(columnOperations.addColumn.fulfilled, (state, action) => {
         const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
-        console.log(action.payload.data);
         state.items.push({ id, ...rest });
       })
       .addCase(columnOperations.updateColumn.fulfilled, (state, action) => {

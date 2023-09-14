@@ -3,7 +3,6 @@ import { Typography } from 'ui';
 import styled from '@emotion/styled';
 
 export const BoardDecor = styled.div`
-  margin-bottom: 40px;
   margin-top: 14px;
 `;
 
@@ -41,6 +40,30 @@ export const BoardText = styled(Typography)`
   margin-bottom: 14px;
   line-height: 21px;
 `;
+
+export const DefaultBackgroundIconWrapper = styled.div(
+  {
+    width: '28px',
+    height: '28px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '7px',
+    margin: '2px',
+    cursor: 'pointer',
+
+    '&:hover': {
+      transform: 'scale(1.1)',
+    },
+  },
+  props => ({
+    backgroundColor: props.theme.palette.background.primary,
+
+    '&:active, &.active': {
+      border: `1px solid ${props.theme.palette.background.buttonPlusSideBar}`,
+    },
+  })
+);
 
 export const BackgroundImage = styled.div(props => ({
   height: '28px',

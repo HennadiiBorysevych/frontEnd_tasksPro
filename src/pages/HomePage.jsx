@@ -6,9 +6,9 @@ import { SharedLayout } from 'layouts';
 import { useBoardContext } from 'contexts';
 import {
   useBackground,
-  useBoards,
-  useCards,
-  useColumns,
+  useBoardsCollector,
+  useCardsCollector,
+  useColumnsCollector,
   useModal,
 } from 'hooks';
 
@@ -26,9 +26,9 @@ const HomePage = () => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
-  const { allBoards, boardLoading, getAllBoards } = useBoards();
-  const { getAllColumns } = useColumns();
-  const { getAllCards } = useCards();
+  const { allBoards, boardLoading, getAllBoards } = useBoardsCollector();
+  const { getAllColumns } = useColumnsCollector();
+  const { getAllCards } = useCardsCollector();
 
   const navigate = useNavigate();
 
@@ -52,10 +52,10 @@ const HomePage = () => {
   }, [allBoards, navigate, activeBoardId, setActiveBoard, hasBoards]);
 
   useEffect(() => {
-     function fetchData() {
+    function fetchData() {
       if (activeBoardId) {
-         getAllColumns(activeBoardId);
-         getAllCards(activeBoardId);
+        getAllColumns(activeBoardId);
+        getAllCards(activeBoardId);
       }
     }
 

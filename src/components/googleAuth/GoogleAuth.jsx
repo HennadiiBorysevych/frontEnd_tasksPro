@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
-import SvgIcon from '../../ui/svgIcon/SvgIcon';
+import { SvgIcon } from 'ui';
 
 import { GoogleLink } from './GoogleAuth.styled';
 
 const GoogleAuth = () => {
-  const { googleAuth } = useAuth();
+  const { googleAuth } = useAuthCollector();
 
   const location = useLocation();
   const token = new URLSearchParams(location.search).get('token');

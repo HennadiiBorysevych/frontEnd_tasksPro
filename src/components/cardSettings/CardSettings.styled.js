@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const SettingsList = styled.ul`
   width: 100%;
-  margin-bottom: 40px;
+  margin-top: 24px;
 `;
 
 export const SettingsItem = styled.li`

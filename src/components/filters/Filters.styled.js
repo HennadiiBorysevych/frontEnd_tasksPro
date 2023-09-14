@@ -1,6 +1,10 @@
 import styled from '@emotion/styled/macro';
 
-import SvgIcon from '../../ui/svgIcon/SvgIcon';
+import { SvgIcon } from 'ui';
+
+export const Container = styled.div`
+  position: relative;
+`;
 
 export const FiltersIcon = styled(SvgIcon)(props => ({
   filter: `drop-shadow(1px 0 1px ${props.theme.palette.text.shadowColor})`,
@@ -29,8 +33,12 @@ export const FiltersButton = styled.button(props => ({
   },
 }));
 
-export const Container = styled.div(
+export const FilterContainer = styled.div(
   {
+    position: 'absolute',
+    top: '100%',
+    right: 0,
+    zIndex: 2,
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '100%',

@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import useCards from './useCards';
+import useCardsCollector from './useCardsCollector';
 
 const cardModel = {
   title: '',
   description: '',
-  priority: 'without',
+  priority: 'Without',
   deadline: '',
 };
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
-  const { addNewCard, updateExistingCard } = useCards();
+  const { addNewCard, updateExistingCard } = useCardsCollector();
   const initialCard = currentCard
     ? getFormattedCard(currentCard)
     : {
@@ -25,24 +25,8 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [priority, setPriority] = useState(initialCard?.priority);
   const [deadline, setDeadline] = useState(initialCard?.deadline);
   const [card, setCard] = useState(initialCard);
-  const [titleChecker, seTitleChecker] = useState(false);
-  const [descriptionChecker, setDescriptionChecker] = useState(false);
 
-  const handleCardSubmit = e => {
-    if (title === '' && !currentCard) {
-      seTitleChecker(true);
-      setTimeout(() => {
-        seTitleChecker(false);
-      }, 2000);
-      return;
-    }
-    if (description === '' && !currentCard) {
-      setDescriptionChecker(true);
-      setTimeout(() => {
-        setDescriptionChecker(false);
-      }, 2000);
-      return;
-    }
+  const handleCardSubmit = () => {
     const { id, createdAt, order, updatedAt, ...rest } = card;
 
     if (currentCard) {
@@ -91,8 +75,6 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
     setDeadline,
     handleInput,
     handlePriority,
-    descriptionChecker,
-    titleChecker,
     handleCardSubmit,
   };
 };

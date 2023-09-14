@@ -6,20 +6,22 @@ import PropTypes from 'prop-types';
 import { popUpInitialValues } from 'constants';
 
 import { authSchema } from 'helpers/validationSchemas';
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
-import { GoogleAuth } from 'components';
 import { Input, PrimaryButton } from 'ui';
-
 import {
   ErrorMessage,
   Form,
-} from '../../assets/styles/commonFormStyles.styled';
+  InputItem,
+  InputList,
+} from 'ui/commonPopUp/commonPopUp.styled';
+
+import GoogleAuth from '../googleAuth/GoogleAuth';
 
 const { authValues } = popUpInitialValues;
 
 const AuthForm = ({ value, chgForm }) => {
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp } = useAuthCollector();
 
   useEffect(() => {
     const { name, email, password } = authValues;
@@ -57,7 +59,10 @@ const AuthForm = ({ value, chgForm }) => {
         await signIn({ email, password });
         toast.success('Welcome to TaskPro!');
       } else {
-        await signIn({ email, password });
+        const data = await signIn({ email, password });
+        if (data.payload === 'Request failed with status code 401') {
+          toast.error('Email or password are wrong');
+        }
       }
 
       resetForm();
@@ -95,46 +100,52 @@ const AuthForm = ({ value, chgForm }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {value === 0 && (
-          <Input
-            name="name"
-            type="name"
-            placeholder="Enter your name"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.name}
-          />
-        )}
-        {value === 0 && errors.name && touched.name ? (
-          <ErrorMessage variant="authForm">{errors.name}</ErrorMessage>
-        ) : null}
-
-        <Input
-          name="email"
-          type="email"
-          placeholder="Enter your email"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-        />
-        {errors.email && touched.email ? (
-          <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
-        ) : null}
-
-        <Input
-          name="password"
-          type="password"
-          placeholder={formDistributor.passText}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-        />
-        {errors.password && touched.password ? (
-          <ErrorMessage variant="authForm">{errors.password}</ErrorMessage>
-        ) : null}
+        <InputList>
+          <InputItem>
+            {value === 0 && (
+              <Input
+                name="name"
+                type="name"
+                placeholder="Enter your name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+              />
+            )}
+            {value === 0 && errors.name && touched.name ? (
+              <ErrorMessage variant="authForm">{errors.name}</ErrorMessage>
+            ) : null}
+          </InputItem>
+          <InputItem>
+            <Input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+            />
+            {errors.email && touched.email ? (
+              <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
+            ) : null}
+          </InputItem>
+          <InputItem>
+            <Input
+              name="password"
+              type="password"
+              placeholder={formDistributor.passText}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+            />
+            {errors.password && touched.password ? (
+              <ErrorMessage variant="authForm">{errors.password}</ErrorMessage>
+            ) : null}
+          </InputItem>
+        </InputList>
 
         <PrimaryButton
-          style={{ marginTop: '14px' }}
+          version="formPopUp"
           type="submit"
           aria-label="authorisation-button"
         >

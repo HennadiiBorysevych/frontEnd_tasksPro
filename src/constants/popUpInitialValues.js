@@ -16,6 +16,7 @@ const boardValues = {
 
 const cardValues = {
   title: '',
+  description: '',
 };
 
 const columnValues = {

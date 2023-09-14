@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import { useToggleModalAndSideBar } from 'contexts';
 
 import { AuthForm } from 'components';
 
@@ -12,23 +14,11 @@ import {
 import { Background, Container } from './styles/commonStyles.styled';
 
 const AuthPage = () => {
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const { windowHeight } = useToggleModalAndSideBar();
   const { id } = useParams();
   const history = useNavigate();
   const [value, setValue] = useState(id === 'register' ? 0 : 1);
   const [resetForm, setResetForm] = useState(0);
-
-  const updateWindowHeight = () => {
-    setWindowHeight(window.innerHeight);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', updateWindowHeight);
-
-    return () => {
-      window.removeEventListener('resize', updateWindowHeight);
-    };
-  }, []);
 
   const tabToIdx = {
     1: 'register',

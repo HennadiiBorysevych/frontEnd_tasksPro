@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { popUpInitialValues } from 'constants';
+
+import { popUpSchema } from 'helpers/validationSchemas';
 import { useBoard } from 'hooks';
 
-import { Input, PopUpLayout, PrimaryButton } from 'ui';
+import { CommonPopUp } from 'ui';
 
 import BoardSettings from '../boardSettings/BoardSettings';
-
-import {
-  ErrorMessage,
-  Form,
-} from '../../assets/styles/commonFormStyles.styled';
 
 const BoardPopUp = ({ board, onClose }) => {
   const {
@@ -19,38 +17,69 @@ const BoardPopUp = ({ board, onClose }) => {
     setIcon,
     setBackground,
     handleTitle,
-    titleChecker,
     handleBoardSubmit,
   } = useBoard(board, onClose);
 
-  return (
-    <PopUpLayout
-      title={board ? 'Edit board' : 'New board'}
-      handleClose={onClose}
-    >
-      <Form onSubmit={handleBoardSubmit}>
-        <Input
-          onChange={handleTitle}
-          placeholder={board ? board?.title : 'Title'}
-        />
+  const { boardValues } = popUpInitialValues;
 
-        {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
-        <BoardSettings
-          chosenIcon={icon}
-          setChosenIcon={setIcon}
-          chosenBackground={background}
-          setChosenBackground={setBackground}
-        />
-        <PrimaryButton
-          type="submit"
-          variant="primary"
-          hasIcon={true}
-          id="create-or-edit-button"
-        >
-          {board ? 'Edit' : 'Create'}
-        </PrimaryButton>
-      </Form>
-    </PopUpLayout>
+  const inputs = [
+    {
+      name: 'title',
+      type: 'text',
+      placeholder: board ? board?.title : 'Title',
+    },
+  ];
+
+  return (
+    <CommonPopUp
+      title={board ? 'Edit board' : 'New board'}
+      onClose={onClose}
+      onSubmit={handleBoardSubmit}
+      onChange={handleTitle}
+      inputs={inputs}
+      initialValues={boardValues}
+      validationSchema={board ? null : popUpSchema}
+      buttonText={board ? 'Edit' : 'Create'}
+      version="settingsPopUp"
+      hasIcon={true}
+      variant="primary"
+      id="create-or-edit-board-button"
+    >
+      <BoardSettings
+        chosenIcon={icon}
+        setChosenIcon={setIcon}
+        chosenBackground={background}
+        setChosenBackground={setBackground}
+      />
+    </CommonPopUp>
+    // <PopUpLayout
+    //   title={board ? 'Edit board' : 'New board'}
+    //   handleClose={onClose}
+    // >
+    //   <Form onSubmit={handleBoardSubmit}>
+    //     <Input
+    //       onChange={handleTitle}
+    //       placeholder={board ? board?.title : 'Title'}
+    //     />
+
+    //     {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
+    //     <BoardSettings
+    //       chosenIcon={icon}
+    //       setChosenIcon={setIcon}
+    //       chosenBackground={background}
+    //       setChosenBackground={setBackground}
+    //     />
+    //     <PrimaryButton
+    //       version="settingsPopUp"
+    //       type="submit"
+    //       variant="primary"
+    //       hasIcon={true}
+    //       id="create-or-edit-button"
+    //     >
+    //       {board ? 'Edit' : 'Create'}
+    //     </PrimaryButton>
+    //   </Form>
+    // </PopUpLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import {
   Code,
@@ -15,7 +15,7 @@ import {
 } from './styles/errorPage.styled';
 
 const ErrorPage = () => {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user } = useAuthCollector();
   const [userTheme, setUserTheme] = useState('');
 
   useEffect(() => {

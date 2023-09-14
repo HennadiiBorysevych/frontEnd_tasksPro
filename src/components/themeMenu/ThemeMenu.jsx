@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import {
   DropdownButton,
@@ -13,7 +13,7 @@ import {
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { theme, changeTheme } = useAuth();
+  const { theme, changeTheme } = useAuthCollector();
 
   const themes = ['Dark', 'Light', 'Violet'];
 
@@ -60,7 +60,11 @@ const ThemeMenu = () => {
 
   return (
     <DropdownWrapper>
-      <DropdownButton onClick={toggleDropdown} id="switcher-theme-button">
+      <DropdownButton
+        onClick={toggleDropdown}
+        type="button"
+        id="switcher-theme-button"
+      >
         Theme
         <DropdownIcon
           svgName="icon-arrow-down"

@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 const PrivatePage = ({ component: Component, redirectTo = '/welcome' }) => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuthCollector();
 
   return !isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 };

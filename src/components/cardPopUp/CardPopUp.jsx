@@ -1,77 +1,106 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { popUpInitialValues } from 'constants';
+
+import { addCardSchema } from 'helpers/validationSchemas';
 import { useCard } from 'hooks';
 
-import { Input, PopUpLayout, PrimaryButton } from 'ui';
+import { CommonPopUp } from 'ui';
 
 import CardSettings from '../cardSettings/CardSettings';
 
-import { ErrorMessage } from '../../assets/styles/commonFormStyles.styled';
-
-const CardPopUp = ({
-  columnId,
-  cardIndex,
-  card,
-  handleModalClose,
-  ...rest
-}) => {
+const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
   const {
     priority,
     deadline,
     setDeadline,
     handleInput,
     handlePriority,
-    titleChecker,
-    descriptionChecker,
     handleCardSubmit,
   } = useCard(columnId, cardIndex, card, handleModalClose);
 
+  const { cardValues } = popUpInitialValues;
+
+  const inputs = [
+    {
+      name: 'title',
+      type: 'text',
+      placeholder: card ? card?.title : 'Title',
+    },
+    {
+      name: 'description',
+      type: 'text',
+      placeholder: card ? card?.description : 'Description',
+      multiline: true,
+    },
+  ];
+
   return (
-    <div {...rest}>
-      <PopUpLayout
-        title={card ? 'Edit card' : 'Add card'}
-        handleClose={handleModalClose}
-      >
-        {/* <Form > */}
-        <Input
-          name="title"
-          onChange={handleInput}
-          placeholder={card ? card?.title : 'Title'}
-          style={{
-            marginBottom: '14px', //---?---------------
-          }}
-        />
-        {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
-        <Input
-          name="description"
-          onChange={handleInput}
-          multiline={true}
-          placeholder={card ? card?.description : 'Description'}
-          style={{
-            marginBottom: '14px', //---?---------------
-          }}
-        />
-        {descriptionChecker ? (
-          <ErrorMessage>Description is required</ErrorMessage>
-        ) : null}
-        <CardSettings
-          priority={priority}
-          deadline={new Date(deadline)}
-          handlePriority={handlePriority}
-          setDeadline={setDeadline}
-        />
-        <PrimaryButton
-          id="create-or-edit-card-button"
-          hasIcon={true}
-          variant="primary"
-          onClick={handleCardSubmit}
-        >
-          {card ? 'Edit' : 'Create'}
-        </PrimaryButton>
-        {/* </Form> */}
-      </PopUpLayout>
-    </div>
+    <CommonPopUp
+      title={card ? 'Edit card' : 'Add card'}
+      onClose={handleModalClose}
+      onSubmit={handleCardSubmit}
+      onChange={handleInput}
+      inputs={inputs}
+      initialValues={cardValues}
+      validationSchema={card ? null : addCardSchema}
+      buttonText={card ? 'Edit' : 'Create'}
+      version="settingsPopUp"
+      hasIcon={true}
+      variant="primary"
+      id="create-or-edit-card-button"
+    >
+      <CardSettings
+        priority={priority}
+        deadline={new Date(deadline)}
+        handlePriority={handlePriority}
+        setDeadline={setDeadline}
+      />
+    </CommonPopUp>
+    // <PopUpLayout
+    //   title={card ? 'Edit card' : 'Add card'}
+    //   handleClose={handleModalClose}
+    // >
+    //   {/* <Form > */}
+    //   <ul>
+    //     <InputItem>
+    //       <Input
+    //         name="title"
+    //         onChange={handleInput}
+    //         placeholder={card ? card?.title : 'Title'}
+    //       />
+    //       {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
+    //     </InputItem>
+    //     <InputItem>
+    //       <Input
+    //         name="description"
+    //         onChange={handleInput}
+    //         multiline={true}
+    //         placeholder={card ? card?.description : 'Description'}
+    //       />
+    //       {descriptionChecker ? (
+    //         <ErrorMessage>Description is required</ErrorMessage>
+    //       ) : null}
+    //     </InputItem>
+    //   </ul>
+    //   <CardSettings
+    // priority={priority}
+    // deadline={new Date(deadline)}
+    // handlePriority={handlePriority}
+    // setDeadline={setDeadline}
+    //   />
+    //   <PrimaryButton
+    //     version="settingsPopUp"
+    //     id="create-or-edit-card-button"
+    //     hasIcon={true}
+    //     variant="primary"
+    //     onClick={handleCardSubmit}
+    //   >
+    //     {card ? 'Edit' : 'Create'}
+    //   </PrimaryButton>
+    //   {/* </Form> */}
+    // </PopUpLayout>
   );
 };
 

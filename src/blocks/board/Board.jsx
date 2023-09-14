@@ -3,7 +3,7 @@ import { DragDropContext, Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 
 import { processDndResult, StrictModeDroppable } from 'helpers';
-import { useBoards, useColumns, useModal } from 'hooks';
+import { useBoardsCollector, useColumnsCollector, useModal } from 'hooks';
 
 import { BoardHead, CardColumn, ColumnPopUp } from 'components';
 import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
@@ -15,9 +15,9 @@ import {
 } from './board.styled';
 
 const Board = () => {
-  const { activeBoardId } = useBoards();
+  const { activeBoardId } = useBoardsCollector();
   const { isModal, onBackdropClick, toggleModal } = useModal();
-  const { columnsAndTasks } = useColumns();
+  const { allColumns, columnsAndTasks } = useColumnsCollector();
   const dispatch = useDispatch();
 
   const onDragEnd = result => {
@@ -31,7 +31,7 @@ const Board = () => {
   return (
     <>
       <BoardHead />
-      <CustomScrollBar height="100% - 68px">
+      <CustomScrollBar variant="board">
         <ContainerWrapper>
           <DragDropContext onDragEnd={onDragEnd}>
             <StrictModeDroppable
@@ -41,6 +41,8 @@ const Board = () => {
             >
               {provided => (
                 <ColumnsContainer
+                  id="all-columns"
+                  columns={allColumns}
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
@@ -53,7 +55,13 @@ const Board = () => {
                         index={index}
                       >
                         {provided => (
-                          <CardColumn provided={provided} column={column} />
+                          <CardColumn
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                            {...provided.dragHandleProps}
+                            provided={provided}
+                            column={column}
+                          />
                         )}
                       </Draggable>
                     ))}

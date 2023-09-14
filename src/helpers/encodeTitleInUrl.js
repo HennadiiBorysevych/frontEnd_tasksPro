@@ -1,6 +1,6 @@
-function encodedTitleInUrl(title) {
+function encodeTitleInUrl(title) {
   const encodedTitle = encodeURIComponent(title);
   window.history.pushState(null, null, `${encodedTitle}`);
 }
 
-export default encodedTitleInUrl;
+export default encodeTitleInUrl;

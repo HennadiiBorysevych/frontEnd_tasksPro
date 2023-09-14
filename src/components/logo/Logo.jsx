@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useAuth } from 'hooks';
+import { useAuthCollector } from 'hooks';
 
 import sprite from 'assets/images/sprite.svg';
 
@@ -9,7 +9,7 @@ import { Board, LogoWrapper, Welcome } from './Logo.styled';
 
 const Logo = ({ variant }) => {
   const [svgName, setSvgName] = useState('icon-logo-big');
-  const { theme } = useAuth();
+  const { theme } = useAuthCollector();
 
   useEffect(() => {
     if (variant === 'bord') {
