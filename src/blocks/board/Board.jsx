@@ -41,7 +41,6 @@ const Board = () => {
             >
               {provided => (
                 <ColumnsContainer
-                  id="all-columns"
                   columns={allColumns}
                   {...provided.droppableProps}
                   ref={provided.innerRef}
@@ -55,13 +54,7 @@ const Board = () => {
                         index={index}
                       >
                         {provided => (
-                          <CardColumn
-                            {...provided.draggableProps}
-                            ref={provided.innerRef}
-                            {...provided.dragHandleProps}
-                            provided={provided}
-                            column={column}
-                          />
+                          <CardColumn provided={provided} column={column} />
                         )}
                       </Draggable>
                     ))}
