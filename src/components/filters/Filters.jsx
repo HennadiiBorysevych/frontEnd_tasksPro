@@ -65,7 +65,11 @@ const Filters = () => {
 
   return (
     <Container>
-      <FiltersButton onClick={toggleDropdown} aria-label="Open filters popup">
+      <FiltersButton
+        onClick={toggleDropdown}
+        aria-label="Open filters popup"
+        isOpen={isOpen}
+      >
         <FiltersIcon svgName="icon-filter" variant="header" isActive="true" />
         <FiltersTitle variant="columnTitle">Filters</FiltersTitle>
       </FiltersButton>

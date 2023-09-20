@@ -33,7 +33,6 @@ const App = () => {
 
   const toastConfig = {
     position: 'top-right',
-    autoClose: false,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

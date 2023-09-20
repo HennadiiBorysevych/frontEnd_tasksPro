@@ -54,3 +54,8 @@ export const ConfirmDeleteButton = styled.button`
     background-color: #ef4444;
   }
 `;
+
+export const DeleteButton = styled.button`
+  width: 16px;
+  height: 16px;
+`;

@@ -1,11 +1,11 @@
 import React from 'react';
-import { DragDropContext, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 
-import { processDndResult, StrictModeDroppable } from 'helpers';
+import { processDndResult } from 'helpers';
 import { useBoardsCollector, useColumnsCollector, useModal } from 'hooks';
 
-import { BoardHead, CardColumn, ColumnPopUp } from 'components';
+import { BoardHead, CardColumn, ColumnPopUp, SkeletonLoader } from 'components';
 import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
 
 import {
@@ -17,14 +17,14 @@ import {
 const Board = () => {
   const { activeBoardId } = useBoardsCollector();
   const { isModal, onBackdropClick, toggleModal } = useModal();
-  const { allColumns, columnsAndTasks } = useColumnsCollector();
+  const { columnLoading, allColumns, columnsAndTasks } = useColumnsCollector();
   const dispatch = useDispatch();
 
-  const onDragEnd = result => {
+  const onDragEnd = async result => {
     const resultProcessed = processDndResult(result, columnsAndTasks);
     if (resultProcessed) {
       const { process, arg } = resultProcessed;
-      dispatch(process(arg));
+      await dispatch(process(arg));
     }
   };
 
@@ -33,46 +33,56 @@ const Board = () => {
       <BoardHead />
       <CustomScrollBar variant="board">
         <ContainerWrapper>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <StrictModeDroppable
-              droppableId="all-columns"
-              direction="horizontal"
-              type="column"
-            >
-              {provided => (
-                <ColumnsContainer
-                  columns={allColumns}
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
+          {columnLoading ? (
+            <SkeletonLoader page="/column" />
+          ) : (
+            <>
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable
+                  droppableId="all-columns"
+                  direction="horizontal"
+                  type="column"
                 >
-                  {columnsAndTasks
-                    .sort((a, b) => a.order - b.order) // Sort columns by order
-                    .map((column, index) => (
-                      <Draggable
-                        key={column.id}
-                        draggableId={column.id}
-                        index={index}
-                      >
-                        {provided => (
-                          <CardColumn provided={provided} column={column} />
-                        )}
-                      </Draggable>
-                    ))}
-                  {provided.placeholder}
-                </ColumnsContainer>
-              )}
-            </StrictModeDroppable>
-          </DragDropContext>
-          <div>
-            <ButtonAddColumn
-              type="button"
-              onClick={toggleModal}
-              id="add-column-button"
-            >
-              <ButtonPlus variant="addColumn" />
-              Add another column
-            </ButtonAddColumn>
-          </div>
+                  {provided => (
+                    <ColumnsContainer
+                      columns={allColumns}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {!!columnsAndTasks &&
+                        columnsAndTasks
+                          .sort((a, b) => a.order - b.order) // Sort columns by order
+                          .map((column, index) => (
+                            <Draggable
+                              key={column.id}
+                              draggableId={column.id}
+                              index={index}
+                            >
+                              {provided => (
+                                <CardColumn
+                                  provided={provided}
+                                  column={column}
+                                />
+                              )}
+                            </Draggable>
+                          ))}
+                      {provided.placeholder}
+                    </ColumnsContainer>
+                  )}
+                </Droppable>
+              </DragDropContext>
+              <div>
+                <ButtonAddColumn
+                  type="button"
+                  onClick={toggleModal}
+                  id="add-column-button"
+                >
+                  <ButtonPlus variant="addColumn" />
+                  Add another column
+                </ButtonAddColumn>
+              </div>
+            </>
+          )}
         </ContainerWrapper>
       </CustomScrollBar>
       {isModal && (

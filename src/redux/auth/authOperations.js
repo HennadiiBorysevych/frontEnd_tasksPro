@@ -46,10 +46,12 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 const googleAuth = createAsyncThunk(
   'auth/google',
   async (tokenAuth, thunkAPI) => {
+    console.log(tokenAuth);
     try {
       token.set(tokenAuth);
       const { data } = await axios.get('/api/users/current');
       data.user.token = tokenAuth;
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -99,6 +101,8 @@ const updateUserInfo = createAsyncThunk(
       const response = await axios.patch('/api/users', formData, {
         headers,
       });
+
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -139,6 +143,7 @@ const recoverPassword = createAsyncThunk(
       const { data } = await axios.patch('api/users/forgotpasswordsend', email);
 
       token.set(data.token);
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

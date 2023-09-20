@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { boardOperations, boardSelectors } from 'redux/boards';
+import { resetBoardState } from 'redux/boards/boardSlice';
 
-import { resetBoardState } from '../redux/boards/boardSlice';
 const useBoardsCollector = () => {
   const activeBoard = useSelector(boardSelectors.selectActiveBoard);
   const activeBoardId = useSelector(boardSelectors.selectActiveBoardId);

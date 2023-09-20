@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { images } from 'constants';
+import { IMAGES } from 'constants';
 
 import { generateContentImages } from 'helpers';
 import { useBoardsCollector } from 'hooks';
@@ -25,7 +25,7 @@ const WelcomePage = () => {
   }, [resetBoardsState]);
 
   const matchedWelcomeImage = generateContentImages(
-    images.welcomeImages,
+    IMAGES.welcomeImages,
     devicePixelRatio,
     'image/webp'
   );

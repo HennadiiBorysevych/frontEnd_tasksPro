@@ -1,10 +1,10 @@
 import { ToastContainer } from 'react-toastify';
 
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
-const { generalColors } = baseColors;
+const { generalColors } = BASE_COLORS;
 
 export const StyledContainer = styled(ToastContainer)(({ theme }) => ({
   '&&&.Toastify__toast-container': {

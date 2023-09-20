@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { addCardSchema } from 'helpers/validationSchemas';
+import { addCardSchema } from 'helpers';
 import { useCard } from 'hooks';
 
 import { CommonPopUp } from 'ui';
@@ -20,7 +20,7 @@ const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
     handleCardSubmit,
   } = useCard(columnId, cardIndex, card, handleModalClose);
 
-  const { cardValues } = popUpInitialValues;
+  const { cardValues } = POP_UP_INITIAL_VALUES;
 
   const inputs = [
     {

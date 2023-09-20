@@ -1,18 +1,18 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 const getPriorityColor = priority => {
   const formattedPriority = priority.toLowerCase();
   switch (formattedPriority) {
     case 'high':
-      return baseColors.priorityColors.high;
+      return BASE_COLORS.priorityColors.high;
     case 'low':
-      return baseColors.priorityColors.low;
+      return BASE_COLORS.priorityColors.low;
     case 'medium':
-      return baseColors.priorityColors.medium;
+      return BASE_COLORS.priorityColors.medium;
     case 'without':
-      return baseColors.priorityColors.default;
+      return BASE_COLORS.priorityColors.default;
     default:
-      return baseColors.priorityColors.default;
+      return BASE_COLORS.priorityColors.default;
   }
 };
 

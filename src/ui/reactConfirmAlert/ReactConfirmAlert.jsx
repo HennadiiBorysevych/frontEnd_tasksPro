@@ -16,6 +16,7 @@ import {
   CancelButton,
   ConfirmDeleteButton,
   ConfirmDialog,
+  DeleteButton,
 } from './ReactConfirmAlert.styled';
 
 const ReactConfirmAlert = ({
@@ -78,14 +79,14 @@ const ReactConfirmAlert = ({
     });
   };
   return (
-    <button aria-label="Delete item button" onClick={helpToggle}>
+    <DeleteButton aria-label="Delete item button" onClick={helpToggle}>
       <SvgIcon
         svgName="icon-trash"
         size={16}
         variant={owner === 'sidebar' ? 'support' : 'popUp'}
         isActive={false}
       />
-    </button>
+    </DeleteButton>
   );
 };
 

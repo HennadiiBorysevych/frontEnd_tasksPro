@@ -1,4 +1,4 @@
-const breakpoints = {
+const BREAKPOINTS = {
   values: {
     nothing: 0,
     small: 375,
@@ -7,4 +7,4 @@ const breakpoints = {
   },
 };
 
-export default breakpoints;
+export default BREAKPOINTS;

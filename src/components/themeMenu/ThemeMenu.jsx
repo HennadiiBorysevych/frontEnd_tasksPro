@@ -64,6 +64,7 @@ const ThemeMenu = () => {
         onClick={toggleDropdown}
         type="button"
         id="switcher-theme-button"
+        isOpen={isOpen}
       >
         Theme
         <DropdownIcon

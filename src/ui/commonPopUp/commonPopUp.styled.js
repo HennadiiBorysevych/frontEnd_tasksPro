@@ -1,4 +1,4 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
@@ -24,6 +24,6 @@ export const ErrorMessage = styled.span(props => ({
   marginTop: '10px',
   color:
     props.variant === 'authForm'
-      ? baseColors.authColors.textSecondary
+      ? BASE_COLORS.authColors.textSecondary
       : props.theme.palette.text.primary,
 }));

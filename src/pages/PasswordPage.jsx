@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { authOperations } from 'redux/auth';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { forgotPasswordSchema } from 'helpers/validationSchemas';
+import { changePasswordSchema, sendEmailSchema } from 'helpers';
 import { useAuthCollector } from 'hooks';
 
 import { Input, PopUpTitle, PrimaryButton } from 'ui';
@@ -20,7 +20,7 @@ import {
 import { Background, Container } from './styles/commonStyles.styled';
 import { PasswordContainer } from './styles/passwordPage.styled';
 
-const { recoveryPasswordValues } = popUpInitialValues;
+const { recoveryPasswordValues } = POP_UP_INITIAL_VALUES;
 
 const PasswordPage = () => {
   const { passwordRecovery, setNewPassword } = useAuthCollector();
@@ -45,10 +45,14 @@ const PasswordPage = () => {
   ) => {
     try {
       if (email !== '') {
-        passwordRecovery({ email });
-        toast.success(
-          'Your request has been sent. Check your email and follow the instructions'
-        );
+        const response = passwordRecovery({ email });
+        if (response.abort) {
+          toast.error(`A user with this email ${email} does not find`);
+        } else {
+          toast.success(
+            'Your request has been sent. Check your email and follow the instructions'
+          );
+        }
       }
 
       if (password !== verifyPassword) {
@@ -59,26 +63,21 @@ const PasswordPage = () => {
 
       if (password !== '' && verifyPassword !== '') {
         setNewPassword({ passwordNew: password });
+
         toast.success('Your password has been changed successfully');
       }
 
       resetForm();
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        toast.error(`A user with this email ${email} already exists`);
-      } else {
-        console.error('An error occurred:', error.message);
-        // Handle other errors here
-      }
+      console.error('An error occurred:', error.message);
+      // Handle other errors here
     }
   };
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: recoveryPasswordValues,
       onSubmit: onHandleSubmit,
-      validationSchema: !passwordToken
-        ? forgotPasswordSchema.emailSendSchema
-        : forgotPasswordSchema.passwordSchema,
+      validationSchema: !passwordToken ? sendEmailSchema : changePasswordSchema,
     });
 
   return (

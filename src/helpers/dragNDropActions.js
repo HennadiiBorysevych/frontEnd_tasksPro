@@ -1,9 +1,7 @@
 import { columnOperations } from 'redux/columns';
 import { cardOperations } from 'redux/tasks';
 
-import updateOrdersFromIndex from './updateOrdersFromIndex';
-
-function processDndResult(result, columnsAndTasks) {
+export function processDndResult(result, columnsAndTasks) {
   if (!result || !result.destination) {
     return null;
   }
@@ -68,4 +66,58 @@ function processDndResult(result, columnsAndTasks) {
   }
 }
 
-export default processDndResult;
+export function updateOrdersFromArray(sourceArray, newOrdersArray) {
+  const idToOrder = {};
+  newOrdersArray.forEach(item => {
+    idToOrder[item.id] = item.order;
+  });
+
+  return sourceArray.map(item => {
+    if (idToOrder.hasOwnProperty(item.id)) {
+      return {
+        ...item,
+        order: idToOrder[item.id],
+      };
+    }
+    return item;
+  });
+}
+
+function updateOrdersFromIndex({ idTask, destinationIndex, dataArray }) {
+  const updatedArray = [...dataArray];
+  updatedArray.sort((a, b) => a.order - b.order);
+
+  const sourceIndex = updatedArray.findIndex(item => item.id === idTask);
+  if (sourceIndex === -1) {
+    return {
+      updatingDataFull: updatedArray,
+      updatingDataStripped: updatedArray,
+    };
+  }
+
+  const updatingDataFull = updatedArray.map((item, index) => {
+    if (index === sourceIndex) {
+      return { ...item, order: destinationIndex + 1 };
+    } else if (index >= destinationIndex && index < sourceIndex) {
+      return { ...item, order: index + 2 };
+    } else if (index <= destinationIndex && index > sourceIndex) {
+      return { ...item, order: index };
+    } else {
+      return { ...item };
+    }
+  });
+
+  const updatingDataStripped = updatedArray.map(({ id, order }, index) => {
+    if (index === sourceIndex) {
+      return { id, order: destinationIndex + 1 };
+    } else if (index >= destinationIndex && index < sourceIndex) {
+      return { id, order: index + 2 };
+    } else if (index <= destinationIndex && index > sourceIndex) {
+      return { id, order: index };
+    } else {
+      return { id, order };
+    }
+  });
+
+  return { updatingDataFull, updatingDataStripped };
+}

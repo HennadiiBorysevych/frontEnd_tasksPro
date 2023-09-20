@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { popUpSchema } from 'helpers/validationSchemas';
+import { popUpSchema } from 'helpers';
 import { useColumn } from 'hooks';
 
 import { CommonPopUp } from 'ui';
@@ -16,7 +16,7 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
     handleModalClose
   );
 
-  const { columnValues } = popUpInitialValues;
+  const { columnValues } = POP_UP_INITIAL_VALUES;
 
   const inputs = [
     {

@@ -31,7 +31,7 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     resetBoardState: state => {
-      return initialState;
+      return (state = initialState);
     },
   },
   extraReducers: builder => {

@@ -1,6 +1,10 @@
 import styled from '@emotion/styled/macro';
 
+import { BASE_COLORS } from 'constants';
+
 import { SvgIcon } from 'ui';
+
+const { generalColors } = BASE_COLORS;
 
 export const Container = styled.div`
   position: relative;
@@ -22,6 +26,10 @@ export const FiltersButton = styled.button(props => ({
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
+
+  [FiltersIcon]: {
+    fill: props.isOpen ? generalColors.whiteBase : null,
+  },
 
   '&:hover': {
     [FiltersTitle]: {

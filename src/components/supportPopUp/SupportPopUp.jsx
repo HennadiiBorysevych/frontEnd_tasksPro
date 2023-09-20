@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { supportSchema } from 'helpers/validationSchemas';
+import { supportSchema } from 'helpers';
 import { useAuthCollector, useSupport } from 'hooks';
 
 import { CommonPopUp } from 'ui';
@@ -19,7 +19,7 @@ const SupportPopUp = ({ onClose }) => {
   //     validationSchema: supportSchema,
   //   });
 
-  const { supportValues } = popUpInitialValues;
+  const { supportValues } = POP_UP_INITIAL_VALUES;
 
   const inputs = [
     {
