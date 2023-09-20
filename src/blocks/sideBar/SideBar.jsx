@@ -10,11 +10,10 @@ import {
   SignOut,
   Support,
 } from 'components';
-import { CustomScrollBar, Modal } from 'ui';
+import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
 
 import {
   CreateBoard,
-  CreateBoardPlus,
   Overlay,
   SideBarContainer,
   SideBarWrapper,
@@ -39,7 +38,7 @@ const SideBar = () => {
         >
           <SideBarContainer>
             <div>
-              <Logo variant="bord" />
+              <Logo variant="board" />
               <TitleBoardList variant="taskDescription">
                 My boards
               </TitleBoardList>
@@ -55,7 +54,7 @@ const SideBar = () => {
                   Create a <br />
                   new board
                 </TitleButton>
-                <CreateBoardPlus
+                <ButtonPlus
                   width={40}
                   height={36}
                   variant="sidemenu"

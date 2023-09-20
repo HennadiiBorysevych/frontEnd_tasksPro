@@ -4,10 +4,17 @@ const generalColors = {
   whiteBase: '#ffffff',
   blackBase: '#161616',
   backdropBase: '#151515',
-  accentGreenBase: '#bedbB0',
+  backgroundDarkBase: '#1f1f1f',
+  foregroundDarkBase: '#121212',
+  backgroundLightBase: '#f6f6f7',
+  foregroundLightBase: '#fcfcfc',
+  backgroundVioletBase: '#ecedfd',
+  accentGreenBase: '#bedbb0',
   accentVioletBase: '#5255bc',
   accentGreenHoverBase: '#9dc888',
   accentVioletHoverBase: '#7b7ede',
+  attentionBase: '#df1010',
+  attentionHoverBase: '#ef4444',
 };
 
 const authColors = {
@@ -27,10 +34,10 @@ const priorityColors = {
   high: generalColors.accentGreenBase,
 };
 
-const baseColors = {
+const BASE_COLORS = {
   generalColors,
   authColors,
   priorityColors,
 };
 
-export default baseColors;
+export default BASE_COLORS;

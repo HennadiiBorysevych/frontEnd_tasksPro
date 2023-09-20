@@ -81,9 +81,3 @@ export const Circle = styled.div(props => ({
       ? props.theme.palette.background.withoutPriorityBackground
       : getPriorityColor(props.priority),
 }));
-
-export const IconsContainer = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-`;

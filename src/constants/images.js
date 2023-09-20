@@ -29,9 +29,9 @@ const welcomeImages = [
   { src: welcome, type: 'image/png', dpi: 1 },
 ];
 
-const images = {
+const IMAGES = {
   plantsImages,
   welcomeImages,
 };
 
-export default images;
+export default IMAGES;

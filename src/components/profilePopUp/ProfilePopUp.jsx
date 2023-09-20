@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { userUpdateSchema } from 'helpers/validationSchemas';
+import { updateUserSchema } from 'helpers';
 import { useEditProfile } from 'hooks';
 
 import { ButtonPlus, CommonPopUp } from 'ui';
@@ -17,7 +17,7 @@ import {
   AvatarWrap,
 } from './ProfilePopUp.styled';
 
-const { updateProfileValues } = popUpInitialValues;
+const { updateProfileValues } = POP_UP_INITIAL_VALUES;
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
@@ -76,7 +76,7 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
       onChange={handleRequiredFieldChange}
       inputs={inputs}
       initialValues={updateProfileValues}
-      validationSchema={userUpdateSchema}
+      validationSchema={updateUserSchema}
       buttonText="Send"
       version="formPopUp"
       id="send-user-updated-data"

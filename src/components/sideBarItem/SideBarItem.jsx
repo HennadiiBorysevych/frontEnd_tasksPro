@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBoardContext, useToggleModalAndSideBar } from 'contexts';
-import { useAuthCollector, useBoardsCollector, useModal } from 'hooks';
+import { useBoardsCollector, useModal } from 'hooks';
 
-import { Modal, ReactConfirmAlert, SvgIcon } from 'ui';
+import { ControlIcons, Modal, SvgIcon } from 'ui';
 
 import BoardPopUp from '../boardPopUp/BoardPopUp';
 
 import {
   BoardIdentificationItem,
-  BoardItemControl,
   BoardListItem,
   BoardName,
 } from './SideBarItem.styled';
@@ -27,7 +26,6 @@ const SideBarItem = ({
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
   const { allBoards } = useBoardsCollector();
-  const { theme } = useAuthCollector();
 
   const editingBoard = allBoards.find(board => board.id === activeBoardId);
 
@@ -53,22 +51,15 @@ const SideBarItem = ({
           <BoardName isActive={active}>{title}</BoardName>
         </BoardIdentificationItem>
         {active && (
-          <BoardItemControl>
-            <button
-              id="edit-board-button"
-              aria-label="Edit board button"
-              onClick={toggleWindows}
-            >
-              <SvgIcon svgName="icon-pencil" size={16} variant="support" />
-            </button>
-            <ReactConfirmAlert
-              selectedTheme={theme}
-              onDeleteAction={onDeleteClick}
-              item="board and all content in it"
-              owner="sidebar"
-              onToggle={() => toggleModalAndSideBar()}
-            />
-          </BoardItemControl>
+          <ControlIcons
+            onClick={toggleWindows}
+            ariaLabel="Edit board button"
+            variant="support"
+            onDeleteAction={onDeleteClick}
+            item="board and all content in it"
+            owner="sidebar"
+            onToggle={() => toggleModalAndSideBar()}
+          />
         )}
       </BoardListItem>
       {isModal && (

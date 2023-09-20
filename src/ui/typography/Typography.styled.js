@@ -1,4 +1,4 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import { TypographyVariants } from './TypographyVariants';
 
@@ -84,6 +84,6 @@ export const typographyVariants = {
     font-size: 14px;
     line-height: 1.28;
     letter-spacing: -0.28px;
-    color: ${baseColors.authColors.textPrimary};
+    color: ${BASE_COLORS.authColors.textPrimary};
   `,
 };

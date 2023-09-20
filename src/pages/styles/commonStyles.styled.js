@@ -1,9 +1,9 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
 export const Background = styled.section`
-  background-image: ${baseColors.authColors.background};
+  background-image: ${BASE_COLORS.authColors.background};
   min-height: 100vh;
   display: flex;
   align-items: center;

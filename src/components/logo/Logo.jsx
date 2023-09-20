@@ -12,7 +12,7 @@ const Logo = ({ variant }) => {
   const { theme } = useAuthCollector();
 
   useEffect(() => {
-    if (variant === 'bord') {
+    if (variant === 'board') {
       if (theme === 'Violet') {
         setSvgName('icon-logo-violet');
       } else {
@@ -46,7 +46,7 @@ const Logo = ({ variant }) => {
 };
 
 Logo.propTypes = {
-  variant: PropTypes.oneOf(['bord', 'welcome']),
+  variant: PropTypes.oneOf(['board', 'welcome']),
 };
 
 export default Logo;

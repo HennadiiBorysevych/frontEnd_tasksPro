@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 
-import { backgrounds } from 'constants';
+import { BACKGROUNDS, BOARD_ICONS } from 'constants';
 
 import { SvgIcon } from 'ui';
 
@@ -15,17 +15,6 @@ import {
   RadioField,
   Row,
 } from './BoardSettings.styled';
-
-const BOARD_ICONS = [
-  'icon-Project',
-  'icon-star',
-  'icon-loading',
-  'icon-puzzle-piece',
-  'icon-container',
-  'icon-lightning',
-  'icon-colors',
-  'icon-hexagon',
-];
 
 const BoardSettings = ({
   chosenIcon,
@@ -66,7 +55,7 @@ const BoardSettings = ({
           </Row>
           <Row>
             <BoardText variant="columnTitle">Background</BoardText>
-            {backgrounds.map(bgIndex => (
+            {BACKGROUNDS.map(bgIndex => (
               <label key={bgIndex.title} title={bgIndex.title}>
                 <RadioField
                   name="background"

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import { toast } from 'react-toastify';
-import { ThemeProvider } from '@emotion/react';
 import PropTypes from 'prop-types';
 
 import { formatSelectedDate, formatShortWeekday } from 'helpers';
@@ -66,63 +65,60 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
   };
 
   return (
-    <ThemeProvider theme={{}}>
-      <>
-        <CalendarButton
-          type="button"
-          onClick={toggleCalendarVisibility}
-          aria-label="open calendar for choosing deadline date"
-        >
-          <DeadlineDay>
-            {isDeadlineToday ? 'Today, ' : ''}{' '}
-            {formatSelectedDate(selectedDate)}
-          </DeadlineDay>
-          <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
-        </CalendarButton>
+    <>
+      <CalendarButton
+        type="button"
+        onClick={toggleCalendarVisibility}
+        aria-label="open calendar for choosing deadline date"
+      >
+        <DeadlineDay>
+          {isDeadlineToday ? 'Today, ' : ''} {formatSelectedDate(selectedDate)}
+        </DeadlineDay>
+        <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
+      </CalendarButton>
 
-        {isCalendarVisible && (
-          <CommonStyles>
-            <BlockCalendar>
-              <Calendar
-                value={initialSelectedDate}
-                maxDate={futureDate}
-                formatShortWeekday={formatShortWeekday}
-                prev2Label={null}
-                next2Label={null}
-                prevLabel={
-                  <PrevLabelWithPadding>
-                    <SvgIcon
-                      svgName="icon-arrow-left"
-                      size="14"
-                      variant="cardItem"
-                    />
-                  </PrevLabelWithPadding>
-                }
-                nextLabel={
-                  <NextLabelWithPadding>
-                    <SvgIcon
-                      svgName="icon-arrow-right"
-                      size="14"
-                      variant="cardItem"
-                    />
-                  </NextLabelWithPadding>
-                }
-                showYearDropdown={false}
-                locale="en-US"
-                calendarType="gregory"
-                defaultView="month"
-                onClickDay={handleDayClick}
-                tileClassName={tileClassName}
-              />
-            </BlockCalendar>
-          </CommonStyles>
-        )}
+      {isCalendarVisible && (
+        <CommonStyles>
+          <BlockCalendar>
+            <Calendar
+              value={initialSelectedDate}
+              maxDate={futureDate}
+              formatShortWeekday={formatShortWeekday}
+              prev2Label={null}
+              next2Label={null}
+              prevLabel={
+                <PrevLabelWithPadding>
+                  <SvgIcon
+                    svgName="icon-arrow-left"
+                    size="14"
+                    variant="header"
+                  />
+                </PrevLabelWithPadding>
+              }
+              nextLabel={
+                <NextLabelWithPadding>
+                  <SvgIcon
+                    svgName="icon-arrow-right"
+                    size="14"
+                    variant="header"
+                  />
+                </NextLabelWithPadding>
+              }
+              showYearDropdown={false}
+              locale="en-US"
+              calendarType="gregory"
+              defaultView="month"
+              onClickDay={handleDayClick}
+              tileClassName={tileClassName}
+            />
+          </BlockCalendar>
+        </CommonStyles>
+      )}
 
-        {isCalendarVisible && (
-          <CalendarLayout onClick={toggleCalendarVisibility} />
-        )}
-      </>
-    </ThemeProvider>
+      {isCalendarVisible && (
+        <CalendarLayout onClick={toggleCalendarVisibility} />
+      )}
+    </>
   );
 };
 

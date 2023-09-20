@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { encodeTitleInUrl } from 'helpers';
+import { useBoardContext } from 'contexts';
+import { encodeTitleBoardInUrl } from 'helpers';
 import { useBoardsCollector } from 'hooks';
 
 import Filters from '../filters/Filters';
@@ -8,6 +9,8 @@ import Filters from '../filters/Filters';
 import { FieldInput, Header } from './boardHead.styled';
 
 const BoardHead = () => {
+  const { setActiveBoard } = useBoardContext();
+
   const { activeBoard, activeBoardId, allBoards, updateExistingBoard } =
     useBoardsCollector();
   const [editingBoard, setEditingBoard] = useState(
@@ -32,14 +35,17 @@ const BoardHead = () => {
     setTitle(e.currentTarget.value);
   }, []);
 
-  const handleBoardChange = () => {
+  const handleBoardChange = async () => {
     const { id, user, ...rest } = editingBoard;
 
     updateExistingBoard({
       boardId: id,
       updatedData: { ...rest, title: title },
     });
-    encodeTitleInUrl(title);
+    await setActiveBoard(editingBoard?.id);
+    if (title) {
+      encodeTitleBoardInUrl(title);
+    }
   };
 
   const decodedTitle = decodeURIComponent(editingBoard?.id);
@@ -57,7 +63,7 @@ const BoardHead = () => {
             type="text"
             variant="standard"
             value={title}
-            placeholder={title}
+            placeholder={editingBoard?.title}
             onChange={handleTitle}
             onBlur={handleBoardChange}
             fullWidth={true}

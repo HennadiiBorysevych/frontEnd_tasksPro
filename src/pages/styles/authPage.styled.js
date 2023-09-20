@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
@@ -32,18 +32,18 @@ export const StyledTab = styled(props => <Tab disableRipple {...props} />)(
     minWidth: '0px',
     minHeight: '0px',
 
-    color: `${baseColors.authColors.textSecondaryDark}`,
+    color: `${BASE_COLORS.authColors.textSecondaryDark}`,
     fontFamily: 'inherit',
     fontSize: '18px',
     fontWeight: '500',
     fontHeight: '27px',
 
     '&:hover': {
-      color: `${baseColors.authColors.textSecondary}`,
+      color: `${BASE_COLORS.authColors.textSecondary}`,
       opacity: 1,
     },
     '&.Mui-selected': {
-      color: `${baseColors.authColors.textSecondary}`,
+      color: `${BASE_COLORS.authColors.textSecondary}`,
     },
   })
 );
@@ -53,7 +53,7 @@ export const AuthContainer = styled.div(
     position: 'relative',
     width: '100%',
     padding: '24px',
-    backgroundColor: baseColors.authColors.form,
+    backgroundColor: BASE_COLORS.authColors.form,
     borderRadius: '8px',
   },
   props => ({
@@ -71,7 +71,7 @@ export const Password = styled(NavLink)(
   {
     display: 'block',
     fontSize: '12px',
-    color: baseColors.authColors.textSecondary,
+    color: BASE_COLORS.authColors.textSecondary,
   },
   props => ({
     [props.theme.breakpoints.down('medium')]: {

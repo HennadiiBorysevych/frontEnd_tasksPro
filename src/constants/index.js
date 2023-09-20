@@ -1,5 +1,6 @@
-export { default as backgrounds } from './backgrounds';
-export { default as baseColors } from './baseColors';
-export { default as breakpoints } from './breakpoints';
-export { default as images } from './images';
-export { default as popUpInitialValues } from './popUpInitialValues';
+export { default as BACKGROUNDS } from './backgrounds';
+export { default as BASE_COLORS } from './baseColors';
+export { default as BOARD_ICONS } from './boardIcons';
+export { default as BREAKPOINTS } from './breakpoints';
+export { default as IMAGES } from './images';
+export { default as POP_UP_INITIAL_VALUES } from './popUpInitialValues';

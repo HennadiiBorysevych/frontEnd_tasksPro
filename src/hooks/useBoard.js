@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setUserFilter } from 'redux/userFilterSlice';
 
 import { useBoardContext } from 'contexts';
-import { clearEncodedTitleInUrl, encodeTitleInUrl } from 'helpers';
+import { clearTitleBoardInUrl, encodeTitleBoardInUrl } from 'helpers';
 
 import useBoardsCollector from './useBoardsCollector';
 
@@ -15,10 +15,15 @@ const boardModel = {
 };
 
 const useBoard = (currentBoard, closeModal) => {
-  const { addNewBoard, updateExistingBoard } = useBoardsCollector();
+  const {
+    allBoards,
+    getAllBoards,
+    getOneBoard,
+    removeBoard,
+    addNewBoard,
+    updateExistingBoard,
+  } = useBoardsCollector();
   const { activeBoardId, setActiveBoard } = useBoardContext();
-  const { allBoards, getAllBoards, getOneBoard, removeBoard } =
-    useBoardsCollector();
 
   const initialBoard = currentBoard ? currentBoard : boardModel;
   const [title, setTitle] = useState(initialBoard?.title);
@@ -28,14 +33,18 @@ const useBoard = (currentBoard, closeModal) => {
 
   const dispatch = useDispatch();
 
-  const handleBoardSubmit = () => {
+  const handleBoardSubmit = async () => {
     const { id, user, ...rest } = board;
 
     if (currentBoard) {
       updateExistingBoard({
         boardId: id,
-        updatedData: rest,
+        updatedData: { ...rest, title: title },
       });
+      await setActiveBoard(currentBoard.id);
+      if (title) {
+        encodeTitleBoardInUrl(title);
+      }
     } else {
       addNewBoard(rest);
     }
@@ -69,7 +78,7 @@ const useBoard = (currentBoard, closeModal) => {
       const { title } = activatedBoard;
 
       if (title) {
-        encodeTitleInUrl(title);
+        encodeTitleBoardInUrl(title);
       }
       const filterBoard = localStorage.getItem(boardId);
       if (filterBoard) {
@@ -83,18 +92,18 @@ const useBoard = (currentBoard, closeModal) => {
   const handleDeleteBoard = async id => {
     try {
       localStorage.removeItem(id);
-      await removeBoard(id);
-      await getAllBoards();
+      removeBoard(id);
+      getAllBoards();
 
       if (allBoards.length > 1) {
         const firstBoard = allBoards[0];
-        setActiveBoard(firstBoard?.id);
+        await setActiveBoard(firstBoard?.id);
 
         const { title } = firstBoard;
-        encodeTitleInUrl(title);
+        encodeTitleBoardInUrl(title);
       } else {
-        setActiveBoard(null);
-        clearEncodedTitleInUrl();
+        await setActiveBoard(null);
+        clearTitleBoardInUrl();
       }
     } catch (error) {
       console.error(error.message);

@@ -39,13 +39,13 @@ const ThemedApp = () => {
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={generalStore.store}>
-      <PersistGate loading={null} persistor={generalStore.persistor}>
-        <BrowserRouter basename="/frontEnd_tasksPro">
-          <ThemedApp />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={generalStore.store}>
+    <PersistGate loading={null} persistor={generalStore.persistor}>
+      <BrowserRouter basename="/frontEnd_tasksPro">
+        <ThemedApp />
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
+  // </React.StrictMode>
 );

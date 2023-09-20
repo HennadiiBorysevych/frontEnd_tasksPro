@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { popUpSchema } from 'helpers/validationSchemas';
+import { popUpSchema } from 'helpers';
 import { useBoard } from 'hooks';
 
 import { CommonPopUp } from 'ui';
@@ -20,7 +20,7 @@ const BoardPopUp = ({ board, onClose }) => {
     handleBoardSubmit,
   } = useBoard(board, onClose);
 
-  const { boardValues } = popUpInitialValues;
+  const { boardValues } = POP_UP_INITIAL_VALUES;
 
   const inputs = [
     {

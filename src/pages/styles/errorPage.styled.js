@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
 export const ErrorBackground = styled.section(({ theme, isLoggedIn }) => ({
   backgroundColor: theme.palette.background.primary,
-  backgroundImage: !isLoggedIn ? baseColors.authColors.background : 'none',
+  backgroundImage: !isLoggedIn ? BASE_COLORS.authColors.background : 'none',
   color: theme.palette.text.primary,
   textAlign: 'center',
   display: 'flex',

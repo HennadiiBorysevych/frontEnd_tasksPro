@@ -35,7 +35,7 @@ const updateProfileValues = {
   password: '',
 };
 
-const popUpInitialValues = {
+const POP_UP_INITIAL_VALUES = {
   authValues,
   recoveryPasswordValues,
   boardValues,
@@ -45,4 +45,4 @@ const popUpInitialValues = {
   updateProfileValues,
 };
 
-export default popUpInitialValues;
+export default POP_UP_INITIAL_VALUES;
