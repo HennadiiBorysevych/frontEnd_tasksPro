@@ -16,6 +16,10 @@ export const DropdownButton = styled.button(props => ({
   alignItems: 'center',
   gap: '8px',
 
+  [DropdownIcon]: {
+    transition: 'transform 0.4s ease',
+    transform: props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+  },
   '&:hover': {
     color: props.theme.palette.accent.light,
     [DropdownIcon]: {

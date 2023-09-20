@@ -18,7 +18,7 @@ const CommonPopUp = ({
   onSubmit, // функція сабміту
   hasIcon, // для реєстраційних форм вказується hasICon={false}
   inputs, // масив об'єктів інпутів передається як inputs={inputs}, окремо описуються всі інпути. Приклади вже є в модалках
-  initialValues, // імпортується з констант import { popUpInitialValues } from 'constants'; потім всередині компонента деструктуризується з відповідною назвоб об'єкта, наприклад, const { AuthValues } = popUpInitialValues;
+  initialValues, // імпортується з констант import { POP_UP_INITIAL_VALUES } from 'constants'; потім всередині компонента деструктуризується з відповідною назвоб об'єкта, наприклад, const { AuthValues } = POP_UP_INITIAL_VALUES;
   validationSchema, // імпортується з helpers/validationSchemas
   buttonText, // вказується рядком, якщо є умова, вказується за умовою
   variant, // для динамічного марджина PrimaryButton, в варіанті форм автентифікації вказується variant="formPopUp". Margin-top не передається в інлайн-стилях, як було до цього

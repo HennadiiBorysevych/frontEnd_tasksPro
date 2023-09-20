@@ -1,4 +1,4 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
@@ -10,9 +10,9 @@ export const GoogleLink = styled.a(
     justifyContent: 'center',
     gap: '10px',
     width: '100%',
-    backgroundColor: baseColors.authColors.buttonBackgroundSecondary,
+    backgroundColor: BASE_COLORS.authColors.buttonBackgroundSecondary,
     borderRadius: '8px',
-    color: baseColors.authColors.textPrimary,
+    color: BASE_COLORS.authColors.textPrimary,
     marginTop: '20px',
     fontSize: '14px',
     fontWeight: '500',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { images } from 'constants';
+import { IMAGES } from 'constants';
 
 import { useToggleModalAndSideBar } from 'contexts';
 import { generateContentImages } from 'helpers';
@@ -26,7 +26,7 @@ const Support = () => {
   const devicePixelRatio = window.devicePixelRatio || 1;
 
   const matchedPlantImage = generateContentImages(
-    images.plantsImages,
+    IMAGES.plantsImages,
     devicePixelRatio,
     'image/webp'
   );

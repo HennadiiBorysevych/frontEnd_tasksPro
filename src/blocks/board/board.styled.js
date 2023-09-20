@@ -21,7 +21,6 @@ export const ContainerWrapper = styled.div({
 export const ColumnsContainer = styled.ul(
   {
     display: 'flex',
-    flexWrap: 'nowrap',
     gap: '8px',
   },
   props => ({

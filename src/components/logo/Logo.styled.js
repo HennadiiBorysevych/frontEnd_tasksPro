@@ -1,4 +1,4 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
@@ -17,7 +17,7 @@ export const LogoWrapper = styled.div(({ variant, theme }) => ({
 
 export const Welcome = styled.h1(
   {
-    color: baseColors.authColors.textPrimary,
+    color: BASE_COLORS.authColors.textPrimary,
     fontSize: '28px',
     fontWeight: '600',
     lineHeight: '1.25',

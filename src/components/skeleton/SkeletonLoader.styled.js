@@ -1,11 +1,11 @@
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
 // WELCOME PAGE
 export const Background = styled.section`
   position: relative;
-  background-image: ${baseColors.authColors.background};
+  background-image: ${BASE_COLORS.authColors.background};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@ export const Background = styled.section`
 
 export const BackgroundLogin = styled.section`
   position: relative;
-  background-image: ${baseColors.authColors.background};
+  background-image: ${BASE_COLORS.authColors.background};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -161,3 +161,15 @@ export const ListWrapper = styled.div`
   flex-direction: column;
   width: 80%;
 `;
+
+export const ColumnsList = styled.div(
+  {
+    position: 'fixed',
+    width: 'calc(100vw - 64px)',
+    maxHeight: 'calc(100vh - 32px)',
+    marginBottom: '32px',
+  },
+  props => ({
+    backgroundColor: props.baseColor,
+  })
+);

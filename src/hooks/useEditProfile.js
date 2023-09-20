@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { generateToastMessage } from 'helpers';
 
 import useAuthCollector from './useAuthCollector';
 
@@ -8,9 +9,7 @@ const useEditProfile = (currentUser, handleModalClose) => {
   const [userAvatar, setUserAvatar] = useState(currentUser?.avatarURL ?? '');
   const [avatarFile, setAvatarFile] = useState(null);
   const [isAvatarLoad, setIsAvatarLoad] = useState(false);
-  const { updateProfileData, signOut } = useAuthCollector();
-
-  const navigate = useNavigate();
+  const { updateProfileData } = useAuthCollector();
 
   useEffect(() => {
     avatarFile ? setIsAvatarLoad(true) : setIsAvatarLoad(false);
@@ -33,16 +32,7 @@ const useEditProfile = (currentUser, handleModalClose) => {
       key => key !== 'password'
     );
 
-    let toastMessage = '';
-
-    if (keysToDisplay.includes('newPassword')) {
-      const updatedKeysToDisplay = keysToDisplay.map(key =>
-        key === 'newPassword' ? 'password' : key
-      );
-      toastMessage = `User ${updatedKeysToDisplay.join(
-        ', '
-      )} successfully updated`;
-    }
+    const toastMessage = generateToastMessage(keysToDisplay, isAvatarLoad);
 
     const response = await updateProfileData(newUser);
     localStorage.clear();
@@ -56,10 +46,11 @@ const useEditProfile = (currentUser, handleModalClose) => {
 
     handleModalClose();
 
-    if (formattedValues.password) {
-      signOut();
-      navigate('/auth/login');
-    }
+    // if (formattedValues.password) {
+    //   signOut();
+    //   console.log(user);
+    //   navigate('/auth/login');
+    // }
   };
 
   const handleUserAvatar = e => {
@@ -69,9 +60,6 @@ const useEditProfile = (currentUser, handleModalClose) => {
     reader.readAsDataURL(file);
     reader.onload = async () => {
       setUserAvatar(reader.result);
-      if (reader.result) {
-        toast.success('User avatar has successfully added');
-      }
     };
   };
 

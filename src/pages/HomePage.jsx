@@ -60,7 +60,7 @@ const HomePage = () => {
     }
 
     fetchData();
-  }, [activeBoardId, hasBoards, getAllCards, getAllColumns]);
+  }, [activeBoardId, getAllCards, getAllColumns]);
 
   return (
     <SharedLayout>

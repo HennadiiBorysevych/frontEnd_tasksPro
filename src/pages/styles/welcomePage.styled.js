@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { baseColors } from 'constants';
+import { BASE_COLORS } from 'constants';
 
 import { Typography } from 'ui';
 
@@ -35,11 +35,11 @@ export const RegisterLink = styled(NavLink)(({ register, theme }) => ({
   padding: register ? '14px 0' : 0,
   width: '100%',
   display: 'block',
-  backgroundColor: register && baseColors.authColors.buttonBackground,
+  backgroundColor: register && BASE_COLORS.authColors.buttonBackground,
   borderRadius: '8px',
   color: register
-    ? baseColors.authColors.textSecondary
-    : baseColors.authColors.textPrimary,
+    ? BASE_COLORS.authColors.textSecondary
+    : BASE_COLORS.authColors.textPrimary,
   marginBottom: register ? '14px' : 0,
   fontWeight: 500,
   fontSize: '14px',

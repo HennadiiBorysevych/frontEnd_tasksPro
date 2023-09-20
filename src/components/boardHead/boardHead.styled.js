@@ -6,7 +6,7 @@ export const Header = styled.div(props => ({
   display: 'flex',
   alignItems: 'center',
   gap: '40px',
-  justifyContent: `${props.boardName ? 'space-between' : 'flex-end'}`,
+  justifyContent: props.boardName ? 'space-between' : 'flex-end',
   marginBottom: '39px',
   width: '100%',
 

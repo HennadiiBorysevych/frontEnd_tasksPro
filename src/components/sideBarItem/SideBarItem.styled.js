@@ -41,16 +41,14 @@ export const BoardName = styled.h2(props => ({
     : props.theme.palette.text.sidebarSecondary,
 }));
 
-export const BoardIdentificationItem = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 20px 0;
-  cursor: pointer;
-`;
+export const BoardIdentificationItem = styled.button(props => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  padding: '20px 0',
+  cursor: 'pointer',
 
-export const BoardItemControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
+  [props.theme.breakpoints.up('medium')]: {
+    gap: '8px',
+  },
+}));

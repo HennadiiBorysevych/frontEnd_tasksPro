@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 
-import { popUpInitialValues } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
-import { authSchema } from 'helpers/validationSchemas';
+import { authSchema } from 'helpers';
 import { useAuthCollector } from 'hooks';
 
 import { Input, PrimaryButton } from 'ui';
@@ -18,7 +18,7 @@ import {
 
 import GoogleAuth from '../googleAuth/GoogleAuth';
 
-const { authValues } = popUpInitialValues;
+const { authValues } = POP_UP_INITIAL_VALUES;
 
 const AuthForm = ({ value, chgForm }) => {
   const { signIn, signUp } = useAuthCollector();

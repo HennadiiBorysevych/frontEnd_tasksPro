@@ -47,20 +47,20 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
-      .addCase(authOperations.logOut.fulfilled, state => {
-        return (state = initialState);
-      })
+      .addCase(authOperations.logOut.fulfilled, state => (state = initialState))
       .addCase(authOperations.fetchCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload.user;
         state.isLoggedIn = true;
+        state.user = action.payload.user;
       })
       .addCase(authOperations.googleAuth.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.user.token;
+        const { token, ...userData } = action.payload.user;
+        state.user = userData;
+        state.token = token;
         state.isLoggedIn = true;
       })
       .addCase(authOperations.updateUserInfo.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        console.log(action.payload.user);
       })
       .addCase(authOperations.updateUserTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.theme;
@@ -68,8 +68,6 @@ const authSlice = createSlice({
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.message;
       })
-      .addCase(authOperations.recoverPassword.fulfilled)
-      .addCase(authOperations.recInPassword.fulfilled)
       .addMatcher(isAnyOf(...getActions('pending')), handlePending)
       .addMatcher(isAnyOf(...getActions('fulfilled')), handleFulfilled)
       .addMatcher(isAnyOf(...getActions('rejected')), handleRejected);

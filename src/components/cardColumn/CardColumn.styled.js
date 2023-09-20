@@ -6,13 +6,12 @@ export const Column = styled.li(
     flexDirection: 'column',
     gap: '14px',
     height: '100%',
-    transition: 'filter 0.4s ease-in-out',
   },
   props => ({
-    filter: props.isLoading ? 'blur(25px)' : 'none',
-
     [props.theme.breakpoints.down('small')]: {
-      width: 'calc(100vw - 40px)',
+      // maxWidth: 'calc(100vw - 40px)',
+      maxWidth: '335px',
+      width: '100%',
     },
     [props.theme.breakpoints.up('small')]: {
       width: '351px',
@@ -52,10 +51,4 @@ export const ItemsContainer = styled.div`
 
 export const DraggableItem = styled.div`
   width: 335px;
-`;
-
-export const IconsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
