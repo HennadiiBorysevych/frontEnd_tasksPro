@@ -11,7 +11,7 @@ const ButtonPlus = ({
   stroke,
   size,
   backgroundColor,
-  variant,
+  variantIcon,
   ...rest
 }) => {
   return (
@@ -19,10 +19,10 @@ const ButtonPlus = ({
       width={width}
       height={height}
       backgroundColor={backgroundColor}
-      variant={variant}
+      variantIcon={variantIcon}
       {...rest}
     >
-      <SvgIcon svgName="icon-plus" variant={variant} size={size} />
+      <SvgIcon svgName="icon-plus" variantIcon={variantIcon} size={size} />
     </SpanStyled>
   );
 };
@@ -33,6 +33,7 @@ ButtonPlus.propTypes = {
   stroke: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   backgroundColor: PropTypes.string,
+  variantIcon: PropTypes.string,
 };
 
 export default ButtonPlus;

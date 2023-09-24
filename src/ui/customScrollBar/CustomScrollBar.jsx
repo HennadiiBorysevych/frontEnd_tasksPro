@@ -7,7 +7,7 @@ import { useAuthCollector } from 'hooks';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { CommonStyles } from './CustomScrollBar.styled';
 
-const CustomScrollbar = ({ width, maxHeight, children, variant }) => {
+const CustomScrollbar = ({ width, maxHeight, children, variantScroll }) => {
   const containerRef = useRef(null);
   const { theme } = useAuthCollector();
 
@@ -22,17 +22,6 @@ const CustomScrollbar = ({ width, maxHeight, children, variant }) => {
         clickScrolling: false,
         touchSupport: true,
       },
-      // callbacks: {
-      //   onInitialized: () => {
-      //     const scrollbar = containerElement.querySelector(
-      //       '.os-scrollbar-horizontal'
-      //     );
-      //     if (scrollbar) {
-      //       scrollbar.style.width = '18px';
-      //       scrollbar.style.height = '18px';
-      //     }
-      //   },
-      // },
     });
 
     // Clean up the OverlayScrollbars instance when the component unmounts
@@ -49,11 +38,10 @@ const CustomScrollbar = ({ width, maxHeight, children, variant }) => {
       style={{
         width,
         height: '100%',
-        minHeight: '126px', //Округлённое значение: высота одной доски (61px) плюс два значения марджинов по макету (4*2=8)
         maxHeight,
-        overflow: 'hidden',
+        minHeight: '126px', //Округлённое значение: высота одной доски (61px) плюс два значения марджинов по макету (4*2=8)
       }}
-      variant={variant}
+      variantScroll={variantScroll}
     >
       <div>{children}</div>
     </CommonStyles>
@@ -65,4 +53,5 @@ export default CustomScrollbar;
 CustomScrollbar.propTypes = {
   width: PropTypes.string,
   maxHeight: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };

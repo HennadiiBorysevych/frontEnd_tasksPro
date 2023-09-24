@@ -8,6 +8,7 @@ export { default as CardItem } from './cardItem/CardItem';
 export { default as CardPopUp } from './cardPopUp/CardPopUp';
 export { default as CardSettings } from './cardSettings/CardSettings';
 export { default as ColumnPopUp } from './columnPopUp/ColumnPopUp';
+export { default as CommonForm } from './commonForm/CommonForm';
 export { default as Filters } from './filters/Filters';
 export { default as GoogleAuth } from './googleAuth/GoogleAuth';
 export { default as Logo } from './logo/Logo';

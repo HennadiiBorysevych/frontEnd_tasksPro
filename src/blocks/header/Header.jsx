@@ -21,7 +21,7 @@ const Header = () => {
         <SvgIcon
           svgName="icon-menu"
           size={28}
-          variant="header"
+          variantIcon="header"
           isActive={true}
         />
       </styles.SideBarButton>

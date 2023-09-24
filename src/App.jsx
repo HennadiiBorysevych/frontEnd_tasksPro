@@ -26,8 +26,10 @@ const App = () => {
     useAuthCollector();
 
   useEffect(() => {
+    console.log('fetchCurrent');
     fetchUser();
-  }, [fetchUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toastTheme = theme === 'Dark' ? 'dark' : 'light';
 
@@ -71,7 +73,10 @@ const App = () => {
                 }
               />
 
-              <Route path="auth/forgot_password" element={<PasswordPage />} />
+              <Route
+                path="auth/forgot_password"
+                element={<PublicPage component={<PasswordPage />} />}
+              />
 
               <Route
                 path="home"

@@ -13,6 +13,9 @@ const GoogleAuth = () => {
   const location = useLocation();
   const token = new URLSearchParams(location.search).get('token');
 
+  // if (token) {
+  //   localStorage.setItem('token', token);
+  // }
   useEffect(() => {
     if (token) {
       googleAuth(token);

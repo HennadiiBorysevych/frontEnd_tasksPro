@@ -31,7 +31,7 @@ const Board = () => {
   return (
     <>
       <BoardHead />
-      <CustomScrollBar variant="board">
+      <CustomScrollBar variantScroll="board">
         <ContainerWrapper>
           {columnLoading ? (
             <SkeletonLoader page="/column" />
@@ -77,7 +77,7 @@ const Board = () => {
                   onClick={toggleModal}
                   id="add-column-button"
                 >
-                  <ButtonPlus variant="addColumn" />
+                  <ButtonPlus variantIcon="addColumn" />
                   Add another column
                 </ButtonAddColumn>
               </div>

@@ -83,7 +83,7 @@ const ReactConfirmAlert = ({
       <SvgIcon
         svgName="icon-trash"
         size={16}
-        variant={owner === 'sidebar' ? 'support' : 'popUp'}
+        variantIcon={owner === 'sidebar' ? 'support' : 'popUp'}
         isActive={false}
       />
     </DeleteButton>

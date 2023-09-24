@@ -1,25 +1,27 @@
 import styled from '@emotion/styled';
 
-export const CommonStyles = styled.div(props => ({
+export const CommonStyles = styled.div(({ variantScroll, theme }) => ({
+  overflow: 'hidden',
+
   maxHeight:
-    props.variant === 'columns'
+    variantScroll === 'columns'
       ? 'calc(100vh - 194px)'
-      : props.variant === 'board'
+      : variantScroll === 'board'
       ? 'calc(100vh - 169px)'
-      : props.variant === 'boardList' && 'calc(100vh - 686px)',
-  [props.theme.breakpoints.up('medium')]: {
+      : variantScroll === 'boardList' && 'calc(100vh - 686px)',
+  [theme.breakpoints.up('medium')]: {
     maxHeight:
-      props.variant === 'columns'
+      variantScroll === 'columns'
         ? 'calc(100vh - 244px)'
-        : props.variant === 'board'
+        : variantScroll === 'board'
         ? 'calc(100vh - 184px)'
-        : props.variant === 'boardList' && 'calc(100vh - 738px)',
+        : variantScroll === 'boardList' && 'calc(100vh - 738px)',
   },
-  [props.theme.breakpoints.up('large')]: {
+  [theme.breakpoints.up('large')]: {
     maxHeight:
-      props.variant === 'columns'
+      variantScroll === 'columns'
         ? 'calc(100vh - 156px)'
-        : props.variant === 'board' && 'calc(100vh - 128px)',
+        : variantScroll === 'board' && 'calc(100vh - 128px)',
   },
 
   '.os-scrollbar-horizontal': {
@@ -27,10 +29,10 @@ export const CommonStyles = styled.div(props => ({
   },
   '.os-scrollbar-horizontal .os-scrollbar-track': {
     height: '12px !important',
-    '--os-track-bg': props.theme.palette.background.horisontalScrollbarGutter,
-    '--os-handle-bg-hover': props.theme.palette.accent.main,
-    '--os-handle-bg-active': props.theme.palette.accent.light,
-    '--os-handle-bg': props.theme.palette.background.horisontalScrollbarSlider,
+    '--os-track-bg': theme.palette.background.horisontalScrollbarGutter,
+    '--os-handle-bg-hover': theme.palette.accent.main,
+    '--os-handle-bg-active': theme.palette.accent.light,
+    '--os-handle-bg': theme.palette.background.horisontalScrollbarSlider,
   },
   '.os-scrollbar-horizontal .os-scrollbar-handle': {
     height: '12px !important',
@@ -40,9 +42,9 @@ export const CommonStyles = styled.div(props => ({
   },
   '.os-scrollbar-vertical .os-scrollbar-track': {
     width: '8px !important',
-    ' --os-track-bg': props.theme.palette.background.verticalScrollbarGutter,
-    '--os-handle-bg': props.theme.palette.background.verticalScrollbarSlider,
-    '--os-handle-bg-hover': props.theme.palette.accent.main,
-    '--os-handle-bg-active': props.theme.palette.accent.light,
+    ' --os-track-bg': theme.palette.background.verticalScrollbarGutter,
+    '--os-handle-bg': theme.palette.background.verticalScrollbarSlider,
+    '--os-handle-bg-hover': theme.palette.accent.main,
+    '--os-handle-bg-active': theme.palette.accent.light,
   },
 }));

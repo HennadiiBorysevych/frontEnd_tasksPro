@@ -1,3 +1,4 @@
+export { default as useAuth } from './useAuth';
 export { default as useAuthCollector } from './useAuthCollector';
 export { default as useBackground } from './useBackground';
 export { default as useBoard } from './useBoard';

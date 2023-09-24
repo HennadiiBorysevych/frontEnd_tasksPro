@@ -32,13 +32,13 @@ const SideBar = () => {
       <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
         <CustomScrollBar
           width="100%"
-          variant="sidebar"
+          variantScroll="sidebar"
           height="100%"
           overflow="auto"
         >
           <SideBarContainer>
             <div>
-              <Logo variant="board" />
+              <Logo variantLogo="board" />
               <TitleBoardList variant="taskDescription">
                 My boards
               </TitleBoardList>
@@ -57,7 +57,7 @@ const SideBar = () => {
                 <ButtonPlus
                   width={40}
                   height={36}
-                  variant="sidemenu"
+                  variantIcon="sidemenu"
                   size={20}
                 />
               </CreateBoard>

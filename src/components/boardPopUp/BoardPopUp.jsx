@@ -40,9 +40,10 @@ const BoardPopUp = ({ board, onClose }) => {
       initialValues={boardValues}
       validationSchema={board ? null : popUpSchema}
       buttonText={board ? 'Edit' : 'Create'}
-      version="settingsPopUp"
+      variantMarginTop="settingsPopUp"
       hasIcon={true}
-      variant="primary"
+      settings={true}
+      variantIcon="primary"
       id="create-or-edit-board-button"
     >
       <BoardSettings
@@ -52,36 +53,10 @@ const BoardPopUp = ({ board, onClose }) => {
         setChosenBackground={setBackground}
       />
     </CommonPopUp>
-    // <PopUpLayout
-    //   title={board ? 'Edit board' : 'New board'}
-    //   handleClose={onClose}
-    // >
-    //   <Form onSubmit={handleBoardSubmit}>
-    //     <Input
-    //       onChange={handleTitle}
-    //       placeholder={board ? board?.title : 'Title'}
-    //     />
-
-    //     {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
-    //     <BoardSettings
-    //       chosenIcon={icon}
-    //       setChosenIcon={setIcon}
-    //       chosenBackground={background}
-    //       setChosenBackground={setBackground}
-    //     />
-    //     <PrimaryButton
-    //       version="settingsPopUp"
-    //       type="submit"
-    //       variant="primary"
-    //       hasIcon={true}
-    //       id="create-or-edit-button"
-    //     >
-    //       {board ? 'Edit' : 'Create'}
-    //     </PrimaryButton>
-    //   </Form>
-    // </PopUpLayout>
   );
 };
+
+export default BoardPopUp;
 
 BoardPopUp.propTypes = {
   onClose: PropTypes.func.isRequired,
@@ -93,5 +68,3 @@ BoardPopUp.propTypes = {
     isActive: PropTypes.bool.isRequired,
   }),
 };
-
-export default BoardPopUp;

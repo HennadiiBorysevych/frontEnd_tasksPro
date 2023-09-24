@@ -1,9 +1,10 @@
-import { Typography } from 'ui';
+import styled from '@emotion/styled/macro';
 
-import styled from '@emotion/styled';
+import { Typography } from 'ui';
 
 export const BoardDecor = styled.div`
   margin-top: 14px;
+  /* margin-right: 14px; */ // розкоментувати, якщо зіб'ється відступ справа
 `;
 
 export const Row = styled.div`

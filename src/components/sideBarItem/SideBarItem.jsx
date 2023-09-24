@@ -46,7 +46,7 @@ const SideBarItem = ({
             svgName={`${iconName}`}
             size={18}
             isActive={active}
-            variant="support"
+            variantIcon="support"
           />
           <BoardName isActive={active}>{title}</BoardName>
         </BoardIdentificationItem>
@@ -54,7 +54,7 @@ const SideBarItem = ({
           <ControlIcons
             onClick={toggleWindows}
             ariaLabel="Edit board button"
-            variant="support"
+            variantIcon="support"
             onDeleteAction={onDeleteClick}
             item="board and all content in it"
             owner="sidebar"

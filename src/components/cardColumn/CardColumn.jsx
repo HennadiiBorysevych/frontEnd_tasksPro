@@ -59,7 +59,7 @@ function CardsColumn({ provided, column }) {
             <ControlIcons
               onClick={handleEditColumn}
               ariaLabel="Edit column button"
-              variant="popUp"
+              variantIcon="popUp"
               isActive={false}
               onDeleteAction={() => removeColumn(column.id)}
               item="column and all content in it"
@@ -73,7 +73,7 @@ function CardsColumn({ provided, column }) {
             // isCombineEnabled={true}
           >
             {provided => (
-              <CustomScrollBar variant="columns">
+              <CustomScrollBar variantScroll="columns">
                 <ItemsContainer
                   {...provided.droppableProps}
                   ref={provided.innerRef}
@@ -111,8 +111,8 @@ function CardsColumn({ provided, column }) {
             hasIcon={true}
             type="button"
             svgName={'icon-plus'}
-            variant="primary"
-            version="board"
+            variantIcon="primary"
+            width="board"
             onClick={handleCreateCard}
           >
             Add another card

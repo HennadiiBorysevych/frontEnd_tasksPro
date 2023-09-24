@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+
+import { POP_UP_INITIAL_VALUES } from 'constants';
 
 import { useToggleModalAndSideBar } from 'contexts';
+import { authSchema } from 'helpers';
+import { useAuth } from 'hooks';
 
-import { AuthForm } from 'components';
+// import { AuthForm } from 'components';
+import { CommonPopUp } from 'ui';
 
 import {
   AuthContainer,
@@ -13,36 +17,64 @@ import {
 } from './styles/authPage.styled';
 import { Background, Container } from './styles/commonStyles.styled';
 
+const { authValues } = POP_UP_INITIAL_VALUES;
+
 const AuthPage = () => {
   const { windowHeight } = useToggleModalAndSideBar();
-  const { id } = useParams();
-  const history = useNavigate();
-  const [value, setValue] = useState(id === 'register' ? 0 : 1);
-  const [resetForm, setResetForm] = useState(0);
+  const {
+    value,
+    formDistributor,
+    handleChange,
+    handleTabChange,
+    onHandleSubmit,
+  } = useAuth();
 
-  const tabToIdx = {
-    1: 'register',
-    0: 'login',
-  };
+  const inputs = [
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'Enter your email',
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: formDistributor.passText,
+    },
+  ];
 
-  const handleChange = (_, newVal) => {
-    history(`/auth/${tabToIdx[value]}`);
-    setValue(newVal);
-    setResetForm(resetForm + 1);
-  };
+  if (value === 0) {
+    inputs.unshift({
+      name: 'name',
+      type: 'text',
+      placeholder: 'Enter your name',
+    });
+  }
 
   return (
     <Background>
       <Container windowHeight={windowHeight}>
         <AuthContainer>
-          <StyledTabs value={value} onChange={handleChange}>
+          <StyledTabs value={value} onChange={handleTabChange}>
             <StyledTab label="Registration" />
             <StyledTab label="Log In" />
           </StyledTabs>
           {value === 1 && (
             <Password to="/auth/forgot_password">Forgot password?</Password>
           )}
-          <AuthForm value={value} chgForm={resetForm} />
+          <CommonPopUp
+            destination="authForm"
+            onSubmit={onHandleSubmit}
+            onChange={handleChange}
+            inputs={inputs}
+            initialValues={authValues}
+            validationSchema={authSchema}
+            buttonText={formDistributor.buttText}
+            variantMarginTop="formPopUp"
+            google={true}
+            variantMessage="authForm"
+            id="register-or-login-button"
+          />
+          {/* <AuthForm value={value} chgForm={resetForm} /> */}
         </AuthContainer>
       </Container>
     </Background>
