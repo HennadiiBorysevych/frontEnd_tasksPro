@@ -7,12 +7,12 @@ import sprite from 'assets/images/sprite.svg';
 
 import { Board, LogoWrapper, Welcome } from './Logo.styled';
 
-const Logo = ({ variant }) => {
+const Logo = ({ variantLogo }) => {
   const [svgName, setSvgName] = useState('icon-logo-big');
   const { theme } = useAuthCollector();
 
   useEffect(() => {
-    if (variant === 'board') {
+    if (variantLogo === 'board') {
       if (theme === 'Violet') {
         setSvgName('icon-logo-violet');
       } else {
@@ -21,13 +21,13 @@ const Logo = ({ variant }) => {
     } else {
       setSvgName('icon-logo-big');
     }
-  }, [theme, variant]);
+  }, [theme, variantLogo]);
 
   const iconSize =
-    variant === 'welcome' ? (window.innerWidth >= 768 ? '48' : '40') : '32';
+    variantLogo === 'welcome' ? (window.innerWidth >= 768 ? '48' : '40') : '32';
 
   return (
-    <LogoWrapper variant={variant}>
+    <LogoWrapper variantLogo={variantLogo}>
       <svg
         width={iconSize}
         height={iconSize}
@@ -36,7 +36,7 @@ const Logo = ({ variant }) => {
       >
         <use href={sprite + `#${svgName}`} />
       </svg>
-      {variant === 'welcome' ? (
+      {variantLogo === 'welcome' ? (
         <Welcome>Task Pro</Welcome>
       ) : (
         <Board>Task Pro</Board>
@@ -46,7 +46,7 @@ const Logo = ({ variant }) => {
 };
 
 Logo.propTypes = {
-  variant: PropTypes.oneOf(['board', 'welcome']),
+  variantLogo: PropTypes.oneOf(['board', 'welcome']),
 };
 
 export default Logo;

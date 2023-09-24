@@ -76,7 +76,7 @@ const CardItem = ({ item }) => {
               deadlineExpired={deadlineExpired}
               onClick={toggleModal}
               ariaLabel="Edit card button"
-              variant="popUp"
+              variantIcon="popUp"
               onDeleteAction={() => removeCard(id)}
               item="task"
               owner="tasks"

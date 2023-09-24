@@ -8,7 +8,7 @@ import { SvgStyled } from './svgIcon.styled';
 const SvgIcon = ({
   svgName,
   size = '14px',
-  variant,
+  variantIcon,
   stroke = 'none',
   fill = 'none',
   isActive,
@@ -20,7 +20,7 @@ const SvgIcon = ({
       height={size}
       stroke={stroke}
       fill={fill}
-      variant={variant}
+      variantIcon={variantIcon}
       isActive={isActive}
       {...rest}
     >
@@ -35,6 +35,7 @@ SvgIcon.propTypes = {
   stroke: PropTypes.string,
   fill: PropTypes.string,
   isActive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  variantIcon: PropTypes.string,
 };
 
 export default SvgIcon;

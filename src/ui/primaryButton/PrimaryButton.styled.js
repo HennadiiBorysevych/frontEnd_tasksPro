@@ -16,8 +16,8 @@ const buttonStyles = {
   textAlign: 'center',
 };
 
-const getMarginTop = version => {
-  switch (version) {
+const getMarginTop = variantMarginTop => {
+  switch (variantMarginTop) {
     case 'formPopUp':
       return '24px';
     case 'settingsPopUp':
@@ -27,14 +27,16 @@ const getMarginTop = version => {
   }
 };
 
-export const ButtonStyled = styled.button(({ theme, version }) => ({
-  ...buttonStyles,
-  backgroundColor: theme.palette.accent.main,
-  color: theme.palette.text.primaryButton,
-  marginTop: getMarginTop(version),
-  width: version === 'board' ? '335px' : '100%',
+export const ButtonStyled = styled.button(
+  ({ theme, width, variantMarginTop }) => ({
+    ...buttonStyles,
+    backgroundColor: theme.palette.accent.main,
+    color: theme.palette.text.primaryButton,
+    marginTop: getMarginTop(variantMarginTop),
+    width: width === 'board' ? '335px' : '100%',
 
-  '&:hover': {
-    backgroundColor: theme.palette.accent.light,
-  },
-}));
+    '&:hover': {
+      backgroundColor: theme.palette.accent.light,
+    },
+  })
+);

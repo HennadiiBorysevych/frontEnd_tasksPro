@@ -54,7 +54,7 @@ const Support = () => {
           <SvgIcon
             svgName="icon-help-circle"
             size={20}
-            variant="support"
+            variantIcon="support"
             isActive
           />
           <TextHelp>Need help?</TextHelp>

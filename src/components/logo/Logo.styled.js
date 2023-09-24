@@ -2,16 +2,16 @@ import { BASE_COLORS } from 'constants';
 
 import styled from '@emotion/styled';
 
-export const LogoWrapper = styled.div(({ variant, theme }) => ({
+export const LogoWrapper = styled.div(({ variantLogo, theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: variant === 'welcome' ? 'center' : 'flex-start',
-  gap: variant === 'welcome' ? '14px' : '8px',
-  marginTop: variant === 'welcome' ? '14px' : '0',
-  padding: variant === 'welcome' ? '0' : '0 14px',
+  justifyContent: variantLogo === 'welcome' ? 'center' : 'flex-start',
+  gap: variantLogo === 'welcome' ? '14px' : '8px',
+  marginTop: variantLogo === 'welcome' ? '14px' : '0',
+  padding: variantLogo === 'welcome' ? '0' : '0 14px',
 
   [theme.breakpoints.up('medium')]: {
-    padding: variant === 'welcome' ? '0' : '0 24px',
+    padding: variantLogo === 'welcome' ? '0' : '0 24px',
   },
 }));
 

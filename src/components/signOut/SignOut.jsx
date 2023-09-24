@@ -13,13 +13,13 @@ const SignOut = () => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/welcome');
+    navigate('/auth/login');
   };
 
   return (
     <>
       <ButtonSignOut id="sign-out-button" type="button" onClick={handleSignOut}>
-        <SvgIcon svgName="icon-login" size={32} variant="logOut" />
+        <SvgIcon svgName="icon-login" size={32} variantIcon="logOut" />
         <TextSignOut>Log out</TextSignOut>
       </ButtonSignOut>
     </>

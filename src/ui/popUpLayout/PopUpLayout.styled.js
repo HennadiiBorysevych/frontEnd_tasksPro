@@ -10,9 +10,10 @@ export const Container = styled.div(props => ({
   boxShadow: '0px 4px 16px 0px rgba(22, 22, 22, 0.05)',
 }));
 
-export const CloseBtn = styled.button({
+export const CloseBtn = styled.button(({ variantForm }) => ({
+  display: variantForm === 'passwordForm' && 'none',
   position: 'absolute',
   top: '14px',
   right: '14px',
   cursor: 'pointer',
-});
+}));
