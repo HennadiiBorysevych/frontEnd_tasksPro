@@ -113,7 +113,9 @@ const AuthForm = ({ value, chgForm }) => {
               />
             )}
             {value === 0 && errors.name && touched.name ? (
-              <ErrorMessage variant="authForm">{errors.name}</ErrorMessage>
+              <ErrorMessage variantMessage="authForm">
+                {errors.name}
+              </ErrorMessage>
             ) : null}
           </InputItem>
           <InputItem>
@@ -126,7 +128,9 @@ const AuthForm = ({ value, chgForm }) => {
               value={values.email}
             />
             {errors.email && touched.email ? (
-              <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
+              <ErrorMessage variantMessage="authForm">
+                {errors.email}
+              </ErrorMessage>
             ) : null}
           </InputItem>
           <InputItem>
@@ -139,13 +143,15 @@ const AuthForm = ({ value, chgForm }) => {
               value={values.password}
             />
             {errors.password && touched.password ? (
-              <ErrorMessage variant="authForm">{errors.password}</ErrorMessage>
+              <ErrorMessage variantMessage="authForm">
+                {errors.password}
+              </ErrorMessage>
             ) : null}
           </InputItem>
         </InputList>
 
         <PrimaryButton
-          version="formPopUp"
+          variantMarginTop="formPopUp"
           type="submit"
           aria-label="authorisation-button"
         >

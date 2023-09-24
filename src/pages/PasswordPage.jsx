@@ -56,7 +56,7 @@ const PasswordPage = () => {
       }
 
       if (password !== verifyPassword) {
-        alert('Password do not match');
+        toast.error('Password do not match');
 
         return;
       }
@@ -85,7 +85,7 @@ const PasswordPage = () => {
       <Container>
         <PasswordContainer>
           <PopUpTitle
-            variant="Auth form"
+            variantMarginBottom="Auth form"
             title={
               !passwordToken ? 'Password recovery' : 'Change your password'
             }
@@ -147,7 +147,7 @@ const PasswordPage = () => {
             </InputList>
 
             <PrimaryButton
-              version="formPopUp"
+              variantMarginTop="formPopUp"
               id="recovery-password-submit-button"
               hasIcon={false}
               type="submit"

@@ -25,12 +25,6 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
       placeholder: column ? column?.title : 'Title',
     },
   ];
-  // const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
-  //   useFormik({
-  //     initialValues: columnValues,
-  //     onSubmit: handleColumnSubmit,
-  //     validationSchema: popUpSchema,
-  //   });
 
   return (
     <CommonPopUp
@@ -42,37 +36,11 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
       initialValues={columnValues}
       validationSchema={column ? null : popUpSchema}
       buttonText={column ? 'Edit' : 'Create'}
-      version="formPopUp"
+      variantMarginTop="formPopUp"
       hasIcon={true}
-      variant="primary"
+      variantIcon="primary"
       id="create-or-edit-column-button"
-    ></CommonPopUp>
-    // <PopUpLayout
-    //   title={column ? 'Edit column' : 'Add column'}
-    //   handleClose={handleModalClose}
-    // >
-    //   <Form onSubmit={handleSubmit}>
-    //     <Input
-    //       name="title"
-    //       onChange={handleChange}
-    //       onBlur={handleBlur}
-    //       placeholder={column ? column?.title : 'Title'}
-    //       value={values.title}
-    //     />
-    //     {errors.title && touched.title ? (
-    //       <ErrorMessage>{errors.title}</ErrorMessage>
-    //     ) : null}
-    //     <PrimaryButton
-    //       version="formPopUp"
-    //       id="create-or-edit-column-button"
-    //       hasIcon={true}
-    //       type="submit"
-    //       variant="primary"
-    //     >
-    //       {column ? 'Edit' : 'Add'}
-    //     </PrimaryButton>
-    //   </Form>
-    // </PopUpLayout>
+    />
   );
 };
 

@@ -46,9 +46,10 @@ const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
       initialValues={cardValues}
       validationSchema={card ? null : addCardSchema}
       buttonText={card ? 'Edit' : 'Create'}
-      version="settingsPopUp"
+      variantMarginTop="settingsPopUp"
       hasIcon={true}
-      variant="primary"
+      settings={true}
+      variantIcon="primary"
       id="create-or-edit-card-button"
     >
       <CardSettings
@@ -58,49 +59,6 @@ const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
         setDeadline={setDeadline}
       />
     </CommonPopUp>
-    // <PopUpLayout
-    //   title={card ? 'Edit card' : 'Add card'}
-    //   handleClose={handleModalClose}
-    // >
-    //   {/* <Form > */}
-    //   <ul>
-    //     <InputItem>
-    //       <Input
-    //         name="title"
-    //         onChange={handleInput}
-    //         placeholder={card ? card?.title : 'Title'}
-    //       />
-    //       {titleChecker ? <ErrorMessage>Title is required</ErrorMessage> : null}
-    //     </InputItem>
-    //     <InputItem>
-    //       <Input
-    //         name="description"
-    //         onChange={handleInput}
-    //         multiline={true}
-    //         placeholder={card ? card?.description : 'Description'}
-    //       />
-    //       {descriptionChecker ? (
-    //         <ErrorMessage>Description is required</ErrorMessage>
-    //       ) : null}
-    //     </InputItem>
-    //   </ul>
-    //   <CardSettings
-    // priority={priority}
-    // deadline={new Date(deadline)}
-    // handlePriority={handlePriority}
-    // setDeadline={setDeadline}
-    //   />
-    //   <PrimaryButton
-    //     version="settingsPopUp"
-    //     id="create-or-edit-card-button"
-    //     hasIcon={true}
-    //     variant="primary"
-    //     onClick={handleCardSubmit}
-    //   >
-    //     {card ? 'Edit' : 'Create'}
-    //   </PrimaryButton>
-    //   {/* </Form> */}
-    // </PopUpLayout>
   );
 };
 

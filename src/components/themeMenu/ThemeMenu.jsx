@@ -70,7 +70,7 @@ const ThemeMenu = () => {
         <DropdownIcon
           svgName="icon-arrow-down"
           size="16"
-          variant="header"
+          variantIcon="header"
           isActive="true"
         />
       </DropdownButton>

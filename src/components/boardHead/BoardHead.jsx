@@ -67,6 +67,9 @@ const BoardHead = () => {
             onChange={handleTitle}
             onBlur={handleBoardChange}
             fullWidth={true}
+            inputProps={{
+              style: { border: 'none', outline: 'none', animation: 'none' },
+            }}
           />
         )}
         <Filters />

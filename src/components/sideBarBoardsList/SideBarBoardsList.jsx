@@ -13,7 +13,7 @@ const SideBarBoardsList = () => {
   const { activeBoardId, handleActiveBoard, handleDeleteBoard } = useBoard();
 
   return (
-    <CustomScrollBar width="100%" variant="boardList" overflow="auto">
+    <CustomScrollBar width="100%" variantScroll="boardList" overflow="auto">
       <BoardList>
         {allBoards.map(({ id, icon, title }) => (
           <SideBarItem

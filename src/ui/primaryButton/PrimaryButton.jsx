@@ -9,22 +9,21 @@ const PrimaryButton = ({
   children,
   onClick,
   width,
-  height,
   hasIcon,
   svgName,
-  variant,
-  version,
+  variantIcon,
+  variantMarginTop,
   ...rest
 }) => {
   return (
     <ButtonStyled
-      version={version}
+      variantMarginTop={variantMarginTop}
       onClick={onClick}
-      style={{ width, height }}
+      width={width}
       svgName={svgName}
       {...rest}
     >
-      {hasIcon && <ButtonPlus svgName={svgName} variant={variant} />}
+      {hasIcon && <ButtonPlus svgName={svgName} variantIcon="primary" />}
       {children}
     </ButtonStyled>
   );
@@ -34,9 +33,10 @@ PrimaryButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hasIcon: PropTypes.bool,
   svgName: PropTypes.string,
+  variantIcon: PropTypes.string,
+  variantMarginTop: PropTypes.string,
 };
 
 export default PrimaryButton;

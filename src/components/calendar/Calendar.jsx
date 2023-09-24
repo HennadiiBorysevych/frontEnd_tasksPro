@@ -74,7 +74,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
         <DeadlineDay>
           {isDeadlineToday ? 'Today, ' : ''} {formatSelectedDate(selectedDate)}
         </DeadlineDay>
-        <SvgIcon svgName="icon-arrow-down" variant="cardItem" size="18" />
+        <SvgIcon svgName="icon-arrow-down" variantIcon="cardItem" size="18" />
       </CalendarButton>
 
       {isCalendarVisible && (
@@ -91,7 +91,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
                   <SvgIcon
                     svgName="icon-arrow-left"
                     size="14"
-                    variant="header"
+                    variantIcon="header"
                   />
                 </PrevLabelWithPadding>
               }
@@ -100,7 +100,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
                   <SvgIcon
                     svgName="icon-arrow-right"
                     size="14"
-                    variant="header"
+                    variantIcon="header"
                   />
                 </NextLabelWithPadding>
               }

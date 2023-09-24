@@ -13,7 +13,7 @@ const ControlIcons = ({
   deadlineExpired,
   onClick,
   ariaLabel,
-  variant,
+  variantIcon,
   isActive,
   onDeleteAction,
   item,
@@ -26,16 +26,16 @@ const ControlIcons = ({
   return (
     <IconsContainer owner={owner}>
       {deadlineToday && (
-        <SvgIcon svgName="icon-bell" size={16} variant="cardItem" />
+        <SvgIcon svgName="icon-bell" size={16} variantIcon="cardItem" />
       )}
       {deadlineExpired && (
-        <SvgIcon svgName="icon-bell" size={16} variant="deadlineExpired" />
+        <SvgIcon svgName="icon-bell" size={16} variantIcon="deadlineExpired" />
       )}
       <EditButton type="button" onClick={onClick} aria-label={ariaLabel}>
         <SvgIcon
           svgName="icon-pencil"
           size={16}
-          variant={variant}
+          variantIcon={variantIcon}
           isActive={isActive}
         />
       </EditButton>
@@ -58,7 +58,7 @@ ControlIcons.propTypes = {
   deadlineExpired: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   ariaLabel: PropTypes.string.isRequired,
-  variant: PropTypes.string,
+  variantIcon: PropTypes.string,
   isActive: PropTypes.bool,
   onDeleteAction: PropTypes.func.isRequired,
   item: PropTypes.string.isRequired,

@@ -1,6 +1,5 @@
+import styled from '@emotion/styled/macro';
 import TextField from '@mui/material/TextField';
-
-import styled from '@emotion/styled';
 
 export const Header = styled.div(props => ({
   display: 'flex',
@@ -29,9 +28,9 @@ export const FieldInput = styled(TextField)(
         borderColor: '#E0E3E7',
       },
     },
-  },
-  props => ({
-    textShadow: `0.5px 0 3px ${props.theme.palette.text.shadowColor}`,
-    cursor: 'pointer',
-  })
+  }
+  // props => ({
+  //   textShadow: `0.5px 0 3px ${props.theme.palette.text.shadowColor}`,
+  //   cursor: 'pointer',
+  // })
 );

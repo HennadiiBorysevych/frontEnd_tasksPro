@@ -48,7 +48,7 @@ const BoardSettings = ({
                   svgName={id}
                   size={18}
                   isActive={id === chosenIcon}
-                  variant="popUp"
+                  variantIcon="popUp"
                 />
               </IconLabel>
             ))}
@@ -69,7 +69,7 @@ const BoardSettings = ({
                     <SvgIcon
                       svgName="icon-background-image"
                       size={16}
-                      variant="background"
+                      variantIcon="background"
                       className={
                         chosenBackground === bgIndex.title ? 'active' : ''
                       }

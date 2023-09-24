@@ -15,6 +15,7 @@ const useBackground = () => {
     if (boardBG === 'default' || boardBG === undefined || boardBG === 'empty') {
       setBgPic('#1f1f1f');
     } else {
+      document.cookie = 'myCookie=myValue; SameSite=None; Secure';
       const imageUrl = getBackgroundImage(boardBG);
       setBgPic(imageUrl);
     }

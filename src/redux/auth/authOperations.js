@@ -46,7 +46,6 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 const googleAuth = createAsyncThunk(
   'auth/google',
   async (tokenAuth, thunkAPI) => {
-    console.log(tokenAuth);
     try {
       token.set(tokenAuth);
       const { data } = await axios.get('/api/users/current');
@@ -72,6 +71,7 @@ const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/api/users/current');
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
