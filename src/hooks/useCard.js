@@ -1,13 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import useCardsCollector from './useCardsCollector';
+import { cardModel } from 'constants';
 
-const cardModel = {
-  title: '',
-  description: '',
-  priority: 'Without',
-  deadline: '',
-};
+import useCardsCollector from './useCardsCollector';
 
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const { addNewCard, updateExistingCard } = useCardsCollector();

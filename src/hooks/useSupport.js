@@ -1,12 +1,9 @@
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import useAuthCollector from './useAuthCollector';
+import { supportModel } from 'constants';
 
-const supportModel = {
-  email: '',
-  comment: '',
-};
+import useAuthCollector from './useAuthCollector';
 
 const useSupport = onClose => {
   const { sendToSupport } = useAuthCollector();
