@@ -4,7 +4,7 @@ import { Typography } from 'ui';
 
 export const BoardDecor = styled.div`
   margin-top: 14px;
-  /* margin-right: 14px; */ // розкоментувати, якщо зіб'ється відступ справа
+  margin-right: 14px; // розкоментувати, якщо зіб'ється відступ справа
 `;
 
 export const Row = styled.div`
@@ -37,9 +37,7 @@ export const IconLabel = styled.label`
 
 export const BoardText = styled(Typography)`
   width: 100%;
-  text-align: left;
   margin-bottom: 14px;
-  line-height: 21px;
 `;
 
 export const DefaultBackgroundIconWrapper = styled.div(

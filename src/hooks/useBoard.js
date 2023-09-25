@@ -2,17 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUserFilter } from 'redux/userFilterSlice';
 
+import { boardModel } from 'constants';
+
 import { useBoardContext } from 'contexts';
 import { clearTitleBoardInUrl, encodeTitleBoardInUrl } from 'helpers';
 
 import useBoardsCollector from './useBoardsCollector';
-
-const boardModel = {
-  title: '',
-  icon: 'icon-Project',
-  background: '',
-  isActive: false,
-};
 
 const useBoard = (currentBoard, closeModal) => {
   const {
@@ -33,15 +28,28 @@ const useBoard = (currentBoard, closeModal) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (activeBoardId) {
+      const updatedBoard = allBoards?.find(board => board.id === activeBoardId);
+      setBoard(updatedBoard);
+    }
+  }, [activeBoardId, allBoards]);
+
+  useEffect(() => {
+    if (currentBoard) {
+      setTitle(currentBoard?.title);
+    }
+  }, [currentBoard]);
+
   const handleBoardSubmit = async () => {
     const { id, user, ...rest } = board;
+    await setActiveBoard(id);
 
     if (currentBoard) {
       updateExistingBoard({
         boardId: id,
         updatedData: { ...rest, title: title },
       });
-      await setActiveBoard(currentBoard.id);
       if (title) {
         encodeTitleBoardInUrl(title);
       }
@@ -110,11 +118,14 @@ const useBoard = (currentBoard, closeModal) => {
     }
   };
 
+  const decodedTitle = decodeURIComponent(currentBoard?.id);
+
   return {
     title,
     icon,
     background,
     activeBoardId,
+    decodedTitle,
     setIcon,
     setBackground,
     handleTitle,
