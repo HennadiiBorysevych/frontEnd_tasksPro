@@ -43,13 +43,13 @@ const useBoard = (currentBoard, closeModal) => {
 
   const handleBoardSubmit = async () => {
     const { id, user, ...rest } = board;
+    await setActiveBoard(id);
 
     if (currentBoard) {
       updateExistingBoard({
         boardId: id,
         updatedData: { ...rest, title: title },
       });
-      await setActiveBoard(currentBoard.id);
       if (title) {
         encodeTitleBoardInUrl(title);
       }
