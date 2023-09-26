@@ -28,8 +28,6 @@ const AuthPage = () => {
     handleChange,
     handleTabChange,
     onHandleSubmit,
-    resetInputs,
-
   } = useAuth();
 
   const inputs = [
@@ -64,21 +62,23 @@ const AuthPage = () => {
           {value === 1 && (
             <Password to="/auth/forgot_password">Forgot password?</Password>
           )}
-          {<CommonPopUp
-            destination="authForm"
-            onSubmit={onHandleSubmit}
-            onChange={handleChange}
-            authInputsTabsReset={resetInputs}
-            inputs={inputs}
-            initialValues={authValues}
-            validationSchema={authSchema}
-            buttonText={formDistributor.buttText}
-            variantMarginTop="formPopUp"
-            google={true}
-            variantMessage="authForm"
-            id="register-or-login-button"
-          />}
-//           <AuthForm value={value} chgForm={resetForm} />
+          {
+            <CommonPopUp
+              destination="authForm"
+              onSubmit={onHandleSubmit}
+              onChange={handleChange}
+              authInputsTabsReset={resetInputs}
+              inputs={inputs}
+              initialValues={authValues}
+              validationSchema={authSchema}
+              buttonText={formDistributor.buttText}
+              variantMarginTop="formPopUp"
+              google={true}
+              variantMessage="authForm"
+              id="register-or-login-button"
+            />
+          }
+          {/* <AuthForm value={value} chgForm={resetForm} /> */}
         </AuthContainer>
       </Container>
     </Background>
