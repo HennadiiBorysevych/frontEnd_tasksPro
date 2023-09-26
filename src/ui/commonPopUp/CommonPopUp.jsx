@@ -25,9 +25,11 @@ const CommonPopUp = ({
   google, // булеве значення для вставки кнопки GoogleAuth
   destination, // призначення форми - або authForm - форма автентифікації, або інші popup
   variantMessage, // рядок "authForm" для стилів повідомлень про помилку при валідації форм
+
   variantMarginBottom, // string
   authInputsTabsReset, //Буль. для сброса значений инпутов при смене таба на логине/регистрации
   variantForm, //Строка, контролирубщая кнопку закрытия модалки
+
 }) => {
   return (
     <>

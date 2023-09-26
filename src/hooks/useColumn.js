@@ -1,10 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import useColumnsCollector from './useColumnsCollector';
+import { columnModel } from 'constants';
 
-const columnModel = {
-  title: '',
-};
+import useColumnsCollector from './useColumnsCollector';
 
 const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
   const { addNewColumn, updateExistingColumn } = useColumnsCollector();

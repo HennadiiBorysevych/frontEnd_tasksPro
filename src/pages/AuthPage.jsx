@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
-
 import { useToggleModalAndSideBar } from 'contexts';
 import { authSchema } from 'helpers';
 import { useAuth } from 'hooks';
 
 import { AuthForm } from 'components';
+
 import { CommonPopUp } from 'ui';
 
 import {
@@ -24,10 +24,12 @@ const AuthPage = () => {
   const {
     value,
     formDistributor,
+    resetInputs,
     handleChange,
     handleTabChange,
     onHandleSubmit,
     resetInputs,
+
   } = useAuth();
 
   const inputs = [
@@ -62,7 +64,7 @@ const AuthPage = () => {
           {value === 1 && (
             <Password to="/auth/forgot_password">Forgot password?</Password>
           )}
-          <CommonPopUp
+          {<CommonPopUp
             destination="authForm"
             onSubmit={onHandleSubmit}
             onChange={handleChange}
@@ -75,8 +77,8 @@ const AuthPage = () => {
             google={true}
             variantMessage="authForm"
             id="register-or-login-button"
-          />
-          {/* <AuthForm value={value} chgForm={resetForm} /> */}
+          />}
+//           <AuthForm value={value} chgForm={resetForm} />
         </AuthContainer>
       </Container>
     </Background>
