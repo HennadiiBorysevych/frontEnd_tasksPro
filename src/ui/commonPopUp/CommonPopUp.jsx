@@ -25,12 +25,21 @@ const CommonPopUp = ({
   google, // булеве значення для вставки кнопки GoogleAuth
   destination, // призначення форми - або authForm - форма автентифікації, або інші popup
   variantMessage, // рядок "authForm" для стилів повідомлень про помилку при валідації форм
-  variantMarginBottom, // значення марджина між title і формою
+
+  variantMarginBottom, // string
+  authInputsTabsReset, //Буль. для сброса значений инпутов при смене таба на логине/регистрации
+  variantForm, //Строка, контролирубщая кнопку закрытия модалки
+
 }) => {
   return (
     <>
       {destination !== 'authForm' ? (
-        <PopUpLayout title={title} handleClose={onClose}>
+        <PopUpLayout
+          title={title}
+          handleClose={onClose}
+          variantForm={variantForm}
+          variantMarginBottom={variantMarginBottom}
+        >
           <CommonForm
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -48,7 +57,6 @@ const CommonPopUp = ({
             google={google}
             children={children}
             variantMessage={variantMessage}
-            variantMarginBottom={variantMarginBottom}
           />
         </PopUpLayout>
       ) : (
@@ -68,6 +76,7 @@ const CommonPopUp = ({
           google={google}
           children={children}
           variantMessage={variantMessage}
+          authInputsTabsReset={authInputsTabsReset}
         />
       )}
     </>
@@ -101,6 +110,7 @@ CommonPopUp.propTypes = {
   destination: PropTypes.string,
   variantMessage: PropTypes.string,
   variantMarginBottom: PropTypes.string,
+  authInputsTabsReset: PropTypes.bool,
 };
 
 export default CommonPopUp;

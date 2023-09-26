@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-// import { POP_UP_INITIAL_VALUES } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
 import { useToggleModalAndSideBar } from 'contexts';
-// import { authSchema } from 'helpers';
+import { authSchema } from 'helpers';
 import { useAuth } from 'hooks';
 
 import { AuthForm } from 'components';
 
-// import { CommonPopUp } from 'ui';
+import { CommonPopUp } from 'ui';
+
 import {
   AuthContainer,
   Password,
@@ -16,17 +17,19 @@ import {
 } from './styles/authPage.styled';
 import { Background, Container } from './styles/commonStyles.styled';
 
-// const { authValues } = POP_UP_INITIAL_VALUES;
+const { authValues } = POP_UP_INITIAL_VALUES;
 
 const AuthPage = () => {
   const { windowHeight } = useToggleModalAndSideBar();
   const {
     value,
     formDistributor,
-    resetForm,
-    // handleChange,
+    resetInputs,
+    handleChange,
     handleTabChange,
-    // onHandleSubmit,
+    onHandleSubmit,
+    resetInputs,
+
   } = useAuth();
 
   const inputs = [
@@ -61,10 +64,11 @@ const AuthPage = () => {
           {value === 1 && (
             <Password to="/auth/forgot_password">Forgot password?</Password>
           )}
-          {/* <CommonPopUp
+          {<CommonPopUp
             destination="authForm"
             onSubmit={onHandleSubmit}
             onChange={handleChange}
+            authInputsTabsReset={resetInputs}
             inputs={inputs}
             initialValues={authValues}
             validationSchema={authSchema}
@@ -73,8 +77,8 @@ const AuthPage = () => {
             google={true}
             variantMessage="authForm"
             id="register-or-login-button"
-          /> */}
-          <AuthForm value={value} chgForm={resetForm} />
+          />}
+//           <AuthForm value={value} chgForm={resetForm} />
         </AuthContainer>
       </Container>
     </Background>

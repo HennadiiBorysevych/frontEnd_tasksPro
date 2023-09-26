@@ -5,13 +5,19 @@ import { PopUpTitle, SvgIcon } from 'ui';
 
 import { CloseBtn, Container } from './PopUpLayout.styled';
 
-const PopUpLayout = ({ title, handleClose, children, variantForm }) => {
+const PopUpLayout = ({
+  variantMarginBottom,
+  title,
+  handleClose,
+  children,
+  variantForm,
+}) => {
   return (
-    <Container>
+    <Container variantForm={variantForm}>
       <CloseBtn onClick={handleClose} variantForm={variantForm}>
         <SvgIcon svgName="icon-x-close" variantIcon="header" size="18" />
       </CloseBtn>
-      <PopUpTitle title={title} />
+      <PopUpTitle title={title} variantMarginBottom={variantMarginBottom} />
       {children}
     </Container>
   );
@@ -19,7 +25,7 @@ const PopUpLayout = ({ title, handleClose, children, variantForm }) => {
 
 PopUpLayout.propTypes = {
   title: PropTypes.string.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func,
   children: PropTypes.node.isRequired,
   variantForm: PropTypes.string,
 };

@@ -9,7 +9,7 @@ import { POP_UP_INITIAL_VALUES } from 'constants';
 import { changePasswordSchema, sendEmailSchema } from 'helpers';
 import { useAuthCollector } from 'hooks';
 
-import { Input, PopUpTitle, PrimaryButton } from 'ui';
+import { CommonPopUp, Input, PopUpTitle, PrimaryButton } from 'ui';
 import {
   ErrorMessage,
   Form,
@@ -39,10 +39,7 @@ const PasswordPage = () => {
     setPasswordToken(false);
   }, [searchParams]);
 
-  const onHandleSubmit = async (
-    { email, password, verifyPassword },
-    { resetForm }
-  ) => {
+  const onHandleSubmit = async ({ email, password, verifyPassword }) => {
     try {
       if (email !== '') {
         const response = passwordRecovery({ email });
@@ -66,24 +63,66 @@ const PasswordPage = () => {
 
         toast.success('Your password has been changed successfully');
       }
-
-      resetForm();
     } catch (error) {
       console.error('An error occurred:', error.message);
       // Handle other errors here
     }
   };
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
-    useFormik({
-      initialValues: recoveryPasswordValues,
-      onSubmit: onHandleSubmit,
-      validationSchema: !passwordToken ? sendEmailSchema : changePasswordSchema,
-    });
+
+  const handleChange = e => {
+    const value = e.target.value;
+    console.log(value);
+  };
+
+  // const { handleSubmit, handleBlur, values, errors, touched } = useFormik({
+  //   initialValues: recoveryPasswordValues,
+  //   onSubmit: onHandleSubmit,
+  //   validationSchema: !passwordToken ? sendEmailSchema : changePasswordSchema,
+  // });
+
+  const emailInput = [
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'Enter your email',
+    },
+  ];
+
+  const passwordInputs = [
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: 'Enter your new password',
+    },
+    {
+      name: 'verifyPassword',
+      type: 'password',
+      placeholder: 'Confirm your password',
+    },
+  ];
+
+  const inputs = !passwordToken ? emailInput : passwordInputs;
 
   return (
     <Background>
       <Container>
-        <PasswordContainer>
+        <CommonPopUp
+          title={passwordToken ? 'Change password' : 'Password recovery'}
+          onSubmit={onHandleSubmit}
+          onChange={handleChange}
+          inputs={inputs}
+          initialValues={recoveryPasswordValues}
+          validationSchema={
+            passwordToken ? changePasswordSchema : sendEmailSchema
+          }
+          buttonText={passwordToken ? 'Change your password' : 'Send email'}
+          variantMarginTop="formPopUp"
+          variantMarginBottom="passwordForm"
+          variantMessage="authForm"
+          variantForm="passwordForm"
+          id="recovery-password-submit-button"
+        />
+        {/* <PasswordContainer>
           <PopUpTitle
             variantMarginBottom="Auth form"
             title={
@@ -155,7 +194,7 @@ const PasswordPage = () => {
               {!passwordToken ? 'Send email' : 'Change your password'}
             </PrimaryButton>
           </Form>
-        </PasswordContainer>
+        </PasswordContainer> */}
       </Container>
     </Background>
   );
