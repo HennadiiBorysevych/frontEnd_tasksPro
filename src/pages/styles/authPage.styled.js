@@ -14,7 +14,7 @@ export const StyledTabs = styled(Tabs)({
     display: 'flex',
     gap: '14px',
     border: 'none',
-    paddingBottom: '10px',
+    marginBottom: '40px',
 
     '@media screen and(min-width: 768px)': {
       paddingBottom: '40px',

@@ -8,7 +8,7 @@ const useAuth = () => {
   const { id } = useParams();
   const history = useNavigate();
   const [value, setValue] = useState(id === 'register' ? 0 : 1);
-  const [resetForm, setResetForm] = useState(0);
+  const [resetInputs, setResetInputs] = useState(false);
   const { signIn, signUp } = useAuthCollector();
 
   const tabToIdx = {
@@ -19,12 +19,11 @@ const useAuth = () => {
   const handleTabChange = (_, newVal) => {
     history(`/auth/${tabToIdx[value]}`);
     setValue(newVal);
-    setResetForm(resetForm + 1);
+    setResetInputs(!resetInputs);
   };
 
   const handleChange = async e => {
     const value = e.target.value;
-    console.log(value);
   };
 
   const onHandleSubmit = async ({ name, email, password }) => {
@@ -64,7 +63,7 @@ const useAuth = () => {
   return {
     value,
     formDistributor,
-    resetForm,
+    resetInputs,
     handleChange,
     handleTabChange,
     onHandleSubmit,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
@@ -6,7 +6,7 @@ import { useToggleModalAndSideBar } from 'contexts';
 import { authSchema } from 'helpers';
 import { useAuth } from 'hooks';
 
-// import { AuthForm } from 'components';
+import { AuthForm } from 'components';
 import { CommonPopUp } from 'ui';
 
 import {
@@ -27,6 +27,7 @@ const AuthPage = () => {
     handleChange,
     handleTabChange,
     onHandleSubmit,
+    resetInputs,
   } = useAuth();
 
   const inputs = [
@@ -65,6 +66,7 @@ const AuthPage = () => {
             destination="authForm"
             onSubmit={onHandleSubmit}
             onChange={handleChange}
+            authInputsTabsReset={resetInputs}
             inputs={inputs}
             initialValues={authValues}
             validationSchema={authSchema}

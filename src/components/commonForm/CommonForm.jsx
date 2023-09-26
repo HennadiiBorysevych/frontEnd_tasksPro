@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 
@@ -7,6 +7,7 @@ import { Input, PrimaryButton } from 'ui';
 import GoogleAuth from '../googleAuth/GoogleAuth';
 
 import { ErrorMessage, Form, InputItem, InputList } from './commonForm.styled';
+import { useAuth } from 'hooks';
 
 const CommonForm = ({
   initialValues,
@@ -25,16 +26,38 @@ const CommonForm = ({
   variantMarginTop,
   buttonText,
   google,
+  authInputsTabsReset,
 }) => {
-  const { handleChange, handleSubmit, values, errors, touched, resetForm } =
-    useFormik({
-      initialValues,
-      onSubmit: values => {
-        onSubmit(values);
-        resetForm();
-      },
-      validationSchema,
+  // const { resetInputs } = useAuth();
+
+  useEffect(() => {
+    breakFormikInputs();
+  }, [authInputsTabsReset]);
+
+  const {
+    setValues,
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    onSubmit: values => {
+      onSubmit(values);
+      resetForm();
+    },
+    validationSchema,
+  });
+
+  async function breakFormikInputs() {
+    await setValues({
+      name: initialValues.name,
+      email: initialValues.email,
+      password: initialValues.password,
     });
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
