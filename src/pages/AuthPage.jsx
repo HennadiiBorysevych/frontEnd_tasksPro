@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 import { useToggleModalAndSideBar } from 'contexts';
 import { authSchema } from 'helpers';
 import { useAuth } from 'hooks';
 
-import { AuthForm } from 'components';
+// import { AuthForm } from 'components';
 
 import { CommonPopUp } from 'ui';
 
@@ -64,7 +64,7 @@ const AuthPage = () => {
           )}
           {
             <CommonPopUp
-              destination="authForm"
+              destination="register-auth-page"
               onSubmit={onHandleSubmit}
               onChange={handleChange}
               authInputsTabsReset={resetInputs}
@@ -74,11 +74,10 @@ const AuthPage = () => {
               buttonText={formDistributor.buttText}
               variantMarginTop="formPopUp"
               google={true}
-              variantMessage="authForm"
+              variantMessage="register-auth-page"
               id="register-or-login-button"
             />
           }
-          {/* <AuthForm value={value} chgForm={resetForm} /> */}
         </AuthContainer>
       </Container>
     </Background>

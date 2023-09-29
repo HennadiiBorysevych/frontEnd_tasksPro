@@ -7,7 +7,6 @@ import { Input, PrimaryButton } from 'ui';
 import GoogleAuth from '../googleAuth/GoogleAuth';
 
 import { ErrorMessage, Form, InputItem, InputList } from './commonForm.styled';
-import { useAuth } from 'hooks';
 
 const CommonForm = ({
   initialValues,
@@ -28,10 +27,10 @@ const CommonForm = ({
   google,
   authInputsTabsReset,
 }) => {
-  // const { resetInputs } = useAuth();
-
   useEffect(() => {
-    breakFormikInputs();
+    if (id === 'register-or-login-button') {
+      breakFormikInputs();
+    }
   }, [authInputsTabsReset]);
 
   const {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useFormik } from 'formik';
 import { authOperations } from 'redux/auth';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
@@ -9,16 +8,9 @@ import { POP_UP_INITIAL_VALUES } from 'constants';
 import { changePasswordSchema, sendEmailSchema } from 'helpers';
 import { useAuthCollector } from 'hooks';
 
-import { CommonPopUp, Input, PopUpTitle, PrimaryButton } from 'ui';
-import {
-  ErrorMessage,
-  Form,
-  InputItem,
-  InputList,
-} from 'ui/commonPopUp/commonPopUp.styled';
+import { CommonPopUp } from 'ui';
 
 import { Background, Container } from './styles/commonStyles.styled';
-import { PasswordContainer } from './styles/passwordPage.styled';
 
 const { recoveryPasswordValues } = POP_UP_INITIAL_VALUES;
 
@@ -74,12 +66,6 @@ const PasswordPage = () => {
     console.log(value);
   };
 
-  // const { handleSubmit, handleBlur, values, errors, touched } = useFormik({
-  //   initialValues: recoveryPasswordValues,
-  //   onSubmit: onHandleSubmit,
-  //   validationSchema: !passwordToken ? sendEmailSchema : changePasswordSchema,
-  // });
-
   const emailInput = [
     {
       name: 'email',
@@ -118,83 +104,10 @@ const PasswordPage = () => {
           buttonText={passwordToken ? 'Change your password' : 'Send email'}
           variantMarginTop="formPopUp"
           variantMarginBottom="passwordForm"
-          variantMessage="authForm"
+          variantMessage="register-auth-page"
           variantForm="passwordForm"
           id="recovery-password-submit-button"
         />
-        {/* <PasswordContainer>
-          <PopUpTitle
-            variantMarginBottom="Auth form"
-            title={
-              !passwordToken ? 'Password recovery' : 'Change your password'
-            }
-          />
-          <Form onSubmit={handleSubmit}>
-            <InputList>
-              <InputItem>
-                {!passwordToken ? (
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                ) : null}
-                {!passwordToken && errors.email && touched.email ? (
-                  <ErrorMessage variant="authForm">{errors.email}</ErrorMessage>
-                ) : null}
-              </InputItem>
-              <InputItem>
-                {' '}
-                {passwordToken ? (
-                  <Input
-                    name="password"
-                    type="password"
-                    placeholder="Enter your new password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                  />
-                ) : null}
-                {passwordToken && errors.password && touched.password ? (
-                  <ErrorMessage variant="authForm">
-                    {errors.password}
-                  </ErrorMessage>
-                ) : null}
-              </InputItem>
-              <InputItem>
-                {passwordToken ? (
-                  <Input
-                    name="verifyPassword"
-                    type="password"
-                    placeholder="Confirm your password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.verifyPassword}
-                  />
-                ) : null}
-                {passwordToken &&
-                errors.verifyPassword &&
-                touched.verifyPassword ? (
-                  <ErrorMessage variant="authForm">
-                    {errors.verifyPassword}
-                  </ErrorMessage>
-                ) : null}
-              </InputItem>
-            </InputList>
-
-            <PrimaryButton
-              variantMarginTop="formPopUp"
-              id="recovery-password-submit-button"
-              hasIcon={false}
-              type="submit"
-            >
-              {!passwordToken ? 'Send email' : 'Change your password'}
-            </PrimaryButton>
-          </Form>
-        </PasswordContainer> */}
       </Container>
     </Background>
   );

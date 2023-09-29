@@ -23,7 +23,7 @@ export const ErrorMessage = styled.span(props => ({
   display: 'block',
   marginTop: '10px',
   color:
-    props.variantMessage === 'authForm'
+    props.variantMessage === 'register-auth-page'
       ? BASE_COLORS.authColors.textSecondary
       : props.theme.palette.text.primary,
 }));

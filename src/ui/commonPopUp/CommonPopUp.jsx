@@ -29,11 +29,10 @@ const CommonPopUp = ({
   variantMarginBottom, // string
   authInputsTabsReset, //Буль. для сброса значений инпутов при смене таба на логине/регистрации
   variantForm, //Строка, контролирубщая кнопку закрытия модалки
-
 }) => {
   return (
     <>
-      {destination !== 'authForm' ? (
+      {destination !== 'register-auth-page' ? (
         <PopUpLayout
           title={title}
           handleClose={onClose}
