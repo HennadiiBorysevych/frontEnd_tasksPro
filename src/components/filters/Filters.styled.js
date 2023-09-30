@@ -1,18 +1,14 @@
 import styled from '@emotion/styled/macro';
 
-// import { BASE_COLORS } from 'constants';
-
-// import { SvgIcon } from 'ui';
-
-// const { generalColors } = BASE_COLORS;
+import { SvgIcon, Typography } from 'ui';
 
 export const Container = styled.div`
   position: relative;
 `;
 
-// export const FiltersIcon = styled(SvgIcon)(props => ({
-//   filter: `drop-shadow(1px 0 1px ${props.theme.palette.text.shadowColor})`,
-// }));
+export const FiltersIcon = styled(SvgIcon)(props => ({
+  filter: `drop-shadow(1px 0 1px ${props.theme.palette.text.shadowColor})`,
+}));
 
 export const FiltersTitle = styled.p(props => ({
   textShadow: `0.5px 0 3px ${props.theme.palette.text.shadowColor}`,
@@ -27,17 +23,20 @@ export const FiltersButton = styled.button(props => ({
   alignItems: 'center',
   gap: '8px',
 
-  // [FiltersIcon]: {
-  //   fill: props.isOpen ? generalColors.whiteBase : null,
-  // },
+  [FiltersIcon]: {
+    fill: props.isOpen ? props.theme.palette.accent.main : 'transparent',
+  },
 
   '&:hover': {
     [FiltersTitle]: {
       color: props.theme.palette.accent.light,
+      textShadow: 'none',
     },
-    // [FiltersIcon]: {
-    //   stroke: props.theme.palette.accent.light,
-    // },
+    [FiltersIcon]: {
+      stroke: props.theme.palette.accent.light,
+      fill: props.theme.palette.accent.main,
+      filter: 'none',
+    },
   },
 }));
 
@@ -84,10 +83,4 @@ export const FilterHeader = styled.div`
   align-items: center;
 `;
 
-export const LabelsTitle = styled.p(props => ({
-  color: props.theme.palette.text.primary,
-  fontSize: '14px',
-  fontWeight: 500,
-  lineHeight: 1.25,
-  letterSpacing: '-0.28px',
-}));
+export const LabelsTitle = styled(Typography)({});

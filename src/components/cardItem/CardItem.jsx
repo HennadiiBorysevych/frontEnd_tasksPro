@@ -50,12 +50,16 @@ const CardItem = ({ item }) => {
       ) : (
         <CardContainer priority={priority}>
           {deadlineExpired && (
-            <DeadlineMessage>Deadline expired</DeadlineMessage>
+            <DeadlineMessage variant="subText">
+              Deadline expired
+            </DeadlineMessage>
           )}
           {deadlineToday && (
-            <DeadlineMessage today={true}>Deadline is today</DeadlineMessage>
+            <DeadlineMessage today={true} variant="subText">
+              Deadline is today
+            </DeadlineMessage>
           )}
-          <Title variant="tastTitle">{title}</Title>
+          <Title variant="cardTitle">{title}</Title>
           <Description variant="taskDescription">{description}</Description>
           <Details>
             <DetailsContainer>

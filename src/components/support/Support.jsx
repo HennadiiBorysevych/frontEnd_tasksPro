@@ -6,17 +6,16 @@ import { useToggleModalAndSideBar } from 'contexts';
 import { generateContentImages } from 'helpers';
 import { useModal } from 'hooks';
 
-import { Modal, SvgIcon } from 'ui';
+import { Modal, SvgIcon, Typography } from 'ui';
 
 import SupportPopUp from '../supportPopUp/SupportPopUp';
 
 import {
   AppName,
-  SupportBox,
+  SupportButton,
   SupportOffer,
   SupportPlate,
   SupportQuestion,
-  TextHelp,
 } from './Support.styled';
 
 const Support = () => {
@@ -38,7 +37,10 @@ const Support = () => {
 
   return (
     <>
-      <SupportBox onClick={toggleWindows}>
+      <SupportButton
+        aria-label="Button for open support popup"
+        onClick={toggleWindows}
+      >
         <SupportPlate
           src={matchedPlantImage.src}
           alt="plant"
@@ -46,7 +48,7 @@ const Support = () => {
           height={78}
           onError={e => console.error('Помилка завантаження зображення:', e)}
         />
-        <SupportOffer>
+        <SupportOffer variant="supportText">
           If you need help with <AppName>TaskPro</AppName>, check out our
           support resources or reach out to our customer support team.
         </SupportOffer>
@@ -57,9 +59,9 @@ const Support = () => {
             variantIcon="support"
             isActive
           />
-          <TextHelp>Need help?</TextHelp>
+          <Typography variant="helpText">Need help?</Typography>
         </SupportQuestion>
-      </SupportBox>
+      </SupportButton>
 
       {isModal && (
         <Modal onBackdropClick={onBackdropClick} variant="support">

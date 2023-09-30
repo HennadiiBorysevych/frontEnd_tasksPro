@@ -71,7 +71,7 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
         onClick={toggleCalendarVisibility}
         aria-label="open calendar for choosing deadline date"
       >
-        <DeadlineDay>
+        <DeadlineDay variant="buttonPopUpAndDropdownText">
           {isDeadlineToday ? 'Today, ' : ''} {formatSelectedDate(selectedDate)}
         </DeadlineDay>
         <SvgIcon svgName="icon-arrow-down" variantIcon="cardItem" size="18" />

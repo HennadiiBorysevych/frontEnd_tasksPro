@@ -12,6 +12,7 @@ import BoardSettings from '../boardSettings/BoardSettings';
 
 const BoardPopUp = ({ board, onClose }) => {
   const {
+    inputs,
     icon,
     background,
     setIcon,
@@ -21,14 +22,6 @@ const BoardPopUp = ({ board, onClose }) => {
   } = useBoard(board, onClose);
 
   const { boardValues } = POP_UP_INITIAL_VALUES;
-
-  const inputs = [
-    {
-      name: 'title',
-      type: 'text',
-      placeholder: board ? board?.title : 'Title',
-    },
-  ];
 
   return (
     <CommonPopUp

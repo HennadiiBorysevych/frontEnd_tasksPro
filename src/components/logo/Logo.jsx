@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import { useAuthCollector } from 'hooks';
 
+import { Typography } from 'ui';
+
 import sprite from 'assets/images/sprite.svg';
 
-import { Board, LogoWrapper, Welcome } from './Logo.styled';
+import { LogoWrapper, ProjectIcon } from './Logo.styled';
 
 const Logo = ({ variantLogo }) => {
   const [svgName, setSvgName] = useState('icon-logo-big');
@@ -23,23 +25,15 @@ const Logo = ({ variantLogo }) => {
     }
   }, [theme, variantLogo]);
 
-  const iconSize =
-    variantLogo === 'welcome' ? (window.innerWidth >= 768 ? '48' : '40') : '32';
-
   return (
     <LogoWrapper variantLogo={variantLogo}>
-      <svg
-        width={iconSize}
-        height={iconSize}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg" //---?-------------
-      >
+      <ProjectIcon variantLogo={variantLogo}>
         <use href={sprite + `#${svgName}`} />
-      </svg>
+      </ProjectIcon>
       {variantLogo === 'welcome' ? (
-        <Welcome>Task Pro</Welcome>
+        <Typography variant="welcomeProjectTitle">Task Pro</Typography>
       ) : (
-        <Board>Task Pro</Board>
+        <Typography variant="projectTitle">Task Pro</Typography>
       )}
     </LogoWrapper>
   );

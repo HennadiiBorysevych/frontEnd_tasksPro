@@ -12,6 +12,7 @@ import CardSettings from '../cardSettings/CardSettings';
 
 const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
   const {
+    inputs,
     priority,
     deadline,
     setDeadline,
@@ -21,20 +22,6 @@ const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
   } = useCard(columnId, cardIndex, card, handleModalClose);
 
   const { cardValues } = POP_UP_INITIAL_VALUES;
-
-  const inputs = [
-    {
-      name: 'title',
-      type: 'text',
-      placeholder: card ? card?.title : 'Title',
-    },
-    {
-      name: 'description',
-      type: 'text',
-      placeholder: card ? card?.description : 'Description',
-      multiline: true,
-    },
-  ];
 
   return (
     <CommonPopUp

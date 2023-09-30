@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ButtonPlus from '../buttonPlus/ButtonPlus';
 
-import { ButtonStyled } from './PrimaryButton.styled';
+import { ButtonStyled, ButtonText } from './PrimaryButton.styled';
 
 const PrimaryButton = ({
   children,
@@ -24,7 +24,7 @@ const PrimaryButton = ({
       {...rest}
     >
       {hasIcon && <ButtonPlus svgName={svgName} variantIcon="primary" />}
-      {children}
+      <ButtonText variant="buttonText">{children}</ButtonText>
     </ButtonStyled>
   );
 };

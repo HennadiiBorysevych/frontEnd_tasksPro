@@ -7,32 +7,39 @@ import useAuthCollector from './useAuthCollector';
 const useAuth = () => {
   const { id } = useParams();
   const history = useNavigate();
-  const [value, setValue] = useState(id === 'register' ? 0 : 1);
+  const [tabPosition, setTabPosition] = useState(id === 'register' ? 0 : 1);
   const [resetInputs, setResetInputs] = useState(false);
   const { signIn, signUp } = useAuthCollector();
+  const [value, setValue] = useState('');
 
   const tabToIdx = {
     1: 'register',
     0: 'login',
   };
 
-  const handleTabChange = (_, newVal) => {
-    history(`/auth/${tabToIdx[value]}`);
-    setValue(newVal);
+  const handleTabChange = async (_, newVal) => {
+    const newTabPosition = newVal === 0 ? 0 : 1;
+    setTabPosition(newTabPosition);
+    history(`/auth/${tabToIdx[newVal]}`);
+    setValue('');
     setResetInputs(!resetInputs);
   };
 
-  const handleChange = async e => {
-    const value = e.target.value;
+  const handleChange = value => {
+    setValue(value);
   };
 
   const onHandleSubmit = async ({ name, email, password }) => {
     try {
-      if (value === 0) {
+      if (tabPosition === 0) {
         const data = await signUp({ name, email, password });
 
-        if (data.payload === 'Request failed with status code 409') {
-          toast.error('User with this email already exists');
+        if (
+          data.payload === 'Request failed with status code 409' ||
+          (name === '' &&
+            data.payload === 'Request failed with status code 400')
+        ) {
+          toast.error(`User with this email ${email} already exists`);
           return;
         }
 
@@ -56,12 +63,37 @@ const useAuth = () => {
   };
 
   const formDistributor = {
-    passText: value === 0 ? 'Create a password' : 'Confirm your password',
-    buttText: value === 0 ? 'Register Now' : 'Log in Now',
+    passText: tabPosition === 0 ? 'Create a password' : 'Confirm your password',
+    buttText: tabPosition === 0 ? 'Register Now' : 'Log in Now',
   };
 
+  const inputs = [
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'Enter your email',
+      value,
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: formDistributor.passText,
+      value,
+    },
+  ];
+
+  if (tabPosition === 0) {
+    inputs.unshift({
+      name: 'name',
+      type: 'text',
+      placeholder: 'Enter your name',
+      value,
+    });
+  }
+
   return {
-    value,
+    inputs,
+    tabPosition,
     formDistributor,
     resetInputs,
     handleChange,

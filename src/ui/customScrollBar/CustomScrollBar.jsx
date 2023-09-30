@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { useAuthCollector } from 'hooks';
 
-import 'overlayscrollbars/overlayscrollbars.css';
 import { CommonStyles } from './CustomScrollBar.styled';
 
 const CustomScrollbar = ({ width, maxHeight, children, variantScroll }) => {

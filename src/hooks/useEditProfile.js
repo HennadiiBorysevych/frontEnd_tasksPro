@@ -9,6 +9,8 @@ const useEditProfile = (currentUser, handleModalClose) => {
   const [userAvatar, setUserAvatar] = useState(currentUser?.avatarURL ?? '');
   const [avatarFile, setAvatarFile] = useState(null);
   const [isAvatarLoad, setIsAvatarLoad] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
   const { updateProfileData } = useAuthCollector();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const useEditProfile = (currentUser, handleModalClose) => {
     const toastMessage = generateToastMessage(keysToDisplay, isAvatarLoad);
 
     const response = await updateProfileData(newUser);
-    localStorage.clear();
+
     if (
       response.payload &&
       response.payload.message === 'Update success' &&
@@ -47,10 +49,19 @@ const useEditProfile = (currentUser, handleModalClose) => {
     handleModalClose();
 
     // if (formattedValues.password) {
+    // localStorage.clear();
     //   signOut();
-    //   console.log(user);
     //   navigate('/auth/login');
     // }
+  };
+
+  const handleRequiredFieldChange = e => {
+    const { name } = e.target;
+    if (name === 'email' || name === 'newPassword' || name === 'password') {
+      setShowPasswordConfirm(true);
+    } else {
+      setShowPasswordConfirm(false);
+    }
   };
 
   const handleUserAvatar = e => {
@@ -63,10 +74,38 @@ const useEditProfile = (currentUser, handleModalClose) => {
     };
   };
 
+  const inputs = [
+    {
+      name: 'name',
+      type: 'text',
+      placeholder: currentUser?.name,
+    },
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: currentUser?.email,
+    },
+    {
+      name: 'newPassword',
+      type: 'password',
+      placeholder: 'Enter new password',
+    },
+  ];
+
+  if (showPasswordConfirm) {
+    inputs.push({
+      name: 'password',
+      type: 'password',
+      placeholder: 'Enter your current password for confirmation',
+    });
+  }
+
   return {
+    inputs,
     userAvatar,
     isAvatarLoad,
     handleChangeProfile,
+    handleRequiredFieldChange,
     handleUserAvatar,
   };
 };

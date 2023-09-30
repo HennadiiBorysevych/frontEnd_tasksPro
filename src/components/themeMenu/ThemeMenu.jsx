@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAuthCollector } from 'hooks';
 
@@ -7,37 +7,38 @@ import {
   DropdownIcon,
   DropdownItem,
   DropdownMenu,
+  DropdownTitle,
   DropdownWrapper,
 } from './ThemeMenu.styled';
 
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { changeTheme } = useAuthCollector();
 
-  const { theme, changeTheme } = useAuthCollector();
-
+  const dropdownRef = useRef(null);
   const themes = ['Dark', 'Light', 'Violet'];
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeDropdown = () => {
-    setIsOpen(false);
-  };
+  const [theme, setTheme] = useState('Dark');
 
   useEffect(() => {
-    const handleWindowClick = event => {
-      if (event.target.nodeName !== 'LI') {
-        closeDropdown();
-      }
-    };
+    const StoredTheme = localStorage.getItem('theme');
+    if (StoredTheme) {
+      setTheme(StoredTheme);
+    }
+  }, []);
 
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') {
-        closeDropdown();
-      }
-    };
+  const handleWindowClick = useCallback(event => {
+    if (!dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  }, []);
 
+  const handleKeyDown = useCallback(event => {
+    if (event.key === 'Escape') {
+      setIsOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('mousedown', handleWindowClick);
     window.addEventListener('keydown', handleKeyDown);
 
@@ -45,28 +46,35 @@ const ThemeMenu = () => {
       window.removeEventListener('mousedown', handleWindowClick);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [handleKeyDown, handleWindowClick, isOpen]);
 
   const handleThemeChange = async newTheme => {
     setIsOpen(false);
+    setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     try {
       await changeTheme(newTheme);
-      closeDropdown();
+      setIsOpen(false);
     } catch (error) {
       console.error('Error updating theme:', error);
     }
   };
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <DropdownWrapper>
+    <DropdownWrapper ref={dropdownRef}>
       <DropdownButton
         onClick={toggleDropdown}
         type="button"
         id="switcher-theme-button"
         isOpen={isOpen}
       >
-        Theme
+        <DropdownTitle variant="buttonPopUpAndDropdownText">
+          Theme
+        </DropdownTitle>
         <DropdownIcon
           svgName="icon-arrow-down"
           size="16"
@@ -77,18 +85,29 @@ const ThemeMenu = () => {
       {isOpen && (
         <DropdownMenu>
           {themes.map(newTheme => (
-            <DropdownItem
+            <MemoisedDropdownItem
               key={newTheme}
               onClick={() => handleThemeChange(newTheme)}
+              variant="themeMenuText"
               className={newTheme === theme ? 'selected' : ''}
             >
               {newTheme}
-            </DropdownItem>
+            </MemoisedDropdownItem>
           ))}
         </DropdownMenu>
       )}
     </DropdownWrapper>
   );
 };
+
+const MemoisedDropdownItem = React.memo(
+  DropdownItem,
+  (prevProps, nextProps) => {
+    return (
+      prevProps.newTheme === nextProps.newTheme &&
+      prevProps.theme === nextProps.theme
+    );
+  }
+);
 
 export default ThemeMenu;

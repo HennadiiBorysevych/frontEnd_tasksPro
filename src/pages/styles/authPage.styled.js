@@ -70,8 +70,6 @@ export const AuthContainer = styled.div(
 export const Password = styled(NavLink)(
   {
     display: 'block',
-    fontSize: '12px',
-    color: BASE_COLORS.authColors.textSecondary,
   },
   props => ({
     [props.theme.breakpoints.down('medium')]: {
@@ -81,7 +79,6 @@ export const Password = styled(NavLink)(
     [props.theme.breakpoints.up('medium')]: {
       position: 'absolute',
       top: '41px',
-      fontSize: '14px',
       right: '40px',
     },
   })

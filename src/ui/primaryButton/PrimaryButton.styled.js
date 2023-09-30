@@ -1,4 +1,6 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
+
+import Typography from '../typography/Typography';
 
 const buttonStyles = {
   display: 'flex',
@@ -9,11 +11,6 @@ const buttonStyles = {
   border: 'none',
   borderRadius: '8px',
   cursor: 'pointer',
-
-  fontSize: '14px',
-  fontWeight: 500,
-  letterSpacing: '-0.28px',
-  textAlign: 'center',
 };
 
 const getMarginTop = variantMarginTop => {
@@ -31,7 +28,7 @@ export const ButtonStyled = styled.button(
   ({ theme, width, variantMarginTop }) => ({
     ...buttonStyles,
     backgroundColor: theme.palette.accent.main,
-    color: theme.palette.text.primaryButton,
+
     marginTop: getMarginTop(variantMarginTop),
     width: width === 'board' ? '335px' : '100%',
 
@@ -40,3 +37,7 @@ export const ButtonStyled = styled.button(
     },
   })
 );
+
+export const ButtonText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primaryButton,
+}));

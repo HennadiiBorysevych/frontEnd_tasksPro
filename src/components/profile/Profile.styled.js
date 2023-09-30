@@ -4,15 +4,15 @@ import { Typography } from 'ui';
 
 export const UserName = styled(Typography)``;
 
-export const UserAvatarWrapper = styled.div`
+export const UserAvatarWrapper = styled.span`
+  display: 'block';
   border-radius: 8px;
 `;
 
-export const ClickWrap = styled.div(props => ({
+export const ProfileWrap = styled.button(props => ({
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
-  cursor: 'pointer',
 
   '&:hover': {
     [UserName]: {
