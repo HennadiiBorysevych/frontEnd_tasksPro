@@ -19,7 +19,9 @@ const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
   return (
     <SettingsList>
       <SettingsItem>
-        <SettingTitle>Label color</SettingTitle>
+        <SettingTitle variant="supplementaryPopUpText">
+          Label color
+        </SettingTitle>
         <Priority
           priority={priority}
           setPriority={changeValue}
@@ -33,7 +35,7 @@ const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
         />
       </SettingsItem>
       <SettingsItem>
-        <SettingTitle>Deadline</SettingTitle>
+        <SettingTitle variant="supplementaryPopUpText">Deadline</SettingTitle>
         <Calend selectedDate={deadline} setSelectedDate={setDeadline} />
       </SettingsItem>
     </SettingsList>

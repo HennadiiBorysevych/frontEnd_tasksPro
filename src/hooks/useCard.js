@@ -22,18 +22,26 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [card, setCard] = useState(initialCard);
 
   const handleCardSubmit = () => {
-    const { id, createdAt, order, updatedAt, ...rest } = card;
+    const hasChanges =
+      title !== currentCard?.title ||
+      description !== currentCard?.description ||
+      priority !== currentCard?.priority ||
+      deadline !== currentCard?.deadline;
 
-    if (currentCard) {
-      updateExistingCard({
-        taskId: id,
-        updatedData: { orderTask: order, ...rest },
-      });
-    } else {
-      addNewCard(rest);
+    if (hasChanges) {
+      const { id, createdAt, order, updatedAt, ...rest } = card;
+
+      if (currentCard) {
+        updateExistingCard({
+          taskId: id,
+          updatedData: { orderTask: order, ...rest },
+        });
+      } else {
+        addNewCard(rest);
+      }
+
+      closeModal();
     }
-
-    closeModal();
   };
 
   const handleInput = useCallback(e => {
@@ -64,7 +72,22 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
     return { ...rest, orderTask: order };
   }
 
+  const inputs = [
+    {
+      name: 'title',
+      type: 'text',
+      placeholder: currentCard ? currentCard?.title : 'Title',
+    },
+    {
+      name: 'description',
+      type: 'text',
+      placeholder: currentCard ? currentCard?.description : 'Description',
+      multiline: true,
+    },
+  ];
+
   return {
+    inputs,
     priority,
     deadline,
     setDeadline,

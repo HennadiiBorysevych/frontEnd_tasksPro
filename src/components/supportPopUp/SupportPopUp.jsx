@@ -4,29 +4,14 @@ import PropTypes from 'prop-types';
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
 import { supportSchema } from 'helpers';
-import { useAuthCollector, useSupport } from 'hooks';
+import { useSupport } from 'hooks';
 
 import { CommonPopUp } from 'ui';
 
 const SupportPopUp = ({ onClose }) => {
-  const { user } = useAuthCollector();
-  const { handleInput, handleSupportSubmit } = useSupport(onClose);
+  const { inputs, handleInput, handleSupportSubmit } = useSupport(onClose);
 
   const { supportValues } = POP_UP_INITIAL_VALUES;
-
-  const inputs = [
-    {
-      name: 'email',
-      type: 'email',
-      placeholder: user ? user?.email : 'Email address',
-    },
-    {
-      name: 'comment',
-      type: 'text',
-      placeholder: 'Your comment',
-      multiline: true,
-    },
-  ];
 
   return (
     <CommonPopUp

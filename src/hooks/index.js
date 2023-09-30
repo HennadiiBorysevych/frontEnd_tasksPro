@@ -9,4 +9,5 @@ export { default as useColumn } from './useColumn';
 export { default as useColumnsCollector } from './useColumnsCollector';
 export { default as useEditProfile } from './useEditProfile';
 export { default as useModal } from './useModal';
+export { default as usePassword } from './usePassword';
 export { default as useSupport } from './useSupport';

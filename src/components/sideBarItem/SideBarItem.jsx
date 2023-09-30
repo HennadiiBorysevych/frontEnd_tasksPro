@@ -48,7 +48,9 @@ const SideBarItem = ({
             isActive={active}
             variantIcon="support"
           />
-          <BoardName isActive={active}>{title}</BoardName>
+          <BoardName variant="buttonPopUpAndDropdownText" isActive={active}>
+            {title}
+          </BoardName>
         </BoardIdentificationItem>
         {active && (
           <ControlIcons

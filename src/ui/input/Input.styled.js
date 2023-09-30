@@ -1,6 +1,6 @@
-import SvgIcon from '../svgIcon/SvgIcon';
+import styled from '@emotion/styled/macro';
 
-import styled from '@emotion/styled';
+import SvgIcon from '../svgIcon/SvgIcon';
 
 export const CommonInputStyles = `
 position: relative;

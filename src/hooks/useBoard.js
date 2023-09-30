@@ -42,22 +42,29 @@ const useBoard = (currentBoard, closeModal) => {
   }, [currentBoard]);
 
   const handleBoardSubmit = async () => {
-    const { id, user, ...rest } = board;
-    await setActiveBoard(id);
+    const hasChanges =
+      title !== currentBoard?.title ||
+      icon !== currentBoard?.icon ||
+      background !== currentBoard?.background;
 
-    if (currentBoard) {
-      updateExistingBoard({
-        boardId: id,
-        updatedData: { ...rest, title: title },
-      });
-      if (title) {
-        encodeTitleBoardInUrl(title);
+    if (hasChanges) {
+      const { id, user, ...rest } = board;
+      await setActiveBoard(id);
+
+      if (currentBoard) {
+        updateExistingBoard({
+          boardId: id,
+          updatedData: { ...rest, title: title },
+        });
+        if (title) {
+          encodeTitleBoardInUrl(title);
+        }
+      } else {
+        addNewBoard(rest);
       }
-    } else {
-      addNewBoard(rest);
-    }
-    if (typeof closeModal === 'function') {
-      closeModal();
+      if (typeof closeModal === 'function') {
+        closeModal();
+      }
     }
   };
 
@@ -118,9 +125,18 @@ const useBoard = (currentBoard, closeModal) => {
     }
   };
 
+  const inputs = [
+    {
+      name: 'title',
+      type: 'text',
+      placeholder: currentBoard ? currentBoard?.title : 'Title',
+    },
+  ];
+
   const decodedTitle = decodeURIComponent(currentBoard?.id);
 
   return {
+    inputs,
     title,
     icon,
     background,

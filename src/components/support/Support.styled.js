@@ -1,6 +1,8 @@
+import { Typography } from 'ui';
+
 import styled from '@emotion/styled';
 
-export const SupportBox = styled.button(
+export const SupportButton = styled.button(
   {
     padding: '14px',
     display: 'block',
@@ -29,22 +31,10 @@ export const SupportPlate = styled.img`
   margin-bottom: 14px;
 `;
 
-export const SupportOffer = styled.span(
-  {
-    display: 'block',
-    marginBottom: '18px',
-    fontSize: '12px',
-    fontWeight: '400',
-    lineHeight: '16px',
-    letterSpacing: '-0.24px',
-  },
-  props => ({
-    [props.theme.breakpoints.up('medium')]: {
-      fontSize: '14px',
-      lineHeight: '1.43',
-    },
-  })
-);
+export const SupportOffer = styled(Typography)({
+  display: 'block',
+  marginBottom: '18px',
+});
 
 export const AppName = styled.span(props => ({
   color: props.theme.palette.accent.main,
@@ -54,11 +44,4 @@ export const SupportQuestion = styled.span`
   display: flex;
   align-items: center;
   gap: 8px;
-`;
-
-export const TextHelp = styled.p`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.24px;
 `;

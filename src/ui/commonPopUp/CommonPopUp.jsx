@@ -23,43 +23,18 @@ const CommonPopUp = ({
   customInputProps, // кастомний проп, якщо потрібно додати функцію-обробник, опціонально
   settings, // булеве значення для вставки BoardSettings та CardSettings
   google, // булеве значення для вставки кнопки GoogleAuth
-  destination, // призначення форми - або authForm - форма автентифікації, або інші popup
   variantMessage, // рядок "authForm" для стилів повідомлень про помилку при валідації форм
-
   variantMarginBottom, // string
-  authInputsTabsReset, //Буль. для сброса значений инпутов при смене таба на логине/регистрации
   variantForm, //Строка, контролирубщая кнопку закрытия модалки
-
 }) => {
   return (
     <>
-      {destination !== 'authForm' ? (
-        <PopUpLayout
-          title={title}
-          handleClose={onClose}
-          variantForm={variantForm}
-          variantMarginBottom={variantMarginBottom}
-        >
-          <CommonForm
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}
-            avatar={avatar}
-            inputs={inputs}
-            onChange={onChange}
-            customInputProps={customInputProps}
-            settings={settings}
-            id={id}
-            variantIcon={variantIcon}
-            hasIcon={hasIcon}
-            variantMarginTop={variantMarginTop}
-            buttonText={buttonText}
-            google={google}
-            children={children}
-            variantMessage={variantMessage}
-          />
-        </PopUpLayout>
-      ) : (
+      <PopUpLayout
+        title={title}
+        handleClose={onClose}
+        variantForm={variantForm}
+        variantMarginBottom={variantMarginBottom}
+      >
         <CommonForm
           initialValues={initialValues}
           onSubmit={onSubmit}
@@ -71,14 +46,14 @@ const CommonPopUp = ({
           settings={settings}
           id={id}
           variantIcon={variantIcon}
+          hasIcon={hasIcon}
           variantMarginTop={variantMarginTop}
           buttonText={buttonText}
           google={google}
           children={children}
           variantMessage={variantMessage}
-          authInputsTabsReset={authInputsTabsReset}
         />
-      )}
+      </PopUpLayout>
     </>
   );
 };
@@ -107,10 +82,8 @@ CommonPopUp.propTypes = {
   avatar: PropTypes.bool,
   settings: PropTypes.bool,
   google: PropTypes.bool,
-  destination: PropTypes.string,
   variantMessage: PropTypes.string,
   variantMarginBottom: PropTypes.string,
-  authInputsTabsReset: PropTypes.bool,
 };
 
 export default CommonPopUp;

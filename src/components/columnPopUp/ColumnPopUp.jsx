@@ -9,7 +9,7 @@ import { useColumn } from 'hooks';
 import { CommonPopUp } from 'ui';
 
 const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
-  const { handleColumnSubmit, handleTitle } = useColumn(
+  const { inputs, handleColumnSubmit, handleTitle } = useColumn(
     column,
     columnIndex,
     boardId,
@@ -17,14 +17,6 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
   );
 
   const { columnValues } = POP_UP_INITIAL_VALUES;
-
-  const inputs = [
-    {
-      name: 'title',
-      type: 'text',
-      placeholder: column ? column?.title : 'Title',
-    },
-  ];
 
   return (
     <CommonPopUp

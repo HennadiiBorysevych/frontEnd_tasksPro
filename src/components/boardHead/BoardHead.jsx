@@ -9,6 +9,7 @@ import { FieldInput, Header } from './boardHead.styled';
 const BoardHead = () => {
   const { activeBoard, activeBoardId, allBoards } = useBoardsCollector();
   const editingBoard = allBoards.find(board => board.id === activeBoardId);
+
   const { title, decodedTitle, handleTitle, handleBoardSubmit } =
     useBoard(editingBoard);
 

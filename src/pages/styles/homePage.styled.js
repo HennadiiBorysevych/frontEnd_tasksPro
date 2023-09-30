@@ -47,15 +47,6 @@ export const DefaultWrapper = styled.div(({ theme }) => ({
   },
 }));
 
-export const WelcomeText = styled.p(({ theme }) => ({
-  fontSize: '12px',
-  fontWeight: 400,
-  lineHeight: '1.3',
-  letterSpacing: '-0.24px',
-  color: theme.palette.text.secondary,
-  textAlign: 'center',
-}));
-
 export const CreateBoardLink = styled.a(({ theme }) => ({
   textDecoration: 'none',
   cursor: 'pointer',

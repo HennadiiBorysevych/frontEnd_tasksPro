@@ -5,7 +5,6 @@ export { default as CustomScrollBar } from './customScrollBar/CustomScrollBar';
 export { default as Input } from './input/Input';
 export { default as Modal } from './modal/Modal';
 export { default as PopUpLayout } from './popUpLayout/PopUpLayout';
-export { default as PopUpTitle } from './popUpTitle/PopUpTitle';
 export { default as PrimaryButton } from './primaryButton/PrimaryButton';
 export { default as Priority } from './priority/Priority';
 export { default as ReactConfirmAlert } from './reactConfirmAlert/ReactConfirmAlert';

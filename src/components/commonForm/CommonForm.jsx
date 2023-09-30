@@ -7,7 +7,6 @@ import { Input, PrimaryButton } from 'ui';
 import GoogleAuth from '../googleAuth/GoogleAuth';
 
 import { ErrorMessage, Form, InputItem, InputList } from './commonForm.styled';
-import { useAuth } from 'hooks';
 
 const CommonForm = ({
   initialValues,
@@ -28,12 +27,6 @@ const CommonForm = ({
   google,
   authInputsTabsReset,
 }) => {
-  // const { resetInputs } = useAuth();
-
-  useEffect(() => {
-    breakFormikInputs();
-  }, [authInputsTabsReset]);
-
   const {
     setValues,
     handleChange,
@@ -51,13 +44,25 @@ const CommonForm = ({
     validationSchema,
   });
 
-  async function breakFormikInputs() {
-    await setValues({
-      name: initialValues.name,
-      email: initialValues.email,
-      password: initialValues.password,
-    });
-  }
+  useEffect(() => {
+    async function breakFormikInputs() {
+      await setValues({
+        name: initialValues.name,
+        email: initialValues.email,
+        password: initialValues.password,
+      });
+    }
+    if (id === 'register-or-login-button') {
+      breakFormikInputs();
+    }
+  }, [
+    authInputsTabsReset,
+    id,
+    initialValues.email,
+    initialValues.name,
+    initialValues.password,
+    setValues,
+  ]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -81,7 +86,10 @@ const CommonForm = ({
             />
 
             {errors[inputProps?.name] && touched[inputProps?.name] ? (
-              <ErrorMessage variantMessage={variantMessage}>
+              <ErrorMessage
+                variantMessage={variantMessage}
+                variant="supplementaryPopUpText"
+              >
                 {errors[inputProps?.name]}
               </ErrorMessage>
             ) : null}

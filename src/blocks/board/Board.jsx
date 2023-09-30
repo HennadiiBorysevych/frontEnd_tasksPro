@@ -6,7 +6,7 @@ import { processDndResult } from 'helpers';
 import { useBoardsCollector, useColumnsCollector, useModal } from 'hooks';
 
 import { BoardHead, CardColumn, ColumnPopUp, SkeletonLoader } from 'components';
-import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
+import { ButtonPlus, CustomScrollBar, Modal, Typography } from 'ui';
 
 import {
   ButtonAddColumn,
@@ -78,7 +78,9 @@ const Board = () => {
                   id="add-column-button"
                 >
                   <ButtonPlus variantIcon="addColumn" />
-                  Add another column
+                  <Typography variant="buttonText">
+                    Add another column
+                  </Typography>
                 </ButtonAddColumn>
               </div>
             </>

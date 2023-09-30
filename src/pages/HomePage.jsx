@@ -13,13 +13,12 @@ import {
 } from 'hooks';
 
 import { BoardPopUp, SkeletonLoader } from 'components';
-import { Modal } from 'ui';
+import { Modal, Typography } from 'ui';
 
 import {
   BoardWrap,
   CreateBoardLink,
   DefaultWrapper,
-  WelcomeText,
 } from './styles/homePage.styled';
 
 const HomePage = () => {
@@ -64,7 +63,7 @@ const HomePage = () => {
 
   return (
     <SharedLayout>
-      <BoardWrap bg={backgroundImage}>
+      <BoardWrap bg={!!backgroundImage && backgroundImage}>
         {activeBoardId ? (
           <Outlet />
         ) : (
@@ -72,7 +71,7 @@ const HomePage = () => {
             {boardLoading ? (
               <SkeletonLoader page="/board" />
             ) : (
-              <WelcomeText>
+              <Typography variant="welcomeText">
                 Before starting your project, it is essential to{' '}
                 <CreateBoardLink
                   href="#"
@@ -84,7 +83,7 @@ const HomePage = () => {
                 to visualize and track all the necessary tasks and milestones.
                 This board serves as a powerful tool to organize the workflow
                 and ensure effective collaboration among team members.
-              </WelcomeText>
+              </Typography>
             )}
           </DefaultWrapper>
         )}

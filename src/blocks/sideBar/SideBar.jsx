@@ -39,7 +39,7 @@ const SideBar = () => {
           <SideBarContainer>
             <div>
               <Logo variantLogo="board" />
-              <TitleBoardList variant="taskDescription">
+              <TitleBoardList variant="supplementaryPopUpText">
                 My boards
               </TitleBoardList>
               <CreateBoard
@@ -50,7 +50,7 @@ const SideBar = () => {
                   toggleModalAndSideBar();
                 }}
               >
-                <TitleButton>
+                <TitleButton variant="buttonPopUpAndDropdownText">
                   Create a <br />
                   new board
                 </TitleButton>

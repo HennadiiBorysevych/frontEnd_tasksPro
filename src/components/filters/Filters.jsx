@@ -4,14 +4,14 @@ import { selectUserFilter, setUserFilter } from 'redux/userFilterSlice';
 
 import { useBoardsCollector } from 'hooks';
 
-import { PopUpLayout, Priority, SvgIcon } from 'ui';
+import { PopUpLayout, Priority } from 'ui';
 
 import {
   Container,
   FilterContainer,
   FilterHeader,
   FiltersButton,
-  // FiltersIcon,
+  FiltersIcon,
   FiltersTitle,
   FilterWrapper,
   LabelsTitle,
@@ -70,8 +70,14 @@ const Filters = () => {
         aria-label="Open filters popup"
         isOpen={isOpen}
       >
-        <SvgIcon svgName="icon-filter" variantIcon="header" isActive="true" />
-        <FiltersTitle variant="columnTitle">Filters</FiltersTitle>
+        <FiltersIcon
+          svgName="icon-filter"
+          variantIcon="header"
+          isActive="true"
+        />
+        <FiltersTitle variant="buttonPopUpAndDropdownText">
+          Filters
+        </FiltersTitle>
       </FiltersButton>
       {isOpen && (
         <FilterContainer ref={filterContainerRef}>
@@ -79,7 +85,9 @@ const Filters = () => {
             <FilterWrapper>
               <Line>
                 <FilterHeader>
-                  <LabelsTitle>Label color</LabelsTitle>
+                  <LabelsTitle variant="buttonPopUpAndDropdownText">
+                    Label color
+                  </LabelsTitle>
                 </FilterHeader>
               </Line>
               <div>

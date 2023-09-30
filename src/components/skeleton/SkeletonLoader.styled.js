@@ -23,11 +23,18 @@ export const BackgroundLogin = styled.section`
   min-height: 100vh;
 `;
 
-export const BackgroundHome = styled.section`
-  height: 60px;
-  width: 100%;
-`;
-
+export const BackgroundHome = styled.section(
+  {
+    height: 60,
+    width: '100%',
+  },
+  ({ variantLoader }) => ({
+    position: variantLoader === 'board' && 'absolute',
+    left: variantLoader === 'board' && 275,
+    top: variantLoader === 'board' && 70,
+    maxWidth: variantLoader === 'board' && '77%',
+  })
+);
 export const Tabs = styled.div`
   display: flex;
   gap: 14px;
@@ -76,6 +83,11 @@ export const Logo = styled.div(
   })
 );
 
+export const UserSettings = styled.div({
+  display: 'flex',
+  gap: '10px',
+});
+
 export const Theme = styled.div(
   {
     width: '65px',
@@ -118,6 +130,11 @@ export const BoardBody = styled.div(
   })
 );
 
+export const BoardHead = styled.div({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+
 export const ProjectName = styled.div(
   {
     width: '80%',
@@ -156,11 +173,25 @@ export const Button = styled.div(
   })
 );
 
+export const Column = styled.div({
+  display: 'flex',
+  gap: '30px',
+  marginTop: 6,
+  justifyContent: 'space-between',
+});
+
 export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
 `;
+
+export const ColumnWrapper = styled.div({
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  width: '100%',
+});
 
 export const ColumnsList = styled.div(
   {
@@ -173,3 +204,16 @@ export const ColumnsList = styled.div(
     backgroundColor: props.baseColor,
   })
 );
+
+export const CardColumn = styled.div({
+  display: 'flex',
+  gap: '10px',
+  width: '335px',
+  justifyContent: 'space-between',
+});
+
+export const CardList = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+});

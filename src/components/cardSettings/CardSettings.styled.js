@@ -1,3 +1,5 @@
+import { Typography } from 'ui';
+
 import styled from '@emotion/styled';
 
 export const SettingsList = styled.ul`
@@ -11,9 +13,7 @@ export const SettingsItem = styled.li`
   }
 `;
 
-export const SettingTitle = styled.p(props => ({
+export const SettingTitle = styled(Typography)(props => ({
   color: props.theme.palette.text.primaryMedium,
-  fontSize: '12px',
-  letterSpacing: '-0.24px',
   marginBottom: '4px',
 }));

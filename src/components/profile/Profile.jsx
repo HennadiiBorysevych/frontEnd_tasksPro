@@ -7,7 +7,7 @@ import { Modal } from 'ui';
 import ProfilePopUp from '../profilePopUp/ProfilePopUp';
 import UserAvatar from '../userAvatar/UserAvatar';
 
-import { ClickWrap, UserAvatarWrapper, UserName } from './Profile.styled';
+import { ProfileWrap, UserAvatarWrapper, UserName } from './Profile.styled';
 
 const Profile = () => {
   const { user } = useAuthCollector();
@@ -15,12 +15,17 @@ const Profile = () => {
 
   return (
     <div>
-      <ClickWrap onClick={toggleModal}>
-        <UserName variant="columnTitle">{user?.name ?? 'No User'}</UserName>
+      <ProfileWrap
+        aria-label="Open modal for editing user profile"
+        onClick={toggleModal}
+      >
+        <UserName variant="buttonPopUpAndDropdownText">
+          {user?.name ?? 'No User'}
+        </UserName>
         <UserAvatarWrapper>
           <UserAvatar avatar={user?.avatarURL} profile="true" />
         </UserAvatarWrapper>
-      </ClickWrap>
+      </ProfileWrap>
       {isModal ? (
         <Modal onBackdropClick={onBackdropClick}>
           <ProfilePopUp user={user} handleModalClose={toggleModal} />

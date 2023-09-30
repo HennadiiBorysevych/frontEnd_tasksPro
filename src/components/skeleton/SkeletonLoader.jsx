@@ -12,8 +12,13 @@ import {
   BackgroundHome,
   BackgroundLogin,
   BoardBody,
+  BoardHead,
   Button,
+  CardColumn,
+  CardList,
+  Column,
   ColumnsList,
+  ColumnWrapper,
   Header,
   ListWrapper,
   Logo,
@@ -23,6 +28,7 @@ import {
   Theme,
   UserName,
   UserPic,
+  UserSettings,
 } from './SkeletonLoader.styled';
 
 const SkeletonLoader = ({ page }) => {
@@ -93,7 +99,7 @@ const SkeletonLoader = ({ page }) => {
           >
             <BackgroundLogin>
               <Tabs>
-                <Skeleton width={100} height={23} style={{}} />
+                <Skeleton width={100} height={23} />
                 <Skeleton width={70} height={23} />
               </Tabs>
               <Skeleton width={345} height={50} style={{ marginBottom: 14 }} />
@@ -152,7 +158,7 @@ const SkeletonLoader = ({ page }) => {
                 <Logo>
                   <Skeleton />
                 </Logo>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <UserSettings>
                   <Theme>
                     <Skeleton />
                   </Theme>
@@ -162,7 +168,7 @@ const SkeletonLoader = ({ page }) => {
                   <UserPic>
                     <Skeleton />
                   </UserPic>
-                </div>
+                </UserSettings>
               </Header>
               <BoardBody
                 baseColor={
@@ -171,33 +177,24 @@ const SkeletonLoader = ({ page }) => {
                     : highlightColor
                 }
               >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
+                <BoardHead>
                   <ProjectName>
                     <Skeleton style={{ marginLeft: 60 }} />
                   </ProjectName>
-                </div>
+                </BoardHead>
                 <Button>
                   <Skeleton
                     height={50}
                     style={{ marginLeft: 60, marginBottom: 20 }}
                   />
                 </Button>
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '30px',
-                    marginTop: 7,
-                    justifyContent: 'space-between',
-                  }}
-                >
+                <Column>
                   {[...Array(skeletonColumns)].map((_, index) => (
                     <ListWrapper key={index}>
                       {generateSkeletonList(3)}
                     </ListWrapper>
                   ))}
-                </div>
+                </Column>
               </BoardBody>
             </BackgroundHome>
           </SkeletonTheme>
@@ -206,14 +203,7 @@ const SkeletonLoader = ({ page }) => {
       {page === '/board' && (
         <>
           <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-            <BackgroundHome
-              style={{
-                position: 'absolute',
-                left: 275,
-                top: 70,
-                maxWidth: '77%',
-              }}
-            >
+            <BackgroundHome variantLoader="board">
               <BoardBody
                 baseColor={
                   theme === 'Violet'
@@ -221,27 +211,18 @@ const SkeletonLoader = ({ page }) => {
                     : highlightColor
                 }
               >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
+                <BoardHead>
                   <ProjectName>
                     <Skeleton style={{ marginLeft: 60 }} />
                   </ProjectName>
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '30px',
-                    marginTop: 6,
-                    justifyContent: 'space-between',
-                  }}
-                >
+                </BoardHead>
+                <Column>
                   {[...Array(skeletonColumns)].map((_, index) => (
                     <ListWrapper key={index}>
                       {generateSkeletonList(3)}
                     </ListWrapper>
                   ))}
-                </div>
+                </Column>
               </BoardBody>
             </BackgroundHome>
           </SkeletonTheme>
@@ -254,14 +235,7 @@ const SkeletonLoader = ({ page }) => {
             highlightColor={highlightColor}
             width="100%"
           >
-            <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                width: '100%',
-              }}
-            >
+            <ColumnWrapper>
               <ColumnsList
                 baseColor={
                   theme === 'Violet'
@@ -269,29 +243,20 @@ const SkeletonLoader = ({ page }) => {
                     : highlightColor
                 }
               >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
+                <BoardHead>
                   <ProjectName>
                     <Skeleton style={{ marginLeft: 60 }} />
                   </ProjectName>
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '30px',
-                    marginTop: 6,
-                    justifyContent: 'space-between',
-                  }}
-                >
+                </BoardHead>
+                <Column>
                   {[...Array(skeletonColumns)].map((_, index) => (
                     <ListWrapper key={index}>
                       {generateSkeletonList(3)}
                     </ListWrapper>
                   ))}
-                </div>
+                </Column>
               </ColumnsList>
-            </div>
+            </ColumnWrapper>
           </SkeletonTheme>
         </>
       )}
@@ -302,14 +267,7 @@ const SkeletonLoader = ({ page }) => {
             highlightColor={highlightColor}
             width="100%"
           >
-            <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                width: '100%',
-              }}
-            >
+            <ColumnWrapper>
               <ColumnsList
                 baseColor={
                   theme === 'Violet'
@@ -317,27 +275,14 @@ const SkeletonLoader = ({ page }) => {
                     : highlightColor
                 }
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '10px',
-                    width: '335px',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                    }}
-                  >
+                <CardColumn>
+                  <CardList>
                     {generateSkeletonList(1)}
                     <Skeleton style={{ height: '56px' }} />
-                  </div>
-                </div>
+                  </CardList>
+                </CardColumn>
               </ColumnsList>
-            </div>
+            </ColumnWrapper>
           </SkeletonTheme>
         </>
       )}
