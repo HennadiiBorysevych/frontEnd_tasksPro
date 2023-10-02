@@ -1,5 +1,7 @@
 import { BASE_COLORS } from 'constants';
 
+import { Typography } from 'ui';
+
 import styled from '@emotion/styled';
 
 export const Form = styled.form`
@@ -19,7 +21,7 @@ export const InputItem = styled.li`
   }
 `;
 
-export const ErrorMessage = styled.span(props => ({
+export const ErrorMessage = styled(Typography)(props => ({
   display: 'block',
   marginTop: '10px',
   color:

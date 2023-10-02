@@ -37,16 +37,18 @@ export const RegisterLink = styled(NavLink)(({ register, theme }) => ({
   display: 'block',
   backgroundColor: register && BASE_COLORS.authColors.buttonBackground,
   borderRadius: '8px',
-  color: register
-    ? BASE_COLORS.authColors.textSecondary
-    : BASE_COLORS.authColors.textPrimary,
+
   marginBottom: register ? '14px' : 0,
-  fontWeight: 500,
-  fontSize: '14px',
 
   [theme.breakpoints.up('medium')]: {
     width: '344px',
     marginLeft: 'auto',
     marginRight: 'auto',
   },
+}));
+
+export const LinkText = styled(Typography)(({ register }) => ({
+  color: register
+    ? BASE_COLORS.authColors.textSecondary
+    : BASE_COLORS.authColors.textPrimary,
 }));

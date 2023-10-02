@@ -18,19 +18,19 @@ export const Header = styled.div(props => ({
   },
 }));
 
-export const FieldInput = styled(TextField)(
-  {
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#B2BAC2',
+export const FieldInput = styled(TextField)(({ theme }) => ({
+  '& .MuiInput-input': {
+    cursor: 'pointer',
+    textShadow: `0.5px 0 3px ${theme.palette.text.shadowColor}`,
+    '&:hover': {
+      textShadow: 'none',
+      color: theme.palette.accent.light,
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#E0E3E7',
-      },
-    },
-  }
-  // props => ({
-  //   textShadow: `0.5px 0 3px ${props.theme.palette.text.shadowColor}`,
-  //   cursor: 'pointer',
-  // })
-);
+  },
+  '& .MuiInput-underline:after': {
+    display: 'none',
+  },
+  '& .MuiInput-underline:before': {
+    display: 'none',
+  },
+}));

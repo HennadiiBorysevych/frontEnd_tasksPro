@@ -1,4 +1,4 @@
-export { default as AuthForm } from './authForm/AuthForm';
+// export { default as AuthForm } from './authForm/AuthForm';
 export { default as BoardHead } from './boardHead/BoardHead';
 export { default as BoardPopUp } from './boardPopUp/BoardPopUp';
 export { default as BoardSettings } from './boardSettings/BoardSettings';

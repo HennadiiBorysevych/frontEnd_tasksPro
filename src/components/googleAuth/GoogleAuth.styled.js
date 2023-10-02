@@ -1,5 +1,7 @@
 import { BASE_COLORS } from 'constants';
 
+import { Typography } from 'ui';
+
 import styled from '@emotion/styled';
 
 export const GoogleLink = styled.a(
@@ -12,10 +14,7 @@ export const GoogleLink = styled.a(
     width: '100%',
     backgroundColor: BASE_COLORS.authColors.buttonBackgroundSecondary,
     borderRadius: '8px',
-    color: BASE_COLORS.authColors.textPrimary,
     marginTop: '20px',
-    fontSize: '14px',
-    fontWeight: '500',
   },
   props => ({
     [props.theme.breakpoints.up('medium')]: {
@@ -25,3 +24,7 @@ export const GoogleLink = styled.a(
     },
   })
 );
+
+export const ButtonText = styled(Typography)({
+  color: BASE_COLORS.authColors.textPrimary,
+});

@@ -1,13 +1,14 @@
 import React from 'react';
 
-// import { POP_UP_INITIAL_VALUES } from 'constants';
+import { POP_UP_INITIAL_VALUES } from 'constants';
+
 import { useToggleModalAndSideBar } from 'contexts';
-// import { authSchema } from 'helpers';
+import { authSchema } from 'helpers';
 import { useAuth } from 'hooks';
 
-import { AuthForm } from 'components';
+import { CommonForm } from 'components';
+import { Typography } from 'ui';
 
-// import { CommonPopUp } from 'ui';
 import {
   AuthContainer,
   Password,
@@ -16,55 +17,41 @@ import {
 } from './styles/authPage.styled';
 import { Background, Container } from './styles/commonStyles.styled';
 
-// const { authValues } = POP_UP_INITIAL_VALUES;
+const { authValues } = POP_UP_INITIAL_VALUES;
 
 const AuthPage = () => {
   const { windowHeight } = useToggleModalAndSideBar();
+
   const {
-    value,
+    inputs,
+    tabPosition,
+    resetInputs,
     formDistributor,
-    resetForm,
-    // handleChange,
+    handleChange,
     handleTabChange,
-    // onHandleSubmit,
+    onHandleSubmit,
   } = useAuth();
-
-  const inputs = [
-    {
-      name: 'email',
-      type: 'email',
-      placeholder: 'Enter your email',
-    },
-    {
-      name: 'password',
-      type: 'password',
-      placeholder: formDistributor.passText,
-    },
-  ];
-
-  if (value === 0) {
-    inputs.unshift({
-      name: 'name',
-      type: 'text',
-      placeholder: 'Enter your name',
-    });
-  }
 
   return (
     <Background>
       <Container windowHeight={windowHeight}>
         <AuthContainer>
-          <StyledTabs value={value} onChange={handleTabChange}>
+          <StyledTabs value={tabPosition} onChange={handleTabChange}>
             <StyledTab label="Registration" />
             <StyledTab label="Log In" />
           </StyledTabs>
-          {value === 1 && (
-            <Password to="/auth/forgot_password">Forgot password?</Password>
+          {tabPosition === 1 && (
+            <Password to="/auth/forgot_password">
+              <Typography variant="passwordForgot">Forgot password?</Typography>
+            </Password>
           )}
-          {/* <CommonPopUp
-            destination="authForm"
+
+          <CommonForm
             onSubmit={onHandleSubmit}
-            onChange={handleChange}
+            onChange={e => {
+              handleChange(e.target.value);
+            }}
+            authInputsTabsReset={resetInputs}
             inputs={inputs}
             initialValues={authValues}
             validationSchema={authSchema}
@@ -73,8 +60,7 @@ const AuthPage = () => {
             google={true}
             variantMessage="authForm"
             id="register-or-login-button"
-          /> */}
-          <AuthForm value={value} chgForm={resetForm} />
+          />
         </AuthContainer>
       </Container>
     </Background>

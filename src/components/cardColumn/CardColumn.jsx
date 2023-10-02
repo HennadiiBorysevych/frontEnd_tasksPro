@@ -67,11 +67,7 @@ function CardsColumn({ provided, column }) {
               ownerId={column.id}
             />
           </ColumnHeading>
-          <Droppable
-            droppableId={column.id}
-            type="item"
-            // isCombineEnabled={true}
-          >
+          <Droppable droppableId={column.id} type="item">
             {provided => (
               <CustomScrollBar variantScroll="columns">
                 <ItemsContainer
@@ -119,18 +115,17 @@ function CardsColumn({ provided, column }) {
           </PrimaryButton>
         </Column>
       )}
-      {isModal && modalType === 'editColumn' && (
+      {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
-          <ColumnPopUp column={column} handleModalClose={toggleModal} />
-        </Modal>
-      )}
-      {isModal && modalType === 'createCard' && (
-        <Modal onBackdropClick={onBackdropClick}>
-          <CardPopUp
-            columnId={column.id}
-            cardIndex={columnsAndTasks.length}
-            handleModalClose={toggleModal}
-          />
+          {modalType === 'editColumn' ? (
+            <ColumnPopUp column={column} handleModalClose={toggleModal} />
+          ) : (
+            <CardPopUp
+              columnId={column.id}
+              cardIndex={columnsAndTasks.length}
+              handleModalClose={toggleModal}
+            />
+          )}
         </Modal>
       )}
     </>

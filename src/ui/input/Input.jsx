@@ -16,14 +16,8 @@ const Input = ({
   name,
   placeholder,
   onChange,
-  background,
   ...rest
 }) => {
-  // console.log(typeof height); // дописати prop-types
-  // console.log(typeof type); // дописати prop-types
-
-  // console.log(typeof background); // дописати prop-types
-
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
@@ -38,7 +32,7 @@ const Input = ({
           name={name}
           placeholder={placeholder}
           onChange={onChange}
-          background={background}
+          variant="textAreaText"
           {...rest}
         />
       ) : (
@@ -48,7 +42,7 @@ const Input = ({
             name={name}
             placeholder={placeholder}
             onChange={onChange}
-            background={background}
+            variant="inputText"
             {...rest}
           />
           {type === 'password' && (
@@ -74,4 +68,6 @@ Input.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  height: PropTypes.string,
 };

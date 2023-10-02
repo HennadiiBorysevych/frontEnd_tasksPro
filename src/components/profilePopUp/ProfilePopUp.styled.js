@@ -8,7 +8,7 @@ export const AvatarWrap = styled.div(props => ({
   backgroundColor: props.avatar ? null : props.theme.palette.background.primary,
 }));
 
-export const AddButtonWrap = styled.div(props => ({
+export const AddButtonWrap = styled.div({
   position: 'absolute',
   zIndex: '3',
   bottom: '0%',
@@ -18,7 +18,7 @@ export const AddButtonWrap = styled.div(props => ({
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '6px',
-}));
+});
 
 export const AvatarInput = styled.input({
   position: 'absolute',

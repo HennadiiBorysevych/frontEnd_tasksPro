@@ -14,24 +14,36 @@ const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
   }, []);
 
   const handleColumnSubmit = () => {
-    if (currentColumn) {
-      const { id, order, columnOwner } = currentColumn;
-      updateExistingColumn({
-        columnId: id,
-        updatedData: { title: title, orderColumn: order, columnOwner },
-      });
-    } else {
-      addNewColumn({
-        title: title,
-        columnOwner: boardId,
-        orderColumn: columnIndex,
-      });
-    }
+    const hasChanges = title !== currentColumn?.title;
 
-    closeModal();
+    if (hasChanges) {
+      if (currentColumn) {
+        const { id, order, columnOwner } = currentColumn;
+        updateExistingColumn({
+          columnId: id,
+          updatedData: { title: title, orderColumn: order, columnOwner },
+        });
+      } else {
+        addNewColumn({
+          title: title,
+          columnOwner: boardId,
+          orderColumn: columnIndex,
+        });
+      }
+
+      closeModal();
+    }
   };
 
-  return { handleColumnSubmit, handleTitle };
+  const inputs = [
+    {
+      name: 'title',
+      type: 'text',
+      placeholder: currentColumn ? currentColumn?.title : 'Title',
+    },
+  ];
+
+  return { inputs, handleColumnSubmit, handleTitle };
 };
 
 export default useColumn;

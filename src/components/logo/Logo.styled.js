@@ -1,5 +1,3 @@
-import { BASE_COLORS } from 'constants';
-
 import styled from '@emotion/styled';
 
 export const LogoWrapper = styled.div(({ variantLogo, theme }) => ({
@@ -15,25 +13,16 @@ export const LogoWrapper = styled.div(({ variantLogo, theme }) => ({
   },
 }));
 
-export const Welcome = styled.h1(
+export const ProjectIcon = styled.svg(
   {
-    color: BASE_COLORS.authColors.textPrimary,
-    fontSize: '28px',
-    fontWeight: '600',
-    lineHeight: '1.25',
-    letterSpacing: '-1.12px',
+    fill: 'none',
   },
-  props => ({
-    [props.theme.breakpoints.up('medium')]: {
-      fontSize: '40px',
-      letterSpacing: '-1.6px',
+  ({ theme, variantLogo }) => ({
+    width: variantLogo === 'board' ? 32 : 40,
+    height: variantLogo === 'board' ? 32 : 40,
+    [theme.breakpoints.up('medium')]: {
+      width: variantLogo === 'welcome' && 48,
+      height: variantLogo === 'welcome' && 48,
     },
   })
 );
-
-export const Board = styled.h1(props => ({
-  color: props.theme.palette.text.sidebarPrimary,
-  fontSize: '16px',
-  fontWeight: 600,
-  letterSpacing: '-0.64px',
-}));

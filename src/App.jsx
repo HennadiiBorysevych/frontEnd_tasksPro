@@ -15,6 +15,7 @@ import { StyledContainer } from 'assets/styles/toastifyStyles.styled';
 
 import GlobalStyles from './GlobalStyles';
 
+import 'overlayscrollbars/overlayscrollbars.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = lazy(() => import('./pages/HomePage'));

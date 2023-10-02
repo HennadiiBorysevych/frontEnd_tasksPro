@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 
@@ -25,16 +25,44 @@ const CommonForm = ({
   variantMarginTop,
   buttonText,
   google,
+  authInputsTabsReset,
 }) => {
-  const { handleChange, handleSubmit, values, errors, touched, resetForm } =
-    useFormik({
-      initialValues,
-      onSubmit: values => {
-        onSubmit(values);
-        resetForm();
-      },
-      validationSchema,
-    });
+  const {
+    setValues,
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    onSubmit: values => {
+      onSubmit(values);
+      resetForm();
+    },
+    validationSchema,
+  });
+
+  useEffect(() => {
+    async function breakFormikInputs() {
+      await setValues({
+        name: initialValues.name,
+        email: initialValues.email,
+        password: initialValues.password,
+      });
+    }
+    if (id === 'register-or-login-button') {
+      breakFormikInputs();
+    }
+  }, [
+    authInputsTabsReset,
+    id,
+    initialValues.email,
+    initialValues.name,
+    initialValues.password,
+    setValues,
+  ]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -58,7 +86,10 @@ const CommonForm = ({
             />
 
             {errors[inputProps?.name] && touched[inputProps?.name] ? (
-              <ErrorMessage variantMessage={variantMessage}>
+              <ErrorMessage
+                variantMessage={variantMessage}
+                variant="supplementaryPopUpText"
+              >
                 {errors[inputProps?.name]}
               </ErrorMessage>
             ) : null}

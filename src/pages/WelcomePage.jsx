@@ -9,6 +9,7 @@ import { GoogleAuth, Logo } from 'components';
 
 import { Background, Container } from './styles/commonStyles.styled';
 import {
+  LinkText,
   RegisterLink,
   UserImage,
   WelcomeContainer,
@@ -47,11 +48,15 @@ const WelcomePage = () => {
           <ul>
             <li>
               <RegisterLink to="/auth/register" register="true">
-                Registration
+                <LinkText variant="buttonText" register="true">
+                  Registration
+                </LinkText>
               </RegisterLink>
             </li>
             <li>
-              <RegisterLink to="/auth/login">Log In</RegisterLink>
+              <RegisterLink to="/auth/login">
+                <LinkText variant="buttonText">Log In</LinkText>
+              </RegisterLink>
             </li>
             <li>
               <GoogleAuth />

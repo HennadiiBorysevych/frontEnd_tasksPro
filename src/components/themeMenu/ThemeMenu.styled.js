@@ -1,17 +1,15 @@
 import styled from '@emotion/styled/macro';
 
-import { SvgIcon } from 'ui';
+import { SvgIcon, Typography } from 'ui';
 
 export const DropdownWrapper = styled.div`
   position: relative;
 `;
 
 export const DropdownIcon = styled(SvgIcon)``;
+export const DropdownTitle = styled(Typography)``;
 
 export const DropdownButton = styled.button(props => ({
-  fontSize: '14px',
-  fontWeight: 500,
-  letterSpacing: '-0.28px',
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
@@ -21,7 +19,9 @@ export const DropdownButton = styled.button(props => ({
     transform: props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
   },
   '&:hover': {
-    color: props.theme.palette.accent.light,
+    [DropdownTitle]: {
+      color: props.theme.palette.accent.light,
+    },
     [DropdownIcon]: {
       stroke: props.theme.palette.accent.light,
     },
@@ -42,20 +42,16 @@ export const DropdownMenu = styled.ul(props => ({
   boxShadow: '0px 4px 16px 0px rgba(17, 17, 17, 0.1)',
 }));
 
-export const DropdownItem = styled.li(props => ({
-  color: props.theme.palette.text.themeMenuItems,
-  fontSize: '14px',
-  letterSpacing: '-0.28px',
-
+export const DropdownItem = styled(Typography)(props => ({
   '& + &': {
     marginTop: '4px',
   },
 
-  '&.selected': {
-    color: props.theme.palette.accent.main,
-  },
-
   '&:hover': {
     cursor: 'pointer',
+  },
+
+  '&.selected': {
+    color: props.theme.palette.accent.main,
   },
 }));

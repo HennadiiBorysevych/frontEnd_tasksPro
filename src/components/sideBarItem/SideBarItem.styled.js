@@ -1,3 +1,5 @@
+import { Typography } from 'ui';
+
 import styled from '@emotion/styled';
 
 export const BoardListItem = styled.li(props => ({
@@ -31,10 +33,7 @@ export const BoardListItem = styled.li(props => ({
   }),
 }));
 
-export const BoardName = styled.h2(props => ({
-  fontSize: '14px',
-  fontWeight: 500,
-  letterSpacing: '-0.28px',
+export const BoardName = styled(Typography)(props => ({
   textAlign: 'left',
   color: props.isActive
     ? props.theme.palette.text.sidebarPrimary

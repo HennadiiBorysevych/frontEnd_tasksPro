@@ -12,7 +12,7 @@ export const SideBarWrapper = styled.div(
   },
   ({ theme, isOpen }) => ({
     backgroundColor: theme.palette.background.sidebar,
-    color: theme.palette.text.sidebarPrimary,
+
     left: isOpen ? '0' : '-225px',
 
     [theme.breakpoints.down('medium')]: {
@@ -84,11 +84,6 @@ export const CreateBoard = styled.button(
     padding: '14px',
     marginBottom: '40px',
     transition: 'box-shadow 0.3s, transform 0.3s',
-    fontFamily: 'inherit',
-    fontSize: '14px',
-    fontWeight: 500,
-    lineHeight: 'normal',
-    letterSpacing: '-0.28px',
 
     '&:hover': {
       boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
@@ -104,9 +99,14 @@ export const CreateBoard = styled.button(
   })
 );
 
-export const TitleButton = styled.span`
-  display: block;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-`;
+export const TitleButton = styled(Typography)(
+  {
+    display: 'block',
+    margin: 0,
+    padding: 0,
+    textAlign: 'left',
+  },
+  ({ theme }) => ({
+    color: theme.palette.text.sidebarPrimary,
+  })
+);

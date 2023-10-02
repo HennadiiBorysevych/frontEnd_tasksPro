@@ -9,7 +9,6 @@ export const Column = styled.li(
   },
   props => ({
     [props.theme.breakpoints.down('small')]: {
-      // maxWidth: 'calc(100vw - 40px)',
       maxWidth: '335px',
       width: '100%',
     },

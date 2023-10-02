@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TypographyVariants } from './TypographyVariants';
+import { typographyVariants } from 'constants';
 
-import { typographyVariants } from './Typography.styled';
+import { textVariants } from './Typography.styled';
 
 const Typography = ({ variant, children, ...rest }) => {
   const VariantComponent =
-    typographyVariants[variant] || typographyVariants[TypographyVariants.p1];
+    textVariants[variant] || textVariants[typographyVariants.p1];
 
   return <VariantComponent {...rest}>{children}</VariantComponent>;
 };
 
 Typography.propTypes = {
-  variant: PropTypes.oneOf(Object.values(TypographyVariants)),
+  variant: PropTypes.oneOf(Object.values(typographyVariants)),
   children: PropTypes.node.isRequired,
 };
 

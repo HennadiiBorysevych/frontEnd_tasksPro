@@ -30,11 +30,10 @@ export const CardContainer = styled.div(props => ({
   },
 }));
 
-export const DeadlineMessage = styled.p(({ theme, today }) => ({
+export const DeadlineMessage = styled(Typography)(({ theme, today }) => ({
   position: 'absolute',
   top: '14px',
   right: '24px',
-  fontSize: '10px',
   color: today ? theme.palette.accent.main : theme.palette.text.attention,
 }));
 

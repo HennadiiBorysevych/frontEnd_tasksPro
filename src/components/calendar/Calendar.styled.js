@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 
+import { Typography } from 'ui';
+
 import styled from '@emotion/styled';
 
 export const CalendarButton = styled.button({
@@ -8,12 +10,9 @@ export const CalendarButton = styled.button({
   cursor: 'pointer',
 });
 
-export const DeadlineDay = styled.span(props => ({
+export const DeadlineDay = styled(Typography)(props => ({
   marginRight: '4px',
   color: props.theme.palette.accent.main,
-  fontSize: '14px',
-  fontWeight: 500,
-  letterSpacing: '-0.28px',
   display: 'block',
 }));
 
@@ -21,11 +20,6 @@ export const BlockCalendar = styled.div(props => ({
   backgroundColor: props.theme.palette.background.calendar,
   padding: '18px',
   width: '233px',
-  fontFamily: 'inherit',
-  fontSize: '16px',
-  fontWeight: 500,
-  lineHeight: 'normal',
-  letterSpacing: '-0.32px',
   borderRadius: '8px',
 }));
 
@@ -34,9 +28,6 @@ export const PrevLabelWithPadding = styled.span({
 });
 export const NextLabelWithPadding = styled.span({
   marginRight: '-5px',
-});
-export const DownWithPadding = styled.span({
-  paddingTop: '5px',
 });
 
 export const CalendarLayout = styled.span(props => ({

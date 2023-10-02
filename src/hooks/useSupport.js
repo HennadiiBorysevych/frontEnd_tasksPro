@@ -6,7 +6,7 @@ import { supportModel } from 'constants';
 import useAuthCollector from './useAuthCollector';
 
 const useSupport = onClose => {
-  const { sendToSupport } = useAuthCollector();
+  const { user, sendToSupport } = useAuthCollector();
   const [email, setEmail] = useState(supportModel.email);
   const [comment, setComment] = useState(supportModel.comment);
 
@@ -42,7 +42,21 @@ const useSupport = onClose => {
     onClose();
   };
 
-  return { handleInput, handleSupportSubmit };
+  const inputs = [
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: user ? user?.email : 'Email address',
+    },
+    {
+      name: 'comment',
+      type: 'text',
+      placeholder: 'Your comment',
+      multiline: true,
+    },
+  ];
+
+  return { inputs, handleInput, handleSupportSubmit };
 };
 
 export default useSupport;

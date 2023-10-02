@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
@@ -20,46 +20,13 @@ import {
 const { updateProfileValues } = POP_UP_INITIAL_VALUES;
 
 const ProfilePopUp = ({ user, handleModalClose }) => {
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const { userAvatar, handleChangeProfile, handleUserAvatar } = useEditProfile(
-    user,
-    handleModalClose
-  );
-
-  const handleRequiredFieldChange = e => {
-    const { name } = e.target;
-    if (name === 'email' || name === 'newPassword' || name === 'password') {
-      setShowPasswordConfirm(true);
-    } else {
-      setShowPasswordConfirm(false);
-    }
-  };
-
-  const inputs = [
-    {
-      name: 'name',
-      type: 'text',
-      placeholder: user?.name,
-    },
-    {
-      name: 'email',
-      type: 'email',
-      placeholder: user?.email,
-    },
-    {
-      name: 'newPassword',
-      type: 'password',
-      placeholder: 'Enter new password',
-    },
-  ];
-
-  if (showPasswordConfirm) {
-    inputs.push({
-      name: 'password',
-      type: 'password',
-      placeholder: 'Enter your current password for confirmation',
-    });
-  }
+  const {
+    inputs,
+    userAvatar,
+    handleRequiredFieldChange,
+    handleChangeProfile,
+    handleUserAvatar,
+  } = useEditProfile(user, handleModalClose);
 
   return (
     <CommonPopUp

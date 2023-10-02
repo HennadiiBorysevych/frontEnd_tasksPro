@@ -14,7 +14,7 @@ export const StyledTabs = styled(Tabs)({
     display: 'flex',
     gap: '14px',
     border: 'none',
-    paddingBottom: '10px',
+    marginBottom: '40px',
 
     '@media screen and(min-width: 768px)': {
       paddingBottom: '40px',
@@ -70,8 +70,6 @@ export const AuthContainer = styled.div(
 export const Password = styled(NavLink)(
   {
     display: 'block',
-    fontSize: '12px',
-    color: BASE_COLORS.authColors.textSecondary,
   },
   props => ({
     [props.theme.breakpoints.down('medium')]: {
@@ -81,7 +79,6 @@ export const Password = styled(NavLink)(
     [props.theme.breakpoints.up('medium')]: {
       position: 'absolute',
       top: '41px',
-      fontSize: '14px',
       right: '40px',
     },
   })
