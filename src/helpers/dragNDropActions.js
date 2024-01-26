@@ -1,5 +1,5 @@
-import { columnOperations } from 'redux/columns';
-import { cardOperations } from 'redux/tasks';
+import { moveColumn } from 'redux/columns';
+import { moveTask, moveTaskToColumn } from 'redux/tasks';
 
 export function processDndResult(result, columnsAndTasks) {
   if (!result || !result.destination) {
@@ -15,7 +15,7 @@ export function processDndResult(result, columnsAndTasks) {
       dataArray: columnsAndTasks,
     });
     return {
-      process: columnOperations.moveColumn,
+      process: moveColumn,
       arg: { updatingDataFull, updatingDataStripped },
     };
   } else {
@@ -32,7 +32,7 @@ export function processDndResult(result, columnsAndTasks) {
         dataArray: column.items,
       });
       return {
-        process: cardOperations.moveTask,
+        process: moveTask,
         arg: { updatingDataFull, updatingDataStripped },
       };
     } else {
@@ -59,7 +59,7 @@ export function processDndResult(result, columnsAndTasks) {
         dataArray: destinationColumnItems,
       });
       return {
-        process: cardOperations.moveTaskToColumn,
+        process: moveTaskToColumn,
         arg: { idTask, idColumnNew, dataOld, dataNew },
       };
     }

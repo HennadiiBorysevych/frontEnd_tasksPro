@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const fetchColumns = createAsyncThunk(
+export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',
   async (boardId, thunkAPI) => {
     try {
@@ -17,7 +17,7 @@ const fetchColumns = createAsyncThunk(
   }
 );
 
-const addColumn = createAsyncThunk(
+export const addColumn = createAsyncThunk(
   'columns/addColumn',
   async (name, thunkAPI) => {
     try {
@@ -29,7 +29,7 @@ const addColumn = createAsyncThunk(
   }
 );
 
-const updateColumn = createAsyncThunk(
+export const updateColumn = createAsyncThunk(
   'columns/updateColumn',
   async ({ columnId, updatedData }, thunkAPI) => {
     try {
@@ -44,7 +44,7 @@ const updateColumn = createAsyncThunk(
   }
 );
 
-const getColumn = createAsyncThunk(
+export const getColumn = createAsyncThunk(
   'columns/getColumn',
   async (columnId, thunkAPI) => {
     try {
@@ -56,7 +56,7 @@ const getColumn = createAsyncThunk(
   }
 );
 
-const deleteColumn = createAsyncThunk(
+export const deleteColumn = createAsyncThunk(
   'columns/deleteColumn',
   async (columnId, thunkAPI) => {
     try {
@@ -68,7 +68,7 @@ const deleteColumn = createAsyncThunk(
   }
 );
 
-const moveColumn = createAsyncThunk(
+export const moveColumn = createAsyncThunk(
   'columns/moveColumn',
   async (columnData, thunkAPI) => {
     try {
@@ -82,12 +82,3 @@ const moveColumn = createAsyncThunk(
     }
   }
 );
-const columnOperations = {
-  fetchColumns,
-  getColumn,
-  addColumn,
-  updateColumn,
-  deleteColumn,
-  moveColumn,
-};
-export default columnOperations;

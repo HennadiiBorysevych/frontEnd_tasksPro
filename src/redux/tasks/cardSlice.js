@@ -2,7 +2,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import { updateOrdersFromArray } from 'helpers';
 
-import cardOperations from './cardOperations';
+import * as cardOperations from './cardOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -107,4 +107,4 @@ const extraActions = [
   cardOperations.moveTaskToColumn,
 ];
 
-export default cardSlice.reducer;
+export const cardReducer = cardSlice.reducer;

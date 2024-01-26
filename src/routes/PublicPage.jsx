@@ -1,9 +1,8 @@
 import { Navigate } from 'react-router-dom';
-
-import { useAuthCollector } from 'hooks';
+import { useAuthRedux } from 'redux/services';
 
 const PublicPage = ({ component: Component, redirectTo = '/home' }) => {
-  const { isLoggedIn } = useAuthCollector();
+  const { isLoggedIn } = useAuthRedux();
 
   return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
@@ -7,6 +6,8 @@ import { supportSchema } from 'helpers';
 import { useSupport } from 'hooks';
 
 import { CommonPopUp } from 'ui';
+
+import SupportPopUpPropTypes from './propTypes';
 
 const SupportPopUp = ({ onClose }) => {
   const { inputs, handleInput, handleSupportSubmit } = useSupport(onClose);
@@ -32,6 +33,4 @@ const SupportPopUp = ({ onClose }) => {
 
 export default SupportPopUp;
 
-SupportPopUp.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
+SupportPopUp.propTypes = SupportPopUpPropTypes;

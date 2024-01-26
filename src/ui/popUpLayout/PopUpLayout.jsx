@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import SvgIcon from '../svgIcon/SvgIcon';
 
-import { CloseBtn, Container, PopUpTitle } from './PopUpLayout.styled';
+import PopUpLayoutPropTypes from './propTypes';
+
+import * as styles from './PopUpLayout.styled';
 
 const PopUpLayout = ({
   variantMarginBottom,
@@ -13,27 +14,21 @@ const PopUpLayout = ({
   variantForm,
 }) => {
   return (
-    <Container variantForm={variantForm}>
-      <CloseBtn onClick={handleClose} variantForm={variantForm}>
+    <styles.Container variantForm={variantForm}>
+      <styles.CloseBtn onClick={handleClose} variantForm={variantForm}>
         <SvgIcon svgName="icon-x-close" variantIcon="header" size="18" />
-      </CloseBtn>
-      <PopUpTitle
+      </styles.CloseBtn>
+      <styles.PopUpTitle
         variant="modalTitle"
         variantMarginBottom={variantMarginBottom}
       >
         {title}
-      </PopUpTitle>
+      </styles.PopUpTitle>
       {children}
-    </Container>
+    </styles.Container>
   );
 };
 
-PopUpLayout.propTypes = {
-  title: PropTypes.string.isRequired,
-  handleClose: PropTypes.func,
-  children: PropTypes.node.isRequired,
-  variantForm: PropTypes.string,
-  variantMarginBottom: PropTypes.string,
-};
-
 export default PopUpLayout;
+
+PopUpLayout.propTypes = PopUpLayoutPropTypes;

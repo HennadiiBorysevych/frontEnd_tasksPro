@@ -1,13 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setUserFilter } from 'redux/userFilterSlice';
+import { useBoardsRedux, useFilterRedux } from 'redux/services';
 
 import { boardModel } from 'constants';
 
 import { useBoardContext } from 'contexts';
 import { clearTitleBoardInUrl, encodeTitleBoardInUrl } from 'helpers';
-
-import useBoardsCollector from './useBoardsCollector';
 
 const useBoard = (currentBoard, closeModal) => {
   const {
@@ -17,16 +14,15 @@ const useBoard = (currentBoard, closeModal) => {
     removeBoard,
     addNewBoard,
     updateExistingBoard,
-  } = useBoardsCollector();
+  } = useBoardsRedux();
   const { activeBoardId, setActiveBoard } = useBoardContext();
+  const { updateFilter } = useFilterRedux();
 
   const initialBoard = currentBoard ? currentBoard : boardModel;
   const [title, setTitle] = useState(initialBoard?.title);
   const [icon, setIcon] = useState(initialBoard?.icon);
   const [background, setBackground] = useState(initialBoard?.background);
   const [board, setBoard] = useState(initialBoard);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (activeBoardId) {
@@ -40,6 +36,15 @@ const useBoard = (currentBoard, closeModal) => {
       setTitle(currentBoard?.title);
     }
   }, [currentBoard]);
+
+  useEffect(() => {
+    setBoard(prev => {
+      const { background: prevBg, ...rest } = prev;
+      return background === ''
+        ? { ...rest, title, icon, isActive: false }
+        : { ...rest, title, icon, background, isActive: false };
+    });
+  }, [background, icon, title]);
 
   const handleBoardSubmit = async () => {
     const hasChanges =
@@ -72,15 +77,6 @@ const useBoard = (currentBoard, closeModal) => {
     setTitle(e.currentTarget.value);
   }, []);
 
-  useEffect(() => {
-    setBoard(prev => {
-      const { background: prevBg, ...rest } = prev;
-      return background === ''
-        ? { ...rest, title, icon, isActive: false }
-        : { ...rest, title, icon, background, isActive: false };
-    });
-  }, [background, icon, title]);
-
   const handleActiveBoard = async boardId => {
     try {
       await getOneBoard(boardId);
@@ -97,7 +93,7 @@ const useBoard = (currentBoard, closeModal) => {
       }
       const filterBoard = localStorage.getItem(boardId);
       if (filterBoard) {
-        dispatch(setUserFilter(filterBoard));
+        updateFilter(filterBoard);
       }
     } catch (error) {
       console.error('Error getting board data', error);

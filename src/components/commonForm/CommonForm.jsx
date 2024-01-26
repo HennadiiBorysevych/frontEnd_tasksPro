@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 
 import { Input, PrimaryButton } from 'ui';
 
 import GoogleAuth from '../googleAuth/GoogleAuth';
 
-import { ErrorMessage, Form, InputItem, InputList } from './commonForm.styled';
+import CommonFormPropTypes from './propTypes';
+
+import * as styles from './commonForm.styled';
 
 const CommonForm = ({
   initialValues,
@@ -65,11 +66,11 @@ const CommonForm = ({
   ]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <styles.Form onSubmit={handleSubmit}>
       {avatar && children}
-      <InputList>
+      <styles.InputList>
         {inputs.map(inputProps => (
-          <InputItem key={inputProps?.name}>
+          <styles.InputItem key={inputProps?.name}>
             <Input
               name={inputProps?.name}
               type={inputProps?.type}
@@ -86,16 +87,16 @@ const CommonForm = ({
             />
 
             {errors[inputProps?.name] && touched[inputProps?.name] ? (
-              <ErrorMessage
+              <styles.ErrorMessage
                 variantMessage={variantMessage}
                 variant="supplementaryPopUpText"
               >
                 {errors[inputProps?.name]}
-              </ErrorMessage>
+              </styles.ErrorMessage>
             ) : null}
-          </InputItem>
+          </styles.InputItem>
         ))}
-      </InputList>
+      </styles.InputList>
       {settings && children}
       <PrimaryButton
         id={id}
@@ -107,33 +108,10 @@ const CommonForm = ({
         {buttonText}
       </PrimaryButton>
       {google && <GoogleAuth />}
-    </Form>
+    </styles.Form>
   );
 };
 
 export default CommonForm;
 
-CommonForm.propTypes = {
-  initialValues: PropTypes.objectOf(PropTypes.string).isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  validationSchema: PropTypes.object,
-  avatar: PropTypes.bool,
-  children: PropTypes.node,
-  inputs: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      placeholder: PropTypes.string.isRequired,
-      multiline: PropTypes.bool,
-    })
-  ).isRequired,
-  onChange: PropTypes.func,
-  variantMessage: PropTypes.string,
-  settings: PropTypes.bool,
-  id: PropTypes.string,
-  variantIcon: PropTypes.string,
-  hasIcon: PropTypes.bool,
-  variantMarginTop: PropTypes.string,
-  buttonText: PropTypes.string,
-  google: PropTypes.bool,
-};
+CommonForm.propTypes = CommonFormPropTypes;

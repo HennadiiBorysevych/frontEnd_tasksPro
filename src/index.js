@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import { useAuthRedux } from 'redux/services';
 import generalStore from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { appThemes } from 'themes';
-
-import { useAuthCollector } from 'hooks';
 
 import './GlobalStyles.js';
 
@@ -16,7 +15,7 @@ import App from './App';
 import './index.css';
 
 const ThemedApp = () => {
-  const { theme } = useAuthCollector();
+  const { theme } = useAuthRedux();
 
   const themeChoice = React.useMemo(() => {
     switch (theme) {

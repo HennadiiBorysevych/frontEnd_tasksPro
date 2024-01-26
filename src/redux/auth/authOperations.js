@@ -3,7 +3,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://backend-taskspro-public.onrender.com';
 
-const token = {
+export const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
@@ -12,7 +12,7 @@ const token = {
   },
 };
 
-const register = createAsyncThunk(
+export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
@@ -24,17 +24,20 @@ const register = createAsyncThunk(
   }
 );
 
-const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
-  try {
-    const { data } = await axios.post('/api/auth/login', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+export const logIn = createAsyncThunk(
+  'auth/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/api/auth/login', credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
-const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/api/auth/logout');
     token.unset();
@@ -43,14 +46,13 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-const googleAuth = createAsyncThunk(
+export const googleAuth = createAsyncThunk(
   'auth/google',
   async (tokenAuth, thunkAPI) => {
     try {
       token.set(tokenAuth);
       const { data } = await axios.get('/api/users/current');
       data.user.token = tokenAuth;
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -58,7 +60,7 @@ const googleAuth = createAsyncThunk(
   }
 );
 
-const fetchCurrentUser = createAsyncThunk(
+export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
@@ -71,7 +73,6 @@ const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/api/users/current');
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -79,7 +80,7 @@ const fetchCurrentUser = createAsyncThunk(
   }
 );
 
-const updateUserInfo = createAsyncThunk(
+export const updateUserInfo = createAsyncThunk(
   'auth/updateUserInfo',
   async (updatedUser, thunkAPI) => {
     const formData = new FormData();
@@ -102,7 +103,6 @@ const updateUserInfo = createAsyncThunk(
         headers,
       });
 
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -110,7 +110,7 @@ const updateUserInfo = createAsyncThunk(
   }
 );
 
-const updateUserTheme = createAsyncThunk(
+export const updateUserTheme = createAsyncThunk(
   'auth/updateUserTheme',
   async (updatedTheme, thunkAPI) => {
     try {
@@ -124,7 +124,7 @@ const updateUserTheme = createAsyncThunk(
   }
 );
 
-const updateUserHelp = createAsyncThunk(
+export const updateUserHelp = createAsyncThunk(
   'auth/updateUserHelp',
   async (helpRequest, thunkAPI) => {
     try {
@@ -136,14 +136,13 @@ const updateUserHelp = createAsyncThunk(
   }
 );
 
-const recoverPassword = createAsyncThunk(
+export const recoverPassword = createAsyncThunk(
   'auth/recoverPassword',
   async (email, thunkAPI) => {
     try {
       const { data } = await axios.patch('api/users/forgotpasswordsend', email);
 
       token.set(data.token);
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -151,7 +150,7 @@ const recoverPassword = createAsyncThunk(
   }
 );
 
-const recInPassword = createAsyncThunk(
+export const recInPassword = createAsyncThunk(
   'auth/recInPassword',
   async (passwordNew, thunkAPI) => {
     try {
@@ -166,18 +165,3 @@ const recInPassword = createAsyncThunk(
     }
   }
 );
-
-const authOperations = {
-  token,
-  register,
-  logIn,
-  googleAuth,
-  logOut,
-  fetchCurrentUser,
-  updateUserInfo,
-  updateUserTheme,
-  updateUserHelp,
-  recoverPassword,
-  recInPassword,
-};
-export default authOperations;

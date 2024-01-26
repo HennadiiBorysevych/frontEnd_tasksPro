@@ -1,70 +1,60 @@
-import { useEffect } from 'react';
+import { useAuthRedux } from 'redux/services';
 
 import { IMAGES } from 'constants';
 
 import { generateContentImages } from 'helpers';
-import { useBoardsCollector } from 'hooks';
 
-import { GoogleAuth, Logo } from 'components';
+import { GoogleAuth, Logo, SkeletonLoader } from 'components';
 
-import { Background, Container } from './styles/commonStyles.styled';
-import {
-  LinkText,
-  RegisterLink,
-  UserImage,
-  WelcomeContainer,
-  WelcomeText,
-} from './styles/welcomePage.styled';
+import * as commonStyles from './styles/commonStyles.styled';
+import * as styles from './styles/welcomePage.styled';
 
 const WelcomePage = () => {
-  const { resetBoardsState } = useBoardsCollector();
-
+  const { isFetchingCurrent } = useAuthRedux();
   const devicePixelRatio = window.devicePixelRatio || 1;
-
-  useEffect(() => {
-    resetBoardsState();
-  }, [resetBoardsState]);
 
   const matchedWelcomeImage = generateContentImages(
     IMAGES.welcomeImages,
     devicePixelRatio,
     'image/webp'
   );
-  return (
-    <Background>
-      <Container>
-        <WelcomeContainer>
-          <UserImage
+  return isFetchingCurrent ? (
+    <SkeletonLoader page="/welcome" />
+  ) : (
+    <commonStyles.Background>
+      <commonStyles.Container>
+        <styles.WelcomeContainer>
+          <styles.UserImage
             src={matchedWelcomeImage.src}
             alt="user-avatar"
             width={124}
             height={124}
           />
           <Logo variantLogo="welcome" />
-          <WelcomeText variant="welcomePageText">
+          <styles.WelcomeText variant="welcomePageText">
             Supercharge your productivity and take control of your tasks with
             Task Pro - Don't wait, start achieving your goals now!
-          </WelcomeText>
+          </styles.WelcomeText>
           <ul>
             <li>
-              <RegisterLink to="/auth/register" register="true">
-                <LinkText variant="buttonText" register="true">
+              <styles.RegisterLink to="/auth/register" register="true">
+                <styles.LinkText variant="buttonText" register="true">
                   Registration
-                </LinkText>
-              </RegisterLink>
+                </styles.LinkText>
+              </styles.RegisterLink>
             </li>
             <li>
-              <RegisterLink to="/auth/login">
-                <LinkText variant="buttonText">Log In</LinkText>
-              </RegisterLink>
+              <styles.RegisterLink to="/auth/login">
+                <styles.LinkText variant="buttonText">Log In</styles.LinkText>
+              </styles.RegisterLink>
             </li>
             <li>
               <GoogleAuth />
             </li>
           </ul>
-        </WelcomeContainer>
-      </Container>
-    </Background>
+        </styles.WelcomeContainer>
+      </commonStyles.Container>
+    </commonStyles.Background>
   );
 };
 

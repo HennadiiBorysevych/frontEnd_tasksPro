@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-import useAuthCollector from './useAuthCollector';
+import { useAuthRedux } from 'redux/services';
 
 const useAuth = () => {
   const { id } = useParams();
   const history = useNavigate();
   const [tabPosition, setTabPosition] = useState(id === 'register' ? 0 : 1);
   const [resetInputs, setResetInputs] = useState(false);
-  const { signIn, signUp } = useAuthCollector();
+  const { signIn, signUp } = useAuthRedux();
   const [value, setValue] = useState('');
 
   const tabToIdx = {
-    1: 'register',
-    0: 'login',
+    0: 'register',
+    1: 'login',
   };
 
   const handleTabChange = async (_, newVal) => {

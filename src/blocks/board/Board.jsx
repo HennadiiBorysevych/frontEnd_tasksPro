@@ -1,38 +1,25 @@
 import React from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { useDispatch } from 'react-redux';
+import { useBoardsRedux, useColumnsRedux } from 'redux/services';
 
-import { processDndResult } from 'helpers';
-import { useBoardsCollector, useColumnsCollector, useModal } from 'hooks';
+import { useDragEnd, useModal } from 'hooks';
 
 import { BoardHead, CardColumn, ColumnPopUp, SkeletonLoader } from 'components';
 import { ButtonPlus, CustomScrollBar, Modal, Typography } from 'ui';
 
-import {
-  ButtonAddColumn,
-  ColumnsContainer,
-  ContainerWrapper,
-} from './board.styled';
+import * as styles from './board.styled';
 
 const Board = () => {
-  const { activeBoardId } = useBoardsCollector();
+  const { onDragEnd } = useDragEnd();
   const { isModal, onBackdropClick, toggleModal } = useModal();
-  const { columnLoading, allColumns, columnsAndTasks } = useColumnsCollector();
-  const dispatch = useDispatch();
-
-  const onDragEnd = async result => {
-    const resultProcessed = processDndResult(result, columnsAndTasks);
-    if (resultProcessed) {
-      const { process, arg } = resultProcessed;
-      await dispatch(process(arg));
-    }
-  };
+  const { activeBoardId } = useBoardsRedux();
+  const { columnLoading, allColumns, columnsAndTasks } = useColumnsRedux();
 
   return (
     <>
       <BoardHead />
       <CustomScrollBar variantScroll="board">
-        <ContainerWrapper>
+        <styles.ContainerWrapper>
           {columnLoading ? (
             <SkeletonLoader page="/column" />
           ) : (
@@ -44,7 +31,7 @@ const Board = () => {
                   type="column"
                 >
                   {provided => (
-                    <ColumnsContainer
+                    <styles.ColumnsContainer
                       columns={allColumns}
                       {...provided.droppableProps}
                       ref={provided.innerRef}
@@ -67,12 +54,12 @@ const Board = () => {
                             </Draggable>
                           ))}
                       {provided.placeholder}
-                    </ColumnsContainer>
+                    </styles.ColumnsContainer>
                   )}
                 </Droppable>
               </DragDropContext>
               <div>
-                <ButtonAddColumn
+                <styles.ButtonAddColumn
                   type="button"
                   onClick={toggleModal}
                   id="add-column-button"
@@ -81,11 +68,11 @@ const Board = () => {
                   <Typography variant="buttonText">
                     Add another column
                   </Typography>
-                </ButtonAddColumn>
+                </styles.ButtonAddColumn>
               </div>
             </>
           )}
-        </ContainerWrapper>
+        </styles.ContainerWrapper>
       </CustomScrollBar>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>

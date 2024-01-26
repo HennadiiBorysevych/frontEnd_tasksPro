@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { authOperations } from 'redux/auth';
-
-import { useAuthCollector } from 'hooks';
+import { token } from 'redux/auth';
+import { useAuthRedux } from 'redux/services';
 
 const usePassword = () => {
-  const { passwordRecovery, setNewPassword } = useAuthCollector();
+  const { passwordRecovery, setNewPassword } = useAuthRedux();
   const [passwordToken, setPasswordToken] = useState(false);
   const [searchParams] = useSearchParams();
 
@@ -15,7 +14,7 @@ const usePassword = () => {
 
     if (param) {
       setPasswordToken(true);
-      authOperations.token.set(param);
+      token.set(param);
       return;
     }
 
@@ -43,12 +42,10 @@ const usePassword = () => {
 
       if (password !== '' && verifyPassword !== '') {
         setNewPassword({ passwordNew: password });
-
         toast.success('Your password has been changed successfully');
       }
     } catch (error) {
       console.error('An error occurred:', error.message);
-      // Handle other errors here
     }
   };
 

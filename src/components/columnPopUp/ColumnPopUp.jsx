@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
@@ -7,6 +6,8 @@ import { popUpSchema } from 'helpers';
 import { useColumn } from 'hooks';
 
 import { CommonPopUp } from 'ui';
+
+import ColumnPopUpPropTypes from './propTypes';
 
 const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
   const { inputs, handleColumnSubmit, handleTitle } = useColumn(
@@ -38,23 +39,4 @@ const ColumnPopUp = ({ boardId, columnIndex, column, handleModalClose }) => {
 
 export default ColumnPopUp;
 
-ColumnPopUp.propTypes = {
-  boardId: PropTypes.string,
-  columnIndex: PropTypes.number,
-  column: PropTypes.shape({
-    id: PropTypes.string,
-    columnOwner: PropTypes.string,
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        cardOwner: PropTypes.string,
-        order: PropTypes.number,
-        deadline: PropTypes.string,
-        id: PropTypes.string,
-        priority: PropTypes.string,
-        title: PropTypes.string,
-        description: PropTypes.string,
-      })
-    ),
-  }),
-  handleModalClose: PropTypes.func.isRequired,
-};
+ColumnPopUp.propTypes = ColumnPopUpPropTypes;

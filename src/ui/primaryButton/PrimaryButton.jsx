@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import ButtonPlus from '../buttonPlus/ButtonPlus';
 
-import { ButtonStyled, ButtonText } from './PrimaryButton.styled';
+import PrimaryButtonPropTypes from './propTypes';
+
+import * as styles from './PrimaryButton.styled';
 
 const PrimaryButton = ({
   children,
@@ -16,7 +17,7 @@ const PrimaryButton = ({
   ...rest
 }) => {
   return (
-    <ButtonStyled
+    <styles.ButtonStyled
       variantMarginTop={variantMarginTop}
       onClick={onClick}
       width={width}
@@ -24,19 +25,11 @@ const PrimaryButton = ({
       {...rest}
     >
       {hasIcon && <ButtonPlus svgName={svgName} variantIcon="primary" />}
-      <ButtonText variant="buttonText">{children}</ButtonText>
-    </ButtonStyled>
+      <styles.ButtonText variant="buttonText">{children}</styles.ButtonText>
+    </styles.ButtonStyled>
   );
 };
 
-PrimaryButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  hasIcon: PropTypes.bool,
-  svgName: PropTypes.string,
-  variantIcon: PropTypes.string,
-  variantMarginTop: PropTypes.string,
-};
-
 export default PrimaryButton;
+
+PrimaryButton.propTypes = PrimaryButtonPropTypes;

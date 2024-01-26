@@ -1,34 +1,24 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useBoardsRedux, useCardsRedux, useColumnsRedux } from 'redux/services';
 
 import { SharedLayout } from 'layouts';
 
 import { useBoardContext } from 'contexts';
-import {
-  useBackground,
-  useBoardsCollector,
-  useCardsCollector,
-  useColumnsCollector,
-  useModal,
-} from 'hooks';
+import { useBackground, useModal } from 'hooks';
 
 import { BoardPopUp, SkeletonLoader } from 'components';
 import { Modal, Typography } from 'ui';
 
-import {
-  BoardWrap,
-  CreateBoardLink,
-  DefaultWrapper,
-} from './styles/homePage.styled';
+import * as styles from './styles/homePage.styled';
 
 const HomePage = () => {
   const { activeBoardId, setActiveBoard } = useBoardContext();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const [backgroundImage] = useBackground();
-  const { allBoards, boardLoading, getAllBoards } = useBoardsCollector();
-  const { getAllColumns } = useColumnsCollector();
-  const { getAllCards } = useCardsCollector();
-
+  const { allBoards, boardLoading, getAllBoards } = useBoardsRedux();
+  const { getAllColumns } = useColumnsRedux();
+  const { getAllCards } = useCardsRedux();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,36 +53,36 @@ const HomePage = () => {
 
   return (
     <SharedLayout>
-      <BoardWrap bg={!!backgroundImage && backgroundImage}>
+      <styles.BoardWrap bg={backgroundImage}>
         {activeBoardId ? (
           <Outlet />
         ) : (
-          <DefaultWrapper defaultBoard={!allBoards}>
+          <styles.DefaultWrapper defaultBoard={!allBoards}>
             {boardLoading ? (
               <SkeletonLoader page="/board" />
             ) : (
               <Typography variant="welcomeText">
                 Before starting your project, it is essential to{' '}
-                <CreateBoardLink
+                <styles.CreateBoardLink
                   href="#"
                   aria-label="Create board"
                   onClick={toggleModal}
                 >
                   create a board
-                </CreateBoardLink>{' '}
+                </styles.CreateBoardLink>{' '}
                 to visualize and track all the necessary tasks and milestones.
                 This board serves as a powerful tool to organize the workflow
                 and ensure effective collaboration among team members.
               </Typography>
             )}
-          </DefaultWrapper>
+          </styles.DefaultWrapper>
         )}
         {isModal && (
           <Modal onBackdropClick={onBackdropClick}>
             <BoardPopUp onClose={toggleModal} />
           </Modal>
         )}
-      </BoardWrap>
+      </styles.BoardWrap>
     </SharedLayout>
   );
 };

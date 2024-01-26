@@ -1,19 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useAuthRedux } from 'redux/services';
 
-import { useAuthCollector } from 'hooks';
-
-import {
-  DropdownButton,
-  DropdownIcon,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTitle,
-  DropdownWrapper,
-} from './ThemeMenu.styled';
+import * as styles from './ThemeMenu.styled';
 
 const ThemeMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { changeTheme } = useAuthCollector();
+  const { changeTheme } = useAuthRedux();
 
   const dropdownRef = useRef(null);
   const themes = ['Dark', 'Light', 'Violet'];
@@ -65,25 +57,25 @@ const ThemeMenu = () => {
   };
 
   return (
-    <DropdownWrapper ref={dropdownRef}>
-      <DropdownButton
+    <styles.DropdownWrapper ref={dropdownRef}>
+      <styles.DropdownButton
         onClick={toggleDropdown}
         type="button"
         id="switcher-theme-button"
         isOpen={isOpen}
       >
-        <DropdownTitle variant="buttonPopUpAndDropdownText">
+        <styles.DropdownTitle variant="buttonPopUpAndDropdownText">
           Theme
-        </DropdownTitle>
-        <DropdownIcon
+        </styles.DropdownTitle>
+        <styles.DropdownIcon
           svgName="icon-arrow-down"
           size="16"
           variantIcon="header"
           isActive="true"
         />
-      </DropdownButton>
+      </styles.DropdownButton>
       {isOpen && (
-        <DropdownMenu>
+        <styles.DropdownMenu>
           {themes.map(newTheme => (
             <MemoisedDropdownItem
               key={newTheme}
@@ -94,14 +86,14 @@ const ThemeMenu = () => {
               {newTheme}
             </MemoisedDropdownItem>
           ))}
-        </DropdownMenu>
+        </styles.DropdownMenu>
       )}
-    </DropdownWrapper>
+    </styles.DropdownWrapper>
   );
 };
 
 const MemoisedDropdownItem = React.memo(
-  DropdownItem,
+  styles.DropdownItem,
   (prevProps, nextProps) => {
     return (
       prevProps.newTheme === nextProps.newTheme &&

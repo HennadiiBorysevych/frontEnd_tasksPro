@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const HeaderBox = styled.div(
+export const HeaderBox = styled.div(
   {
     display: 'flex',
     justifyContent: 'space-between',
@@ -20,23 +20,15 @@ const HeaderBox = styled.div(
   })
 );
 
-const SideBarButton = styled.button(props => ({
+export const SideBarButton = styled.button(props => ({
   height: '28px',
   [props.theme.breakpoints.up('large')]: {
     display: 'none',
   },
 }));
 
-const UserSettings = styled.div`
+export const UserSettings = styled.div`
   display: flex;
   gap: 14px;
   align-items: center;
 `;
-
-const styles = {
-  HeaderBox,
-  SideBarButton,
-  UserSettings,
-};
-
-export default styles;

@@ -2,6 +2,7 @@ import { BASE_COLORS } from 'constants';
 
 const getPriorityColor = priority => {
   const formattedPriority = priority.toLowerCase();
+
   switch (formattedPriority) {
     case 'high':
       return BASE_COLORS.priorityColors.high;

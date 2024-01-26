@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useAuthRedux } from 'redux/services';
 
 import { generateToastMessage } from 'helpers';
-
-import useAuthCollector from './useAuthCollector';
 
 const useEditProfile = (currentUser, handleModalClose) => {
   const [userAvatar, setUserAvatar] = useState(currentUser?.avatarURL ?? '');
@@ -11,7 +10,7 @@ const useEditProfile = (currentUser, handleModalClose) => {
   const [isAvatarLoad, setIsAvatarLoad] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  const { updateProfileData } = useAuthCollector();
+  const { updateProfileData } = useAuthRedux();
 
   useEffect(() => {
     avatarFile ? setIsAvatarLoad(true) : setIsAvatarLoad(false);

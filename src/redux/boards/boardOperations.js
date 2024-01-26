@@ -1,25 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const fetchBoards = createAsyncThunk('boards/fetchAll', async (_, thunkAPI) => {
-  try {
-    const res = await axios.get('/api/boards');
-    return res.data?.data.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+export const fetchBoards = createAsyncThunk(
+  'boards/fetchAll',
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get('/api/boards');
+      return res.data?.data.map(({ _id, ...rest }) => ({ id: _id, ...rest }));
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
-const addBoard = createAsyncThunk('boards/addBoard', async (name, thunkAPI) => {
-  try {
-    const response = await axios.post('/api/boards', name);
-    return response.data;
-  } catch (e) {
-    return thunkAPI.rejectWithValue(e.message);
+export const addBoard = createAsyncThunk(
+  'boards/addBoard',
+  async (name, thunkAPI) => {
+    try {
+      const response = await axios.post('/api/boards', name);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
+);
 
-const updateBoard = createAsyncThunk(
+export const updateBoard = createAsyncThunk(
   'boards/updateBoard',
   async ({ boardId, updatedData }, thunkAPI) => {
     try {
@@ -31,7 +37,7 @@ const updateBoard = createAsyncThunk(
   }
 );
 
-const getBoard = createAsyncThunk(
+export const getBoard = createAsyncThunk(
   'boards/getBoard',
   async (boardId, thunkAPI) => {
     try {
@@ -45,7 +51,7 @@ const getBoard = createAsyncThunk(
   }
 );
 
-const deleteBoard = createAsyncThunk(
+export const deleteBoard = createAsyncThunk(
   'boards/deleteBoard',
   async (boardId, thunkAPI) => {
     try {
@@ -57,8 +63,7 @@ const deleteBoard = createAsyncThunk(
   }
 );
 
-
-const fetchColumnsTasks = createAsyncThunk(
+export const fetchColumnsTasks = createAsyncThunk(
   'columns/fetchAll',
   async (boardId, thunkAPI) => {
     try {
@@ -79,13 +84,3 @@ const fetchColumnsTasks = createAsyncThunk(
     }
   }
 );
-
-const boardOperations = {
-  fetchBoards,
-  addBoard,
-  updateBoard,
-  getBoard,
-  deleteBoard,
-  fetchColumnsTasks,
-};
-export default boardOperations;

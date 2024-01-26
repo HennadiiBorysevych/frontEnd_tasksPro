@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import { toast } from 'react-toastify';
-import PropTypes from 'prop-types';
 
 import { formatSelectedDate, formatShortWeekday } from 'helpers';
 
 import { SvgIcon } from 'ui';
 
-import {
-  BlockCalendar,
-  CalendarButton,
-  CalendarLayout,
-  CommonStyles,
-  DeadlineDay,
-  NextLabelWithPadding,
-  PrevLabelWithPadding,
-} from './Calendar.styled';
+import CalendPropTypes from './propTypes';
+
+import * as styles from './Calendar.styled';
 
 const Calend = ({ selectedDate, setSelectedDate }) => {
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
@@ -66,20 +59,20 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
   return (
     <>
-      <CalendarButton
+      <styles.CalendarButton
         type="button"
         onClick={toggleCalendarVisibility}
         aria-label="open calendar for choosing deadline date"
       >
-        <DeadlineDay variant="buttonPopUpAndDropdownText">
+        <styles.DeadlineDay variant="buttonPopUpAndDropdownText">
           {isDeadlineToday ? 'Today, ' : ''} {formatSelectedDate(selectedDate)}
-        </DeadlineDay>
+        </styles.DeadlineDay>
         <SvgIcon svgName="icon-arrow-down" variantIcon="cardItem" size="18" />
-      </CalendarButton>
+      </styles.CalendarButton>
 
       {isCalendarVisible && (
-        <CommonStyles>
-          <BlockCalendar>
+        <styles.CommonStyles>
+          <styles.BlockCalendar>
             <Calendar
               value={initialSelectedDate}
               maxDate={futureDate}
@@ -87,22 +80,22 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
               prev2Label={null}
               next2Label={null}
               prevLabel={
-                <PrevLabelWithPadding>
+                <styles.PrevLabelWithPadding>
                   <SvgIcon
                     svgName="icon-arrow-left"
                     size="14"
                     variantIcon="header"
                   />
-                </PrevLabelWithPadding>
+                </styles.PrevLabelWithPadding>
               }
               nextLabel={
-                <NextLabelWithPadding>
+                <styles.NextLabelWithPadding>
                   <SvgIcon
                     svgName="icon-arrow-right"
                     size="14"
                     variantIcon="header"
                   />
-                </NextLabelWithPadding>
+                </styles.NextLabelWithPadding>
               }
               showYearDropdown={false}
               locale="en-US"
@@ -111,12 +104,12 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
               onClickDay={handleDayClick}
               tileClassName={tileClassName}
             />
-          </BlockCalendar>
-        </CommonStyles>
+          </styles.BlockCalendar>
+        </styles.CommonStyles>
       )}
 
       {isCalendarVisible && (
-        <CalendarLayout onClick={toggleCalendarVisibility} />
+        <styles.CalendarLayout onClick={toggleCalendarVisibility} />
       )}
     </>
   );
@@ -124,7 +117,4 @@ const Calend = ({ selectedDate, setSelectedDate }) => {
 
 export default Calend;
 
-Calend.propTypes = {
-  selectedDate: PropTypes.object.isRequired,
-  setSelectedDate: PropTypes.func.isRequired,
-};
+Calend.propTypes = CalendPropTypes;

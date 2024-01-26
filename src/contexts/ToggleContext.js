@@ -38,7 +38,8 @@ const ToggleProvider = ({ children }) => {
   };
 
   const toggleModalAndSideBar = () => {
-    closeSideBar();
+    setIsOpen(false);
+    setIsScrollDisabled(true);
   };
 
   return (
@@ -56,6 +57,16 @@ const ToggleProvider = ({ children }) => {
   );
 };
 
-const useToggleModalAndSideBar = () => useContext(ToggleContext);
+const useToggleModalAndSideBar = () => {
+  const context = useContext(ToggleContext);
+
+  if (!context) {
+    throw new Error(
+      'useToggleModalAndSideBar must be used within a ToggleProvider'
+    );
+  }
+
+  return context;
+};
 
 export { ToggleProvider as default, useToggleModalAndSideBar };

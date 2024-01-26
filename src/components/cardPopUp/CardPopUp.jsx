@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
@@ -9,6 +8,8 @@ import { useCard } from 'hooks';
 import { CommonPopUp } from 'ui';
 
 import CardSettings from '../cardSettings/CardSettings';
+
+import CardPopUpPropTypes from './propTypes';
 
 const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
   const {
@@ -51,17 +52,4 @@ const CardPopUp = ({ columnId, cardIndex, card, handleModalClose }) => {
 
 export default CardPopUp;
 
-CardPopUp.propTypes = {
-  columnId: PropTypes.string,
-  cardIndex: PropTypes.number,
-  card: PropTypes.shape({
-    cardOwner: PropTypes.string,
-    deadline: PropTypes.string,
-    description: PropTypes.string,
-    id: PropTypes.string,
-    order: PropTypes.number,
-    priority: PropTypes.string,
-    title: PropTypes.string,
-  }),
-  handleModalClose: PropTypes.func.isRequired,
-};
+CardPopUp.propTypes = CardPopUpPropTypes;

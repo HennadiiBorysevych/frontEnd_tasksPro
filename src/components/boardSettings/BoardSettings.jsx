@@ -1,20 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
-import PropTypes from 'prop-types';
 
 import { BACKGROUNDS, BOARD_ICONS } from 'constants';
 
 import { SvgIcon } from 'ui';
 
-import {
-  BackgroundImage,
-  BoardDecor,
-  BoardText,
-  DefaultBackgroundIconWrapper,
-  IconLabel,
-  RadioField,
-  Row,
-} from './BoardSettings.styled';
+import BoardSettingsPropTypes from './propTypes';
+
+import * as styles from './BoardSettings.styled';
 
 const BoardSettings = ({
   chosenIcon,
@@ -32,12 +25,12 @@ const BoardSettings = ({
       }}
     >
       {() => (
-        <BoardDecor>
-          <Row>
-            <BoardText variant="columnTitle">Icons</BoardText>
+        <styles.BoardDecor>
+          <styles.Row>
+            <styles.BoardText variant="columnTitle">Icons</styles.BoardText>
             {BOARD_ICONS.map(id => (
-              <IconLabel key={id} title={id}>
-                <RadioField
+              <styles.IconLabel key={id} title={id}>
+                <styles.RadioField
                   name="icon"
                   type="radio"
                   value={id}
@@ -50,14 +43,16 @@ const BoardSettings = ({
                   isActive={id === chosenIcon}
                   variantIcon="popUp"
                 />
-              </IconLabel>
+              </styles.IconLabel>
             ))}
-          </Row>
-          <Row>
-            <BoardText variant="columnTitle">Background</BoardText>
+          </styles.Row>
+          <styles.Row>
+            <styles.BoardText variant="columnTitle">
+              Background
+            </styles.BoardText>
             {BACKGROUNDS.map(bgIndex => (
               <label key={bgIndex.title} title={bgIndex.title}>
-                <RadioField
+                <styles.RadioField
                   name="background"
                   type="radio"
                   value={bgIndex.title}
@@ -65,7 +60,7 @@ const BoardSettings = ({
                   onChange={() => setChosenBackground(bgIndex.title)}
                 />
                 {bgIndex.isDefault ? (
-                  <DefaultBackgroundIconWrapper>
+                  <styles.DefaultBackgroundIconWrapper>
                     <SvgIcon
                       svgName="icon-background-image"
                       size={16}
@@ -74,9 +69,9 @@ const BoardSettings = ({
                         chosenBackground === bgIndex.title ? 'active' : ''
                       }
                     />
-                  </DefaultBackgroundIconWrapper>
+                  </styles.DefaultBackgroundIconWrapper>
                 ) : (
-                  <BackgroundImage
+                  <styles.BackgroundImage
                     bgIndex={bgIndex}
                     isActive={chosenBackground === bgIndex.title}
                     className={
@@ -86,8 +81,8 @@ const BoardSettings = ({
                 )}
               </label>
             ))}
-          </Row>
-        </BoardDecor>
+          </styles.Row>
+        </styles.BoardDecor>
       )}
     </Formik>
   );
@@ -95,9 +90,4 @@ const BoardSettings = ({
 
 export default BoardSettings;
 
-BoardSettings.propTypes = {
-  chosenIcon: PropTypes.string.isRequired,
-  setChosenIcon: PropTypes.func.isRequired,
-  chosenBackground: PropTypes.string.isRequired,
-  setChosenBackground: PropTypes.func.isRequired,
-};
+BoardSettings.propTypes = BoardSettingsPropTypes;

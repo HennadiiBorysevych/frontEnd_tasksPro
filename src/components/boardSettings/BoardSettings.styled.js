@@ -4,7 +4,7 @@ import { Typography } from 'ui';
 
 export const BoardDecor = styled.div`
   margin-top: 14px;
-  margin-right: 14px; // розкоментувати, якщо зіб'ється відступ справа
+  margin-right: 14px;
 `;
 
 export const Row = styled.div`
