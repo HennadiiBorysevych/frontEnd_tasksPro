@@ -1,15 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Priority } from 'ui';
 
 import Calend from '../calendar/Calendar';
 
-import {
-  SettingsItem,
-  SettingsList,
-  SettingTitle,
-} from './CardSettings.styled';
+import CardSettingsPropTypes from './propTypes';
+
+import * as styles from './CardSettings.styled';
 
 const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
   function changeValue(value) {
@@ -17,11 +14,11 @@ const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
   }
 
   return (
-    <SettingsList>
-      <SettingsItem>
-        <SettingTitle variant="supplementaryPopUpText">
+    <styles.SettingsList>
+      <styles.SettingsItem>
+        <styles.SettingTitle variant="supplementaryPopUpText">
           Label color
-        </SettingTitle>
+        </styles.SettingTitle>
         <Priority
           priority={priority}
           setPriority={changeValue}
@@ -33,20 +30,17 @@ const CardsSettings = ({ priority, deadline, handlePriority, setDeadline }) => {
           ]}
           variant="CardSettings"
         />
-      </SettingsItem>
-      <SettingsItem>
-        <SettingTitle variant="supplementaryPopUpText">Deadline</SettingTitle>
+      </styles.SettingsItem>
+      <styles.SettingsItem>
+        <styles.SettingTitle variant="supplementaryPopUpText">
+          Deadline
+        </styles.SettingTitle>
         <Calend selectedDate={deadline} setSelectedDate={setDeadline} />
-      </SettingsItem>
-    </SettingsList>
+      </styles.SettingsItem>
+    </styles.SettingsList>
   );
 };
 
 export default CardsSettings;
 
-CardsSettings.propTypes = {
-  priority: PropTypes.string.isRequired,
-  deadline: PropTypes.instanceOf(Date),
-  handlePriority: PropTypes.func.isRequired,
-  setDeadline: PropTypes.func.isRequired,
-};
+CardsSettings.propTypes = CardSettingsPropTypes;

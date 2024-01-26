@@ -1,23 +1,15 @@
 import React from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { toast } from 'react-toastify';
-import PropTypes from 'prop-types';
-
-import { useCardsCollector } from 'hooks';
+import { useCardsRedux } from 'redux/services';
 
 import SvgIcon from '../svgIcon/SvgIcon';
 
+import ReactConfirmAlertPropTypes from './propTypes';
+
 import './reactConfirmAlert.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import {
-  AlertContainer,
-  AlertQuestion,
-  AlertTitle,
-  CancelButton,
-  ConfirmDeleteButton,
-  ConfirmDialog,
-  DeleteButton,
-} from './ReactConfirmAlert.styled';
+import * as styles from './ReactConfirmAlert.styled';
 
 const ReactConfirmAlert = ({
   selectedTheme,
@@ -27,7 +19,7 @@ const ReactConfirmAlert = ({
   onToggle,
   ownerId,
 }) => {
-  const { allCards } = useCardsCollector();
+  const { allCards } = useCardsRedux();
   const handleDeleteConfirm = () => {
     onDeleteAction();
   };
@@ -49,20 +41,22 @@ const ReactConfirmAlert = ({
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <AlertContainer theme={selectedTheme}>
-            <AlertTitle theme={selectedTheme}>Confirm the deletion</AlertTitle>
-            <AlertQuestion theme={selectedTheme}>
+          <styles.AlertContainer theme={selectedTheme}>
+            <styles.AlertTitle theme={selectedTheme}>
+              Confirm the deletion
+            </styles.AlertTitle>
+            <styles.AlertQuestion theme={selectedTheme}>
               Are you sure you want to delete this {item}?
-            </AlertQuestion>
-            <ConfirmDialog theme={selectedTheme}>
-              <CancelButton
+            </styles.AlertQuestion>
+            <styles.ConfirmDialog theme={selectedTheme}>
+              <styles.CancelButton
                 onClick={onClose}
                 theme={selectedTheme}
                 id="cancel-deletion-item-button"
               >
                 Cancel
-              </CancelButton>
-              <ConfirmDeleteButton
+              </styles.CancelButton>
+              <styles.ConfirmDeleteButton
                 id="confirm-deletion-item-button"
                 theme={selectedTheme}
                 onClick={() => {
@@ -71,32 +65,25 @@ const ReactConfirmAlert = ({
                 }}
               >
                 Delete
-              </ConfirmDeleteButton>
-            </ConfirmDialog>
-          </AlertContainer>
+              </styles.ConfirmDeleteButton>
+            </styles.ConfirmDialog>
+          </styles.AlertContainer>
         );
       },
     });
   };
   return (
-    <DeleteButton aria-label="Delete item button" onClick={helpToggle}>
+    <styles.DeleteButton aria-label="Delete item button" onClick={helpToggle}>
       <SvgIcon
         svgName="icon-trash"
         size={16}
         variantIcon={owner === 'sidebar' ? 'support' : 'popUp'}
         isActive={false}
       />
-    </DeleteButton>
+    </styles.DeleteButton>
   );
 };
 
 export default ReactConfirmAlert;
 
-ReactConfirmAlert.propTypes = {
-  selectedTheme: PropTypes.string.isRequired,
-  onDeleteAction: PropTypes.func.isRequired,
-  item: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired,
-  ownerId: PropTypes.string,
-  onToggle: PropTypes.func,
-};
+ReactConfirmAlert.propTypes = ReactConfirmAlertPropTypes;

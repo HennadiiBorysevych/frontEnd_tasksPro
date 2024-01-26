@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
-import {
-  InputStyled,
-  InputUnit,
-  PasswordEyeIcon,
-  PasswordWrapperIcon,
-  TextareaStyled,
-} from './Input.styled';
+import InputPropTypes from './propTypes';
+
+import * as styles from './Input.styled';
 
 const Input = ({
   multiline,
@@ -27,7 +22,7 @@ const Input = ({
   return (
     <>
       {multiline ? (
-        <TextareaStyled
+        <styles.TextareaStyled
           height={height}
           name={name}
           placeholder={placeholder}
@@ -36,8 +31,8 @@ const Input = ({
           {...rest}
         />
       ) : (
-        <InputUnit>
-          <InputStyled
+        <styles.InputUnit>
+          <styles.InputStyled
             type={showPassword ? 'text' : type}
             name={name}
             placeholder={placeholder}
@@ -46,16 +41,16 @@ const Input = ({
             {...rest}
           />
           {type === 'password' && (
-            <PasswordWrapperIcon onClick={handleTogglePassword}>
-              <PasswordEyeIcon
+            <styles.PasswordWrapperIcon onClick={handleTogglePassword}>
+              <styles.PasswordEyeIcon
                 svgName={showPassword ? 'icon-eye' : 'icon-eye-close'}
                 size="18"
                 variantIcon="popUp"
                 isActive={true}
               />
-            </PasswordWrapperIcon>
+            </styles.PasswordWrapperIcon>
           )}
-        </InputUnit>
+        </styles.InputUnit>
       )}
     </>
   );
@@ -63,11 +58,4 @@ const Input = ({
 
 export default Input;
 
-Input.propTypes = {
-  multiline: PropTypes.bool,
-  name: PropTypes.string,
-  placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  type: PropTypes.string,
-  height: PropTypes.string,
-};
+Input.propTypes = InputPropTypes;

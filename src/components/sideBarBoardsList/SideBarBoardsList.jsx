@@ -1,20 +1,21 @@
 import React from 'react';
+import { useBoardsRedux } from 'redux/services';
 
-import { useBoard, useBoardsCollector } from 'hooks';
+import { useBoard } from 'hooks';
 
 import { CustomScrollBar } from 'ui';
 
 import SideBarItem from '../sideBarItem/SideBarItem';
 
-import { BoardList } from './sideBarBoardsList.styled';
+import * as styles from './sideBarBoardsList.styled';
 
 const SideBarBoardsList = () => {
-  const { allBoards } = useBoardsCollector();
+  const { allBoards } = useBoardsRedux();
   const { activeBoardId, handleActiveBoard, handleDeleteBoard } = useBoard();
 
   return (
     <CustomScrollBar width="100%" variantScroll="boardList" overflow="auto">
-      <BoardList>
+      <styles.BoardList>
         {allBoards.map(({ id, icon, title }) => (
           <SideBarItem
             key={id}
@@ -26,7 +27,7 @@ const SideBarBoardsList = () => {
             onDeleteClick={() => handleDeleteBoard(id)}
           />
         ))}
-      </BoardList>
+      </styles.BoardList>
     </CustomScrollBar>
   );
 };

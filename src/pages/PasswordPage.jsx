@@ -5,7 +5,7 @@ import { usePassword } from 'hooks';
 
 import { CommonPopUp } from 'ui';
 
-import { Background, Container } from './styles/commonStyles.styled';
+import * as commonStyles from './styles/commonStyles.styled';
 
 const { recoveryPasswordValues } = POP_UP_INITIAL_VALUES;
 
@@ -13,8 +13,8 @@ const PasswordPage = () => {
   const { inputs, passwordToken, handleChange, onHandleSubmit } = usePassword();
 
   return (
-    <Background>
-      <Container>
+    <commonStyles.Background>
+      <commonStyles.Container>
         <CommonPopUp
           title={passwordToken ? 'Change password' : 'Password recovery'}
           onSubmit={onHandleSubmit}
@@ -31,8 +31,8 @@ const PasswordPage = () => {
           variantForm="passwordForm"
           id="recovery-password-submit-button"
         />
-      </Container>
-    </Background>
+      </commonStyles.Container>
+    </commonStyles.Background>
   );
 };
 

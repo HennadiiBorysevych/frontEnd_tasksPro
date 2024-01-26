@@ -1,12 +1,11 @@
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useAuthRedux } from 'redux/services';
 
 import { supportModel } from 'constants';
 
-import useAuthCollector from './useAuthCollector';
-
 const useSupport = onClose => {
-  const { user, sendToSupport } = useAuthCollector();
+  const { user, sendToSupport } = useAuthRedux();
   const [email, setEmail] = useState(supportModel.email);
   const [comment, setComment] = useState(supportModel.comment);
 
@@ -24,8 +23,7 @@ const useSupport = onClose => {
         break;
     }
   }, []);
-  console.log(email);
-  console.log(comment);
+
   const handleSupportSubmit = async values => {
     try {
       const response = await sendToSupport(values);
@@ -56,7 +54,7 @@ const useSupport = onClose => {
     },
   ];
 
-  return { inputs, handleInput, handleSupportSubmit };
+  return { email, comment, inputs, handleInput, handleSupportSubmit };
 };
 
 export default useSupport;

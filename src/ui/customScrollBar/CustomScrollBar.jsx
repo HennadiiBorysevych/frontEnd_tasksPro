@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { OverlayScrollbars } from 'overlayscrollbars';
 import PropTypes from 'prop-types';
+import { useAuthRedux } from 'redux/services';
 
-import { useAuthCollector } from 'hooks';
-
-import { CommonStyles } from './CustomScrollBar.styled';
+import * as styles from './CustomScrollBar.styled';
 
 const CustomScrollbar = ({ width, maxHeight, children, variantScroll }) => {
   const containerRef = useRef(null);
-  const { theme } = useAuthCollector();
+  const { theme } = useAuthRedux();
 
   useEffect(() => {
     const containerElement = containerRef.current;
@@ -32,7 +31,7 @@ const CustomScrollbar = ({ width, maxHeight, children, variantScroll }) => {
   }, [theme]);
 
   return (
-    <CommonStyles
+    <styles.CommonStyles
       ref={containerRef}
       style={{
         width,
@@ -43,7 +42,7 @@ const CustomScrollbar = ({ width, maxHeight, children, variantScroll }) => {
       variantScroll={variantScroll}
     >
       <div>{children}</div>
-    </CommonStyles>
+    </styles.CommonStyles>
   );
 };
 

@@ -9,6 +9,8 @@ const generalColors = {
   backgroundLightBase: '#f6f6f7',
   foregroundLightBase: '#fcfcfc',
   backgroundVioletBase: '#ecedfd',
+  scrollBarLightBase: '#e8e8e8',
+  scrollBarVioletBase: '#b8bcfd',
   accentGreenBase: '#bedbb0',
   accentVioletBase: '#5255bc',
   accentGreenHoverBase: '#9dc888',

@@ -1,13 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { Avatar, AvatarBg, AvatarImage } from './UserAvatar.styled';
+import UserAvatarPropTypes from './propTypes';
+
+import * as styles from './UserAvatar.styled';
 
 const UserAvatar = ({ avatar, width, height, margin, profile }) => {
   return (
-    <Avatar margin={margin} width={width} height={height} profile={profile}>
+    <styles.Avatar
+      margin={margin}
+      width={width}
+      height={height}
+      profile={profile}
+    >
       {avatar ? (
-        <AvatarImage
+        <styles.AvatarImage
           src={avatar}
           alt="User Avatar"
           width={width}
@@ -15,17 +21,12 @@ const UserAvatar = ({ avatar, width, height, margin, profile }) => {
           profile={profile}
         />
       ) : (
-        <AvatarBg />
+        <styles.AvatarBg />
       )}
-    </Avatar>
+    </styles.Avatar>
   );
 };
 
-UserAvatar.propTypes = {
-  avatar: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  margin: PropTypes.string,
-};
+UserAvatar.propTypes = UserAvatarPropTypes;
 
 export default UserAvatar;

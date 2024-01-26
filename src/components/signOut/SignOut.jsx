@@ -1,14 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { useAuthCollector } from 'hooks';
+import { useAuthRedux } from 'redux/services';
 
 import { SvgIcon } from 'ui';
 
-import { ButtonSignOut, TextSignOut } from './SignOut.styled';
+import * as styles from './SignOut.styled';
 
 const SignOut = () => {
-  const { signOut } = useAuthCollector();
+  const { signOut } = useAuthRedux();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -18,10 +17,14 @@ const SignOut = () => {
 
   return (
     <>
-      <ButtonSignOut id="sign-out-button" type="button" onClick={handleSignOut}>
+      <styles.ButtonSignOut
+        id="sign-out-button"
+        type="button"
+        onClick={handleSignOut}
+      >
         <SvgIcon svgName="icon-login" size={32} variantIcon="logOut" />
-        <TextSignOut variant="signOut">Log out</TextSignOut>
-      </ButtonSignOut>
+        <styles.TextSignOut variant="signOut">Log out</styles.TextSignOut>
+      </styles.ButtonSignOut>
     </>
   );
 };

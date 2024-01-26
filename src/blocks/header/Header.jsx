@@ -5,7 +5,7 @@ import { useToggleModalAndSideBar } from 'contexts';
 import { Profile, ThemeMenu } from 'components';
 import { SvgIcon } from 'ui';
 
-import styles from './Header.styled';
+import * as styles from './Header.styled';
 
 const Header = () => {
   const { openSidebar } = useToggleModalAndSideBar();

@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useBoardsRedux } from 'redux/services';
 
 import { getBackgroundImage } from 'helpers';
 
-import useBoardsCollector from './useBoardsCollector';
-
 const useBackground = () => {
   const [bgPic, setBgPic] = useState('');
-  const { allBoards, boardIndex } = useBoardsCollector();
+  const { allBoards, boardIndex } = useBoardsRedux();
 
   const handleResize = useCallback(() => {
     const boardBG = allBoards.find(board => {

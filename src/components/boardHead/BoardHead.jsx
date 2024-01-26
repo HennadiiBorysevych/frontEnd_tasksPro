@@ -1,13 +1,14 @@
 import React from 'react';
+import { useBoardsRedux } from 'redux/services';
 
-import { useBoard, useBoardsCollector } from 'hooks';
+import { useBoard } from 'hooks';
 
 import Filters from '../filters/Filters';
 
-import { FieldInput, Header } from './boardHead.styled';
+import * as styles from './boardHead.styled';
 
 const BoardHead = () => {
-  const { activeBoard, activeBoardId, allBoards } = useBoardsCollector();
+  const { activeBoard, activeBoardId, allBoards } = useBoardsRedux();
   const editingBoard = allBoards.find(board => board.id === activeBoardId);
 
   const { title, decodedTitle, handleTitle, handleBoardSubmit } =
@@ -15,12 +16,12 @@ const BoardHead = () => {
 
   return (
     <>
-      <Header
+      <styles.Header
         boardName={editingBoard?.title}
         active={decodedTitle === activeBoard?.id}
       >
         {!!decodedTitle && (
-          <FieldInput
+          <styles.FieldInput
             id="standard"
             aria-label="Change board name"
             type="text"
@@ -33,7 +34,7 @@ const BoardHead = () => {
           />
         )}
         <Filters />
-      </Header>
+      </styles.Header>
     </>
   );
 };

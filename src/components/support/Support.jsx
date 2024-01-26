@@ -10,13 +10,7 @@ import { Modal, SvgIcon, Typography } from 'ui';
 
 import SupportPopUp from '../supportPopUp/SupportPopUp';
 
-import {
-  AppName,
-  SupportButton,
-  SupportOffer,
-  SupportPlate,
-  SupportQuestion,
-} from './Support.styled';
+import * as styles from './Support.styled';
 
 const Support = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
@@ -37,22 +31,22 @@ const Support = () => {
 
   return (
     <>
-      <SupportButton
+      <styles.SupportButton
         aria-label="Button for open support popup"
         onClick={toggleWindows}
       >
-        <SupportPlate
+        <styles.SupportPlate
           src={matchedPlantImage.src}
           alt="plant"
           width={54}
           height={78}
           onError={e => console.error('Помилка завантаження зображення:', e)}
         />
-        <SupportOffer variant="supportText">
-          If you need help with <AppName>TaskPro</AppName>, check out our
-          support resources or reach out to our customer support team.
-        </SupportOffer>
-        <SupportQuestion>
+        <styles.SupportOffer variant="supportText">
+          If you need help with <styles.AppName>TaskPro</styles.AppName>, check
+          out our support resources or reach out to our customer support team.
+        </styles.SupportOffer>
+        <styles.SupportQuestion>
           <SvgIcon
             svgName="icon-help-circle"
             size={20}
@@ -60,8 +54,8 @@ const Support = () => {
             isActive
           />
           <Typography variant="helpText">Need help?</Typography>
-        </SupportQuestion>
-      </SupportButton>
+        </styles.SupportQuestion>
+      </styles.SupportButton>
 
       {isModal && (
         <Modal onBackdropClick={onBackdropClick} variant="support">

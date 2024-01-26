@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import sprite from 'assets/images/sprite.svg';
 
-import { SvgStyled } from './svgIcon.styled';
+import SvgIconPropTypes from './propTypes';
+
+import * as styles from './svgIcon.styled';
 
 const SvgIcon = ({
   svgName,
@@ -15,7 +16,7 @@ const SvgIcon = ({
   ...rest
 }) => {
   return (
-    <SvgStyled
+    <styles.SvgStyled
       width={size}
       height={size}
       stroke={stroke}
@@ -25,17 +26,10 @@ const SvgIcon = ({
       {...rest}
     >
       <use href={sprite + `#${svgName}`} />
-    </SvgStyled>
+    </styles.SvgStyled>
   );
 };
 
-SvgIcon.propTypes = {
-  svgName: PropTypes.string.isRequired,
-  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  stroke: PropTypes.string,
-  fill: PropTypes.string,
-  isActive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  variantIcon: PropTypes.string,
-};
-
 export default SvgIcon;
+
+SvgIcon.propTypes = SvgIconPropTypes;

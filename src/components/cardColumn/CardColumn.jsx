@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { selectUserFilter } from 'redux/userFilterSlice';
+import { useColumnsRedux, useFilterRedux } from 'redux/services';
 
-import { useColumnsCollector, useModal } from 'hooks';
+import { useModal } from 'hooks';
 
 import {
   ControlIcons,
@@ -19,28 +17,19 @@ import CardPopUp from '../cardPopUp/CardPopUp';
 import ColumnPopUp from '../columnPopUp/ColumnPopUp';
 import SkeletonLoader from '../skeleton/SkeletonLoader';
 
-import {
-  Column,
-  ColumnHeading,
-  DraggableItem,
-  ItemsContainer,
-} from './CardColumn.styled';
+import CardColumnPropTypes from './propTypes';
+
+import * as styles from './CardColumn.styled';
 
 function CardsColumn({ provided, column }) {
-  const { columnLoading, columnsAndTasks, removeColumn } =
-    useColumnsCollector();
+  const { columnLoading, columnsAndTasks, removeColumn } = useColumnsRedux();
+  const { userFilter } = useFilterRedux();
   const { isModal, onBackdropClick, toggleModal } = useModal();
-  const userFilter = useSelector(selectUserFilter);
 
   const [modalType, setModalType] = useState(null);
 
-  const handleEditColumn = () => {
-    setModalType('editColumn');
-    toggleModal();
-  };
-
-  const handleCreateCard = () => {
-    setModalType('createCard');
+  const handleOpenModal = modalName => {
+    setModalType(modalName);
     toggleModal();
   };
 
@@ -49,15 +38,18 @@ function CardsColumn({ provided, column }) {
       {columnLoading ? (
         <SkeletonLoader page="/column" />
       ) : (
-        <Column
+        <styles.Column
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <ColumnHeading {...provided.dragHandleProps} ref={provided.innerRef}>
+          <styles.ColumnHeading
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
             <Typography variant="columnTitle">{column.title}</Typography>
             <ControlIcons
-              onClick={handleEditColumn}
+              onClick={() => handleOpenModal('editColumn')}
               ariaLabel="Edit column button"
               variantIcon="popUp"
               isActive={false}
@@ -66,11 +58,11 @@ function CardsColumn({ provided, column }) {
               owner="columns"
               ownerId={column.id}
             />
-          </ColumnHeading>
+          </styles.ColumnHeading>
           <Droppable droppableId={column.id} type="item">
             {provided => (
               <CustomScrollBar variantScroll="columns">
-                <ItemsContainer
+                <styles.ItemsContainer
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
@@ -88,18 +80,18 @@ function CardsColumn({ provided, column }) {
                         index={index}
                       >
                         {provided => (
-                          <DraggableItem
+                          <styles.DraggableItem
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
                           >
                             <CardItem item={{ ...item }} />
-                          </DraggableItem>
+                          </styles.DraggableItem>
                         )}
                       </Draggable>
                     ))}
                   {provided.placeholder}
-                </ItemsContainer>
+                </styles.ItemsContainer>
               </CustomScrollBar>
             )}
           </Droppable>
@@ -109,11 +101,11 @@ function CardsColumn({ provided, column }) {
             svgName={'icon-plus'}
             variantIcon="primary"
             width="board"
-            onClick={handleCreateCard}
+            onClick={() => handleOpenModal('createCard')}
           >
             Add another card
           </PrimaryButton>
-        </Column>
+        </styles.Column>
       )}
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
@@ -134,12 +126,4 @@ function CardsColumn({ provided, column }) {
 
 export default CardsColumn;
 
-CardsColumn.propTypes = {
-  column: PropTypes.shape({
-    columnOwner: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    items: PropTypes.array,
-    orderColumn: PropTypes.number,
-    title: PropTypes.string.isRequired,
-  }),
-};
+CardsColumn.propTypes = CardColumnPropTypes;

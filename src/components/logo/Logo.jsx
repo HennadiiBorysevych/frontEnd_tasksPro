@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-
-import { useAuthCollector } from 'hooks';
+import { useAuthRedux } from 'redux/services';
 
 import { Typography } from 'ui';
 
 import sprite from 'assets/images/sprite.svg';
 
-import { LogoWrapper, ProjectIcon } from './Logo.styled';
+import LogoPropTypes from './propTypes';
+
+import * as styles from './Logo.styled';
 
 const Logo = ({ variantLogo }) => {
   const [svgName, setSvgName] = useState('icon-logo-big');
-  const { theme } = useAuthCollector();
+  const { theme } = useAuthRedux();
 
   useEffect(() => {
     if (variantLogo === 'board') {
@@ -26,21 +26,18 @@ const Logo = ({ variantLogo }) => {
   }, [theme, variantLogo]);
 
   return (
-    <LogoWrapper variantLogo={variantLogo}>
-      <ProjectIcon variantLogo={variantLogo}>
+    <styles.LogoWrapper variantLogo={variantLogo}>
+      <styles.ProjectIcon variantLogo={variantLogo}>
         <use href={sprite + `#${svgName}`} />
-      </ProjectIcon>
+      </styles.ProjectIcon>
       {variantLogo === 'welcome' ? (
         <Typography variant="welcomeProjectTitle">Task Pro</Typography>
       ) : (
         <Typography variant="projectTitle">Task Pro</Typography>
       )}
-    </LogoWrapper>
+    </styles.LogoWrapper>
   );
 };
-
-Logo.propTypes = {
-  variantLogo: PropTypes.oneOf(['board', 'welcome']),
-};
-
 export default Logo;
+
+Logo.propTypes = LogoPropTypes;

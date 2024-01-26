@@ -1,11 +1,10 @@
 import { useCallback, useState } from 'react';
+import { useColumnsRedux } from 'redux/services';
 
 import { columnModel } from 'constants';
 
-import useColumnsCollector from './useColumnsCollector';
-
 const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
-  const { addNewColumn, updateExistingColumn } = useColumnsCollector();
+  const { addNewColumn, updateExistingColumn } = useColumnsRedux();
   const initialColumn = currentColumn ? currentColumn : columnModel;
   const [title, setTitle] = useState(initialColumn?.title);
 
