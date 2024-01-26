@@ -1,18 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useBoardsRedux } from 'redux/services';
 
 import { useBoardContext, useToggleModalAndSideBar } from 'contexts';
-import { useBoardsCollector, useModal } from 'hooks';
+import { useModal } from 'hooks';
 
 import { ControlIcons, Modal, SvgIcon } from 'ui';
 
 import BoardPopUp from '../boardPopUp/BoardPopUp';
 
-import {
-  BoardIdentificationItem,
-  BoardListItem,
-  BoardName,
-} from './SideBarItem.styled';
+import SideBarItemPropTypes from './propTypes';
+
+import * as styles from './SideBarItem.styled';
 
 const SideBarItem = ({
   id,
@@ -25,7 +23,7 @@ const SideBarItem = ({
   const { toggleModalAndSideBar } = useToggleModalAndSideBar();
   const { isModal, toggleModal, onBackdropClick } = useModal();
   const { activeBoardId } = useBoardContext();
-  const { allBoards } = useBoardsCollector();
+  const { allBoards } = useBoardsRedux();
 
   const editingBoard = allBoards.find(board => board.id === activeBoardId);
 
@@ -36,8 +34,8 @@ const SideBarItem = ({
 
   return (
     <>
-      <BoardListItem isActive={active}>
-        <BoardIdentificationItem
+      <styles.BoardListItem isActive={active}>
+        <styles.BoardIdentificationItem
           onClick={() => {
             onHandleActiveBoard(id);
           }}
@@ -48,10 +46,13 @@ const SideBarItem = ({
             isActive={active}
             variantIcon="support"
           />
-          <BoardName variant="buttonPopUpAndDropdownText" isActive={active}>
+          <styles.BoardName
+            variant="buttonPopUpAndDropdownText"
+            isActive={active}
+          >
             {title}
-          </BoardName>
-        </BoardIdentificationItem>
+          </styles.BoardName>
+        </styles.BoardIdentificationItem>
         {active && (
           <ControlIcons
             onClick={toggleWindows}
@@ -63,7 +64,7 @@ const SideBarItem = ({
             onToggle={() => toggleModalAndSideBar()}
           />
         )}
-      </BoardListItem>
+      </styles.BoardListItem>
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
           <BoardPopUp board={editingBoard} onClose={toggleModal}></BoardPopUp>
@@ -73,13 +74,6 @@ const SideBarItem = ({
   );
 };
 
-SideBarItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  iconName: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  onHandleActiveBoard: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired,
-};
-
 export default SideBarItem;
+
+SideBarItem.propTypes = SideBarItemPropTypes;

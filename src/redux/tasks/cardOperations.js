@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const fetchTasks = createAsyncThunk(
+export const fetchTasks = createAsyncThunk(
   'tasks/fetchAll',
   async (boardId, thunkAPI) => {
     try {
@@ -17,24 +17,30 @@ const fetchTasks = createAsyncThunk(
     }
   }
 );
-const getTask = createAsyncThunk('tasks/getTask', async (taskId, thunkAPI) => {
-  try {
-    const response = await axios.get(`/api/cards/${taskId}`);
-    return response.data;
-  } catch (e) {
-    return thunkAPI.rejectWithValue(e.message);
+export const getTask = createAsyncThunk(
+  'tasks/getTask',
+  async (taskId, thunkAPI) => {
+    try {
+      const response = await axios.get(`/api/cards/${taskId}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
+);
 
-const addTask = createAsyncThunk('tasks/addTask', async (name, thunkAPI) => {
-  try {
-    const response = await axios.post('/api/cards', name);
-    return response.data;
-  } catch (e) {
-    return thunkAPI.rejectWithValue(e.message);
+export const addTask = createAsyncThunk(
+  'tasks/addTask',
+  async (name, thunkAPI) => {
+    try {
+      const response = await axios.post('/api/cards', name);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
-const updateTask = createAsyncThunk(
+);
+export const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ taskId, updatedData }, thunkAPI) => {
     try {
@@ -45,7 +51,7 @@ const updateTask = createAsyncThunk(
     }
   }
 );
-const deleteTask = createAsyncThunk(
+export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (taskId, thunkAPI) => {
     try {
@@ -56,7 +62,7 @@ const deleteTask = createAsyncThunk(
     }
   }
 );
-const moveTask = createAsyncThunk(
+export const moveTask = createAsyncThunk(
   'tasks/moveTask',
   async (tasksData, thunkAPI) => {
     try {
@@ -70,7 +76,7 @@ const moveTask = createAsyncThunk(
     }
   }
 );
-const moveTaskToColumn = createAsyncThunk(
+export const moveTaskToColumn = createAsyncThunk(
   'tasks/moveTaskToColumn',
   async (data, thunkAPI) => {
     try {
@@ -85,14 +91,3 @@ const moveTaskToColumn = createAsyncThunk(
     }
   }
 );
-
-const cardOperations = {
-  fetchTasks,
-  addTask,
-  updateTask,
-  getTask,
-  deleteTask,
-  moveTask,
-  moveTaskToColumn,
-};
-export default cardOperations;

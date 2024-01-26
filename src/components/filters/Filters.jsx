@@ -1,29 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUserFilter, setUserFilter } from 'redux/userFilterSlice';
-
-import { useBoardsCollector } from 'hooks';
+import { useBoardsRedux, useFilterRedux } from 'redux/services';
 
 import { PopUpLayout, Priority } from 'ui';
 
-import {
-  Container,
-  FilterContainer,
-  FilterHeader,
-  FiltersButton,
-  FiltersIcon,
-  FiltersTitle,
-  FilterWrapper,
-  LabelsTitle,
-  Line,
-} from './Filters.styled';
+import * as styles from './Filters.styled';
 
 const Filters = () => {
-  const { activeBoardId } = useBoardsCollector();
   const [isOpen, setIsOpen] = useState(false);
-  const priority = useSelector(selectUserFilter);
-  const dispatch = useDispatch();
   const filterContainerRef = useRef(null);
+
+  const { activeBoardId } = useBoardsRedux();
+  const { userFilter, updateFilter } = useFilterRedux();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -60,39 +47,39 @@ const Filters = () => {
 
   function changeValue(value) {
     localStorage.setItem(activeBoardId, value);
-    dispatch(setUserFilter(value));
+    updateFilter(value);
   }
 
   return (
-    <Container>
-      <FiltersButton
+    <styles.Container>
+      <styles.FiltersButton
         onClick={toggleDropdown}
         aria-label="Open filters popup"
         isOpen={isOpen}
       >
-        <FiltersIcon
+        <styles.FiltersIcon
           svgName="icon-filter"
           variantIcon="header"
           isActive="true"
         />
-        <FiltersTitle variant="buttonPopUpAndDropdownText">
+        <styles.FiltersTitle variant="buttonPopUpAndDropdownText">
           Filters
-        </FiltersTitle>
-      </FiltersButton>
+        </styles.FiltersTitle>
+      </styles.FiltersButton>
       {isOpen && (
-        <FilterContainer ref={filterContainerRef}>
+        <styles.FilterContainer ref={filterContainerRef}>
           <PopUpLayout title="Filters" handleClose={toggleDropdown}>
-            <FilterWrapper>
-              <Line>
-                <FilterHeader>
-                  <LabelsTitle variant="buttonPopUpAndDropdownText">
+            <styles.FilterWrapper>
+              <styles.Line>
+                <styles.FilterHeader>
+                  <styles.LabelsTitle variant="buttonPopUpAndDropdownText">
                     Label color
-                  </LabelsTitle>
-                </FilterHeader>
-              </Line>
+                  </styles.LabelsTitle>
+                </styles.FilterHeader>
+              </styles.Line>
               <div>
                 <Priority
-                  priority={priority}
+                  priority={userFilter}
                   setPriority={changeValue}
                   options={[
                     { value: 'showAll', label: 'ShowAll' },
@@ -104,11 +91,11 @@ const Filters = () => {
                   variant="Filters"
                 />
               </div>
-            </FilterWrapper>
+            </styles.FilterWrapper>
           </PopUpLayout>
-        </FilterContainer>
+        </styles.FilterContainer>
       )}
-    </Container>
+    </styles.Container>
   );
 };
 

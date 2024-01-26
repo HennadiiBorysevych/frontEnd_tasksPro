@@ -14,13 +14,3 @@ export const selectActiveBoardId = state => {
   const activeIndex = state.boards.activeBoardIndex;
   return activeIndex || state.boards.items.length ? activeIndex : null;
 };
-
-const boardSelectors = {
-  selectLoading,
-  selectAllBoards,
-  selectOneBoard,
-  selectBoardIndex,
-  selectActiveBoard,
-  selectActiveBoardId,
-};
-export default boardSelectors;

@@ -2,7 +2,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import { updateOrdersFromArray } from 'helpers';
 
-import columnOperations from './columnOperations';
+import * as columnOperations from './columnOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -81,4 +81,4 @@ const extraActions = [
   columnOperations.moveColumn,
 ];
 
-export default columnSlice.reducer;
+export const columnReducer = columnSlice.reducer;

@@ -1,14 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { useAuthCollector } from 'hooks';
+import { useAuthRedux } from 'redux/services';
 
 import { SvgIcon } from 'ui';
 
-import { ButtonText, GoogleLink } from './GoogleAuth.styled';
+import * as styles from './GoogleAuth.styled';
 
 const GoogleAuth = () => {
-  const { googleAuth } = useAuthCollector();
+  const { googleAuth } = useAuthRedux();
 
   const location = useLocation();
   const token = new URLSearchParams(location.search).get('token');
@@ -16,23 +15,23 @@ const GoogleAuth = () => {
   if (token) {
     googleAuth(token);
   }
-  // useEffect(() => {
-  // }, [token]);
 
   const googleAuthUrl =
     'https://backend-taskspro-public.onrender.com/api/auth/google';
 
   return (
-    <GoogleLink
+    <styles.GoogleLink
       href={googleAuthUrl}
-      aria-label="Google реєстрація"
+      aria-label="Continue with Google"
       aria-haspopup="dialog"
       aria-expanded="false"
       aria-controls="google-registration-dialog"
     >
       <SvgIcon svgName="icon-google" size={20} stroke="none" />
-      <ButtonText variant="buttonText">Continue with Google</ButtonText>
-    </GoogleLink>
+      <styles.ButtonText variant="buttonText">
+        Continue with Google
+      </styles.ButtonText>
+    </styles.GoogleLink>
   );
 };
 

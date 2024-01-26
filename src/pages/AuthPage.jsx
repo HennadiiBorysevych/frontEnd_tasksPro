@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAuthRedux, useBoardsRedux } from 'redux/services';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
@@ -6,22 +7,18 @@ import { useToggleModalAndSideBar } from 'contexts';
 import { authSchema } from 'helpers';
 import { useAuth } from 'hooks';
 
-import { CommonForm } from 'components';
+import { CommonForm, SkeletonLoader } from 'components';
 import { Typography } from 'ui';
 
-import {
-  AuthContainer,
-  Password,
-  StyledTab,
-  StyledTabs,
-} from './styles/authPage.styled';
-import { Background, Container } from './styles/commonStyles.styled';
+import * as styles from './styles/authPage.styled';
+import * as commonStyles from './styles/commonStyles.styled';
 
 const { authValues } = POP_UP_INITIAL_VALUES;
 
 const AuthPage = () => {
   const { windowHeight } = useToggleModalAndSideBar();
-
+  const { resetBoardsState } = useBoardsRedux();
+  const { isFetchingCurrent } = useAuthRedux();
   const {
     inputs,
     tabPosition,
@@ -32,18 +29,26 @@ const AuthPage = () => {
     onHandleSubmit,
   } = useAuth();
 
-  return (
-    <Background>
-      <Container windowHeight={windowHeight}>
-        <AuthContainer>
-          <StyledTabs value={tabPosition} onChange={handleTabChange}>
-            <StyledTab label="Registration" />
-            <StyledTab label="Log In" />
-          </StyledTabs>
+  useEffect(() => {
+    resetBoardsState();
+  }, [resetBoardsState]);
+
+  return isFetchingCurrent ? (
+    <SkeletonLoader
+      page={tabPosition === 0 ? '/auth/register' : '/auth/login'}
+    />
+  ) : (
+    <commonStyles.Background>
+      <commonStyles.Container windowHeight={windowHeight}>
+        <styles.AuthContainer>
+          <styles.StyledTabs value={tabPosition} onChange={handleTabChange}>
+            <styles.StyledTab label="Registration" />
+            <styles.StyledTab label="Log In" />
+          </styles.StyledTabs>
           {tabPosition === 1 && (
-            <Password to="/auth/forgot_password">
+            <styles.Password to="/auth/forgot_password">
               <Typography variant="passwordForgot">Forgot password?</Typography>
-            </Password>
+            </styles.Password>
           )}
 
           <CommonForm
@@ -61,9 +66,9 @@ const AuthPage = () => {
             variantMessage="authForm"
             id="register-or-login-button"
           />
-        </AuthContainer>
-      </Container>
-    </Background>
+        </styles.AuthContainer>
+      </commonStyles.Container>
+    </commonStyles.Background>
   );
 };
 

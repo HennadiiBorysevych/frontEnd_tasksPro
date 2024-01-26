@@ -17,7 +17,7 @@
               // External libraries and packages
               ["^react", "^@?\\w", "^axios", "^lodash"],
               // Imports from the 'layouts' and 'routes' folders.
-              ["^(constants|layouts|routes)(/.*|$)"],
+              ["^(constants|layouts|routes|pages)(/.*|$)"],
               // Functions helpers and hooks
               ["^(@|contexts|helpers|hooks)(/.*|$)"],
               // Internal packages.

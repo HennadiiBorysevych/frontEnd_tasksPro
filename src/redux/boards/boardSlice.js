@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import boardOperations from './boardOperations';
+import * as boardOperations from './boardOperations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -103,4 +103,4 @@ const extraActions = [
   boardOperations.updateBoard,
 ];
 export const { resetBoardState } = boardSlice.actions;
-export default boardSlice.reducer;
+export const boardsReducer = boardSlice.reducer;

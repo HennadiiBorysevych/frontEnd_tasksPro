@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import authOperations from './authOperations';
+import * as authOperations from './authOperations';
 
 const handleFulfilled = state => {
   state.isFetchingCurrentUser = false;
@@ -57,11 +57,9 @@ const authSlice = createSlice({
         state.user = userData;
         state.token = token;
         state.isLoggedIn = true;
-        console.log(action.payload.user);
       })
       .addCase(authOperations.updateUserInfo.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        console.log(action.payload.user);
       })
       .addCase(authOperations.updateUserTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.theme;
@@ -88,4 +86,4 @@ const extraActions = [
   authOperations.recInPassword,
 ];
 
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;

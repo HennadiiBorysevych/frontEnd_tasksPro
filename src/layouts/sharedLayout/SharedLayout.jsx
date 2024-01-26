@@ -2,21 +2,21 @@ import { BoardProvider, ToggleProvider } from 'contexts';
 
 import { Header, SideBar } from 'blocks';
 
-import { MainWrapper, ScreenWrapper } from './SharedLayouts.styled';
+import * as styles from './SharedLayouts.styled';
 
 const SharedLayout = ({ children }) => {
   return (
-    <ScreenWrapper>
+    <styles.ScreenWrapper>
       <ToggleProvider>
         <BoardProvider>
           <SideBar />
         </BoardProvider>
-        <MainWrapper>
+        <styles.MainWrapper>
           <Header />
           {children}
-        </MainWrapper>
+        </styles.MainWrapper>
       </ToggleProvider>
-    </ScreenWrapper>
+    </styles.ScreenWrapper>
   );
 };
 export default SharedLayout;

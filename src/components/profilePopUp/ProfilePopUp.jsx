@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { POP_UP_INITIAL_VALUES } from 'constants';
 
@@ -10,12 +9,9 @@ import { ButtonPlus, CommonPopUp } from 'ui';
 
 import UserAvatar from '../userAvatar/UserAvatar';
 
-import {
-  AddButtonWrap,
-  AvatarBg,
-  AvatarInput,
-  AvatarWrap,
-} from './ProfilePopUp.styled';
+import ProfilePopUpPropTypes from './propTypes';
+
+import * as styles from './ProfilePopUp.styled';
 
 const { updateProfileValues } = POP_UP_INITIAL_VALUES;
 
@@ -42,8 +38,8 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
       id="send-user-updated-data"
       avatar={true}
     >
-      <AvatarWrap avatar={true}>
-        <AvatarInput
+      <styles.AvatarWrap avatar={true}>
+        <styles.AvatarInput
           type="file"
           id="avatar"
           name="avatar"
@@ -54,27 +50,21 @@ const ProfilePopUp = ({ user, handleModalClose }) => {
         {userAvatar ? (
           <UserAvatar avatar={userAvatar} />
         ) : (
-          <AvatarBg size="68" />
+          <styles.AvatarBg size="68" />
         )}
-        <AddButtonWrap>
+        <styles.AddButtonWrap>
           <ButtonPlus
             variantIcon="addAvatar"
             width={24}
             height={24}
             size={10}
           />
-        </AddButtonWrap>
-      </AvatarWrap>
+        </styles.AddButtonWrap>
+      </styles.AvatarWrap>
     </CommonPopUp>
   );
 };
 
-ProfilePopUp.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }),
-  handleModalClose: PropTypes.func.isRequired,
-};
-
 export default ProfilePopUp;
+
+ProfilePopUp.propTypes = ProfilePopUpPropTypes;

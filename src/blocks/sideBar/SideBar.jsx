@@ -12,14 +12,7 @@ import {
 } from 'components';
 import { ButtonPlus, CustomScrollBar, Modal } from 'ui';
 
-import {
-  CreateBoard,
-  Overlay,
-  SideBarContainer,
-  SideBarWrapper,
-  TitleBoardList,
-  TitleButton,
-} from './SideBar.styled';
+import * as styles from './SideBar.styled';
 
 const SideBar = () => {
   const { isModal, toggleModal, onBackdropClick } = useModal();
@@ -29,20 +22,20 @@ const SideBar = () => {
 
   return (
     <>
-      <SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
+      <styles.SideBarWrapper isOpen={isOpen} windowHeight={windowHeight}>
         <CustomScrollBar
           width="100%"
           variantScroll="sidebar"
           height="100%"
           overflow="auto"
         >
-          <SideBarContainer>
+          <styles.SideBarContainer>
             <div>
               <Logo variantLogo="board" />
-              <TitleBoardList variant="supplementaryPopUpText">
+              <styles.TitleBoardList variant="supplementaryPopUpText">
                 My boards
-              </TitleBoardList>
-              <CreateBoard
+              </styles.TitleBoardList>
+              <styles.CreateBoard
                 type="button"
                 id="create-new-board-button"
                 onClick={() => {
@@ -50,17 +43,17 @@ const SideBar = () => {
                   toggleModalAndSideBar();
                 }}
               >
-                <TitleButton variant="buttonPopUpAndDropdownText">
+                <styles.TitleButton variant="buttonPopUpAndDropdownText">
                   Create a <br />
                   new board
-                </TitleButton>
+                </styles.TitleButton>
                 <ButtonPlus
                   width={40}
                   height={36}
                   variantIcon="sidemenu"
                   size={20}
                 />
-              </CreateBoard>
+              </styles.CreateBoard>
               {activeBoardId && (
                 <SideBarBoardsList windowHeight={windowHeight} />
               )}
@@ -69,10 +62,10 @@ const SideBar = () => {
               <Support />
               <SignOut />
             </div>
-          </SideBarContainer>
+          </styles.SideBarContainer>
         </CustomScrollBar>
-      </SideBarWrapper>
-      {isOpen && <Overlay onClick={() => closeSideBar()} />}
+      </styles.SideBarWrapper>
+      {isOpen && <styles.Overlay onClick={() => closeSideBar()} />}
       {isModal && (
         <Modal onBackdropClick={onBackdropClick}>
           <BoardPopUp onClose={toggleModal} />

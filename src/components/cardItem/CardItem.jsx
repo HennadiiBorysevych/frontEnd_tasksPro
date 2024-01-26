@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useCardsRedux } from 'redux/services';
 
 import {
   formatShortDeadlineForMarkup,
@@ -8,27 +8,19 @@ import {
   getShortCurrentDate,
   getShortDeadlineDate,
 } from 'helpers';
-import { useCardsCollector, useModal } from 'hooks';
+import { useModal } from 'hooks';
 
 import { ControlIcons, Modal, Typography } from 'ui';
 
 import CardPopUp from '../cardPopUp/CardPopUp';
 import SkeletonLoader from '../skeleton/SkeletonLoader';
 
-import {
-  CardContainer,
-  Circle,
-  DeadlineMessage,
-  Description,
-  DetailLabel,
-  Details,
-  DetailsContainer,
-  PriorityBlock,
-  Title,
-} from './CardItem.styled';
+import CardItemPropTypes from './propTypes';
+
+import * as styles from './CardItem.styled';
 
 const CardItem = ({ item }) => {
-  const { cardLoading, removeCard } = useCardsCollector();
+  const { cardLoading, removeCard } = useCardsRedux();
   const { isModal, onBackdropClick, toggleModal } = useModal();
 
   const { title, description, priority, deadline, id } = item;
@@ -48,33 +40,39 @@ const CardItem = ({ item }) => {
       {cardLoading ? (
         <SkeletonLoader page="/card" />
       ) : (
-        <CardContainer priority={priority}>
+        <styles.CardContainer priority={priority}>
           {deadlineExpired && (
-            <DeadlineMessage variant="subText">
+            <styles.DeadlineMessage variant="subText">
               Deadline expired
-            </DeadlineMessage>
+            </styles.DeadlineMessage>
           )}
           {deadlineToday && (
-            <DeadlineMessage today={true} variant="subText">
+            <styles.DeadlineMessage today={true} variant="subText">
               Deadline is today
-            </DeadlineMessage>
+            </styles.DeadlineMessage>
           )}
-          <Title variant="cardTitle">{title}</Title>
-          <Description variant="taskDescription">{description}</Description>
-          <Details>
-            <DetailsContainer>
+          <styles.Title variant="cardTitle">{title}</styles.Title>
+          <styles.Description variant="taskDescription">
+            {description}
+          </styles.Description>
+          <styles.Details>
+            <styles.DetailsContainer>
               <div>
-                <DetailLabel variant="subTitle">Priority:</DetailLabel>
-                <PriorityBlock>
-                  <Circle priority={priority} />
+                <styles.DetailLabel variant="subTitle">
+                  Priority:
+                </styles.DetailLabel>
+                <styles.PriorityBlock>
+                  <styles.Circle priority={priority} />
                   <Typography variant="subText">{priority}</Typography>
-                </PriorityBlock>
+                </styles.PriorityBlock>
               </div>
               <div>
-                <DetailLabel variant="subTitle">Deadline:</DetailLabel>
+                <styles.DetailLabel variant="subTitle">
+                  Deadline:
+                </styles.DetailLabel>
                 <Typography variant="subText">{formattedDeadline}</Typography>
               </div>
-            </DetailsContainer>
+            </styles.DetailsContainer>
             <ControlIcons
               deadlineToday={deadlineToday}
               deadlineExpired={deadlineExpired}
@@ -85,27 +83,17 @@ const CardItem = ({ item }) => {
               item="task"
               owner="tasks"
             />
-          </Details>
+          </styles.Details>
           {isModal && (
             <Modal onBackdropClick={onBackdropClick}>
               <CardPopUp card={item} handleModalClose={toggleModal} />
             </Modal>
           )}
-        </CardContainer>
+        </styles.CardContainer>
       )}
     </>
   );
 };
 export default CardItem;
 
-CardItem.propTypes = {
-  item: PropTypes.shape({
-    cardOwner: PropTypes.string,
-    deadline: PropTypes.string,
-    description: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    order: PropTypes.number,
-    priority: PropTypes.string,
-    title: PropTypes.string,
-  }),
-};
+CardItem.propTypes = CardItemPropTypes;

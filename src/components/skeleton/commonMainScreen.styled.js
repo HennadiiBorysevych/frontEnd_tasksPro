@@ -1,27 +1,4 @@
-import { BASE_COLORS } from 'constants';
-
 import styled from '@emotion/styled';
-
-// WELCOME PAGE
-export const Background = styled.section`
-  position: relative;
-  background-image: ${BASE_COLORS.authColors.background};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-`;
-
-export const BackgroundLogin = styled.section`
-  position: relative;
-  background-image: ${BASE_COLORS.authColors.background};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-`;
 
 export const BackgroundHome = styled.section(
   {
@@ -35,14 +12,18 @@ export const BackgroundHome = styled.section(
     maxWidth: variantLoader === 'board' && '77%',
   })
 );
-export const Tabs = styled.div`
-  display: flex;
-  gap: 14px;
-  margin-bottom: 24px;
-  margin-top: 24px;
-  justify-content: flex-start;
-  align-items: start;
-`;
+
+export const SideBar = styled.aside(
+  {
+    height: '100vh',
+    width: '260px',
+    position: 'fixed',
+    zIndex: '10',
+  },
+  props => ({
+    backgroundColor: props.baseColor,
+  })
+);
 
 export const Header = styled.header(
   {
@@ -52,18 +33,6 @@ export const Header = styled.header(
     justifyContent: 'space-between',
     alignItems: 'start',
     padding: '20px',
-  },
-  props => ({
-    backgroundColor: props.baseColor,
-  })
-);
-
-export const SideBar = styled.aside(
-  {
-    height: '100vh',
-    width: '260px',
-    position: 'fixed',
-    zIndex: '10',
   },
   props => ({
     backgroundColor: props.baseColor,
@@ -101,11 +70,6 @@ export const Theme = styled.div(
   })
 );
 
-export const UserPic = styled.div`
-  width: 32px;
-  height: 32px;
-`;
-
 export const UserName = styled.div(
   {
     width: '65px',
@@ -118,6 +82,11 @@ export const UserName = styled.div(
     },
   })
 );
+
+export const UserPic = styled.div`
+  width: 32px;
+  height: 32px;
+`;
 
 export const BoardBody = styled.div(
   {
@@ -135,6 +104,18 @@ export const BoardHead = styled.div({
   justifyContent: 'space-between',
 });
 
+export const Button = styled.div(
+  {
+    marginTop: '30px',
+    width: '80%',
+  },
+  props => ({
+    [props.theme.breakpoints.up('medium')]: {
+      width: '80%',
+    },
+  })
+);
+
 export const ProjectName = styled.div(
   {
     width: '80%',
@@ -144,31 +125,6 @@ export const ProjectName = styled.div(
     [props.theme.breakpoints.up('medium')]: {
       width: '90%',
       height: '40px',
-    },
-  })
-);
-
-export const Filters = styled.div(
-  {
-    width: '40px',
-    height: '2px',
-  },
-  props => ({
-    [props.theme.breakpoints.up('medium')]: {
-      width: '60px',
-      height: '30px',
-    },
-  })
-);
-
-export const Button = styled.div(
-  {
-    marginTop: '30px',
-    width: '80%',
-  },
-  props => ({
-    [props.theme.breakpoints.up('medium')]: {
-      width: '80%',
     },
   })
 );
@@ -217,3 +173,16 @@ export const CardList = styled.div({
   flexDirection: 'column',
   width: '100%',
 });
+
+// export const Filters = styled.div(
+//   {
+//     width: '40px',
+//     height: '2px',
+//   },
+//   props => ({
+//     [props.theme.breakpoints.up('medium')]: {
+//       width: '60px',
+//       height: '30px',
+//     },
+//   })
+// );

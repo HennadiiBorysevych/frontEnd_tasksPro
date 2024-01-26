@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useCardsRedux } from 'redux/services';
 
 import { cardModel } from 'constants';
 
-import useCardsCollector from './useCardsCollector';
-
 const useCard = (columnId, cardIndex, currentCard, closeModal) => {
-  const { addNewCard, updateExistingCard } = useCardsCollector();
+  const { addNewCard, updateExistingCard } = useCardsRedux();
   const initialCard = currentCard
     ? getFormattedCard(currentCard)
     : {
@@ -20,6 +19,29 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
   const [priority, setPriority] = useState(initialCard?.priority);
   const [deadline, setDeadline] = useState(initialCard?.deadline);
   const [card, setCard] = useState(initialCard);
+
+  useEffect(() => {
+    setCard(prev => ({ ...prev, title, description, priority, deadline }));
+  }, [deadline, description, priority, title]);
+
+  const handleInput = useCallback(e => {
+    const { name, value } = e.currentTarget;
+
+    switch (name) {
+      case 'title':
+        setTitle(value);
+        break;
+      case 'description':
+        setDescription(value);
+        break;
+      default:
+        break;
+    }
+  }, []);
+
+  const handlePriority = value => {
+    setPriority(value);
+  };
 
   const handleCardSubmit = () => {
     const hasChanges =
@@ -43,29 +65,6 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
       closeModal();
     }
   };
-
-  const handleInput = useCallback(e => {
-    const { name, value } = e.currentTarget;
-
-    switch (name) {
-      case 'title':
-        setTitle(value);
-        break;
-      case 'description':
-        setDescription(value);
-        break;
-      default:
-        break;
-    }
-  }, []);
-
-  const handlePriority = value => {
-    setPriority(value);
-  };
-
-  useEffect(() => {
-    setCard(prev => ({ ...prev, title, description, priority, deadline }));
-  }, [deadline, description, priority, title]);
 
   function getFormattedCard(card) {
     const { order, ...rest } = card;

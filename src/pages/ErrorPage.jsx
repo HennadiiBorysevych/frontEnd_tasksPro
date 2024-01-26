@@ -1,21 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useAuthRedux } from 'redux/services';
 
-import { useAuthCollector } from 'hooks';
-
-import {
-  Code,
-  Container,
-  Description,
-  ErrorBackground,
-  Header,
-  Link,
-  Num,
-  Start,
-  Text,
-} from './styles/errorPage.styled';
+import * as styles from './styles/errorPage.styled';
 
 const ErrorPage = () => {
-  const { isLoggedIn, user } = useAuthCollector();
+  const { isLoggedIn, user } = useAuthRedux();
   const [userTheme, setUserTheme] = useState('');
 
   useEffect(() => {
@@ -46,28 +35,28 @@ const ErrorPage = () => {
   };
 
   return (
-    <ErrorBackground
+    <styles.ErrorBackground
       isLoggedIn={isLoggedIn}
       txtColor={userTheme}
       bgColor={userTheme}
       bgImg={userTheme}
     >
-      <Container>
-        <Header>
-          <Code>
-            <Num>404</Num>
+      <styles.Container>
+        <styles.Header>
+          <styles.Code>
+            <styles.Num>404</styles.Num>
             error
-          </Code>
-          <Description>
-            <Start>{errDis.start}</Start>
+          </styles.Code>
+          <styles.Description>
+            <styles.Start>{errDis.start}</styles.Start>
             {errDis.desc}
-          </Description>
-        </Header>
-        <Text>{errDis.text}</Text>
-        <Link to={errDis.nav}>{errDis.link}</Link>
-        <Text>{errDis.underLinkText}</Text>
-      </Container>
-    </ErrorBackground>
+          </styles.Description>
+        </styles.Header>
+        <styles.Text>{errDis.text}</styles.Text>
+        <styles.Link to={errDis.nav}>{errDis.link}</styles.Link>
+        <styles.Text>{errDis.underLinkText}</styles.Text>
+      </styles.Container>
+    </styles.ErrorBackground>
   );
 };
 
