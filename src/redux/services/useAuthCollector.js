@@ -58,6 +58,11 @@ const useAuthCollector = () => {
     [dispatch]
   );
 
+  const updateTokens = useCallback(
+    tokens => dispatch(auth.setTokens(tokens)),
+    [dispatch]
+  );
+
   return {
     isLoggedIn,
     user,
@@ -73,6 +78,7 @@ const useAuthCollector = () => {
     sendToSupport,
     passwordRecovery,
     setNewPassword,
+    updateTokens,
   };
 };
 

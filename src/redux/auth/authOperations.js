@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { axiosInstance } from 'redux/services';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://backend-taskspro-public.onrender.com';
@@ -39,8 +40,7 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/api/auth/logout');
-    token.unset();
+    await axiosInstance.post('/api/auth/logout');
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -114,7 +114,7 @@ export const updateUserTheme = createAsyncThunk(
   'auth/updateUserTheme',
   async (updatedTheme, thunkAPI) => {
     try {
-      const response = await axios.patch('/api/users/themes', {
+      const response = await axiosInstance.patch('/api/users/themes', {
         theme: updatedTheme,
       });
       return response.data;

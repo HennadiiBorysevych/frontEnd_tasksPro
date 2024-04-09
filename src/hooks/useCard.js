@@ -56,10 +56,11 @@ const useCard = (columnId, cardIndex, currentCard, closeModal) => {
       if (currentCard) {
         updateExistingCard({
           taskId: id,
-          updatedData: { orderTask: order, ...rest },
+          orderTask: order,
+          ...rest,
         });
       } else {
-        addNewCard(rest);
+        addNewCard({ orderTask: order, ...rest });
       }
 
       closeModal();

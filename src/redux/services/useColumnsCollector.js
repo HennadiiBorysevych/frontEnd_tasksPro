@@ -6,18 +6,12 @@ import * as columns from '../columns';
 const useColumnsCollector = () => {
   const columnLoading = useSelector(columns.selectLoading);
   const allColumns = useSelector(columns.selectAllColumns);
-  const oneColumn = useSelector(columns.selectOneColumn);
   const columnsAndTasks = useSelector(columns.selectColumnsAndTasks);
 
   const dispatch = useDispatch();
 
   const getAllColumns = useCallback(
     boardId => dispatch(columns.fetchColumns(boardId)),
-    [dispatch]
-  );
-
-  const getOneColumn = useCallback(
-    columnId => dispatch(columns.getColumn(columnId)),
     [dispatch]
   );
 
@@ -45,10 +39,8 @@ const useColumnsCollector = () => {
   return {
     columnLoading,
     allColumns,
-    oneColumn,
     columnsAndTasks,
     getAllColumns,
-    getOneColumn,
     addNewColumn,
     updateExistingColumn,
     removeColumn,

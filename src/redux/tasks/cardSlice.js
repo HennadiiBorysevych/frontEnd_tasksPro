@@ -2,22 +2,14 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import { updateOrdersFromArray } from 'helpers';
 
+import {
+  generateActions,
+  handleFulfilled,
+  handlePending,
+  handleRejected,
+} from '../services/handleFunctions';
+
 import * as cardOperations from './cardOperations';
-
-const handlePending = state => {
-  state.isLoading = true;
-};
-
-const handleFulfilled = state => {
-  state.isLoading = false;
-  state.error = null;
-};
-
-const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
-  console.error(action.payload);
-};
 
 const initialState = {
   items: [],
@@ -25,10 +17,19 @@ const initialState = {
   error: null,
 };
 
-const getActions = type => extraActions.map(action => action[type]);
+const extraActions = [
+  cardOperations.fetchTasks,
+  cardOperations.addTask,
+  cardOperations.updateTask,
+  cardOperations.deleteTask,
+  cardOperations.moveTask,
+  cardOperations.moveTaskToColumn,
+];
+
+const getActions = generateActions(extraActions);
 
 const cardSlice = createSlice({
-  name: 'tasks',
+  name: 'cards',
   initialState,
   reducers: {},
   extraReducers: builder => {
@@ -36,42 +37,18 @@ const cardSlice = createSlice({
       .addCase(cardOperations.fetchTasks.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(cardOperations.getTask.fulfilled, (state, action) => {
-        const index = state.items.findIndex(
-          task => task.id === action.payload.id
-        );
+      .addCase(cardOperations.addTask.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(cardOperations.updateTask.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        const index = state.items.findIndex(task => task.id === id);
         if (index !== -1) {
           state.items[index] = action.payload;
         }
       })
-      .addCase(cardOperations.addTask.fulfilled, (state, action) => {
-        const {
-          _id: id,
-          orderTask: order,
-          createdAt,
-          updatedAt,
-          ...rest
-        } = action.payload.data;
-
-        state.items.push({
-          id,
-          order,
-          ...rest,
-        });
-      })
-      .addCase(cardOperations.updateTask.fulfilled, (state, action) => {
-        const { _id: id, createdAt, updatedAt, ...rest } = action.payload.data;
-        const index = state.items.findIndex(task => task.id === id);
-        if (index !== -1) {
-          state.items[index] = {
-            id,
-            ...rest,
-          };
-        }
-      })
       .addCase(cardOperations.deleteTask.fulfilled, (state, action) => {
-        const deletedCardId = action.payload;
-        state.items = state.items.filter(item => item.id !== deletedCardId);
+        state.items = state.items.filter(item => item.id !== action.payload.id);
       })
       .addCase(cardOperations.moveTask.fulfilled, (state, action) => {
         state.items = updateOrdersFromArray(state.items, action.payload);
@@ -96,15 +73,5 @@ const cardSlice = createSlice({
       .addMatcher(isAnyOf(...getActions('rejected')), handleRejected);
   },
 });
-
-const extraActions = [
-  cardOperations.fetchTasks,
-  cardOperations.getTask,
-  cardOperations.addTask,
-  cardOperations.updateTask,
-  cardOperations.deleteTask,
-  cardOperations.moveTask,
-  cardOperations.moveTaskToColumn,
-];
 
 export const cardReducer = cardSlice.reducer;
