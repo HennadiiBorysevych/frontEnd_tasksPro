@@ -59,7 +59,8 @@ const useBoard = (currentBoard, closeModal) => {
       if (currentBoard) {
         updateExistingBoard({
           boardId: id,
-          updatedData: { ...rest, title: title },
+          ...rest,
+          title: title,
         });
         if (title) {
           encodeTitleBoardInUrl(title);

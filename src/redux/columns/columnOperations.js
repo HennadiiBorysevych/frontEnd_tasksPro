@@ -1,82 +1,45 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-export const fetchColumns = createAsyncThunk(
+import { axiosInstance } from '../services';
+import requestTemplate from '../services/requestTemplate';
+
+export const fetchColumns = requestTemplate(
   'columns/fetchAll',
-  async (boardId, thunkAPI) => {
-    try {
-      const res = await axios.get(`/api/boards/${boardId}`);
-      return res.data.columns.map(({ _id, orderColumn, ...rest }) => ({
-        id: _id,
-        order: orderColumn,
-        ...rest,
-      }));
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
+  '/api/boards/:id',
+  'get',
+  'columns'
 );
 
-export const addColumn = createAsyncThunk(
+export const addColumn = requestTemplate(
   'columns/addColumn',
-  async (name, thunkAPI) => {
-    try {
-      const response = await axios.post('/api/columns', name);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+  '/api/columns',
+  'post',
+  'data'
 );
 
-export const updateColumn = createAsyncThunk(
+export const updateColumn = requestTemplate(
   'columns/updateColumn',
-  async ({ columnId, updatedData }, thunkAPI) => {
-    try {
-      const response = await axios.patch(
-        `/api/columns/${columnId}`,
-        updatedData
-      );
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+  '/api/columns/:columnId',
+  'patch',
+  'data'
 );
 
-export const getColumn = createAsyncThunk(
-  'columns/getColumn',
-  async (columnId, thunkAPI) => {
-    try {
-      const response = await axios.get(`/api/columns/${columnId}`);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-export const deleteColumn = createAsyncThunk(
+export const deleteColumn = requestTemplate(
   'columns/deleteColumn',
-  async (columnId, thunkAPI) => {
-    try {
-      const response = await axios.delete(`/api/columns/${columnId}`);
-      return response.data?.data?._id;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+  '/api/columns/:id',
+  'delete',
+  'data'
 );
 
 export const moveColumn = createAsyncThunk(
   'columns/moveColumn',
   async (columnData, thunkAPI) => {
     try {
-      const response = await axios.put(
+      const response = await axiosInstance.put(
         `/api/columns/movecolumn`,
         columnData.updatingDataStripped
       );
-      return response.data?.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

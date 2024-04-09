@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import * as authOperations from './authOperations';
 
@@ -9,11 +9,13 @@ const handleFulfilled = state => {
 
 const handlePending = state => {
   state.isFetchingCurrentUser = true;
+  state.error = null;
 };
 
 const handleRejected = (state, action) => {
   state.isFetchingCurrentUser = false;
-  state.error = action.payload;
+  if (action.payload && typeof action.payload === 'string')
+    state.error = action.payload;
 };
 
 const initialState = {
@@ -25,12 +27,15 @@ const initialState = {
     help: null,
   },
   token: null,
+  refreshToken: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
   error: null,
 };
 
 const getActions = type => extraActions.map(action => action[type]);
+
+export const setTokens = createAction('auth/setTokens');
 
 const authSlice = createSlice({
   name: 'auth',
@@ -45,6 +50,7 @@ const authSlice = createSlice({
       .addCase(authOperations.logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.tokenRefresh;
         state.isLoggedIn = true;
       })
       .addCase(authOperations.logOut.fulfilled, state => (state = initialState))
@@ -67,6 +73,11 @@ const authSlice = createSlice({
       .addCase(authOperations.updateUserHelp.fulfilled, (state, action) => {
         state.user.help = action.payload.message;
       })
+      .addCase(setTokens, (state, action) => {
+        const { token, tokenRefresh } = action.payload;
+        state.token = token;
+        state.refreshToken = tokenRefresh;
+      })
       .addMatcher(isAnyOf(...getActions('pending')), handlePending)
       .addMatcher(isAnyOf(...getActions('fulfilled')), handleFulfilled)
       .addMatcher(isAnyOf(...getActions('rejected')), handleRejected);
@@ -80,7 +91,6 @@ const extraActions = [
   authOperations.fetchCurrentUser,
   authOperations.googleAuth,
   authOperations.updateUserInfo,
-  authOperations.updateUserTheme,
   authOperations.updateUserHelp,
   authOperations.recoverPassword,
   authOperations.recInPassword,

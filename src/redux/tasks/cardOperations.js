@@ -1,76 +1,45 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { axiosInstance, rearrangementResponse } from 'redux/services';
 
-export const fetchTasks = createAsyncThunk(
-  'tasks/fetchAll',
-  async (boardId, thunkAPI) => {
-    try {
-      const res = await axios.get(`/api/boards/${boardId}`);
-      const tasks = res.data.cards.map(({ _id, orderTask, ...rest }) => ({
-        id: _id,
-        order: orderTask,
-        ...rest,
-      }));
-      return tasks;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-export const getTask = createAsyncThunk(
-  'tasks/getTask',
-  async (taskId, thunkAPI) => {
-    try {
-      const response = await axios.get(`/api/cards/${taskId}`);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+import requestTemplate from '../services/requestTemplate';
+
+export const fetchTasks = requestTemplate(
+  'cards/fetchAll',
+  '/api/boards/:id',
+  'get',
+  'cards'
 );
 
-export const addTask = createAsyncThunk(
-  'tasks/addTask',
-  async (name, thunkAPI) => {
-    try {
-      const response = await axios.post('/api/cards', name);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+export const addTask = requestTemplate(
+  'cards/addTask',
+  '/api/cards',
+  'post',
+  'data'
 );
-export const updateTask = createAsyncThunk(
-  'tasks/updateTask',
-  async ({ taskId, updatedData }, thunkAPI) => {
-    try {
-      const response = await axios.patch(`/api/cards/${taskId}`, updatedData);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+
+export const updateTask = requestTemplate(
+  'cards/updateTask',
+  '/api/cards/:taskId',
+  'patch',
+  'data'
 );
-export const deleteTask = createAsyncThunk(
-  'tasks/deleteTask',
-  async (taskId, thunkAPI) => {
-    try {
-      const response = await axios.delete(`/api/cards/${taskId}`);
-      return response.data?.data?._id;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
+
+export const deleteTask = requestTemplate(
+  'cards/deleteTask',
+  '/api/cards/:id',
+  'delete',
+  'data'
 );
+
 export const moveTask = createAsyncThunk(
   'tasks/moveTask',
   async (tasksData, thunkAPI) => {
     try {
-      const response = await axios.put(
+      const response = await axiosInstance.put(
         `/api/cards/movetask`,
         tasksData.updatingDataStripped
       );
-      return response.data?.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -80,12 +49,11 @@ export const moveTaskToColumn = createAsyncThunk(
   'tasks/moveTaskToColumn',
   async (data, thunkAPI) => {
     try {
-      const response = await axios.put(`/api/cards/movetasktocolumn`, data);
-      return response.data?.data.map(({ _id, orderTask, ...rest }) => ({
-        id: _id,
-        order: orderTask,
-        ...rest,
-      }));
+      const response = await axiosInstance.put(
+        `/api/cards/movetasktocolumn`,
+        data
+      );
+      return rearrangementResponse(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

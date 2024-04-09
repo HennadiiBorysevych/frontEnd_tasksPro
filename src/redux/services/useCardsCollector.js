@@ -6,17 +6,11 @@ import * as cards from '../tasks';
 const useCardsCollector = () => {
   const cardLoading = useSelector(cards.selectLoading);
   const allCards = useSelector(cards.selectAllTasks);
-  const oneCard = useSelector(cards.selectOneTask);
 
   const dispatch = useDispatch();
 
   const getAllCards = useCallback(
     boardId => dispatch(cards.fetchTasks(boardId)),
-    [dispatch]
-  );
-
-  const getOneCard = useCallback(
-    columnId => dispatch(cards.getTask(columnId)),
     [dispatch]
   );
 
@@ -49,9 +43,7 @@ const useCardsCollector = () => {
   return {
     cardLoading,
     allCards,
-    oneCard,
     getAllCards,
-    getOneCard,
     addNewCard,
     updateExistingCard,
     removeCard,

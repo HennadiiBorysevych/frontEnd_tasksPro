@@ -20,7 +20,9 @@ const useColumn = (currentColumn, columnIndex, boardId, closeModal) => {
         const { id, order, columnOwner } = currentColumn;
         updateExistingColumn({
           columnId: id,
-          updatedData: { title: title, orderColumn: order, columnOwner },
+          title: title,
+          orderColumn: order,
+          columnOwner,
         });
       } else {
         addNewColumn({

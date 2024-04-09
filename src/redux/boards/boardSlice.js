@@ -1,21 +1,13 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
+import {
+  generateActions,
+  handleFulfilled,
+  handlePending,
+  handleRejected,
+} from '../services/handleFunctions';
+
 import * as boardOperations from './boardOperations';
-
-const handlePending = state => {
-  state.isLoading = true;
-};
-
-const handleFulfilled = state => {
-  state.isLoading = false;
-  state.error = null;
-};
-
-const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
-  console.error(action.payload);
-};
 
 const initialState = {
   items: [],
@@ -24,7 +16,15 @@ const initialState = {
   error: null,
 };
 
-const getActions = type => extraActions.map(action => action[type]);
+const extraActions = [
+  boardOperations.addBoard,
+  boardOperations.deleteBoard,
+  boardOperations.fetchBoards,
+  boardOperations.getBoard,
+  boardOperations.updateBoard,
+];
+
+const getActions = generateActions(extraActions);
 
 const boardSlice = createSlice({
   name: 'boards',
@@ -44,42 +44,23 @@ const boardSlice = createSlice({
       })
       .addCase(boardOperations.getBoard.fulfilled, (state, action) => {
         const index = state.items.findIndex(
-          board => board.id === action.payload.board.id
+          board => board.id === action.payload.id
         );
         if (index !== -1) {
-          state.items[index] = action.payload.board;
-          state.activeBoardIndex = action.payload.board.id;
+          state.items[index] = action.payload;
+          state.activeBoardIndex = action.payload.id;
         }
       })
       .addCase(boardOperations.addBoard.fulfilled, (state, action) => {
-        const {
-          _id: id,
-          title,
-          icon,
-          background,
-          isActive,
-        } = action.payload.data;
-
-        state.items.unshift({ id, title, icon, background, isActive });
+        const { id } = action.payload;
+        state.items.unshift(action.payload);
         state.activeBoardIndex = id;
       })
       .addCase(boardOperations.updateBoard.fulfilled, (state, action) => {
-        const {
-          _id: id,
-          title,
-          icon,
-          background,
-          isActive,
-        } = action.payload.data;
+        const { id } = action.payload;
         const index = state.items.findIndex(board => board.id === id);
         if (index !== -1) {
-          state.items[index] = {
-            id,
-            title,
-            icon,
-            background,
-            isActive,
-          };
+          state.items[index] = action.payload;
         }
       })
       .addCase(boardOperations.deleteBoard.fulfilled, (state, action) => {
@@ -95,12 +76,5 @@ const boardSlice = createSlice({
   },
 });
 
-const extraActions = [
-  boardOperations.addBoard,
-  boardOperations.deleteBoard,
-  boardOperations.fetchBoards,
-  boardOperations.getBoard,
-  boardOperations.updateBoard,
-];
 export const { resetBoardState } = boardSlice.actions;
 export const boardsReducer = boardSlice.reducer;
